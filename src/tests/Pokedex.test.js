@@ -9,4 +9,9 @@ describe('testing component Pokedex.js', () => {
     const pokedex = getByRole('heading', { level: 2, name: /encountered pokémons/i });
     expect(pokedex).toBeInTheDocument();
   });
+  test('button \'próximo pokémon\'', () => {
+    const { getByTestId } = renderWithRouter(<App />);
+    const button = getByTestId('next-pokemon');
+    expect(button).toHaveTextContent(/próximo pokémon/i);
+  });
 });
