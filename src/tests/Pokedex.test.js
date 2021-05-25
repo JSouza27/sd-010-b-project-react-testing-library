@@ -34,17 +34,18 @@ test('Testa se renderiza os butões', () => {
   expect(buttonType[6]).toHaveTextContent('Dragon');
 });
 
-// test('Testando função de filtragem', () => {
-//   // expect(func.filterPokemons('all')).
-// });
-
 test('Testando se renderiza o pokemon um a um quando o botão é clicado', async () => {
   const { getByRole, getByText } = renderWithRoute(<App />);
+
+  const buttonAll = getByRole('button', {
+    name: 'All',
+  });
 
   const buttonProximo = getByRole('button', {
     name: 'Próximo pokémon',
   });
 
+  fireEvent.click(buttonAll);
   fireEvent.click(buttonProximo);
 
   const charmander = getByText('Charmander');
