@@ -1,5 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
@@ -37,5 +38,19 @@ describe('Teste se o topo da aplicação contém links de navegação', () => {
 
     const textFavPokemon = screen.getByRole('link', { name: /favorite pokémons/i });
     expect(textFavPokemon).toBeInTheDocument();
+  });
+});
+
+describe('Teste de redirecionamento de páginas', () => {
+  test('Testa redirecionamento para URL / ao clicar na Home.', () => {
+    const { history } = renderWithRouter(<App />);
+
+    userEvent.click(screen.getByRole('heading', {
+      name: /encountered pokémons/i }));
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/');
+    const inHome = screen.getByRole('button', { name: /próximo pokémon/i });
+    expect(inHome).toBeInTheDocument();
   });
 });
