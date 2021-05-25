@@ -2,8 +2,8 @@ import React from 'react';
 import './about.css';
 
 const About = () => (
-  <section data-testid='pokedex'>
-    <h2>{`About Pokédex`}</h2>
+  <section data-testid="pokedex">
+    <h2>{`About ` + `Pokédex`}</h2>
     <section>
       <p data-testid="pokedex-info">
         This application simulates a Pokédex, a digital encyclopedia containing
