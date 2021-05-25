@@ -15,4 +15,10 @@ describe('testing component About.js', () => {
     const textOne = getByText(firstPart + secondPart);
     expect(textOne).toBeInTheDocument();
   });
+  test('if contain image', () => {
+    const { getByRole } = render(<About />);
+    const image = getByRole('img');
+    expect(image).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
+    expect(image).toHaveAttribute('alt', 'Pokédex');
+  });
 });
