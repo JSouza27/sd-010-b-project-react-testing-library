@@ -39,4 +39,11 @@ describe('Testando App.js', () => {
     expect(pathname).toBe('/favorites');
     expect(favoritePokemons).toBeInTheDocument();
   });
+
+  it('Renderiza a página Not Found quando entrado em uma URl desconhecida', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    history.push('/page/not/found');
+    const notFound = getByText(/Page requested not found/i);
+    expect(notFound).toBeInTheDocument();
+  });
 });
