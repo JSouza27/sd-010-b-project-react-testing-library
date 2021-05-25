@@ -19,7 +19,18 @@ describe('Testa se a página contém as informações sobre a Pokédex', () => {
   });
 
   test('Teste se a página contém dois parágrafos com texto sobre a Pokédex', () => {
-    renderRouter(<App />);
+    render(<About />);
+
+    const textPokedex1 = screen.getByText(
+      'This application simulates a Pokédex,'
+       + 'a digital encyclopedia containing all Pokémons',
+    );
+    const textPokedex2 = screen.getByText(
+      'One can filter Pokémons by type, and see more details for each one of them',
+    );
+
+    expect(textPokedex1).toBeInTheDocument();
+    expect(textPokedex2).toBeInTheDocument();
   });
 
   test('Teste se a página contém a seguinte imagem de uma Pokédex', () => {
