@@ -29,4 +29,19 @@ describe('Teste o componente <FavoritePokemons.js />', () => {
     const cardPokemon = screen.getByRole('img', { name: /pikachu sprite/i });
     expect(cardPokemon).toBeInTheDocument();
   });
+
+  test('Teste se nenhum card de pokémon é exibido, se não favoritado.', () => {
+    renderWithRouter(<App />);
+
+    const linkDetails = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(linkDetails);
+
+    const favPokemon = screen.getByRole('link', { name: /favorite pokémons/i });
+    userEvent.click(favPokemon);
+
+    // expect(screen.getByText('No favorite pokemon found')).toBeInTheDocument();
+
+    // const message = screen.getByText('no favorite pokemon found', { exact: false });
+    // expect(message).toBeInTheDocument();
+  });
 });
