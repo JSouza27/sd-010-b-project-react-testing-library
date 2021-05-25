@@ -1,15 +1,13 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
 import App from '../App';
+import renderWithRouter from './renderWithRouter';
 
-test('renders a reading with the text `Pokédex`', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
-  const heading = getByText(/Pokédex/i);
-  expect(heading).toBeInTheDocument();
+describe('Requirement 1', () => {
+  test('Redirect to Home, About and Favorite Pokémons', () => {
+    const { getAllByRole } = renderWithRouter(<App />);
+    const links = getAllByRole('link');
+    expect(links[0]).toHaveTextContent(/Home/i);
+    expect(links[1]).toHaveTextContent(/About/i);
+    expect(links[2]).toHaveTextContent(/Favorite Pokémons/i);
+  });
 });
-// commit inicial bora e bora
