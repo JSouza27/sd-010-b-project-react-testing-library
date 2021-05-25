@@ -1,9 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import App from '../App';
-
-import renderRouter from './renderWithRoute';
 import { About } from '../components';
 
 describe('Testa se a página contém as informações sobre a Pokédex', () => {
