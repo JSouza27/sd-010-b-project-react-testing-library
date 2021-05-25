@@ -11,4 +11,12 @@ describe('Teste requisito 4 NotFound.js', () => {
     const text = getByRole('heading', { name: /Page requested not found/ });
     expect(text).toBeInTheDocument();
   });
+
+  test('Teste se página mostra a imagem https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif.', () => {
+    const { getByRole, history } = renderWithRouter(<App />);
+    history.push('/ash');
+
+    const img = getByRole('img', { name: /Pikachu crying/ });
+    expect(img.src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+  });
 });
