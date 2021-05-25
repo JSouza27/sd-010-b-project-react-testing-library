@@ -8,5 +8,7 @@ import FavoritePokemons from '../components/FavoritePokemons';
 describe('Teste Favorite Pokemons', () => {
   test('renders a reading with the text `Pokédex`', () => {
     const { getByText } = renderWithRouter(<FavoritePokemons />);
+    const phrase = getByText('No favorite pokemon found');
+    expect(phrase).toBeInTheDocument();
   });
 });
