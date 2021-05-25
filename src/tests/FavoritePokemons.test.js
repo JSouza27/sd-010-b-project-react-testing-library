@@ -14,4 +14,8 @@ describe('Tests the Favorite Pokemons page', () => {
   // it('tests whether all favorite Pokémon cards are applied', () => {
 
   // });
+
+  // it('tests if no Pokémon card is displayed, if it is not favored', () => {
+
+  // });
 });
