@@ -6,7 +6,6 @@ import About from '../components/About';
 describe('Testando o componente About', () => {
   test('Teste se a página contém um heading h2 com o texto About Pokédex', () => {
     renderWithRouter(<About />);
-
     expect(screen.getByRole('heading', {
       level: 2,
       name: 'About Pokédex',
