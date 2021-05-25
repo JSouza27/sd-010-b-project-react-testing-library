@@ -55,4 +55,21 @@ describe('Testa requisito 1 App.js', () => {
     userEvent.click(about);
     expect(history.location.pathname).toBe('/about');
   });
+
+  test('Testa se primeiro link redireciona para "Favorites"', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+
+    const favorite = getByText('Favorite Pokémons');
+    userEvent.click(favorite);
+    expect(history.location.pathname).toBe('/favorites');
+  });
+
+  test('Testa se primeiro link redireciona para "Not Found"', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+
+    history.push('/notFound');
+    expect(history.location.pathname).toBe('/notFound');
+    const notFound = getByText('Page requested not found');
+    expect(notFound).toBeInTheDocument();
+  });
 });
