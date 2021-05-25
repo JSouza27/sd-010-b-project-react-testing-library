@@ -1,31 +1,40 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
 import About from '../components/About';
 
-describe('Testando a pagina about', () => {
-  it('Deve ter um heading H2', () => {
-    const { getByRole } = render(<About />);
-    const h2 = getByRole('heading', { level: 2 });
-
-    expect(h2).toBeInTheDocument();
-    expect(h2.textContent).toBe('About Pokédex');
-    expect(h2.tagName).toBe('H2');
+describe('Testa o componente About', () => {
+  test('Verifica se a página contem as informações sobre a Pokédex', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <About />
+      </MemoryRouter>,
+    );
+    const contentText = getByText('About Pokédex');
+    expect(contentText).toBeInTheDocument();
   });
-  it('Deve conter dois paragrafos', () => {
-    const { getAllByText } = render(<About />);
-    const Paragraphs = getAllByText(/Pokémons/i);
+});
 
-    expect(Paragraphs.length).toBe(2);
-    Paragraphs.forEach((tagElement) => {
-      expect(tagElement.tagName).toBe('P');
-    });
+test('Verifica se a página contem um heading h2', () => {
+  render(<About />);
+  const headingPage = screen.getByRole('heading', {
+    level: 2,
+    name: 'About Pokédex',
   });
-  it('Deve conter uma imagem', () => {
-    const { getByRole } = render(<About />);
-    const pokedexImage = getByRole('img');
-    const urlImage = 'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
+  expect(headingPage).toBeInTheDocument();
+});
 
-    expect(pokedexImage).toBeInTheDocument();
-    expect(pokedexImage).toHaveAttribute('src', urlImage);
-  });
+test('Verifica se a página contém dois parágrafos ', () => {
+  const { container } = render(<About />);
+
+  const paragraph = container.querySelectorAll('p');
+  expect(paragraph[0].value).toBe();
+  expect(paragraph[1].value).toBe();
+  expect(paragraph.length).toBe(2);
+});
+
+test('Verifica se a página carrega a imagem ', async () => {
+  const { getByAltText } = await render(<About />);
+  const image = getByAltText('Pokédex');
+  expect(image.src).toContain('https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
 });
