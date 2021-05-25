@@ -8,12 +8,16 @@ import App from '../App';
 describe('testes do componente <App.js /> ', () => {
   test('testa se a rota "/" leva para a pagina principal', () => {
     const { history } = RenderWithRouter(<App />);
+
     history.push('/');
+
     const { pathname } = history.location;
+
     const textContentHome = screen.getByRole('heading', {
       level: 2,
       name: /encountered pokémons/i,
     });
+
     expect(pathname).toBe('/');
     expect(textContentHome).toBeInTheDocument();
   });
@@ -22,25 +26,31 @@ describe('testes do componente <App.js /> ', () => {
 describe('Teste se o topo da aplicação contém links de navegação fixo.', () => {
   test('O primeiro link deve possuir o texto Home.', () => {
     RenderWithRouter(<App />);
+
     const linkHome = screen.getByRole('link', {
       name: /home/i,
     });
+
     expect(linkHome).toBeInTheDocument();
   });
 
   test('O segundo link deve possuir o texto About.', () => {
     RenderWithRouter(<App />);
+
     const linkAbout = screen.getByRole('link', {
       name: /about/i,
     });
+
     expect(linkAbout).toBeInTheDocument();
   });
 
   test('O terceiro link deve possuir o texto Favorite Pokémons.', () => {
     RenderWithRouter(<App />);
+
     const linkFavoritePokemons = screen.getByRole('link', {
       name: /Favorite Pokémons/i,
     });
+
     expect(linkFavoritePokemons).toBeInTheDocument();
   });
 });
@@ -48,11 +58,15 @@ describe('Teste se o topo da aplicação contém links de navegação fixo.', ()
 describe('Testa o redirecionamento  das páginas', () => {
   test('Testa o redirecionamento para a "/" ao clicar no link Home', () => {
     const { history } = RenderWithRouter(<App />);
+
     const linkHome = screen.getByRole('link', {
       name: /home/i,
     });
+
     userEvent.click(linkHome);
+
     const { pathname } = history.location;
+
     expect(pathname).toBe('/');
   });
 
