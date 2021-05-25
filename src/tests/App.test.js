@@ -4,7 +4,7 @@ import { fireEvent, render } from '@testing-library/react';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
-describe('testing the homePage "/"', () => {
+describe('testing the homePage "/" ', () => {
   it('should render a heading with the text `Pokédex`', () => {
     const { getByText } = renderWithRouter(<App />);
     const heading = getByText(/Pokédex/i);
@@ -33,7 +33,7 @@ describe('testa o menu de navegação', () => {
     expect(favoriteLink).toBeInTheDocument();
   });
 
-  it('Redireciona o usúario para "/"', () => {
+  it('Redireciona o usúario para "/" clicando no link Home', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     fireEvent.click(getByText('Home'));
@@ -41,7 +41,7 @@ describe('testa o menu de navegação', () => {
 
     expect(pathname).toBe('/');
   });
-  it('Redireciona o usúario para "/about"', () => {
+  it('Redireciona o usúario para "/about" clicando no link About', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     fireEvent.click(getByText('About'));
@@ -49,7 +49,7 @@ describe('testa o menu de navegação', () => {
 
     expect(pathname).toBe('/about');
   });
-  it('Redireciona o usúario para "/favorites"', () => {
+  it('Redireciona o usúario para "/favorites" clicando no link de Pkm favoritos', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     fireEvent.click(getByText('Favorite Pokémons'));
@@ -57,7 +57,7 @@ describe('testa o menu de navegação', () => {
 
     expect(pathname).toBe('/favorites');
   });
-  it('Redireciona o usúario para "Not Found', () => {
+  it('Redireciona o usúario para "Not Found" Caso entre com um link desconhecido', () => {
     const { getByText, history } = renderWithRouter(<App />);
     history.push('/error');
     const notFound = getByText(/not found/i);
