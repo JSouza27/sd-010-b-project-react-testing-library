@@ -9,4 +9,13 @@ describe('Teste do quarto requisito', () => {
 
     expect(heading).toHaveTextContent('Page requested not found');
   });
+
+  test('Teste se página mostra a imagem', () => {
+    const { getAllByRole } = renderWithRouter(<NotFound />);
+    const image = getAllByRole('img');
+    const urlImage = 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif';
+
+    expect(image[1]).toBeInTheDocument();
+    expect(image[1]).toHaveAttribute('src', urlImage);
+  });
 });
