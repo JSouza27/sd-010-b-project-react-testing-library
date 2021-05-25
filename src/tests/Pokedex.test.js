@@ -5,6 +5,7 @@ import pokemons from '../data';
 import App from '../App';
 
 const nameDataTestId = 'pokemon-name';
+const nextName = 'Próximo pokémon';
 
 describe('testando o componente Pokedex', () => {
   it('Deve ter um heading H2', () => {
@@ -20,12 +21,12 @@ describe('testando o componente Pokedex', () => {
 describe('Se tiver um botão de Next', () => {
   it('Deve mostrar o proximo Pokemon, clicando em "Próximo Pokémon"', () => {
     const { getByRole, getByTestId } = renderWithRouter(<App />);
-    const nextButton = getByRole('button', { name: 'Próximo pokémon' });
+    const nextButton = getByRole('button', { name: nextName });
     const pokemonName = getByTestId(nameDataTestId);
 
     fireEvent.click(nextButton);
 
-    expect(nextButton.textContent).toBe('Próximo pokémon');
+    expect(nextButton.textContent).toBe('nextName');
     expect(pokemonName.textContent).toBe('Charmander');
 
     fireEvent.click(nextButton);
@@ -67,8 +68,8 @@ describe('Se tiver os botoes de filtro', () => {
 
       fireEvent.click(filterButton);
 
-      const currentPokemon = getByTestId('pokemonType');
-      expect(currentPokemon.textContent).toBe(filterButton.textContent);
+      const currentPokemon = getByTestId('pokemon-type');
+      expect(currentPokemon).toHaveTextContent(type);
     });
   });
   it('Deve ter um botão de resetar filtro', () => {
@@ -80,5 +81,15 @@ describe('Se tiver os botoes de filtro', () => {
 
     expect(resetButton).toBeInTheDocument();
     expect(currentPokemon.textContent).toBe('Pikachu');
+  });
+
+  it('Deve destivar o botão de proximo', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const typeFilter = getByRole('button', { name: 'Electric' });
+    const nextButton = getByRole('button', { name: 'Próximo pokémon' });
+
+    fireEvent.click(typeFilter);
+
+    expect(nextButton).toBeDisabled();
   });
 });
