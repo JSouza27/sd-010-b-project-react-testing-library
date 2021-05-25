@@ -1,20 +1,12 @@
 import React from 'react';
-import { getAllByRole, getByRole, render } from "@testing-library/react";
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
 import App from '../App';
+import renderWithRouter from './renderWithRouter';
 
 describe('Teste o componente <About.js /.', () => {
   test('Se a página contém um heading h2 com o texto About Pokédex', () => {
-    const historyMock = createMemoryHistory();
+    const { history, getByRole } = renderWithRouter( <App />);
 
-    const { getByRole } = render(
-      <Router history={ historyMock }>
-        <App />
-      </Router>,
-    );
-
-    historyMock.push('/about');
+    history.push('/about');
 
     const aboutHeading = getByRole('heading', {
       level: 2,
@@ -25,15 +17,9 @@ describe('Teste o componente <About.js /.', () => {
   });
 
   test('Se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
-    const historyMock = createMemoryHistory();
+    const { history, getByText } = renderWithRouter( <App />);
 
-    const { getByText } = render(
-      <Router history={ historyMock }>
-        <App />
-      </Router>,
-    );
-
-    historyMock.push('/about');
+    history.push('/about');
 
     const firstText = 'This application simulates a Pokédex, a digital encyclopedia containing all Pokémons';
     const secondText = 'One can filter Pokémons by type, and see more details for each one of them';
@@ -45,15 +31,9 @@ describe('Teste o componente <About.js /.', () => {
   });
 
   test('Se a página contém a seguinte imagem de uma Pokédex:', () => {
-    const historyMock = createMemoryHistory();
+    const { history, getByRole } = renderWithRouter( <App />);
 
-    const { getByRole } = render(
-      <Router history={ historyMock }>
-        <App />
-      </Router>
-    );
-
-    historyMock.push('/about');
+    history.push('/about');
 
     const image = getByRole('img', {});
 
