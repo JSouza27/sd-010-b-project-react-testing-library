@@ -7,6 +7,7 @@ describe('Teste requisito1', () => {
   test('Pagina renderizada ao carregar a aplicação no caminho `/`', () => {
     const { getByText } = renderWithRouter(<App />);
     const home = getByText('Pokédex');
+
     expect(home).toBeInTheDocument();
   });
 
@@ -25,6 +26,7 @@ describe('Teste requisito1', () => {
     const { getByText, history } = renderWithRouter(<App />);
     fireEvent.click(getByText('Home'));
     const { pathname } = history.location;
+
     expect(pathname).toBe('/');
   });
 
@@ -32,6 +34,7 @@ describe('Teste requisito1', () => {
     const { getByText, history } = renderWithRouter(<App />);
     fireEvent.click(getByText('About'));
     const { pathname } = history.location;
+
     expect(pathname).toBe('/about');
   });
 
@@ -39,6 +42,7 @@ describe('Teste requisito1', () => {
     const { getByText, history } = renderWithRouter(<App />);
     fireEvent.click(getByText('Favorite Pokémons'));
     const { pathname } = history.location;
+
     expect(pathname).toBe('/favorites');
   });
 
@@ -46,6 +50,7 @@ describe('Teste requisito1', () => {
     const { getByText, history } = renderWithRouter(<App />);
     history.push('/pagina-que-nao-existe');
     const notFound = getByText(/not found/i);
+
     expect(notFound).toBeInTheDocument();
   });
 });
