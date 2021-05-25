@@ -69,6 +69,21 @@ describe('Teste requisito 5 Pokedex.js.', () => {
     expect(buttonAll).toBeInTheDocument();
   });
 
+  test(`'Deve existir um botão de filtragem para cada tipo 
+    de Pokémon disponível do tipo Fire, Psychic, 
+    Electric, Bug, Poison, Dragon e Normal'`, () => {
+    const { getByText, getAllByTestId } = renderWithRouter(<App />);
+    const types = ['Fire', 'Psychic', 'Electric', 'Bug', 'Poison', 'Dragon', 'Normal'];
+    const typeLength = 7;
+    types.forEach((_, index) => {
+      fireEvent.click(getByText(types[index]));
+      const fndtype = getAllByTestId('pokemon-type-button');
+      expect(fndtype.length).toBe(typeLength);
+      const buttoAll = getByText('All');
+      expect(buttoAll).toBeInTheDocument();
+    });
+  });
+
   test(`'O botão de Próximo pokémon deve ser desabilitado 
   quando a lista filtrada de Pokémons tiver um só pokémon'`, () => {
     const { getByText, getAllByText } = renderWithRouter(<App />);
