@@ -18,5 +18,8 @@ describe('Teste do primeiro requisito', () => {
     const about = getByText('About');
     const favorite = getByText('Favorite Pokémons');
 
-  expect(getByText('Encountered pokémons')).toBeInTheDocument();
+    expect(home).toBeInTheDocument();
+    expect(about).toBeInTheDocument();
+    expect(favorite).toBeInTheDocument();
+  });
 });
