@@ -6,7 +6,7 @@ import App from '../App';
 describe('Testing App', () => {
   test('', () => {
     render(
-      <MemoryRouter initialEntries={ ['/', '/about', '/favorites'] }>
+      <MemoryRouter initialEntries={ ['/'] }>
         <App />
       </MemoryRouter>,
     );
