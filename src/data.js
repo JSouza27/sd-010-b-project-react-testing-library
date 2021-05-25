@@ -197,6 +197,28 @@ const pokemons = [
     ],
     summary: 'They say that if it emits an aura from its whole body, the weather will begin to change instantly.',
   },
+  {
+    id: 471,
+    name: 'Glaceon',
+    type: 'Ice',
+    averageWeight: {
+      value: '25.9',
+      measurementUnit: 'kg',
+    },
+    image: 'https://cdn2.bulbagarden.net/upload/0/01/Spr_5b_471_s.png',
+    moreInfo: 'https://bulbapedia.bulbagarden.net/wiki/Glaceon_(Pok%C3%A9mon)',
+    foundAt: [
+      {
+        location: 'Johto Route 45',
+        map: 'https://cdn2.bulbagarden.net/upload/2/21/Johto_Route_45_Map.png',
+      },
+      {
+        location: 'Johto Dragon\'s Den',
+        map: 'https://cdn2.bulbagarden.net/upload/1/1e/Johto_Dragons_Den_Map.png',
+      },
+    ],
+    summary: 'By controlling its body heat, it can freeze the atmosphere around it to make a diamond-dust flurry.',
+  },
 ];
 
 export default pokemons;

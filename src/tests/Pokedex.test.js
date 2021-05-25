@@ -1,5 +1,5 @@
 import React from 'react';
-import { getByRole, getByTestId, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import renderRouter from './renderWithRoute';
@@ -47,5 +47,19 @@ describe('Teste da página Pokédex', () => {
     const pokemon = screen.getAllByTestId('pokemon-name');
 
     expect(pokemon.length).toBe(1);
+  });
+
+  test('Teste se a Pokédex tem os botões de filtro', () => {
+    renderRouter(<App />);
+
+    const typeButton = screen.getByRole('button', {
+      name: /fire/i,
+    });
+
+    const typePokemon = screen.getByTestId('pokemon-type');
+
+    userEvent.click(typeButton);
+
+    expect(typePokemon).toHaveTextContent('Fire');
   });
 });
