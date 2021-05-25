@@ -5,7 +5,7 @@ import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
-test('Teste se a página contém um heading h2 com o texto About Pokédex', () => {
+test('Testes ABOUT', () => {
   const history = createMemoryHistory();
   render(
     <Router history={ history }>
