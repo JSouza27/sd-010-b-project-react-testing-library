@@ -59,4 +59,13 @@ describe('Teste requisito 5 Pokedex.js.', () => {
     fireEvent.click(button);
     expect(button.innerHTML).toBe('All');
   });
+
+  test('Teste se é criado, um botão de filtro para cada tipo de Pokémon', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    Pokemons.forEach(({ type }) => {
+      expect(getByRole('button', { name: type })).toBeInTheDocument();
+    });
+    const buttonAll = getByRole('button', { name: 'All' });
+    expect(buttonAll).toBeInTheDocument();
+  });
 });
