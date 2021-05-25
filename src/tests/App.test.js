@@ -73,15 +73,4 @@ describe('Testing the main page', () => {
 
     expect(atualURL).toBe('/favorites');
   });
-
-  it('Should redirect to notFoundPage when goes to strange pages', () => {
-    const { getByRole, history } = renderWithRouter(<App />);
-    history.push('/strangepage');
-
-    const notFoundText = getByRole('heading', {
-      level: 2,
-    });
-
-    expect(notFoundText).toHaveTextContent('Page requested not found 😭');
-  });
 });
