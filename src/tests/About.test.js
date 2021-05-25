@@ -12,18 +12,18 @@ dos casos de uso criados pelo Stryker`, () => {
   https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png.
   `, () => {
     const { getByText, getByAltText } = renderWithRouter(<App />);
-    const btnAbout = getByText(/about/i);
-    fireEvent.click(btnAbout);
+    const buttonAbout = getByText(/about/i);
+    fireEvent.click(buttonAbout);
 
     const imgAtribute = getByAltText(/pokédex/i);
     const pokedexTitle = getByText(/about pokédex/i);
-    const pOne = getByText(/(pokémons by)/i);
-    const pTwo = getByText(/(pokédex, a)/i);
+    const paragraphOne = getByText(/(pokémons by)/i);
+    const paragraphTwo = getByText(/(pokédex, a)/i);
 
     expect(imgAtribute.alt).toBe('Pokédex');
     expect(pokedexTitle.textContent).toBe('About Pokédex');
-    expect(pOne.textContent).toMatch('One can filter Pokémons');
-    expect(pTwo.textContent).toMatch('This application simulates');
+    expect(paragraphOne.textContent).toMatch('One can filter Pokémons');
+    expect(paragraphTwo.textContent).toMatch('This application simulates');
     expect(imgAtribute.src).toBe(
       'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png',
     );
