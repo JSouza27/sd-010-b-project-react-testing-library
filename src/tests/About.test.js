@@ -3,25 +3,26 @@ import About from '../components/About';
 import renderWithRouter from './renderWithRouter';
 
 describe('Test "About" component', () => {
-  test('renders info about Pokédex', () => {
-    const { getByTestId } = renderWithRouter(<About />);
-    const info = getByTestId('pokedex');
-
-    expect(info).toBeInTheDocument();
+  it('renders info about Pokédex', () => {
+    const { container } = renderWithRouter(<About />);
+    // const info = getByRole('dialog');
+    expect(container).toBeInTheDocument();
   });
 
-  test('renders heading with "About Pokédex"', () => {
+  it('renders heading with "About Pokédex"', () => {
     const { getByRole } = renderWithRouter(<About />);
     const title = getByRole('heading', { level: 2, name: /about pokédex/i });
 
     expect(title).toBeInTheDocument();
   });
 
-  test('renders 2 paragraphs about Pokédex', () => {
-    const { getAllByTestId } = renderWithRouter(<About />);
-    const paragraphs = getAllByTestId('pokedex-info');
+  it('renders 2 paragraphs about Pokédex', () => {
+    const { getByText } = renderWithRouter(<About />);
+    const paragraph1 = getByText(/This application simulates a Pokédex/i);
+    const paragraph2 = getByText(/One can filter Pokémons/i);
 
-    expect(paragraphs).toHaveLength(2);
+    expect(paragraph1).toBeInTheDocument();
+    expect(paragraph2).toBeInTheDocument();
   });
 
   test('has image from Pokédex', () => {
