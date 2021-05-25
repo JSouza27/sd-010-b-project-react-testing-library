@@ -1,4 +1,4 @@
-import { fireEvent, getByAltText } from '@testing-library/dom';
+import { fireEvent } from '@testing-library/dom';
 import React from 'react';
 import App from '../App';
 import renderWithRoute from './renderWithRoute';
