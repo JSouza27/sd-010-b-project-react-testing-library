@@ -73,3 +73,11 @@ describe('Teste se a app é redirecionada para Favoritos ao clicar no link', () 
     expect(getByText('Favorite pokémons')).toBeInTheDocument();
   });
 });
+
+describe('Teste se a app é redirecionada para Not Found', () => {
+  it('Redireciona para Not Found (URL desconhecida)', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    history.push('url-desconhecida');
+    expect(getByText('Page requested not found')).toBeInTheDocument();
+  });
+});
