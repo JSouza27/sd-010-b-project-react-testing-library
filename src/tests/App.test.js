@@ -9,6 +9,6 @@ test('renders a reading with the text `Pokédex`', () => {
       <App />
     </MemoryRouter>,
   );
-  const heading = getByText(/Pokédex/i);
-  expect(heading).toBeInTheDocument();
+  const h1 = getByText(/Pokédex/i);
+  expect(h1).toBeInTheDocument();
 });
