@@ -20,7 +20,7 @@ test('Verifica se a página contém parágrafos com texto sobre a Pokédex', () 
   });
 });
 
-test('Verifica se a página contém parágrafos com texto sobre a Pokédex', () => {
+test('Verifica se a página contém uma imagem com uma determinada Url', () => {
   const { getByAltText } = render(<About />);
   const image = getByAltText('Pokédex');
   expect(image.src).toContain(
