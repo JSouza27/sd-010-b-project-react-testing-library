@@ -55,7 +55,7 @@ describe('Teste App', () => {
     expect(favoritePage).toBeInTheDocument();
   });
   test('Verifica se carrega a página não encontrada', () => {
-    const { history, getByText, getByRole } = renderWithRouter(<App />);
+    const { history, getByRole } = renderWithRouter(<App />);
 
     const route = '/pagina-que-nao-existe';
     history.push(route);
