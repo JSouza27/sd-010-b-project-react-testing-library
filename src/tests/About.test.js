@@ -34,6 +34,10 @@ describe('Testa se a página contém as informações sobre a Pokédex', () => {
   });
 
   test('Teste se a página contém a seguinte imagem de uma Pokédex', () => {
-    renderRouter(<App />);
+    render(<About />);
+
+    const pokedexImg = screen.getByRole('img');
+
+    expect(pokedexImg.src).toBe('https://cdn2.bulbagarden.net/upload/thumb/8Z/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
   });
 });
