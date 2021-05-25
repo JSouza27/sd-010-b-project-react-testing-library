@@ -4,6 +4,7 @@ import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
 describe('Testing the main page', () => {
+  const favoritePokemonsText = 'Favorite Pokémons';
   it('renders and check the nav links', () => {
     const { getByRole, history } = renderWithRouter(<App />);
     history.push('/');
@@ -15,7 +16,7 @@ describe('Testing the main page', () => {
       name: 'About',
     });
     const favoriteLink = getByRole('link', {
-      name: 'Favorite Pokémons',
+      name: favoritePokemonsText,
     });
 
     expect(homeLink).toBeInTheDocument();
@@ -25,7 +26,7 @@ describe('Testing the main page', () => {
     expect(aboutLink).toHaveTextContent('About');
 
     expect(favoriteLink).toBeInTheDocument();
-    expect(favoriteLink).toHaveTextContent('Favorite Pokémons');
+    expect(favoriteLink).toHaveTextContent(favoritePokemonsText);
   });
 
   it('Should redirect to "/" when click in "Home" link', () => {
@@ -63,7 +64,7 @@ describe('Testing the main page', () => {
     history.push('/');
 
     const favoriteLink = getByRole('link', {
-      name: 'Favorite Pokémons',
+      name: favoritePokemonsText,
     });
 
     userEvent.click(favoriteLink);
