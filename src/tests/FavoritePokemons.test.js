@@ -34,4 +34,26 @@ describe('Teste o componente <FavoritePokemons.js />', () => {
     expect(getByText('Snorlax')).toBeInTheDocument();
     expect(getByText('Mew')).toBeInTheDocument();
   });
+
+  it('Teste se nenhum card de pokémon é exibido, se ele não estiver favoritado', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+
+    const rota = '/pokemons/23';
+    history.push(rota);
+    const favorite = getByText('Pokémon favoritado?');
+    userEvent.click(favorite);
+
+    const rota2 = '/pokemons/143';
+    history.push(rota2);
+    userEvent.click(favorite);
+
+    const rota3 = '/pokemons/151';
+    history.push(rota3);
+    userEvent.click(favorite);
+
+    const rota4 = '/favorites';
+    history.push(rota4);
+
+    expect(getByText('No favorite pokemon found')).toBeInTheDocument();
+  });
 });
