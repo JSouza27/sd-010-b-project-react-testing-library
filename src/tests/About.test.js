@@ -24,7 +24,7 @@ test('Verifica se a página contem um heading h2', () => {
   expect(headingPage).toBeInTheDocument();
 });
 
-test('Verifica se a página contém dois parágrafos ', () => {
+test('Verifica se a página contém dois parágrafos com texto sobre a Pokédex', () => {
   const { container } = render(<About />);
 
   const paragraph = container.querySelectorAll('p');

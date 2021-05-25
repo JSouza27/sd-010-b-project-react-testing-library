@@ -1,95 +1,70 @@
 import React from 'react';
-import { fireEvent } from '@testing-library/react';
+import { MemoryRouter, Router } from 'react-router-dom';
+import { fireEvent, screen, render } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
 import renderWithRouter from '../renderWithRouter';
-import pokemons from '../data';
 import App from '../App';
 
-const nameDataTestId = 'pokemon-name';
-const nextName = 'Próximo pokémon';
+describe('Testa o componente Pokedex.js', () => {
+  test('Verifica se a página contém um heading h2 "Encountered pokémons" ', () => {
+    renderWithRouter(<App />);
 
-describe('testando o componente Pokedex', () => {
-  it('Deve ter um heading H2', () => {
-    const { getByRole } = renderWithRouter(<App />);
-    const h2 = getByRole('heading', { level: 2 });
+    const aboutMeText = screen.getByRole('heading', {
+      level: 2,
+      name: /Encountered pokémons/i,
+    });
 
-    expect(h2).toBeInTheDocument();
-    expect(h2.tagName).toBe('H2');
-    expect(h2.textContent).toBe('Encountered pokémons');
+    expect(aboutMeText).toBeInTheDocument();
   });
 });
 
-describe('Se tiver um botão de Next', () => {
-  it('Deve mostrar o proximo Pokemon, clicando em "Próximo Pokémon"', () => {
-    const { getByRole, getByTestId } = renderWithRouter(<App />);
-    const nextButton = getByRole('button', { name: nextName });
-    const pokemonName = getByTestId(nameDataTestId);
-
-    fireEvent.click(nextButton);
-
-    expect(nextButton.textContent).toBe('nextName');
-    expect(pokemonName.textContent).toBe('Charmander');
-
-    fireEvent.click(nextButton);
-
-    expect(pokemonName.textContent).toBe('Caterpie');
-  });
-  it('Deve mostar um Pokemon por vez', () => {
-    const { getAllByTestId } = renderWithRouter(<App />);
-    const pokemon = getAllByTestId(nameDataTestId);
-
-    expect(pokemon.length).toBe(1);
-  });
+test('Teste se é exibido o próximo Pokémon ao clicar no botão Próximo pokémon.', () => {
+  const { getByText } = render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>,
+  );
+  const heading = getByText(/Próximo pokémon/i);
+  expect(heading).toBeInTheDocument();
 });
 
-describe('Se tiver os botoes de filtro', () => {
-  it('Deve ter botões de filtro', () => {
-    const { getAllByTestId } = renderWithRouter(<App />);
-    const typeButtons = getAllByTestId('pokemon-type-button');
-    const pokemonsTypes = [
-      'Electric',
-      'Fire',
-      'Bug',
-      'Poison',
-      'Psychic',
-      'Normal',
-      'Dragon',
-    ];
+test('Testa se a Pokédex contém um botão para resetar o filtro.', () => {
+  const history = createMemoryHistory();
+  const { getByText } = render(
+    <Router history={ history }>
+      <App />
+    </Router>,
+  );
+  fireEvent.click(getByText(/All/i));
+});
 
-    typeButtons.forEach((button, index) => {
-      expect(button.textContent).toBe(pokemonsTypes[index]);
-    });
+test('Testa se a Pokédex tem os botões de filtro.', () => {
+  const { getAllByTestId, getAllByRole, getByRole } = renderWithRouter(
+    <App />,
+  );
+  const typesLength = 7;
+  const button = getAllByTestId('pokemon-type-button');
+  expect(button).toHaveLength(typesLength);
+
+  const fire = getAllByRole('button', {
+    name: /fire/i,
   });
-  it('Deve filtrar clicando em um botão de tipo', () => {
-    const { getByRole, getByTestId } = renderWithRouter(<App />);
-
-    pokemons.forEach((pokemon) => {
-      const { type } = pokemon;
-      const filterButton = getByRole('button', { name: type });
-
-      fireEvent.click(filterButton);
-
-      const currentPokemon = getByTestId('pokemon-type');
-      expect(currentPokemon).toHaveTextContent(type);
-    });
+  const psychic = getAllByRole('button', {
+    name: /psychic/i,
   });
-  it('Deve ter um botão de resetar filtro', () => {
-    const { getByRole, getByTestId } = renderWithRouter(<App />);
-    const resetButton = getByRole('button', { name: 'All' });
-
-    fireEvent.click(resetButton);
-    const currentPokemon = getByTestId(nameDataTestId);
-
-    expect(resetButton).toBeInTheDocument();
-    expect(currentPokemon.textContent).toBe('Pikachu');
+  const electric = getAllByRole('button', {
+    name: /electric/i,
   });
-
-  it('Deve destivar o botão de proximo', () => {
-    const { getByRole } = renderWithRouter(<App />);
-    const typeFilter = getByRole('button', { name: 'Electric' });
-    const nextButton = getByRole('button', { name: 'Próximo pokémon' });
-
-    fireEvent.click(typeFilter);
-
-    expect(nextButton).toBeDisabled();
+  const normal = getAllByRole('button', {
+    name: /normal/i,
   });
+  expect(fire).toHaveLength(1);
+  expect(psychic).toHaveLength(1);
+  expect(electric).toHaveLength(1);
+  expect(normal).toHaveLength(1);
+
+  const buttonAll = getByRole('button', {
+    name: /all/i,
+  });
+  expect(buttonAll).toBeInTheDocument();
 });
