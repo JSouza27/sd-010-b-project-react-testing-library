@@ -2,7 +2,6 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import renderWithRouter from '../helper/renderWithRouter';
 import App from '../App';
-import userEvent from '@testing-library/user-event';
 
 describe('Requirement 5', () => {
   const idName = 'pokemon-name';
@@ -55,7 +54,7 @@ describe('Requirement 5', () => {
     expect(SecondPokemonType).toBe('Psychic');
   });
 
-  it('find button "All, click it"', () => {
+  it('find button "All" and click', () => {
     const { getByText, getByTestId } = renderWithRouter(<App />);
 
     const AllButton = getByText(/all/i);
