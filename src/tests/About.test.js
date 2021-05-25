@@ -9,4 +9,11 @@ describe('Testa o componente About', () => {
 
     expect(heading).toHaveTextContent('About Pokédex');
   });
+
+  test('Teste se a página contém dois parágrafos com texto sobre a Pokédex', () => {
+    const { getAllByText } = renderWithRouter(<About />);
+    const quantityLines = getAllByText(/pokémons/i);
+
+    expect(quantityLines.length).toBe(2);
+  });
 });
