@@ -1,3 +1,5 @@
+import { screen } from '@testing-library/dom';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 // import { MemoryRouter } from 'react-router-dom';
 // import { render } from '@testing-library/react';
@@ -24,4 +26,31 @@ test('shows the Pokédex when the route is `/`', () => {
   expect(favorite).toBeInTheDocument();
 
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
+});
+
+test('testando o link de navegação Home', () => {
+  const { getByText } = renderWithRouter(<App />);
+  const linkHome = screen.getByRole('link', {
+    name: /Home/i,
+  });
+  userEvent.click(linkHome);
+  expect(getByText('Encountered pokémons')).toBeInTheDocument();
+});
+
+test('testando o link de navegação About', () => {
+  const { getByText } = renderWithRouter(<App />);
+  const linkAbout = screen.getByRole('link', {
+    name: /About/i,
+  });
+  userEvent.click(linkAbout);
+  expect(getByText('About Pokédex')).toBeInTheDocument();
+});
+
+test('testando o link de navegação Favorite Pokémons', () => {
+  const { getByText } = renderWithRouter(<App />);
+  const linkFavorite = screen.getByRole('link', {
+    name: /Favorite Pokémons/i,
+  });
+  userEvent.click(linkFavorite);
+  expect(getByText('Favorite Pokémons')).toBeInTheDocument();
 });
