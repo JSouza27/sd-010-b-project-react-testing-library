@@ -32,7 +32,7 @@ test('Teste se o topo da aplicação contém um conjunto fixo de links de navega
 test('A é aplicação é redireciona para ahome, na URL / ao clicar no link Home', () => {
   const { getByText } = renderWithRouter(<App />);
   const home = getByText(/Home/i);
-  userEvent.click(home); 
+  userEvent.click(home);
   const aplicacao = getByText(/Encountered pokémons/i);
   expect(aplicacao).toBeInTheDocument();
 });
