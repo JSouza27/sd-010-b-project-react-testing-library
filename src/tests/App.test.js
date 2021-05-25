@@ -45,12 +45,22 @@ describe('Teste de redirecionamento de páginas', () => {
   test('Testa redirecionamento para URL / ao clicar na Home.', () => {
     const { history } = renderWithRouter(<App />);
 
-    userEvent.click(screen.getByRole('heading', {
-      name: /encountered pokémons/i }));
+    userEvent.click(screen.getByRole('link', { name: /home/i }));
 
     const { pathname } = history.location;
     expect(pathname).toBe('/');
     const inHome = screen.getByRole('button', { name: /próximo pokémon/i });
     expect(inHome).toBeInTheDocument();
+  });
+
+  test('Testa redirecionamento para URL /about ao clicar na About.', () => {
+    const { history } = renderWithRouter(<App />);
+
+    userEvent.click(screen.getByRole('link', { name: /about/i }));
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/about');
+    const inAbout = screen.getByRole('img', { name: /pokédex/i });
+    expect(inAbout).toBeInTheDocument();
   });
 });
