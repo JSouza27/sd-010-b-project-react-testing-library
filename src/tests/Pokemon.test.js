@@ -39,4 +39,14 @@ describe('Teste requisito 5 Pokemon.js ', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/pokemons/25');
   });
+
+  test(`'O ícone deve ser uma imagem com o atributo src contendo o caminho /star-icon.svg
+  '`, () => {
+    const { getByText, getByRole, getAllByRole } = renderWithRouter(<App />);
+    fireEvent.click(getByText('More details'));
+    fireEvent.click(getByRole('checkbox'));
+    const star = getAllByRole('img');
+    expect(star[1].src).toBe('http://localhost/star-icon.svg');
+    expect(star[1]).toHaveAttribute('alt', `${data[0].name} is marked as favorite`);
+  });
 });
