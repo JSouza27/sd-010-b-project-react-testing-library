@@ -39,36 +39,26 @@ describe('Teste o componente <Pokedex.js />', () => {
       const { getByText } = renderWithRouter(<App />);
       const button = getByText(texto);
 
-      userEvent.click(button);
-      userEvent.click(button);
-      userEvent.click(button);
-      userEvent.click(button);
-      userEvent.click(button);
-      userEvent.click(button);
-      userEvent.click(button);
-      userEvent.click(button);
-      userEvent.click(button);
+      const cliques = 9;
+      for (let i = 0; i < cliques; i += 1) {
+        userEvent.click(button);
+      }
 
       const next = getByText(/pikachu/i);
       expect(next).toBeInTheDocument();
     });
   });
 
-  // it('Teste se é mostrado apenas um Pokémon por vez', () => {
-  //   const { getByText } = renderWithRouter(<App />);
-  //   const pokemon =
-  //   const next = getByText(/charmander/i);
-  //   expect(next).toBeInTheDocument();
+  it('Teste se é mostrado apenas um Pokémon por vez', () => {
+    const { getAllByTestId } = renderWithRouter(<App />);
+    const pokemon = getAllByTestId('pokemon-name');
+    expect(pokemon.length).toBe(1);
+  });
 
-  //   userEvent.click(button);
-  //   const next2 = getByText(/caterpie/i);
-  //   expect(next2).toBeInTheDocument();
-  // });
+  // // describe('Teste se a Pokédex tem os botões de filtro', () => {
+  // //   it('a Pokédex deve circular somente pelos pokémons do tipo filtrado', () => {
 
-  // describe('Teste se a Pokédex tem os botões de filtro', () => {
-  //   it('a Pokédex deve circular somente pelos pokémons do tipo filtrado', () => {
-
-  //   });
+  // //   });
 
   //   it('O texto do botão deve corresponder ao nome do tipo', () => {
 
@@ -105,5 +95,7 @@ describe('Teste o componente <Pokedex.js />', () => {
     //   });
     // });
     // it('O botão de Próximo pokémon deve ser desabilitado quando tiver um pokémon', () => {
+      
+    // });      
   });
 });
