@@ -14,6 +14,7 @@ describe('Exercicio 2"', () => {
     const paragraphs = getAllByText(/Pokédex/i);
     expect(paragraphs[0]).toBeInTheDocument();
     expect(paragraphs[1]).toBeInTheDocument();
+    expect(paragraphs.length).toBe(2);
   });
 
   it('Renderize a imagem de uma Pokedex', () => {
