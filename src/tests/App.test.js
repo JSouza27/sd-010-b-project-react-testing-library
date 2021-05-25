@@ -1,4 +1,5 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../helpers/renderWithRouters';
 import App from '../App';
 
@@ -17,12 +18,41 @@ describe('Testa requisito 1 App.js', () => {
     history.push(route);
 
     const home = getByText('Home');
-    const about = getByText('About');
-    const favorite = getByText('Favorite Pokémons');
-
     expect(home).toBeInTheDocument();
-    expect(about).toBeInTheDocument();
-    expect(favorite).toBeInTheDocument();
     expect(getByText('Encountered pokémons')).toBeInTheDocument();
+  });
+
+  test('Renderiza o segundo link com texto About ', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    const route = '/';
+    history.push(route);
+
+    const about = getByText('About');
+    expect(about).toBeInTheDocument();
+  });
+
+  test('Renderiza o terceiro link Favorite Pokémons', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    const route = '/';
+    history.push(route);
+
+    const favorite = getByText('Favorite Pokémons');
+    expect(favorite).toBeInTheDocument();
+  });
+
+  test('Testa se primeiro link redireciona para "/"', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+
+    const home = getByText('Home');
+    userEvent.click(home);
+    expect(history.location.pathname).toBe('/');
+  });
+
+  test('Testa se primeiro link redireciona para "About"', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+
+    const about = getByText('About');
+    userEvent.click(about);
+    expect(history.location.pathname).toBe('/about');
   });
 });
