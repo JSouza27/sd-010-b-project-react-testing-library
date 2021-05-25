@@ -11,4 +11,19 @@ describe('Test the pokedex', () => {
     });
     expect(titlePokedex).toHaveTextContent('Encountered pokémons');
   });
+
+  it('test if the pokemon changes when next button is clicked', () => {
+    const { getByRole, getByTestId } = renderWithRouter(<App />);
+    const nextBtn = getByRole('button', {
+      name: 'Próximo pokémon',
+    });
+    const initialPokemonName = getByTestId('pokemon-name');
+
+    expect(initialPokemonName).toHaveTextContent('Pikachu');
+
+    userEvent.click(nextBtn);
+    const pokemonNameAfterClick = getByTestId('pokemon-name');
+
+    expect(pokemonNameAfterClick).toHaveTextContent('Charmander');
+  });
 });
