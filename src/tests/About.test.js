@@ -4,13 +4,12 @@ import About from '../components/About';
 
 describe('Testando o componente About', () => {
   test('Teste se a página contém um heading h2 com o texto About Pokédex', () => {
-    const { getByText, getByRole } = renderWithRouter(<About />);
-    const textoAbout = getByText('About Pokédex');
-    const h2 = getByRole('heading', { level: 2 });
+    const { getByRole } = renderWithRouter(<About />);
 
-    expect(h2).toBeInTheDocument();
-    expect(h2.tagName).toBe('H2');
-    expect(textoAbout).toBeInTheDocument();
+    expect(getByRole('heading', {
+      level: 2,
+      name: 'About Pokédex',
+    }));
   });
 
   test('Teste se a página contém dois parágrafos com texto sobre a Pokédex', () => {
