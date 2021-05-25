@@ -28,5 +28,12 @@ each one of them`;
       expect(testFirstParagraph).toBeInTheDocument();
       expect(testSecondParagraph).toBeInTheDocument();
     });
+
+    it('Teste se a página contém a seguinte imagem de uma Pokédex: <https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png>', () => {
+      const { getByRole } = render(<About />);
+      const image = getByRole('img');
+      // Source: https://dev.to/raphaelchaula/a-simple-image-test-in-react-3p6f
+      expect(image).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
+    });
   });
 });
