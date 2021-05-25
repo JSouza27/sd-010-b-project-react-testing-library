@@ -22,4 +22,11 @@ describe('Test o Componente', () => {
     const textHome = screen.getByRole('link', { name: /home/i });
     expect(textHome).toBeInTheDocument();
   });
+
+  test('Testa se o segundo link deve possuir o texto About.', () => {
+    renderWithRouter(<App />);
+
+    const textAbout = screen.getByRole('link', { name: /about/i });
+    expect(textAbout).toBeInTheDocument();
+  });
 });
