@@ -34,4 +34,21 @@ describe('Teste requisito 5 Pokedex.js.', () => {
 
     expect(pokeImage.length).toBe(1);
   });
+
+  test('Teste se a Pokédex tem os botões de filtro.', () => {
+    const { getAllByTestId } = renderWithRouter(<App />);
+    const pokemonButton = getAllByTestId('pokemon-type-button');
+    const PokemonsElements = [
+      'Electric',
+      'Fire',
+      'Bug',
+      'Poison',
+      'Psychic',
+      'Normal',
+      'Dragon',
+    ];
+    pokemonButton.forEach(
+      (types, index) => expect(types.innerHTML).toBe(PokemonsElements[index]),
+    );
+  });
 });
