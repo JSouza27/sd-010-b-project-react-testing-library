@@ -18,12 +18,6 @@ describe('Teste o componente <NotFound.js />', () => {
     const urlImage = 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif';
 
     // console.log(image);
-
-    image.forEach((imagem) => {
-      if (imagem.tagName === 'img') {
-        expect(imagem).toBeInTheDocument();
-        expect(imagem).toHaveAttribute('src', urlImage);
-      }
-    });
+    expect(image[1]).toHaveAttribute('src', urlImage);
   });
 });
