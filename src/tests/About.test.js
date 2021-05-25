@@ -16,7 +16,6 @@ describe('Checks About', () => {
 
   it('Checks if the page has two paragraphs about Pokédex', () => {
     render(<About />);
-
     const firstParagraph = screen.getByText('This application simulates a Pokédex'
     + ', a digital encyclopedia containing all Pokémons');
     expect(firstParagraph).toBeInTheDocument();
@@ -30,6 +29,6 @@ describe('Checks About', () => {
     render(<About />);
 
     const image = screen.getByAltText('Pokédex');
-    expect(image).toBeInTheDocument();
+    expect(image.src).toEqual('https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
   });
 });
