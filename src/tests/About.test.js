@@ -6,8 +6,14 @@ describe('Testando o componente about', () => {
   it('Testa se a página contém um h2 com o valor About Pokédex', () => {
     const { getByRole } = render(<About />);
     const aboutPokedex = getByRole('heading', { level: 2, name: /About Pokédex/i });
-
     expect(aboutPokedex).toBeInTheDocument();
+  });
 
+  it('Testa se a página contém dois parágrafos com texto sobre a Pokédex', () => {
+    const { getByText } = render(<About />);
+    const paragraph1 = getByText(/This application simulates/i);
+    const paragraph2 = getByText(/One can filter Pokémons by/i);
+    expect(paragraph1).toBeInTheDocument();
+    expect(paragraph2).toBeInTheDocument();
   });
 });
