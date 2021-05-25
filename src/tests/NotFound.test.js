@@ -13,11 +13,11 @@ describe('Teste o componente <NotFound.js />', () => {
   });
 
   test('Teste se página mostra a imagem', () => {
-    renderWithRouter(<NotFound />);
-    const image = screen.getAllByRole('img');
+    const { getAllByRole } = renderWithRouter(<NotFound />);
+    const image = getAllByRole('img');
     const urlImage = 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif';
 
-    console.log(image);
+    // console.log(image);
 
     image.forEach((imagem) => {
       if (imagem.tagName === 'img') {
