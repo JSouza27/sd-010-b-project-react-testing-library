@@ -1,31 +1,22 @@
 import React from 'react';
-import renderWithRouter from '../components/renderWithRouter';
-import About from '../components/About';
+import './about.css';
 
-describe('Testando o componente About', () => {
-  test('Teste se a página contém um heading h2 com o texto About Pokédex', () => {
-    const { getByText, getByRole } = renderWithRouter(<About />);
-    const textoAbout = getByText('About Pokédex');
-    const h2 = getByRole('heading', { level: 2 });
+const About = () => (
+  <section>
+    <h2>{`About ` + `Pokédex`}</h2>
+    <section>
+      <p>
+        This application simulates a Pokédex, a
+        digital encyclopedia containing all Pokémons
+      </p>
+      <p>One can filter Pokémons by type, and see more details for each one of them</p>
+      <img
+        className="pokedex-image"
+        src={`https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png`}
+        alt="Pokédex"
+      />
+    </section>
+  </section>
+);
 
-    expect(h2).toBeInTheDocument();
-    expect(h2.tagName).toBe('H2');
-    expect(textoAbout).toBeInTheDocument();
-  });
-
-  test('Teste se a página contém dois parágrafos com texto sobre a Pokédex', () => {
-    const { getAllByText } = renderWithRouter(<About />);
-    const linhas = getAllByText(/Pokémons/i);
-
-    expect(linhas.length).toBe(2);
-  });
-
-  it('Teste se a página contém a imagem de uma Pokédex', () => {
-    const { getByRole } = renderWithRouter(<About />);
-    const image = getByRole('img');
-    const urlImage = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
-
-    expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute('src', urlImage);
-  });
-});
+export default About;
