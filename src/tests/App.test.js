@@ -11,4 +11,13 @@ test('renders a reading with the text `Pokédex`', () => {
   );
   const heading = getByText(/Pokédex/i);
   expect(heading).toBeInTheDocument();
+
+  test('shows the Pokédex when the route is `/`', () => {
+    render(
+      <MemoryRouter initialEntries={ ['/'] }>
+        <App />
+      </MemoryRouter>,
+    );
+    expect(getByText('Encountered pokémons')).toBeInTheDocument();
+  });
 });
