@@ -52,4 +52,12 @@ describe('Testing component <App>', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/about');
   });
+
+  test('Ao clicar em Favorite Pokémons é redirecionada para a página /favorites', () => {
+    const { getByRole, history } = renderWithRouter(<App />);
+    const favoritePokemons = getByRole('link', { name: /favorite pokémons/i });
+    userEvent.click(favoritePokemons);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/favorites');
+  });
 });
