@@ -51,4 +51,12 @@ describe('Teste requisito 5 Pokedex.js.', () => {
       (types, index) => expect(types.innerHTML).toBe(PokemonsElements[index]),
     );
   });
+
+  test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const button = getByRole('button', { name: 'All' });
+    expect(button).toBeInTheDocument();
+    fireEvent.click(button);
+    expect(button.innerHTML).toBe('All');
+  });
 });
