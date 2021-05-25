@@ -1,9 +1,9 @@
 import React from 'react';
 import { fireEvent } from '@testing-library/dom';
 import renderWithRoute from './renderWithRoute';
-import * as func from '../components/Pokedex';
+// import * as func from '../components/Pokedex';
 import App from '../App';
-import data from '../data';
+// import data from '../data';
 
 test('Testando se renderiza o texto "Encountered pokémons" na tela', () => {
   const { getByRole } = renderWithRoute(<App />);
@@ -43,10 +43,6 @@ test('Testando se renderiza o pokemon um a um quando o botão é clicado', async
 
   const buttonProximo = getByRole('button', {
     name: 'Próximo pokémon',
-  });
-
-  data.forEach((pokemon) => {
-    fireEvent.click(buttonProximo);
   });
 
   fireEvent.click(buttonProximo);
