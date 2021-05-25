@@ -17,4 +17,10 @@ describe('Testing component <App>', () => {
     expect(about).toBeInTheDocument();
     expect(favoritePokemons).toBeInTheDocument();
   });
+
+  test('O primeiro link deve possuir o texto Home', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const home = getByRole('link', { name: /home/i });
+    expect(home).toHaveTextContent('Home');
+  });
 });
