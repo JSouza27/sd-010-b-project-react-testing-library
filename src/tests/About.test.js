@@ -19,7 +19,7 @@ describe('Testing App', () => {
     expect(aboutText).toBeInTheDocument();
   });
 
-  test('verificar se existe um primeiro parágrafo na página "About"', () => {
+  test('check if there is a first paragraph on the "About" page', () => {
     render(
       <MemoryRouter initialEntries={ ['/about'] }>
         <App />
@@ -33,7 +33,7 @@ describe('Testing App', () => {
     expect(firstParagraph).toBeInTheDocument();
   });
 
-  test('verificar se existe um segundo parágrafo na página "About"', () => {
+  test('check if there is a second paragraph on the "About" page', () => {
     render(
       <MemoryRouter initialEntries={ ['/about'] }>
         <App />
@@ -47,7 +47,7 @@ describe('Testing App', () => {
     expect(secondParagraph).toBeInTheDocument();
   });
 
-  test('verificar se existe uma imagem na página "About"', () => {
+  test('check if there is an image on the "About" page', () => {
     render(
       <MemoryRouter initialEntries={ ['/about'] }>
         <App />
