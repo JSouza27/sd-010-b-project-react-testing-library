@@ -7,8 +7,9 @@ import pokemons from '../data';
 
 import App from '../App';
 
+const pokemonNa = 'pokemon-name';
+
 describe('Teste da página Pokédex', () => {
-  const pokemonName = screen.getByTestId('pokemon-name');
   test('Teste se página contém um heading', () => {
     renderRouter(<App />);
 
@@ -27,6 +28,8 @@ describe('Teste da página Pokédex', () => {
       name: /próximo pokémon/i,
     });
 
+    const pokemonName = screen.getByTestId(pokemonNa);
+
     expect(pokemonName).toHaveTextContent('Pikachu');
 
     userEvent.click(nextButton);
@@ -43,7 +46,7 @@ describe('Teste da página Pokédex', () => {
   test('Teste se é mostrado apenas um Pokémon por vez', () => {
     renderRouter(<App />);
 
-    const pokemon = screen.getAllByTestId('pokemon-name');
+    const pokemon = screen.getAllByTestId(pokemonNa);
 
     expect(pokemon.length).toBe(1);
   });
@@ -90,6 +93,8 @@ describe('Teste da página Pokédex', () => {
     expect(allTypeButton).toBeInTheDocument();
 
     userEvent.click(allTypeButton);
+
+    const pokemonName = screen.getByTestId(pokemonNa);
 
     expect(pokemonName).toHaveTextContent('Pikachu');
   });
