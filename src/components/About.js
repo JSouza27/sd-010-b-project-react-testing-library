@@ -1,29 +1,31 @@
 import React from 'react';
+import renderWithRouter from '../components/renderWithRouter';
 import About from '../components/About';
-import renderWithRouter from './renderWithRouter';
 
-describe('Teste se a página contém as informações sobre a Pokédex', () => {
+describe('Testando o componente About', () => {
   test('Teste se a página contém um heading h2 com o texto About Pokédex', () => {
-    const { getByRole } = renderWithRouter(<About />);
-    const aboutText = getByRole('heading', {
-      level: 2,
-      name: 'About Pokédex',
-    });
-    expect(aboutText).toBeInTheDocument();
+    const { getByText, getByRole } = renderWithRouter(<About />);
+    const textoAbout = getByText('About Pokédex');
+    const h2 = getByRole('heading', { level: 2 });
+
+    expect(h2).toBeInTheDocument();
+    expect(h2.tagName).toBe('H2');
+    expect(textoAbout).toBeInTheDocument();
   });
 
   test('Teste se a página contém dois parágrafos com texto sobre a Pokédex', () => {
     const { getAllByText } = renderWithRouter(<About />);
+    const linhas = getAllByText(/Pokémons/i);
 
-    const paragraphQuant = getAllByText(/Pokémons/);
-    expect(paragraphQuant.length).toBe(2);
+    expect(linhas.length).toBe(2);
   });
-  test('Teste se a página contém uma imagem de Pokédex', () => {
+
+  it('Teste se a página contém a imagem de uma Pokédex', () => {
     const { getByRole } = renderWithRouter(<About />);
-    const pokedexImage = getByRole('img');
-    expect(pokedexImage).toHaveAttribute(
-      'src',
-      'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png',
-    );
+    const image = getByRole('img');
+    const urlImage = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
+
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute('src', urlImage);
   });
 });
