@@ -4,7 +4,7 @@ import { screen } from '@testing-library/react';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
-describe('Test o Componente', () => {
+describe('Teste o Componente', () => {
   test('Teste se a página principal é renderizada na URL /`', () => {
     const { history } = renderWithRouter(<App />);
 
@@ -15,7 +15,9 @@ describe('Test o Componente', () => {
       name: /encountered pokémons/i });
     expect(iAmAtHome).toBeInTheDocument();
   });
+});
 
+describe('Teste se o topo da aplicação contém links de navegação', () => {
   test('Testa se o primeiro link deve possuir o texto Home.', () => {
     renderWithRouter(<App />);
 
