@@ -11,4 +11,15 @@ describe('Test the <App /> component', () => {
 
     expect(heading).toBeInTheDocument();
   });
+
+  it('renders a navigatrion bar with Home, About and Favorites Pokémons links', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const home = getByText('Home');
+    const about = getByText('About');
+    const favorites = getByText('Favorite Pokémons');
+
+    expect(home).toHaveTextContent('Home');
+    expect(about).toHaveTextContent('About');
+    expect(favorites).toHaveTextContent('Favorite Pokémons');
+  });
 });
