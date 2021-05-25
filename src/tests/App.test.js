@@ -1,16 +1,29 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
-test('renders a reading with the text `Pokédex`', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
-  const heading = getByText(/Pokédex/i);
-  expect(heading).toBeInTheDocument();
-});
+describe('Testing the main page', () => {
+  it('renders and check the nav links', () => {
+    const { getByRole, history } = renderWithRouter(<App />);
+    history.push('/');
 
-// mudança para commitar
+    const homeLink = getByRole('link', {
+      name: 'Home',
+    });
+    const aboutLink = getByRole('link', {
+      name: 'About',
+    });
+    const favoriteLink = getByRole('link', {
+      name: 'Favorite Pokémons',
+    });
+
+    expect(homeLink).toBeInTheDocument();
+    expect(homeLink).toHaveTextContent('Home');
+
+    expect(aboutLink).toBeInTheDocument();
+    expect(aboutLink).toHaveTextContent('About');
+
+    expect(favoriteLink).toBeInTheDocument();
+    expect(favoriteLink).toHaveTextContent('Favorite Pokémons');
+  });
+});
