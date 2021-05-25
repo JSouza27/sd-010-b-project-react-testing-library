@@ -1,6 +1,5 @@
 import React from 'react';
 import renderWithRouter from '../helpers/renderWithRouters';
-// import { NotFound } from '../components';
 import App from '../App';
 
 describe('Teste requisito 4 NotFound.js', () => {
