@@ -53,23 +53,23 @@ describe('Teste se a app é redirecionada para a Home ao clicar no link', () => 
 });
 
 describe('Teste se a app é redirecionada para About ao clicar no link', () => {
-  it('Redireciona para a página HoAboutme', () => {
+  it('Redireciona para a página About', () => {
     const { getByText } = renderWithRouter(<App />);
-    const home = screen.getByRole('link', {
+    const about = screen.getByRole('link', {
       name: /About/i,
     });
-    userEvent.click(home);
+    userEvent.click(about);
     expect(getByText('About Pokédex')).toBeInTheDocument();
   });
 });
 
-describe('Teste se a app é redirecionada para About ao clicar no link', () => {
-  it('Redireciona para a página HoAboutme', () => {
+describe('Teste se a app é redirecionada para Favoritos ao clicar no link', () => {
+  it('Redireciona para a página Favorites', () => {
     const { getByText } = renderWithRouter(<App />);
-    const home = screen.getByRole('link', {
-      name: /About/i,
+    const favorito = screen.getByRole('link', {
+      name: /Favorite Pokémons/i,
     });
-    userEvent.click(home);
-    expect(getByText('About Pokédex')).toBeInTheDocument();
+    userEvent.click(favorito);
+    expect(getByText('Favorite pokémons')).toBeInTheDocument();
   });
 });
