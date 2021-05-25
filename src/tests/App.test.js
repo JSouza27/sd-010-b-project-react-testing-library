@@ -21,6 +21,12 @@ describe('Testing component <App>', () => {
   test('O primeiro link deve possuir o texto Home', () => {
     const { getByRole } = renderWithRouter(<App />);
     const home = getByRole('link', { name: /home/i });
-    expect(home).toHaveTextContent('Home');
+    expect(home).toHaveTextContent(/^Home$/);
+  });
+
+  test('O segundo link deve possuir o texto About', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const home = getByRole('link', { name: /about/i });
+    expect(home).toHaveTextContent(/^About$/);
   });
 });
