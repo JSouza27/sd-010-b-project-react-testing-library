@@ -1,6 +1,5 @@
 import React from 'react';
-// import { MemoryRouter } from 'react-router-dom';
-// import { render } from '@testing-library/react';
+import { fireEvent } from '@testing-library/dom';
 import renderWithRouter from '../helper/renderWithRouter';
 import App from '../App';
 
@@ -34,5 +33,26 @@ describe('Test links in home page', () => {
     history.push('/');
     const firstLink = getAllByRole('link');
     expect(firstLink[2].innerHTML).toBe('Favorite Pokémons');
+  });
+});
+
+describe('Test route of links in home page', () => {
+  test('test if link `Home` go to `/`', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    fireEvent.click(getByText('Home'));
+    const { location: { pathname } } = history;
+    expect(pathname).toBe('/');
+  });
+  test('test if link `About` go to `/about`', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    fireEvent.click(getByText('About'));
+    const { location: { pathname } } = history;
+    expect(pathname).toBe('/about');
+  });
+  test('test if link `Favorite Pokémons` go to `/favorites`', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    fireEvent.click(getByText('Favorite Pokémons'));
+    const { location: { pathname } } = history;
+    expect(pathname).toBe('/favorites');
   });
 });
