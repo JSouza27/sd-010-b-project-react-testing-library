@@ -32,8 +32,10 @@ describe('Teste About', () => {
   });
   test('2.4 - Teste se a página contém a seguinte imagem de uma Pokédex', () => {
     const { getByRole } = renderWithRouter(<About />);
-    const URL = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
-    const imagem = getByRole('img', { src: URL });
-    expect(imagem).toBeInTheDocument();
+    const imagem = getByRole('img');
+    expect(imagem).toHaveAttribute(
+      'src',
+      'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png'
+    );
   });
 });
