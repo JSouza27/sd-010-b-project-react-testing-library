@@ -10,4 +10,10 @@ describe('Testando página Not found', () => {
     expect(h2).toBeInTheDocument();
     expect(cryingEmoji).toBeInTheDocument();
   });
+
+  it('Testa se a página mostra a imagem do Pikachu chorando', () => {
+    const { getAllByRole } = render(<NotFound />);
+    const pikachuCrying = getAllByRole('img');
+    expect(pikachuCrying[1].src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+  });
 });
