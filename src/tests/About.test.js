@@ -4,9 +4,7 @@ import renderWithRouter from './renderWithRouter';
 
 describe('Teste o componente <About.js /.', () => {
   test('Se a página contém um heading h2 com o texto About Pokédex', () => {
-    const { history, getByRole } = renderWithRouter( <App />);
-
-    history.push('/about');
+    const { getByRole } = renderWithRouter(<App />, '/about');
 
     const aboutHeading = getByRole('heading', {
       level: 2,
@@ -17,9 +15,7 @@ describe('Teste o componente <About.js /.', () => {
   });
 
   test('Se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
-    const { history, getByText } = renderWithRouter( <App />);
-
-    history.push('/about');
+    const { getByText } = renderWithRouter(<App />, '/about');
 
     const firstText = 'This application simulates a Pokédex, a digital encyclopedia containing all Pokémons';
     const secondText = 'One can filter Pokémons by type, and see more details for each one of them';
@@ -31,9 +27,7 @@ describe('Teste o componente <About.js /.', () => {
   });
 
   test('Se a página contém a seguinte imagem de uma Pokédex:', () => {
-    const { history, getByRole } = renderWithRouter( <App />);
-
-    history.push('/about');
+    const { getByRole } = renderWithRouter(<App />, '/about');
 
     const image = getByRole('img', {});
 
