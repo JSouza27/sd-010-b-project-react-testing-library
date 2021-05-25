@@ -13,23 +13,24 @@ describe('Testando o componente <About />', () => {
       expect(heading).toBeInTheDocument();
     });
 
-    it('Teste se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
-      const { getByText } = render(<About />);
-      let firstParagraph = `This application simulates a Pokédex, a digital
+    it('Teste se nas informações contém dois parágrafos com texto sobre a Pokédex.',
+      () => {
+        const { getByText } = render(<About />);
+        let firstParagraph = `This application simulates a Pokédex, a digital
 encyclopedia containing all Pokémons`;
-      let secondParagraph = `One can filter Pokémons by type, and see more details for
+        let secondParagraph = `One can filter Pokémons by type, and see more details for
 each one of them`;
-      firstParagraph = firstParagraph.replace('\n', ' ');
-      secondParagraph = secondParagraph.replace('\n', ' ');
-      const regexFirstParagraph = RegExp(firstParagraph);
-      const regexSecondParagraph = RegExp(secondParagraph);
-      const testFirstParagraph = getByText(regexFirstParagraph);
-      const testSecondParagraph = getByText(regexSecondParagraph);
-      expect(testFirstParagraph).toBeInTheDocument();
-      expect(testSecondParagraph).toBeInTheDocument();
-    });
+        firstParagraph = firstParagraph.replace('\n', ' ');
+        secondParagraph = secondParagraph.replace('\n', ' ');
+        const regexFirstParagraph = RegExp(firstParagraph);
+        const regexSecondParagraph = RegExp(secondParagraph);
+        const testFirstParagraph = getByText(regexFirstParagraph);
+        const testSecondParagraph = getByText(regexSecondParagraph);
+        expect(testFirstParagraph).toBeInTheDocument();
+        expect(testSecondParagraph).toBeInTheDocument();
+      });
 
-    it('Teste se a página contém a seguinte imagem de uma Pokédex: <https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png>', () => {
+    it('Teste se nas informações contém a seguinte imagem de uma Pokédex: <https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png>', () => {
       const { getByRole } = render(<About />);
       const image = getByRole('img');
       // Source: https://dev.to/raphaelchaula/a-simple-image-test-in-react-3p6f
