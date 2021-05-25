@@ -88,6 +88,12 @@ describe('Teste da página Pokédex', () => {
       name: 'All',
     });
 
-    expect(allTypeButton).toBeVisible();
+    expect(allTypeButton).toBeInTheDocument();
+
+    userEvent.click(allTypeButton);
+
+    const pokemonName = screen.getByTestId('pokemon-name');
+
+    expect(pokemonName).toHaveTextContent('Pikachu');
   });
 });
