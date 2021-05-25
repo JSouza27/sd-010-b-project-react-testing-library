@@ -41,3 +41,28 @@ test('by clicking on the Home link in the navigation bar.', () => {
   const home = getByText(/Encountered pokémons/);
   expect(home).toBeInTheDocument();
 });
+
+test('by clicking on the About link in the navigation bar.', () => {
+  const { getByText, history } = renderWithRouter(<App />);
+  fireEvent.click(getByText('About'));
+  const { pathname } = history.location;
+  expect(pathname).toBe('/about');
+  const home = getByText(/About Pokédex/);
+  expect(home).toBeInTheDocument();
+});
+
+test('by clicking on the Favorite Pokémons link in the navigation bar.', () => {
+  const { getByText, history } = renderWithRouter(<App />);
+  fireEvent.click(getByText('Favorite Pokémons'));
+  const { pathname } = history.location;
+  expect(pathname).toBe('/favorites');
+  const home = getByText(/Favorite pokémons/);
+  expect(home).toBeInTheDocument();
+});
+
+test('is redirected to the Not Found page when entering an unknown URL.', () => {
+  const { getByText, history } = renderWithRouter(<App />);
+  history.push('/que-nao-existe');
+  const noMatch = getByText(/Page requested not found/i);
+  expect(noMatch).toBeInTheDocument();
+});
