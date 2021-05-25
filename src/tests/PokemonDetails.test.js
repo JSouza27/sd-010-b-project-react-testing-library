@@ -1,10 +1,7 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render, fireEvent } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
+import { fireEvent } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
-import { PokemonDetails } from '../components';
 
 describe('test PokemonDetails component', () => {
   test('if pokemon details are displayed on screen', () => {
@@ -17,7 +14,6 @@ describe('test PokemonDetails component', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/pokemons/25');
     expect(moreDetails).not.toBeInTheDocument();
-    const pokemonName = getByText('Pikachu Details');
     const sumario = getByText('Summary');
     expect(sumario).toBeInTheDocument();
     const paragraph = getByText(/This intelligent Pokémon roasts hard/i);
@@ -33,12 +29,29 @@ describe('test PokemonDetails component', () => {
       { level: 2 });
     expect(heading).toBeInTheDocument();
     const allPikachuLocations = getAllByAltText('Pikachu location');
-    expect(allPikachuLocations[0]).toHaveProperty('src', 'https://cdn.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png');
-    expect(allPikachuLocations[1]).toHaveProperty('src', 'https://cdn.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
+    expect(allPikachuLocations[0]).toHaveProperty('src', 'https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png');
+    expect(allPikachuLocations[1]).toHaveProperty('src', 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
     expect(allPikachuLocations.length).toBe(2);
     const location1 = getByText('Kanto Viridian Forest');
     expect(location1).toBeInTheDocument();
     const location2 = getByText('Kanto Power Plant');
     expect(location2).toBeInTheDocument();
+  });
+
+  test('if user can favorite pokemon throgh detail page', () => {
+    const { getByText, getByRole, getByAltText, history } = renderWithRouter(<App />);
+    const moreDetails = getByText(/More details/i);
+    fireEvent.click(moreDetails);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/pokemons/25');
+    const textFavoritePokemon = getByText('Pokémon favoritado?');
+    expect(textFavoritePokemon).toBeInTheDocument();
+    const checkbox = getByRole('checkbox');
+    expect(checkbox).toBeInTheDocument();
+    fireEvent.click(checkbox);
+    const favorite = getByAltText('Pikachu is marked as favorite');
+    expect(favorite).toBeInTheDocument();
+    fireEvent.click(checkbox);
+    expect(favorite).not.toBeInTheDocument();
   });
 });
