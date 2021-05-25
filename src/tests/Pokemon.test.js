@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
 
@@ -25,23 +25,28 @@ describe('test Pokemon component', () => {
   });
 
   test('if pokemon is favorited', () => {
-    const { getByText, getByAltText, getByRole } = renderWithRouter(<App />);
+    const { getByText, getByRole, history } = renderWithRouter(<App />);
     const moreDetailsButton = getByText(/more details/i);
     fireEvent.click(moreDetailsButton);
     const checkbox = getByRole('checkbox');
     fireEvent.click(checkbox);
-    const favoritedPokemon = getByAltText(/pikachu is marked as favorite/i);
+    const favoritedPokemon = screen.getByAltText(/pikachu is marked as favorite/i);
     expect(favoritedPokemon).toBeInTheDocument();
     expect(favoritedPokemon).toHaveAttribute('src', '/star-icon.svg');
-    // failed total complete test from add to remove favorite pokemon:
-    // const home = getByText('Home');
-    // fireEvent.click(home);
-    // const favoritedPokemon2 = getByAltText(/pikachu is marked as favorite/i);
-    // expect(favoritedPokemon2).toBeInTheDocument();
-    // fireEvent.click(moreDetailsButton);
-    // fireEvent.click(checkbox);
-    // fireEvent.click(home);
-    // const favoritedPokemon3 = getByAltText(/pikachu is marked as favorite/i);
-    // expect(favoritedPokemon3).toBeInTheDocument();
+    const home = getByText('Home');
+    fireEvent.click(home);
+    const favoritedPokemon2 = screen.getByAltText(/pikachu is marked as favorite/i);
+    expect(favoritedPokemon2).toHaveAttribute('src', '/star-icon.svg');
+    expect(favoritedPokemon2).toBeInTheDocument();
+    const moreDetailsButton2 = getByText(/more details/i);
+    fireEvent.click(moreDetailsButton2);
+    // const checkbox2 = getByRole('checkbox');
+    // fireEvent.click(checkbox2); acho que no fim não precisava desse botão, era o moreDetailsButton2 que precisava ser criado mesmo
+    fireEvent.click(home);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/');
+    expect(favoritedPokemon).not.toBeInTheDocument();
+    expect(favoritedPokemon2).not.toBeInTheDocument();
   });
+  // teste final com aumento de complexidade com ajuda de Henrique Clementino
 });
