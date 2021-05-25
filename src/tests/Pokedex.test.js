@@ -68,4 +68,14 @@ describe('Teste requisito 5 Pokedex.js.', () => {
     const buttonAll = getByRole('button', { name: 'All' });
     expect(buttonAll).toBeInTheDocument();
   });
+
+  test(`'O botão de Próximo pokémon deve ser desabilitado 
+  quando a lista filtrada de Pokémons tiver um só pokémon'`, () => {
+    const { getByText, getAllByText } = renderWithRouter(<App />);
+    const eletric = getAllByText('Electric');
+    fireEvent.click(eletric[1]);
+    fireEvent.click(getByText('Próximo pokémon'));
+    const pikachu = getByText('Pikachu');
+    expect(pikachu).toBeInTheDocument();
+  });
 });
