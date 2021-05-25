@@ -51,9 +51,6 @@ describe('Verifica os links', () => {
     currentRoute = history.location.pathname;
     expect(currentRoute).toBe('/favorites');
 
-    /* currentRoute = history.location.pathname;
-    expect(currentRoute).toBe('/favorites'); */
-
     history.push('/naoexiste');
     const notFound = getByText('Page requested not found');
     expect(notFound).toBeInTheDocument();
