@@ -1,7 +1,9 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { getAllByRole, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import App from '../App';
+
+//  *SOURCE* https://testing-library.com/docs/queries/byrole
 
 test('renders a reading with the text `Pokédex`', () => {
   const { getByText } = render(
