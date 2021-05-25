@@ -54,3 +54,9 @@ test('testando o link de navegação Favorite Pokémons', () => {
   userEvent.click(linkFavorite);
   expect(getByText('Favorite Pokémons')).toBeInTheDocument();
 });
+
+test('testando se a pagina não for encontrada', () => {
+  const { getByText, history } = renderWithRouter(<App />);
+  history.push('/ll');
+  expect(getByText('Page requested not found')).toBeInTheDocument();
+});
