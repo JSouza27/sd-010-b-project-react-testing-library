@@ -1,4 +1,6 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
@@ -19,7 +21,7 @@ it('shows the Pokédex when the route is `/`', () => {
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
 });
 
-describe('Testa se o topo da aplicação contém um conjunto fixo de links de navegação', () => {
+describe('Testa se o topo da aplicação contém um conjunto de links de navegação', () => {
   it('O primeiro link deve possuir o texto Home', () => {
     const { getByText, history } = renderWithRouter(<App />);
     history.push('/');
@@ -36,5 +38,16 @@ describe('Testa se o topo da aplicação contém um conjunto fixo de links de na
     const { getByText, history } = renderWithRouter(<App />);
     history.push('/');
     expect(getByText('Favorite Pokémons')).toBeInTheDocument();
+  });
+});
+
+describe('Teste se a app é redirecionada para a Home ao clicar no link', () => {
+  it('Redireciona para a página Home', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const home = screen.getByRole('link', {
+      name: /Home/i,
+    });
+    userEvent.click(home);
+    expect(getByText('Encountered pokémons')).toBeInTheDocument();
   });
 });
