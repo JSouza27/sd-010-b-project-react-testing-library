@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import About from '../components/About';
 
-describe('Testando a pagina "about"', () => {
+describe('Testando a pagina about', () => {
   it('Deve ter um heading H2', () => {
     const { getByRole } = render(<About />);
     const h2 = getByRole('heading', { level: 2 });
