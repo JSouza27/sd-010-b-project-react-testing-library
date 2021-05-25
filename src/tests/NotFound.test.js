@@ -16,7 +16,9 @@ describe('testa requisito 4', () => {
 
   it('verifica a existência de uma imagem', () => {
     RenderWithRouter(<NotFound />);
-    const img = screen.getByAltText(/Pikachu crying because the page requested was not found/i);
+    const img = screen.getByAltText(
+      /Pikachu crying because the page requested was not found/i,
+    );
     expect(img).toHaveAttribute(
       'src', 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif',
     );
