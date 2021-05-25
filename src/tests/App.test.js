@@ -26,7 +26,13 @@ describe('Testing component <App>', () => {
 
   test('O segundo link deve possuir o texto About', () => {
     const { getByRole } = renderWithRouter(<App />);
-    const home = getByRole('link', { name: /about/i });
-    expect(home).toHaveTextContent(/^About$/);
+    const about = getByRole('link', { name: /about/i });
+    expect(about).toHaveTextContent(/^About$/);
+  });
+
+  test('O terceiro link deve possuir o texto Favorite Pokémons', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const favoritePokemons = getByRole('link', { name: /favorite pokémons/i });
+    expect(favoritePokemons).toHaveTextContent(/^Favorite Pokémons$/);
   });
 });
