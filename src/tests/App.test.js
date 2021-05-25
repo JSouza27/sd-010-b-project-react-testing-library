@@ -16,7 +16,7 @@ describe('test component App', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test('nav links home', () => {
+  test('nav link home', () => {
     const { history } = renderWithRouter(<App />);
     const homeLink = screen.getByText('Home');
     expect(homeLink).toBeInTheDocument();
@@ -25,5 +25,28 @@ describe('test component App', () => {
 
     const { pathname } = history.location;
     expect(pathname).toBe('/');
+  });
+
+  test('nav link About', () => {
+    const { history } = renderWithRouter(<App />);
+    const aboutLink = screen.getByText('About');
+    expect(aboutLink).toBeInTheDocument();
+
+    userEvent.click(aboutLink);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/about');
+  });
+
+  test('nav link Favorite Pokemons', () => {
+    const { history } = renderWithRouter(<App />);
+
+    const favPokemonLink = screen.getByRole('link', { name: /Favorite Pokémons/i });
+    expect(favPokemonLink).toBeInTheDocument();
+
+    userEvent.click(favPokemonLink);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/favorites');
   });
 });
