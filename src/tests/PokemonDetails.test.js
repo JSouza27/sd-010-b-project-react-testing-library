@@ -38,7 +38,7 @@ describe('test PokemonDetails component', () => {
     expect(location2).toBeInTheDocument();
   });
 
-  test('if user can favorite pokemon throgh detail page', () => {
+  test('if user can favorite pokemon through detail page', () => {
     const { getByText, getByRole, getByAltText, history } = renderWithRouter(<App />);
     const moreDetails = getByText(/More details/i);
     fireEvent.click(moreDetails);
@@ -53,5 +53,15 @@ describe('test PokemonDetails component', () => {
     expect(favorite).toBeInTheDocument();
     fireEvent.click(checkbox);
     expect(favorite).not.toBeInTheDocument();
+  });
+
+  test('find new stryker element', () => {
+    const { getByRole, getByText } = renderWithRouter(<App />);
+    const moreDetails = getByText(/More details/i);
+    fireEvent.click(moreDetails);
+    const pokemonDetailsHidden = getByRole('heading',
+      { name: 'Pikachu Details' },
+      { level: 2 });
+    expect(pokemonDetailsHidden).toBeInTheDocument();
   });
 });
