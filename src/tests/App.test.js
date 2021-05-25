@@ -51,3 +51,25 @@ describe('Teste se a app é redirecionada para a Home ao clicar no link', () => 
     expect(getByText('Encountered pokémons')).toBeInTheDocument();
   });
 });
+
+describe('Teste se a app é redirecionada para About ao clicar no link', () => {
+  it('Redireciona para a página HoAboutme', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const home = screen.getByRole('link', {
+      name: /About/i,
+    });
+    userEvent.click(home);
+    expect(getByText('About Pokédex')).toBeInTheDocument();
+  });
+});
+
+describe('Teste se a app é redirecionada para About ao clicar no link', () => {
+  it('Redireciona para a página HoAboutme', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const home = screen.getByRole('link', {
+      name: /About/i,
+    });
+    userEvent.click(home);
+    expect(getByText('About Pokédex')).toBeInTheDocument();
+  });
+});
