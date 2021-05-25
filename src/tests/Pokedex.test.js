@@ -27,4 +27,11 @@ describe('Teste requisito 5 Pokedex.js.', () => {
 
     expect(getByText('Pikachu')).toBeInTheDocument();
   });
+
+  test('Teste se é mostrado apenas um Pokémon por vez.', () => {
+    const { getAllByRole } = renderWithRouter(<App />);
+    const pokeImage = getAllByRole('img');
+
+    expect(pokeImage.length).toBe(1);
+  });
 });
