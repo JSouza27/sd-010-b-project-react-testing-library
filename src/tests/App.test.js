@@ -27,4 +27,5 @@ test('renders a reading with the text `Pokédex`', () => {
   expect(linkFavoritePokemons).toBeInTheDocument();
 
   history.push('pagina/pagina-nao-encontrada');
+
 });
