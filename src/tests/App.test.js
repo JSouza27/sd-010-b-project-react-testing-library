@@ -27,6 +27,11 @@ test('shows the Pokédex when the route is `/`', () => {
 
 test('Testa se a página principal da Pokédex é renderizada no caminho /', () => {
   renderRouter(<App />);
+
+  const pokedexHome = screen.getByRole('heading', {
+    level: 2,
+  });
+  expect(pokedexHome).toBeInTheDocument();
 });
 
 test('Testa se o topo da aplicação contém um conjunto fixo de links de navegação', () => {
