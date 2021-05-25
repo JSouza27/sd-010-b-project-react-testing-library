@@ -25,7 +25,7 @@ describe('Test "About" component', () => {
     expect(paragraph2).toBeInTheDocument();
   });
 
-  it('has image from Pokédex', () => {
+  it('renders image from Pokédex', () => {
     const { getByRole } = renderWithRouter(<About />);
     const image = getByRole('img', { name: /pokédex/i });
     const { src } = image;
