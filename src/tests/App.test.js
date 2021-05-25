@@ -11,13 +11,36 @@ test('renders a reading with the text `Pokédex`', () => {
   );
   const heading = getByText(/Pokédex/i);
   expect(heading).toBeInTheDocument();
+});
 
-  test('shows the Pokédex when the route is `/`', () => {
-    render(
-      <MemoryRouter initialEntries={ ['/'] }>
+describe('Teste se o topo da aplicação contém um conjunto de links', () => {
+  test('Primeiro link deve ter o texto Home', () => {
+    const { getByText } = render(
+      <MemoryRouter>
         <App />
       </MemoryRouter>,
     );
-    expect(getByText('Encountered pokémons')).toBeInTheDocument();
+    const home = getByText('Home');
+    expect(home).toBeInTheDocument();
+  });
+
+  test('Primeiro link deve ter o texto About', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
+    const about = getByText('About');
+    expect(about).toBeInTheDocument();
+  });
+
+  test('Primeiro link deve ter o texto Favorite Pokémons', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
+    const about = getByText('Favorite Pokémons');
+    expect(about).toBeInTheDocument();
   });
 });
