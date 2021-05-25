@@ -17,4 +17,28 @@ describe('Test the component FavoritePokemons', () => {
     const notFound = getByText('No favorite pokemon found');
     expect(notFound).toBeInTheDocument();
   });
+
+  test('renders all the cards of favorite pokemons', () => {
+    const { getByRole } = renderWithRouter(<App />);
+
+    const linkDetails = getByRole('link', {
+      name: /more details/i,
+    });
+    fireEvent.click(linkDetails);
+
+    const checkFavorite = getByRole('checkbox', {
+      name: /pokémon favoritado\?/i,
+    });
+    fireEvent.click(checkFavorite);
+
+    const favorite = getByRole('link', {
+      name: 'Favorite Pokémons',
+    });
+    fireEvent.click(favorite);
+
+    const imgFavoritePokemon = getByRole('img', {
+      name: /pikachu sprite/i,
+    });
+    expect(imgFavoritePokemon).toBeInTheDocument();
+  });
 });
