@@ -1,6 +1,6 @@
 import React from 'react';
-import renderWithRouter from './renderWithRouter';
 import userEvent from '@testing-library/user-event';
+import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
 describe('Testing the main page', () => {
