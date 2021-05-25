@@ -4,91 +4,93 @@ import { render, fireEvent } from '@testing-library/react';
 import renderWithRouter from '../components/renderWithRouter';
 import App from '../App';
 
-test('renders a reading with the text `Pokédex`', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
-  const heading = getByText(/Pokédex/i);
-  expect(heading).toBeInTheDocument();
-});
+describe('Testing the App.js', () => {
+  test('renders a reading with the text `Pokédex`', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
+    const heading = getByText(/Pokédex/i);
+    expect(heading).toBeInTheDocument();
+  });
 
-test('shows the Pokédex when the route is `/`', () => {
-  const { getByText } = render(
-    <MemoryRouter initialEntries={ ['/'] }>
-      <App />
-    </MemoryRouter>,
-  );
+  test('shows the Pokédex when the route is `/`', () => {
+    const { getByText } = render(
+      <MemoryRouter initialEntries={ ['/'] }>
+        <App />
+      </MemoryRouter>,
+    );
 
-  expect(getByText('Encountered pokémons')).toBeInTheDocument();
-});
+    expect(getByText('Encountered pokémons')).toBeInTheDocument();
+  });
 
-test('test if the main page has a group of links', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
+  test('test if the main page has a group of links', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
 
-  const homeLink = getByText('Home');
-  expect(homeLink).toBeInTheDocument();
+    const homeLink = getByText('Home');
+    expect(homeLink).toBeInTheDocument();
 
-  const aboutLink = getByText('About');
-  expect(aboutLink).toBeInTheDocument();
+    const aboutLink = getByText('About');
+    expect(aboutLink).toBeInTheDocument();
 
-  const favoriteLink = getByText('Favorite Pokémons');
-  expect(favoriteLink).toBeInTheDocument();
-});
+    const favoriteLink = getByText('Favorite Pokémons');
+    expect(favoriteLink).toBeInTheDocument();
+  });
 
-test('when \'Home\' link is clicked is redirected to / URL', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
+  test('when \'Home\' link is clicked is redirected to / URL', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
 
-  const homeLink = getByText('Home');
+    const homeLink = getByText('Home');
 
-  fireEvent.click(homeLink);
+    fireEvent.click(homeLink);
 
-  expect(getByText('Encountered pokémons')).toBeInTheDocument();
-});
+    expect(getByText('Encountered pokémons')).toBeInTheDocument();
+  });
 
-test('when \'About\' link is clicked is redirected to /about URL', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
+  test('when \'About\' link is clicked is redirected to /about URL', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
 
-  const aboutLink = getByText('About');
+    const aboutLink = getByText('About');
 
-  fireEvent.click(aboutLink);
+    fireEvent.click(aboutLink);
 
-  expect(getByText('About Pokédex')).toBeInTheDocument();
-});
+    expect(getByText('About Pokédex')).toBeInTheDocument();
+  });
 
-test('when \'Favorite Pokémons\' link is clicked is redirected to /favorites URL', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
+  test('when \'Favorite Pokémons\' is clicked is redirected to /favorites URL', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
 
-  const favoriteLink = getByText('Favorite Pokémons');
+    const favoriteLink = getByText('Favorite Pokémons');
 
-  fireEvent.click(favoriteLink);
+    fireEvent.click(favoriteLink);
 
-  expect(getByText('Favorite pokémons')).toBeInTheDocument();
-});
+    expect(getByText('Favorite pokémons')).toBeInTheDocument();
+  });
 
-test('when the URL is unknown, the page requested is the Not found', () => {
-  const { getByText, history } = renderWithRouter(<App />);
+  test('when the URL is unknown, the page requested is the Not found', () => {
+    const { getByText, history } = renderWithRouter(<App />);
 
-  history.push('/pagina-qualquer');
+    history.push('/pagina-qualquer');
 
-  const unknownPage = getByText('Page requested not found');
+    const unknownPage = getByText('Page requested not found');
 
-  expect(unknownPage).toBeInTheDocument();
+    expect(unknownPage).toBeInTheDocument();
+  });
 });
