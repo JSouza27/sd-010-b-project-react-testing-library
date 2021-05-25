@@ -29,4 +29,11 @@ describe('Test o Componente', () => {
     const textAbout = screen.getByRole('link', { name: /about/i });
     expect(textAbout).toBeInTheDocument();
   });
+
+  test('Testa se o terceiro link deve possuir o texto Favorite Pokémons.', () => {
+    renderWithRouter(<App />);
+
+    const textFavPokemon = screen.getByRole('link', { name: /favorite pokémons/i });
+    expect(textFavPokemon).toBeInTheDocument();
+  });
 });
