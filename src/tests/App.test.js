@@ -28,4 +28,15 @@ describe('Testando App.js', () => {
     expect(pathname).toBe('/about');
     expect(about).toBeInTheDocument();
   });
+
+  it('renderiza a página Favorite Pokemons, quando clicado no link', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    const favoritePokemons = getByText(/Favorite Pokémons/i);
+
+    fireEvent.click(favoritePokemons);
+    const { pathname } = history.location;
+
+    expect(pathname).toBe('/favorites');
+    expect(favoritePokemons).toBeInTheDocument();
+  });
 });
