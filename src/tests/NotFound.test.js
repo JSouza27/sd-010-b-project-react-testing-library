@@ -14,4 +14,14 @@ describe('Teste da página Not Found', () => {
 
     expect(textNotFound).toBeInTheDocument();
   });
+
+  test('Teste se a página contém uma image', () => {
+    render(<NotFound />);
+
+    const imageNotFound = screen.getByRole('img', {
+      name: 'Pikachu crying because the page requested was not found',
+    });
+
+    expect(imageNotFound.src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+  });
 });
