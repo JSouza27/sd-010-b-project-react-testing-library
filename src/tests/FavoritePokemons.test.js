@@ -6,7 +6,7 @@ import FavoritePokemons from '../components/FavoritePokemons';
 import App from '../App';
 
 describe('testa requisito 3', () => {
-  it('renderiza o componente NotFound', () => {
+  it('verifica text not found', () => {
     const { getByText } = RenderWithRouter(<FavoritePokemons />);
     const notFound = getByText(/No favorite pokemon found/i);
     expect(notFound).toBeInTheDocument();
