@@ -1,10 +1,7 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
 import { fireEvent } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
-import Pokedex from '../components/Pokedex';
 
 describe('test Pokedex component', () => {
   const proxPokemonTexto = 'Próximo pokémon';
@@ -55,19 +52,27 @@ describe('test Pokedex component', () => {
 
   test('filter buttons', () => {
     const pokemonsTypes = [
-      'Fire',
-      'Psychic',
       'Electric',
+      'Fire',
       'Bug',
       'Poison',
-      'Dragon',
-      'Normal'];
-    const { getByRole } = renderWithRouter(<App />);
-    pokemonsTypes.forEach((type) => {
-      const button = getByRole('button', { name: type });
+      'Psychic',
+      'Normal',
+      'Dragon'];
+    const { getByRole, getAllByTestId } = renderWithRouter(<App />);
+    const buttonsId = getAllByTestId('pokemon-type-button');
+    buttonsId.forEach((type, index) => {
+      const button = getByRole('button', { name: pokemonsTypes[index] });
       expect(button).toBeInTheDocument();
-      expect(button.textContent).toBe(type);
+      expect(button.textContent).toBe(pokemonsTypes[index]);
     });
+  });
 
+  test('next pokemon button disabled case', () => {
+    const { getByRole, getByText } = renderWithRouter(<App />);
+    const eletricButton = getByRole('button', { name: 'Electric' });
+    fireEvent.click(eletricButton);
+    const disabledButton = getByText('Próximo pokémon');
+    expect(disabledButton).toHaveAttribute('disabled'); // https://stackoverflow.com/questions/56593840/check-that-button-is-disabled-in-react-testing-library
   });
 });
