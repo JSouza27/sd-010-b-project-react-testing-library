@@ -27,9 +27,10 @@ describe('if the top of the application contains a fixed set of navigation links
   });
 
   it('The first link must have the text Favorite Pokémons', () => {
+    const pokemon = 'Favorite Pokémons';
     const { getByText } = renderWithRouter(<App />);
-    const link = getByText('Favorite Pokémons').innerHTML;
-    expect(link).toBe('Favorite Pokémons');
+    const link = getByText(pokemon).innerHTML;
+    expect(link).toBe(pokemon);
   });
 });
 
