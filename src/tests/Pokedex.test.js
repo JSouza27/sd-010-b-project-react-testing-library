@@ -62,4 +62,32 @@ describe('Teste da página Pokédex', () => {
 
     expect(typePokemon).toHaveTextContent('Fire');
   });
+
+  test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+    renderRouter(<App />);
+
+    const typeButton = screen.getByRole('button', {
+      name: 'All',
+    });
+
+    expect(typeButton).toBeInTheDocument();
+  });
+  test('Teste se é criado, um botão de filtro para cada tipo de Pokémon', () => {
+    renderRouter(<App />);
+
+    const typeButtons = screen.getAllByTestId('pokemon-type-button');
+
+    const types = pokemons.map((pokemon) => pokemon.type);
+
+    // https://www.javascripttutorial.net/array/javascript-remove-duplicates-from-array/#:~:text=1)%20Remove%20duplicates%20from%20an%20array%20using%20a%20Set&text=To%20remove%20duplicates%20from%20an%20array%3A,set%20back%20to%20an%20array.
+    const uniqueTypes = [...new Set(types)];
+
+    expect(typeButtons.length).toBe(uniqueTypes.length);
+
+    const allTypeButton = screen.getByRole('button', {
+      name: 'All',
+    });
+
+    expect(allTypeButton).toBeVisible();
+  });
 });
