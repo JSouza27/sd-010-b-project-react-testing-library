@@ -60,4 +60,11 @@ describe('Testing component <App>', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/favorites');
   });
+
+  test('Ao acessar a rota /teste é redirecionada a página Not Found', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    history.push('/teste');
+    const noMatch = getByText(/Page requested not found/i);
+    expect(noMatch).toBeInTheDocument();
+  });
 });
