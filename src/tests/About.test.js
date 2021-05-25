@@ -12,5 +12,21 @@ describe('Testando o componente <About />', () => {
       });
       expect(heading).toBeInTheDocument();
     });
+
+    it('Teste se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
+      const { getByText } = render(<About />);
+      let firstParagraph = `This application simulates a Pokédex, a digital
+encyclopedia containing all Pokémons`;
+      let secondParagraph = `One can filter Pokémons by type, and see more details for
+each one of them`;
+      firstParagraph = firstParagraph.replace('\n', ' ');
+      secondParagraph = secondParagraph.replace('\n', ' ');
+      const regexFirstParagraph = RegExp(firstParagraph);
+      const regexSecondParagraph = RegExp(secondParagraph);
+      const testFirstParagraph = getByText(regexFirstParagraph);
+      const testSecondParagraph = getByText(regexSecondParagraph);
+      expect(testFirstParagraph).toBeInTheDocument();
+      expect(testSecondParagraph).toBeInTheDocument();
+    });
   });
 });
