@@ -40,4 +40,12 @@ describe('Teste da página Pokédex', () => {
 
     expect(pokemonName).toHaveTextContent('Pikachu');
   });
+
+  test('Teste se é mostrado apenas um Pokémon por vez', () => {
+    renderRouter(<App />);
+
+    const pokemon = screen.getAllByTestId('pokemon-name');
+
+    expect(pokemon.length).toBe(1);
+  });
 });
