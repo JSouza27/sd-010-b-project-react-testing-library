@@ -27,5 +27,6 @@ test('Testando as rotas', () => {
   const route = '/';
   history.push(route);
 
-  expect();
+  const text = getByText(/Pokédex/i);
+  expect(text).toBeInTheDocument();
 });
