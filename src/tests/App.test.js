@@ -63,4 +63,24 @@ describe('Teste de redirecionamento de páginas', () => {
     const inAbout = screen.getByRole('img', { name: /pokédex/i });
     expect(inAbout).toBeInTheDocument();
   });
+
+  test('Testa redirecionamento para URL /favorites ao clicar Fav. Pokemon', () => {
+    const { history } = renderWithRouter(<App />);
+
+    userEvent.click(screen.getByRole('link', { name: /favorite pokémons/i }));
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/favorites');
+    const inFavorites = screen.getByText(/no favorite pokemon found/i);
+    expect(inFavorites).toBeInTheDocument();
+  });
+
+  it('Testa um caminho não existente e a renderização do Not Found', () => {
+    const { history } = renderWithRouter(<App />);
+
+    history.push('/nao-existe');
+    const noMatch = screen.getByRole('img', {
+      name: /pikachu crying because the page requested was not found/i });
+    expect(noMatch).toBeInTheDocument();
+  });
 });
