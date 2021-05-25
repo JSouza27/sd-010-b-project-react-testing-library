@@ -1,4 +1,5 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from './RenderWithRouter';
 
@@ -34,5 +35,13 @@ describe('Testing component <App>', () => {
     const { getByRole } = renderWithRouter(<App />);
     const favoritePokemons = getByRole('link', { name: /favorite pokémons/i });
     expect(favoritePokemons).toHaveTextContent(/^Favorite Pokémons$/);
+  });
+
+  test('Ao clicar em Home é redirecionada para a página inicial', () => {
+    const { getByRole, history } = renderWithRouter(<App />);
+    const home = getByRole('link', { name: /home/i });
+    userEvent.click(home);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/');
   });
 });
