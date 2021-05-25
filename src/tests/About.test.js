@@ -16,4 +16,13 @@ describe('Testa o componente About', () => {
 
     expect(quantityLines.length).toBe(2);
   });
+
+  test('Teste se a página contém a imagem de uma Pokédex', () => {
+    const { getByRole } = renderWithRouter(<About />);
+    const image = getByRole('img');
+    const urlImage = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
+
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute('src', urlImage);
+  });
 });
