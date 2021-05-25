@@ -1,6 +1,7 @@
 import React from 'react';
 // import { MemoryRouter } from 'react-router-dom';
 // import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../Helpers/renderWithRouter';
 import App from '../App';
 
@@ -27,4 +28,11 @@ test('Teste se o topo da aplicação contém um conjunto fixo de links de navega
   expect(home).toBeInTheDocument();
   expect(about).toBeInTheDocument();
   expect(favoritePokemons).toBeInTheDocument();
+});
+test('A é aplicação é redireciona para ahome, na URL / ao clicar no link Home', () => {
+  const { getByText } = renderWithRouter(<App />);
+  const home = getByText(/Home/i);
+  userEvent.click(home); 
+  const aplicacao = getByText(/Encountered pokémons/i);
+  expect(aplicacao).toBeInTheDocument();
 });
