@@ -49,4 +49,12 @@ describe('test component App', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/favorites');
   });
+
+  test('not existing path and render page not found', () => {
+    const { history } = renderWithRouter(<App />);
+
+    history.push('/page/that-doesnt-exists');
+    const notFound = screen.getByText('Page requested not found');
+    expect(notFound).toBeInTheDocument();
+  });
 });
