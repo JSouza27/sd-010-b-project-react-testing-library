@@ -26,4 +26,10 @@ describe('Testando página Pokedex', () => {
       fireEvent.click(btnNextPokemon);
     });
   });
+
+  it('Testa se é mostrado apenas um Pokémon por vez', () => {
+    const { getAllByTestId } = renderWithRouter(<App />);
+    const pokemonNameArr = getAllByTestId('pokemon-name');
+    expect(pokemonNameArr.length).toBe(1);
+  });
 });
