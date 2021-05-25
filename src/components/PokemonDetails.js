@@ -10,7 +10,7 @@ class PokemonDetails extends React.Component {
   static renderHabitat({ foundAt, name }) {
     return (
       <section>
-        <h2>{`Game Locations of ` + `${name}`}</h2>
+        <h2>{`Game Locations of ${name}`}</h2>
         <div className="pokemon-habitat">
           {foundAt.map(({ location, map }) => (
             <div key={ location }>
