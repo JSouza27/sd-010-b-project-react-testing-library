@@ -1,16 +1,19 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
+// import { MemoryRouter } from 'react-router-dom';
 import App from '../App';
+import renderWithRouter from '../renderWithRouter';
 
-test('renders a reading with the text `Pokédex`', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
-  const heading = getByText(/Pokédex/i);
-  expect(heading).toBeInTheDocument();
+describe('Testando App.js', () => {
+  it('Renderiza a página home quando o documento é aberto', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const heading = getByText(/Pokédex/i);
+    const homeLink = getByText(/Home/i);
+    const aboutLink = getByText(/About/i);
+    const favoritePokemonsLink = getByText(/Favorite Pokémons/i);
+
+    expect(heading).toBeInTheDocument();
+    expect(homeLink).toBeInTheDocument();
+    expect(aboutLink).toBeInTheDocument();
+    expect(favoritePokemonsLink).toBeInTheDocument();
+  });
 });
-
-// comentário para commit inicial
