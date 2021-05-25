@@ -95,7 +95,7 @@ describe('Teste o componente <Pokedex.js />', () => {
     //   });
     // });
     // it('O botão de Próximo pokémon deve ser desabilitado quando tiver um pokémon', () => {
-      
-    // });      
+
+    // });
   });
 });
