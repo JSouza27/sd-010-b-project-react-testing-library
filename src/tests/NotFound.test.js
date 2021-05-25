@@ -6,7 +6,8 @@ import NotFound from '../components/NotFound';
 describe('Tests the NotFound Component', () => {
   it('tests the heading', () => {
     const { getByRole } = renderWithRouter(<NotFound />);
-    const heading = getByRole('heading', { level: 2, name: 'Page requested not found Crying emoji' });
+    const heading = getByRole('heading',
+      { level: 2, name: 'Page requested not found Crying emoji' });
     expect(heading).toBeInTheDocument();
   });
 
