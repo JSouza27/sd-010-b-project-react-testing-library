@@ -3,8 +3,8 @@ import { fireEvent } from '@testing-library/react';
 import renderWithRouter from '../helper/renderWithRouter';
 import App from '../App';
 
-describe('requirement 3', () => {
-  it('verify no favorite pokemonFound', () => {
+describe('Requirement 3', () => {
+  it('Verify no favorite pokemon found', () => {
     const { getByText, history } = renderWithRouter(<App />);
     history.push('/favorites');
 
@@ -13,7 +13,7 @@ describe('requirement 3', () => {
     expect(noFound).toBeInTheDocument();
   });
 
-  it('Check add favorite pokemon', () => {
+  it('Check to add favorite pokemon', () => {
     const { getByText, getByRole } = renderWithRouter(<App />);
 
     const moreInfo = getByText(/More details/);

@@ -2,7 +2,7 @@ import React from 'react';
 import renderWithRouter from '../helper/renderWithRouter';
 import App from '../App';
 
-describe('requirement 2', () => {
+describe('Requirement 2', () => {
   it('verify h2, p and src from About page', () => {
     const { history, getByRole, getByText } = renderWithRouter(<App />);
     history.push('/about');

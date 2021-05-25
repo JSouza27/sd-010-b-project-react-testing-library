@@ -2,8 +2,8 @@ import React from 'react';
 import renderWithRouter from '../helper/renderWithRouter';
 import App from '../App';
 
-describe('requirement 1', () => {
-  it('renders a reading with the text `Pokédex`', () => {
+describe('Requirement 1', () => {
+  it('Renders a reading with the text `Pokédex`', () => {
     const { getByText } = renderWithRouter(<App />);
 
     const heading = getByText(/pokédex/i);
@@ -11,7 +11,7 @@ describe('requirement 1', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  it('verify links if exists (Home, About, Favorite Pokémons)', () => {
+  it('Verify links if exists (Home, About, Favorite Pokémons)', () => {
     const { getByRole } = renderWithRouter(<App />);
 
     const linkHome = getByRole('link', { name: 'Home' });
