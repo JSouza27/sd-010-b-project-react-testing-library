@@ -21,12 +21,22 @@ test('Testando os links', () => {
   expect(link[2]).toHaveTextContent('Favorite Pokémons');
 });
 
-test('Testando as rotas', () => {
-  const { getByText, history } = renderWithRoute(<App />);
+// test('Testando a rota Home', () => {
+//   const { getByText, history } = renderWithRoute(<App />);
 
-  const route = '/';
-  history.push(route);
+//   const route = '/';
+//   history.push(route);
 
-  const text = getByText(/Pokédex/i);
-  expect(text).toBeInTheDocument();
-});
+//   const text = getByText(/Encountered pokémons/i);
+//   expect(text).toBeInTheDocument();
+// });
+
+// test('Testando a rota About', () => {
+//   const { findByText, history } = renderWithRoute(<App />);
+
+//   const route = '/about';
+//   history.push(route);
+
+//   const text = findByText(/About Pokédex/i);
+//   expect(text).toBeInTheDocument();
+// });
