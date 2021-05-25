@@ -38,4 +38,21 @@ describe('Teste requisito 3 FavoritePokemons.js', () => {
     expect(type).toHaveTextContent(data[0].type);
     expect(weight).toHaveTextContent(`Average weight: ${value} ${measurementUnit}`);
   });
+
+  test('Teste se nenhum card de pokémon é exibido, se ele não estiver favoritado', () => {
+    const { getByText, getByLabelText } = renderWithRouter(<App />);
+
+    const details = getByText('More details');
+    userEvent.click(details);
+
+    const input = getByLabelText('Pokémon favoritado?');
+    userEvent.click(input);
+    expect(input).not.toBeChecked();
+
+    const link = getByText('Favorite Pokémons');
+    userEvent.click(link);
+
+    const notFound = getByText('No favorite pokemon found');
+    expect(notFound).toBeInTheDocument();
+  });
 });
