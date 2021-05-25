@@ -16,7 +16,7 @@ describe('test Pokemon component', () => {
     expect(pokemonFat.textContent).toBe('Average weight: 6.0 kg');
     const pokemonImg = getByAltText('Pikachu sprite');
     expect(pokemonImg).toBeInTheDocument();
-    expect(pokemonImg).toHaveProperty('src', 'https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
+    expect(pokemonImg).toHaveProperty('src', 'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
     const navigationLink = getByText(/more details/i);
     expect(navigationLink.pathname).toBe('/pokemons/25');
     fireEvent.click(navigationLink);
