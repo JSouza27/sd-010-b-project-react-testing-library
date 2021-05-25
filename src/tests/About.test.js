@@ -4,7 +4,6 @@ import renderWithRouter from '../services/renderWithRouter';
 import About from '../components/About';
 
 describe('Testando toda a aplicação da tela About', () => {
-
   it('Verifica se o título aparece na tela', () => {
     renderWithRouter(<About />);
     const title = screen.getByRole('heading', {
