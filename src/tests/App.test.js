@@ -54,4 +54,16 @@ describe('Teste App', () => {
     });
     expect(favoritePage).toBeInTheDocument();
   });
+  test('Verifica se carrega a página não encontrada', () => {
+    const { history, getByText, getByRole } = renderWithRouter(<App />);
+
+    const route = '/pagina-que-nao-existe';
+    history.push(route);
+
+    const pageNotFound = getByRole('heading', {
+      level: 2,
+      name: /Page requested not found/i,
+    });
+    expect(pageNotFound).toBeInTheDocument();
+  });
 });
