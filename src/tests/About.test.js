@@ -17,9 +17,9 @@ describe('Exercicio 2"', () => {
   });
 
   it('Renderize a imagem de uma Pokedex', () => {
-    const { getByRole } = renderWithRouter(<About />);
+    const { getByAltText } = renderWithRouter(<About />);
     const URL = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
-    const image = getByRole('img');
+    const image = getByAltText('Pokédex');
     expect(image).toHaveAttribute('src', URL);
   });
 });
