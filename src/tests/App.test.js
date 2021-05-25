@@ -41,5 +41,15 @@ describe('Testing App', () => {
     expect(aboutLink).toBeInTheDocument();
   });
 
-  expect(getByText('Encountered pokémons')).toBeInTheDocument();
+  test('check if the "Favorite Pokémons" link is on the screen', () => {
+    render(
+      <MemoryRouter initialEntries={ ['/'] }>
+        <App />
+      </MemoryRouter>,
+    );
+    const favoritePokemonsLink = screen.getByRole('link', {
+      name: 'Favorite Pokémons',
+    });
+    expect(favoritePokemonsLink).toBeInTheDocument();
+  });
 });
