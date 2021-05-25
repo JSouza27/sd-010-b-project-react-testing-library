@@ -12,12 +12,11 @@ describe('Teste do primeiro requisito', () => {
     expect(home).toBeInTheDocument();
   });
 
-test('shows the Pokédex when the route is `/`', () => {
-  const { getByText } = render(
-    <MemoryRouter initialEntries={['/']}>
-      <App />
-    </MemoryRouter>,
-  );
+  test('O topo da aplicação contém um conjunto fixo de links de navegação', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const home = getByText('Home');
+    const about = getByText('About');
+    const favorite = getByText('Favorite Pokémons');
 
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
 });
