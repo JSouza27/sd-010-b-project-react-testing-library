@@ -49,5 +49,4 @@ describe('Testando toda a aplicação da tela Pokemon', () => {
     expect(imagem.src).toBe(`${pokemons[0].image}`);
     expect(imagem.alt).toBe(`${pokemons[0].name} sprite`);
   });
-
 });
