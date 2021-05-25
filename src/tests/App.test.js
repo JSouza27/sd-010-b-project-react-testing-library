@@ -35,6 +35,11 @@ describe('Testing App', () => {
         <App />
       </MemoryRouter>,
     );
+    const aboutLink = screen.getByRole('link', {
+      name: 'About',
+    });
+    expect(aboutLink).toBeInTheDocument();
+  });
 
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
 });
