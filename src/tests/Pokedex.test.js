@@ -7,6 +7,7 @@ import renderWithRouter from '../renderWithRouter';
 import Pokedex from '../components/Pokedex';
 
 describe('test Pokedex component', () => {
+  const proxPokemonTexto = 'Próximo pokémon';
   test('heading h2 existence', () => {
     const { getByRole } = renderWithRouter(<App />);
     const heading = getByRole('heading', { level: 2 });
@@ -16,9 +17,9 @@ describe('test Pokedex component', () => {
 
   test('if shows next pokemon when clicked', () => {
     const { getByText } = renderWithRouter(<App />);
-    const button = getByText('Próximo pokémon');
+    const button = getByText(proxPokemonTexto);
     expect(button).toBeInTheDocument();
-    expect(button.textContent).toBe('Próximo pokémon');
+    expect(button.textContent).toBe(proxPokemonTexto);
     const pokemon = getByText('Pikachu');
     expect(pokemon).toBeInTheDocument();
     fireEvent.click(button);
@@ -35,7 +36,7 @@ describe('test Pokedex component', () => {
 
   test('if filter is working', () => {
     const { getByText } = renderWithRouter(<App />);
-    const nextButton = getByText('Próximo pokémon');
+    const nextButton = getByText(proxPokemonTexto);
     const fireButton = getByText('Fire');
     fireEvent.click(fireButton);
     const pokemon1 = getByText('Charmander');
@@ -43,5 +44,30 @@ describe('test Pokedex component', () => {
     fireEvent.click(nextButton);
     const pokemon2 = getByText('Rapidash');
     expect(pokemon2).toBeInTheDocument();
+  });
+
+  test('if All button filter is working', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const allButton = getByText('All');
+    fireEvent.click(allButton);
+    expect(allButton).toBeInTheDocument();
+  });
+
+  test('filter buttons', () => {
+    const pokemonsTypes = [
+      'Fire',
+      'Psychic',
+      'Electric',
+      'Bug',
+      'Poison',
+      'Dragon',
+      'Normal'];
+    const { getByRole } = renderWithRouter(<App />);
+    pokemonsTypes.forEach((type) => {
+      const button = getByRole('button', { name: type });
+      expect(button).toBeInTheDocument();
+      expect(button.textContent).toBe(type);
+    });
+
   });
 });
