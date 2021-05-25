@@ -3,7 +3,7 @@ import renderWithRouter from '../helper/renderWithRouter';
 import App from '../App';
 
 describe('Requirement 4', () => {
-  it('', () => {
+  it('Verify components in no found page', () => {
     const { history, getByRole, getByAltText } = renderWithRouter(<App />);
     history.push('/noFoundPage');
 
