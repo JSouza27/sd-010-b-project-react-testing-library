@@ -5,11 +5,36 @@ import App from '../App';
 
 describe('Testing App', () => {
   test('shows the Pokédex when the route is `/`', () => {
-  const { getByText } = render(
-    <MemoryRouter initialEntries={ ['/'] }>
-      <App />
-    </MemoryRouter>,
-  );
+    render(
+      <MemoryRouter initialEntries={ ['/'] }>
+        <App />
+      </MemoryRouter>,
+    );
+    const homeText = screen.getByRole('heading', {
+      level: 2,
+      name: 'Encountered pokémons',
+    });
+    expect(homeText).toBeInTheDocument();
+  });
+
+  test('check if the "Home" link is on the screen', () => {
+    render(
+      <MemoryRouter initialEntries={ ['/'] }>
+        <App />
+      </MemoryRouter>,
+    );
+    const homeLink = screen.getByRole('link', {
+      name: 'Home',
+    });
+    expect(homeLink).toBeInTheDocument();
+  });
+
+  test('check if the "About" link is on the screen', () => {
+    render(
+      <MemoryRouter initialEntries={ ['/'] }>
+        <App />
+      </MemoryRouter>,
+    );
 
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
 });
