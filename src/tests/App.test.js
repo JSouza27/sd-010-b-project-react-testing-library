@@ -44,4 +44,12 @@ describe('Testing component <App>', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/');
   });
+
+  test('Ao clicar em About é redirecionada para a página /about', () => {
+    const { getByRole, history } = renderWithRouter(<App />);
+    const about = getByRole('link', { name: /about/i });
+    userEvent.click(about);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/about');
+  });
 });
