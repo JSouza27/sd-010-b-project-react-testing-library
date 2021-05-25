@@ -41,5 +41,44 @@ describe('test App component', () => {
 
     const { pathname } = history.location;
     expect(pathname).toBe('/');
+
+    const pokedex = getByText('Pokédex');
+    expect(pokedex).toBeInTheDocument();
+  });
+
+  it('test if is redirected to about if click on About', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+
+    const about = getByText('About');
+    expect(about).toBeInTheDocument();
+    fireEvent.click(about);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/about');
+
+    const h2 = getByText('About Pokédex');
+    expect(h2).toBeInTheDocument();
+  });
+
+  it('test if is redirected to Pokemons Favoritos if click on Favorite Pokémons', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+
+    const favoritePokemon = getByText('Favorite Pokémons');
+    expect(favoritePokemon).toBeInTheDocument();
+    fireEvent.click(favoritePokemon);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/favorites');
+
+    const h2 = getByText('Favorite pokémons');
+    expect(h2).toBeInTheDocument();
+  });
+
+  it('test if not found component is rendered if access non existent url', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    history.push('/workingonit');
+
+    const notFound = getByText('Page requested not found');
+    expect(notFound).toBeInTheDocument();
   });
 });
