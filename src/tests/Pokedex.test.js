@@ -72,6 +72,9 @@ describe('Teste do quinto requisito', () => {
           'Dragon',
         ];
 
+        button.forEach((buttons, index) => {
+          expect(buttons.textContent).toBe(typesPokemons[index]);
+        });
       });
     });
   });
