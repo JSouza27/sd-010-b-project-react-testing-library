@@ -21,9 +21,14 @@ describe('Teste se as informações detalhadas do Pokémon são mostradas na tel
     expect(name).toBeInTheDocument();
   });
 
-  // it('Não deve existir o link de navegação para os detalhes do selecionado', () => {
+  it('Não deve existir o link de navegação para os detalhes do selecionado', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const link = getByText(maisDetalhes);
+    expect(link).toHaveAttribute('href', linkPikachu);
+    userEvent.click(link);
 
-  // });
+    expect(link).not.toBeInTheDocument();
+  });
 
   it('A seção de detalhes deve conter um heading h2 com o texto Summary', () => {
     const { getByText, getByRole } = renderWithRouter(<App />);
@@ -86,14 +91,6 @@ describe('Teste se existe na página uma seção com os mapas de localização',
     expect(local[1]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
     expect(local[1]).toHaveAttribute('alt', 'Pikachu location');
   });
-
-  // it('A imagem da localização deve ter um atributo src com a URL da localização', () => {
-
-  // });
-
-  // it('A imagem deve ter um atributo alt com o texto <name> location', () => {
-
-  // });
 });
 
 describe('Teste se o usuário pode favoritar pokémon na página de detalhes', () => {
@@ -123,10 +120,6 @@ describe('Teste se o usuário pode favoritar pokémon na página de detalhes', (
 
     expect(star[1]).not.toBeInTheDocument();
   });
-
-  // it('Devem ser exibidos o nome e uma imagem do mapa em cada localização', () => {
-
-  // });
 
   it('O label do checkbox deve conter o texto Pokémon favoritado?', () => {
     const { getByText, getByLabelText } = renderWithRouter(<App />);
