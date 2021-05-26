@@ -1,15 +1,15 @@
 import React from 'react';
-import { queryByText, screen } from '@testing-library/react';
-import App from '../App';
+import { screen } from '@testing-library/react';
+import About from '../components/About';
 import renderWithRouter from './renderWithRouter';
 
 describe('Teste requisito 2', () => {
   test('Testa se a página contém as informações sobre a Pokédex.', () => {
-    renderWithRouter(<App />);
+    const { queryByText } = renderWithRouter(<About />); // aí já não é mais no APP. E faço a desestruturação aqui pq optei por não usar screen aqui. Mas também poderia usar o screen antes do queryByText na linha abaixo
     expect(queryByText('About Pokédex')).toBeDefined();
   });
   test('Testa se a página contém um heading h2 com o texto About Pokédex', () => {
-    renderWithRouter(<App />);
+    renderWithRouter(<About />);
     const aboutPokedex = screen.getByRole('heading', {
       level: 2,
       name: 'About Pokédex',
@@ -17,7 +17,7 @@ describe('Teste requisito 2', () => {
     expect(aboutPokedex).toBeInTheDocument();
   });
   test('Testa se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
-    renderWithRouter(<App />); // OBS: A Parte abaixo eu fiz com ajuda do meu colega Alexandre Damasceno. Eu tinha feito antes do meu jeito, mas dava erro de Lint e não sabia como resolver.  Link do PR dele: https://github.com/tryber/sd-010-b-project-react-testing-library/pull/83/commits/530e8befe7888550f1751428fa71cca2513ec14f
+    const { getByText } = renderWithRouter(<About />); // OBS: A Parte abaixo eu fiz com ajuda do meu colega Alexandre Damasceno. Eu tinha feito antes do meu jeito, mas dava erro de Lint e não sabia como resolver.  Link do PR dele: https://github.com/tryber/sd-010-b-project-react-testing-library/pull/83/commits/530e8befe7888550f1751428fa71cca2513ec14f
 
     const texto1 = 'This application simulates a Pokédex,';
     const texto2 = 'a digital encyclopedia containing all Pokémons';
@@ -32,7 +32,7 @@ describe('Teste requisito 2', () => {
     expect(paragraph2).toBeInTheDocument();
   });
   test('Testa se a página contém uma imagem de uma Pokédex:', () => {
-    renderWithRouter(<App />);
+    renderWithRouter(<About />);
     const image = screen.getByRole('img');
     expect(image).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
   });
