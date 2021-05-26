@@ -35,7 +35,7 @@ test('link para detalhes do pokemon', () => {
 });
 
 it('adicionar aos favoritos', () => {
-  const { getByRole, getByAltText, getByText } = renderWithRouter(<App />);
+  const { getByAltText, getByText } = renderWithRouter(<App />);
 
   const MoreDetails = getByText('More details');
   fireEvent.click(MoreDetails);
