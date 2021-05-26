@@ -58,6 +58,8 @@ describe('Teste do quinto requisito', () => {
 
         expect(namePsychic).toBeInTheDocument();
 
+        const namePokemonPsychic = screen.getByText('Mew');
+        fireEvent.click(nameButtonNext);
         
       });
     });
