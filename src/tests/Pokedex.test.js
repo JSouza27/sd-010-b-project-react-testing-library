@@ -49,13 +49,13 @@ describe('Teste o componente <Pokedex.js />', () => {
     // expect(getFirstPokemon).toBeInTheDocument();
 
     // método abaixo sugerido pelo instrutor Eduardo Santos
-    const firstCard = screen.getByRole('img', 'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
+    const firstCard = screen.getByText(/pikachu/i);
     expect(firstCard).toBeInTheDocument();
 
     const getButton = screen.getByText('Próximo pokémon');
     userEvent.click(getButton);
 
-    const lastCard = screen.getByRole('img', 'https://cdn2.bulbagarden.net/upload/2/2c/Spr_5b_148.png');
+    const lastCard = screen.getByText(/charmander/i);
     expect(lastCard).toBeInTheDocument();
   });
 
