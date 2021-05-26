@@ -61,9 +61,23 @@ describe('Renders Pokédex page', () => {
       pokemonsDisplayed.push(currPokemon);
       userEvent.click(getByTestId(nextBtntext));
     }
-    pokemons.forEach(({ name }) => { // compare pokemons displayed with the data
+    pokemons.forEach(({ name }) => { // compare pokemons displayed with the database
       const comparation = pokemonsDisplayed.find((elem) => elem === name);
       expect(comparation).toBe(name);
+    });
+  });
+
+  it('disable nextButton when there is just one pokemon of a type', () => {
+    const { getAllByTestId, getByTestId } = renderWithRouter(<App />);
+
+    const pokemonTypeBtn = getAllByTestId('pokemon-type-button');
+
+    pokemonTypeBtn.forEach((elem) => {
+      const currType = pokemons.filter(({ type }) => type === elem.textContent);
+      if (currType.length === 1) {
+        userEvent.click(elem);
+        expect(getByTestId(nextBtntext)).toBeDisabled();
+      }
     });
   });
 });
