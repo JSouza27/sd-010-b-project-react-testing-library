@@ -5,7 +5,7 @@ import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
-const pokemonCheck = (pok, typ) => {
+const pokemonCheck = (pok, typ, weight) => {
   const pokemonName = screen.getByTestId('pokemon-name');
   expect(pokemonName.innerHTML).toBe(pok);
   const pokemonType = screen.getByTestId('pokemon-type');
@@ -13,7 +13,7 @@ const pokemonCheck = (pok, typ) => {
   const nextButton = screen.getByRole('button', {
     name: /próximo pokémon/i,
   });
-  const weightText = screen.getByText(/average weight:/i);
+  const weightText = screen.getByText(`Average weight: ${weight} kg`);
   expect(weightText).toBeInTheDocument();
   const img = screen.getByRole('img');
   expect(img.alt).toBe(`${pok} sprite`);
@@ -35,8 +35,8 @@ test('É renderizado um card com as informações de determinado pokémon', () =
       <App />
     </Router>,
   );
-  pokemonCheck('Pikachu', 'Electric');
-  pokemonCheck('Charmander', 'Fire');
+  pokemonCheck('Pikachu', 'Electric', '6.0');
+  pokemonCheck('Charmander', 'Fire', '8.5');
 });
 
 const pokemonsDetails = (pok, history) => {
