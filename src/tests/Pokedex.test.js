@@ -102,4 +102,14 @@ describe('Teste o componente <Pokedex.js />', () => {
     });
     // feito com a colaboração do colega Felippe Correa
   });
+
+  test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+    renderWithRouter(<App />);
+
+    const buttonAll = screen.getByRole('button', { name: /all/i });
+    userEvent.click(buttonAll);
+
+    const pikachu = screen.getByRole('img', { name: /pikachu sprite/i });
+    expect(pikachu).toBeInTheDocument();
+  });
 });
