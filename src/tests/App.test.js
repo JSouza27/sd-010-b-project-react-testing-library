@@ -3,7 +3,7 @@ import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
 describe('Requirement 1', () => {
-  test('Redirect to Home, About and Favorite Pokémons', () => {
+  test('There are `Home`, `About` and `Favorite Pokémons` on links', () => {
     const { getAllByRole } = renderWithRouter(<App />);
     const links = getAllByRole('link');
     expect(links[0]).toHaveTextContent(/Home/i);
