@@ -21,6 +21,8 @@ const isFavoritePokemons = {
   [dragonair.id]: false,
 };
 
+const types = ['Electric', 'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon'];
+
 describe('Testando o componente <Pokedex />', () => {
   it('Teste se página contém um heading h2 com o texto Encountered pokémons', () => {
     const { getByRole } = renderWithRouter(<App />);
@@ -57,6 +59,20 @@ ao clicar sucessivamente no botão`, () => {
         expect(randomPokemonWeight)
           .toHaveTextContent(`Average weight: ${value} ${measurementUnit}`);
       }
+    });
+
+    it(`O primeiro Pokémon da lista deve ser mostrado ao clicar no botão,
+se estiver no último Pokémon da lista`, () => {
+      const { getByRole, getByTestId } = renderWithRouter(
+        <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isFavoritePokemons } />,
+      );
+      const btnNextPokemon = getByRole('button', { name: 'Próximo pokémon' });
+      expect(btnNextPokemon).toBeInTheDocument();
+      for (let index = 0; index < pokemons.length; index += 1) {
+        userEvent.click(btnNextPokemon);
+      }
+      const randomPokemonName = getByTestId('pokemon-name');
+      expect(randomPokemonName).toHaveTextContent(/^pikachu$/i);
     });
   });
 });
