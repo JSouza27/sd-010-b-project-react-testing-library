@@ -4,6 +4,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import App from '../App';
+import renderWithRouter from '../renderWithRouter';
 
 describe('tests the whole App', () => {
   test('renders a reading with the text `Pokédex`', () => {
