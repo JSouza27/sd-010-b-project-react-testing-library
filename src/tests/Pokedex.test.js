@@ -105,9 +105,17 @@ describe('Teste o componente <Pokedex.js />', () => {
       expect(button.length).toBe(7);
     });
 
-    // it('Deve ser mostrado como opção de filtro, um botão para cada um dos tipos', () => {
-
-    // });
+    it('Deve ser mostrado como opção de filtro, um botão para cada um dos tipos', () => {
+      const { getAllByTestId } = renderWithRouter(<App />);
+      const button = getAllByTestId('pokemon-type-button');
+      expect(button[0]).toHaveTextContent('Electric');
+      expect(button[1]).toHaveTextContent('Fire');
+      expect(button[2]).toHaveTextContent('Bug');
+      expect(button[3]).toHaveTextContent('Poison');
+      expect(button[4]).toHaveTextContent('Psychic');
+      expect(button[5]).toHaveTextContent('Normal');
+      expect(button[6]).toHaveTextContent('Dragon');
+    });
   });
   // it('O botão de Próximo pokémon deve ser desabilitado quando tiver um pokémon', () => {
 
