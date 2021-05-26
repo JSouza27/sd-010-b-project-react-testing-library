@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
 
-describe('Teste o componente Not Found', () => {
+describe('Teste o componente Pokedex', () => {
   test('Se a página contém um heading h2 com o texto Page requested not found', () => {
     renderWithRouter(<App />);
 
