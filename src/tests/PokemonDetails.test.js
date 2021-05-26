@@ -9,9 +9,18 @@ describe('Teste se os detalhades do Pokémon selecionado são mostradas na tela.
     renderWithRouter(<App />);
 
     const details = screen.getByRole('link', { name: /more details/i });
-    userEvent(details);
+    userEvent.click(details);
 
     const titlePikachu = screen.getByRole('heading', { name: /pikachu details/i });
     expect(titlePikachu).toBeInTheDocument();
+  });
+
+  test('Testa se link "More details" não é renderizado.', () => {
+    renderWithRouter(<App />);
+
+    const details = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(details);
+
+    expect(details).not.toBeInTheDocument();
   });
 });
