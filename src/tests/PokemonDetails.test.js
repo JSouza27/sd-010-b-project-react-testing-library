@@ -46,4 +46,20 @@ describe('Test requisito 7 PokemonDetails.js', () => {
       expect(img[index].src).toBe(map);
     });
   });
+
+  test(`'Teste se o usuário pode favoritar um pokémon
+   através da página de detalhes'`, () => {
+    const { getByText, getByLabelText } = renderWithRouter(<App />);
+    const details = getByText(moreDetails);
+    expect(details).toBeInTheDocument();
+    fireEvent.click(details);
+
+    const input = getByLabelText('Pokémon favoritado?');
+    expect(input.parentNode).toHaveTextContent('Pokémon favoritado?');
+    fireEvent.click(input);
+    expect(input).toBeChecked();
+
+    fireEvent.click(input);
+    expect(input).not.toBeChecked();
+  });
 });
