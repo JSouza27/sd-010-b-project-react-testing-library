@@ -75,4 +75,44 @@ se estiver no último Pokémon da lista`, () => {
       expect(randomPokemonName).toHaveTextContent(/^pikachu$/i);
     });
   });
+
+  describe('Teste se a Pokédex tem os botões de filtro.', () => {
+    it('O texto do botão deve corresponder ao nome do tipo, ex. Psychic', () => {
+      const { getByRole } = renderWithRouter(
+        <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isFavoritePokemons } />,
+      );
+      types.forEach((type) => {
+        const typeButton = getByRole('button', { name: type });
+        expect(typeButton).toBeInTheDocument();
+      });
+    });
+
+    it(`A partir da seleção de um botão de tipo,
+a Pokédex deve circular somente pelos pokémons daquele tipo`, () => {
+      const { getByRole, getByTestId } = renderWithRouter(
+        <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isFavoritePokemons } />,
+      );
+      const typeButton = getByRole('button', { name: 'Fire' });
+      userEvent.click(typeButton);
+
+      const btnNextPokemon = getByRole('button', { name: 'Próximo pokémon' });
+      const firePokemons = pokemons.filter(({ type }) => type === 'Fire');
+      for (let index = 0; index < firePokemons.length; index += 1) {
+        const { value, measurementUnit } = firePokemons[index].averageWeight;
+
+        const randomPokemonName = getByTestId('pokemon-name');
+        const randomPokemonType = getByTestId('pokemon-type');
+        const randomPokemonWeight = getByTestId('pokemon-weight');
+        expect(randomPokemonName).toHaveTextContent(firePokemons[index].name);
+        expect(randomPokemonType).toHaveTextContent(firePokemons[index].type);
+        expect(randomPokemonWeight)
+          .toHaveTextContent(`Average weight: ${value} ${measurementUnit}`);
+
+        userEvent.click(btnNextPokemon);
+      }
+
+      const randomPokemonName = getByTestId('pokemon-name');
+      expect(randomPokemonName).toHaveTextContent(/^charmander$/i);
+    });
+  });
 });
