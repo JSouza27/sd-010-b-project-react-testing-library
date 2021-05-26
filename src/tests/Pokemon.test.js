@@ -17,3 +17,9 @@ test('Testa se card é renderizado com informações de um Pokemon', () => {
   expect(pokeImage.src).toContain('https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
   expect(pokeImage.alt).toContain('Pikachu sprite');
 });
+
+test('Testa se card do pokemon possui link de navegação', () => {
+  const { getByText } = renderWithRouter(<App />);
+  const linkDetails = getByText('More details');
+  expect(linkDetails.href).toBe('http://localhost/pokemons/25');
+});
