@@ -15,6 +15,8 @@ const typesPokemons = [
   'Dragon',
 ];
 
+const nextPokemon = 'Próximo pokémon';
+
 describe('Teste o componente <Pokedex.js />', () => {
   test('Teste se página contém um h2 com o texto Encountered pokémons.', async () => {
     renderWithRouter(<App />);
@@ -50,7 +52,7 @@ describe('Teste o componente <Pokedex.js />', () => {
     const firstCard = screen.getByText(/pikachu/i);
     expect(firstCard).toBeInTheDocument();
 
-    const getButton = screen.getByText('Próximo pokémon');
+    const getButton = screen.getByText(nextPokemon);
     userEvent.click(getButton);
 
     const lastCard = screen.getByText(/charmander/i);
@@ -63,7 +65,7 @@ describe('Teste o componente <Pokedex.js />', () => {
     const lastCard = screen.getByRole('img', 'https://cdn2.bulbagarden.net/upload/2/2c/Spr_5b_148.png');
     expect(lastCard).toBeInTheDocument();
 
-    const getButton = screen.getByText('Próximo pokémon');
+    const getButton = screen.getByText(nextPokemon);
     userEvent.click(getButton);
 
     const firstCard = screen.getByRole('img', 'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
@@ -122,5 +124,19 @@ describe('Teste o componente <Pokedex.js />', () => {
 
     const pikachu = screen.getByRole('img', { name: /pikachu sprite/i });
     expect(pikachu).toBeInTheDocument();
+  });
+
+  test('Teste se é criado, dinamicamente, um filtro para cada tipo de Pokémon.', () => {
+    renderWithRouter(<App />);
+    const electricType = 'Pikachu';
+
+    const button = screen.getByRole('button', { name: 'Electric' });
+    userEvent.click(button);
+
+    const pokemon = screen.getByTestId('pokemon-name');
+    expect(pokemon).toHaveTextContent(electricType);
+
+    const nextButton = screen.getByRole('button', { name: 'Próximo pokémon' });
+    expect(nextButton).toBeDisabled();
   });
 });
