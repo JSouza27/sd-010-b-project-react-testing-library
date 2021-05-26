@@ -12,8 +12,8 @@ describe('Testing About.js', () => {
     expect(pokedexText).toBeInTheDocument();
   });
   it('Verifies if have 2 paragraphs', () => {
-    const { getAllByTestId } = renderWithRouter(<About />);
-    const paragraphs = getAllByTestId('paragraph');
+    const { getAllByText } = renderWithRouter(<About />);
+    const paragraphs = getAllByText(/pok[eé]mons/i);
     expect(paragraphs.length).toBe(2);
   });
   it('Verifies if have an img if an specific src', () => {
