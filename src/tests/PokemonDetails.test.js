@@ -20,6 +20,13 @@ describe('Teste página de detalhes pokémon', () => {
 
     const summary = screen.getByText('Summary');
     expect(summary).toBeInTheDocument();
+
+    const pokeSum = pokemons[0].summary;
+    const pokePageSum = screen.getByText(
+      'This intelligent Pokémon roasts hard berries '
+       + 'with electricity to make them tender enough to eat.',
+    );
+    expect(pokeSum).toBe(pokePageSum.textContent);
   });
 
   test('Teste se existe na página uma seção com os mapas', () => {
