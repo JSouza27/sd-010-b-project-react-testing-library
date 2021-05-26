@@ -2,7 +2,6 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
-import listaPokemons from '../data';
 
 // test('', () => {});
 describe('Teste o componente <Pokemon.js />', () => {
@@ -42,14 +41,10 @@ it('Teste se o card contém um link de navegação para exibir detalhes', () => 
   expect(pathname).toBe('/pokemons/25');
 });
 
-// it('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
-//   const { getByText, history } = renderWithRouter(<App />);
-//   const link = getByText('More details');
-//   expect(link).toHaveAttribute('href', '/pokemons/25');
-//   userEvent.click(link);
-//   const { pathname } = history.location;
-//   expect(pathname).toBe('/pokemons/25');
-// });
+it('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
+  
+  
+});
 
 //   it('Os próximos Pokémons da lista devem ser mostrados', () => {
 //     const { getByText } = renderWithRouter(<App />);
