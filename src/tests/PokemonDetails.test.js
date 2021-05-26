@@ -41,3 +41,24 @@ test('Testa se existe mapa na página', () => {
   const location2 = getByText(/Kanto Power Plant/i);
   expect(location2).toBeInTheDocument();
 });
+
+test('Teste para favoritar pokemon', () => {
+  const { getByText, getByRole, getByLabelText } = renderWithRouter(<App />);
+  const linkDetails = getByText(moreDetails);
+  userEvent.click(linkDetails);
+
+  const checkbox = getByRole('checkbox');
+  expect(checkbox).toBeInTheDocument();
+
+  userEvent.click(checkbox);
+  expect(checkbox.checked).toBeTruthy();
+
+  userEvent.click(checkbox);
+  expect(checkbox.checked).toBeFalsy();
+
+  const favoriteLabel = getByLabelText('Pokémon favoritado?');
+  expect(favoriteLabel).toBeInTheDocument();
+});
+
+// Source https://testing-library.com/docs/queries/byrole/
+// Feito em parceria com Paulo Xavier
