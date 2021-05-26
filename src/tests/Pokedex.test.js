@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import pokemons from '../data';
 import App from '../App';
+import { Pokedex } from '../components';
 
 describe('Tests the Pokedex component', () => {
   it('tests if the page cotains a heading h2', async () => {
@@ -44,7 +45,6 @@ describe('Tests the buttons on the Pokedex component', () => {
   it('tests if the Pokédex has the filter buttons', () => {
     // const { getByText, findAllByTestId, getByRole } = renderWithRouter(<App />);
     const { getByRole } = renderWithRouter(<App />);
-
     let filterBtn;
     pokemons.forEach((pokemon) => {
       filterBtn = getByRole('button', { name: pokemon.type });
@@ -56,12 +56,22 @@ describe('Tests the buttons on the Pokedex component', () => {
   });
 
   it('Test if the Pokédex contains a button to reset the filter', () => {
-    const { getByRole } = renderWithRouter(<App />);
-    const filterBtn = getByRole('button', { name: 'All' });
-    console.log(filterBtn);
-    const functionOnClick = filterBtn.getAttribute('onClick');
-    console.log(functionOnClick);
-    expect(functionOnClick).toBeDefined();
+    // const { getByRole } = renderWithRouter(<App />);
+    const isPokemonFavoriteById = {};
+    pokemons.reduce((acc, poke) => {
+      isPokemonFavoriteById[poke.id] = false;
+      return acc;
+    }, {});
+    const { getByRole } = renderWithRouter(
+      <Pokedex
+        pokemons={ pokemons }
+        isPokemonFavoriteById={ isPokemonFavoriteById }
+      />,
+    );
+
+    const allBtn = getByRole('button', { name: 'All' });
+    userEvent.click(allBtn);
+    expect(allBtn).toBeDefined();
   });
 
   // it('tests whether a filter btn is created dynamically for each type of Pokémon', () => {
