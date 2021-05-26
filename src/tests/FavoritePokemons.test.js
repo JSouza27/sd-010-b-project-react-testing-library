@@ -13,23 +13,16 @@ describe('Renders favorites Pokémons when needed', () => {
   });
 
   it('renders a favorited pokemon when needed"', () => {
-    const { getByText } = renderWithRouter(<App />);
+    const { getByText, getByTestId } = renderWithRouter(<App />);
 
-    const homeLink = getByText('Home');
-    const favoriteLink = getByText('Favorite Pokémons');
-    const moreDetailsLink = getByText('More details');
+    userEvent.click(getByText('Home'));
+    userEvent.click(getByText('More details'));
+    userEvent.click(getByText('Pokémon favoritado?'));
+    userEvent.click(getByText('Favorite Pokémons'));
 
-    userEvent.click(homeLink);
-    userEvent.click(moreDetailsLink);
+    const pokemon = getByTestId('pokemon-name');
 
-    const favoriteBtn = getByText('Pokémon favoritado?');
-
-    userEvent.click(favoriteBtn);
-    userEvent.click(favoriteLink);
-
-    const pikachu = getByText('Pikachu');
-
-    expect(pikachu).toBeInTheDocument();
+    expect(pokemon).toBeInTheDocument();
   });
 
   it('renders a msg when no Pokémon is selected as a favorite', () => {
