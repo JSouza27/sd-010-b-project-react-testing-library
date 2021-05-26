@@ -82,4 +82,15 @@ describe('Teste o componente <Pokedex.js />', () => {
       expect(button.textContent).toBe(types[index]);
     });
   });
+
+  test(' Pokédex contém um botão para resetar o filtro', () => {
+    renderWithRouter(<App />);
+    const reset = screen.getByRole('button', { name: 'All' });
+
+    fireEvent.click(reset);
+    const currentPokemon = screen.getByTestId(xablau);
+
+    expect(reset).toBeInTheDocument();
+    expect(currentPokemon.textContent).toBe('Pikachu');
+  });
 });
