@@ -83,7 +83,7 @@ describe('Teste o componente <Pokedex.js />', () => {
     });
   });
 
-  test(' Pokédex contém um botão para resetar o filtro', () => {
+  test('Pokédex contém um botão para resetar o filtro', () => {
     renderWithRouter(<App />);
     const reset = screen.getByRole('button', { name: 'All' });
 

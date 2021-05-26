@@ -1,1 +1,29 @@
-test('', () => {});
+import React from 'react';
+import { screen, fireEvent } from '@testing-library/react';
+import renderWithRouter from '../components/renderWithRouter';
+import App from '../App';
+
+describe('Teste o componente <Pokemon.js />', () => {
+  test('Um card com as informações de determinado pokémon.', () => {
+    renderWithRouter(<App />);
+    const pokemonName = screen.getByTestId('pokemon-name');
+    const pokemonType = screen.getByTestId('pokemon-type');
+    const pokemonWeight = screen.getByTestId('pokemon-weight');
+    const pokemonImage = screen.getByAltText('Pikachu sprite');
+
+    expect(pokemonName).toHaveTextContent('Pikachu');
+    expect(pokemonType).toHaveTextContent('Electric');
+    expect(pokemonWeight).toHaveTextContent('Average weight: 6.0 kg');
+    expect(pokemonImage).toBeInTheDocument();
+    expect(pokemonImage).not.toHaveAttribute('src', '');
+  });
+
+  test('Um link de navegação para exibir detalhes.', () => {
+    const { history } = renderWithRouter(<App />);
+    const details = screen.getByText('More details');
+    expect(details).toHaveAttribute('href', '/pokemons/25');
+    fireEvent.click(details);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/pokemons/25');
+  });
+});
