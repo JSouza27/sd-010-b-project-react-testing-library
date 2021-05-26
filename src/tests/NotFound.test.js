@@ -16,7 +16,7 @@ test('check is there is a heading h2', () => {
 test('check if the pages renders picture', () => {
   renderWithRouter(<NotFound />);
 
-  const image = screen.getByAltText(/Pikachu crying because the page requested was not found/i);
+  const image = screen.getByAltText(/Pikachu crying because the page requested was no/i);
 
   expect(image.src).toContain('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
 });
