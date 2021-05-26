@@ -28,6 +28,20 @@ se a pessoa não tiver pokémons favoritos.`, () => {
     expect(pokemonType.length).toBe(2);
     expect(pokemonWeight.length).toBe(2);
   });
+
+  it('Teste se nenhum card de pokémon é exibido, se ele não estiver favoritado', () => {
+    const [pikachu] = pokemons;
+    const { getByTestId } = renderWithRouter(
+      <FavoritePokemons pokemons={ [pikachu] } />,
+    );
+
+    const randomPokemonName = getByTestId('pokemon-name');
+    const randomPokemonType = getByTestId('pokemon-type');
+    const randomPokemonWeight = getByTestId('pokemon-weight');
+    expect(randomPokemonName).not.toHaveTextContent(/^charmander$/i);
+    expect(randomPokemonType).not.toHaveTextContent(/^fire$/i);
+    expect(randomPokemonWeight).not.toHaveTextContent(/^average weight: 8.5 kg$/i);
+  });
 });
 /*
 */
