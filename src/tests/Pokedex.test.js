@@ -57,6 +57,20 @@ describe('Teste do quinto requisito', () => {
         const namePokemon = screen.getByText('Alakazam');
 
         expect(namePokemon).toBeInTheDocument();
+      });
+      test('O texto do botão deve corresponder ao nome do tipo, ex. Psychic', () => {
+        renderWithRouter(<App />);
+        const button = screen.getAllByTestId('pokemon-type-button');
+        // Feito com ajuda dos colegas no plantão.
+        const typesPokemons = [
+          'Electric',
+          'Fire',
+          'Bug',
+          'Poison',
+          'Psychic',
+          'Normal',
+          'Dragon',
+        ];
 
       });
     });
