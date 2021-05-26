@@ -25,3 +25,13 @@ test('contains two paragraphs', () => {
   expect(phaseOne).toBeInTheDocument();
   expect(phaseTwo).toBeInTheDocument();
 });
+
+// https://dev.to/raphaelchaula/a-simple-image-test-in-react-3p6f
+test('contains image with defined src', () => {
+  const { getByRole } = renderWithRouter(<About />);
+
+  const image = getByRole('img');
+
+  expect(image).toHaveAttribute('src',
+    'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
+});
