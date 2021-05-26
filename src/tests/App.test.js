@@ -44,3 +44,32 @@ describe('testa um conjunto de links', () => {
   });
 });
 
+describe('Teste de rotas', () => {
+  it('Ao clicar em Home redireciona para Home (URL /)', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    const home = getByText(/Home/i);
+    userEvent.click(home);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/');
+  });
+  it('Ao clicar em About redireciona para About (URL /about)', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    const home = getByText(/About/i);
+    userEvent.click(home);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/about');
+  });
+  it('Ao clicar em Favoritos redireciona para a Favorites (URL /favorites)', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    const home = getByText(/Favorite Pokémons/i);
+    userEvent.click(home);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/favorites');
+  });
+  it('Ao digitar URL inválida redireciona para Not Found', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    history.push('/pagina-que-nao-existe');
+    const noMatch = getByText(/Page requested not found/i);
+    expect(noMatch).toBeInTheDocument();
+  });
+});
