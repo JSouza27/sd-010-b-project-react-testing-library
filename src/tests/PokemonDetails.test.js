@@ -3,13 +3,14 @@ import { MemoryRouter } from 'react-router-dom';
 import { fireEvent, render } from '@testing-library/react';
 import App from '../App';
 import pokemons from '../data';
+import renderWithMemoryRouter from './renderWithMemoryRouter';
 
 describe('Requisito 7', () => {
   it('Teste se as informações detalhadas do selecionado são mostradas na tela.', () => {
-    const { getByText, getAllByRole } = render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>,
+    const { getByText, getAllByRole } = renderWithMemoryRouter(
+      // <MemoryRouter>
+      <App />
+      // {/* </MemoryRouter>, */}
     );
     const { name, summary } = pokemons[0];
     fireEvent.click(getByText('More details'));
