@@ -3,7 +3,7 @@ import { screen, fireEvent } from '@testing-library/react';
 import renderWithRouter from '../components/renderWithRouter';
 import App from '../App';
 
-const nameButton = 'Próximo pokémon';
+const nameButtonNext = 'Próximo pokémon';
 
 describe('Teste do quinto requisito', () => {
   test('Teste se página contém um heading h2 com o texto Encountered pokémons', () => {
@@ -16,14 +16,14 @@ describe('Teste do quinto requisito', () => {
   describe('Proximo Pokémon da lista quando o botão Próximo pokémon é clicado', () => {
     test('Teste se o botão tem o texto Próximo pokémon', () => {
       renderWithRouter(<App />);
-      const btnText = screen.getByText(nameButton);
+      const btnText = screen.getByText(nameButtonNext);
 
       expect(btnText).toBeInTheDocument();
     });
 
     test('Teste se os próximos Pokémons são mostrados', () => {
       renderWithRouter(<App />);
-      const btnText = screen.getByRole('button', { name: nameButton });
+      const btnText = screen.getByRole('button', { name: nameButtonNext });
       fireEvent.click(btnText);
       const testePokemon = screen.getByText('Charmander');
 
@@ -32,7 +32,7 @@ describe('Teste do quinto requisito', () => {
 
     test('O primeiro Pokémon da lista deve ser mostrado ao chegar no último', () => {
       renderWithRouter(<App />);
-      const btnText = screen.getByRole('button', { name: nameButton });
+      const btnText = screen.getByRole('button', { name: nameButtonNext });
       const testePokemon = screen.getByText('Pikachu');
 
       const numeroClick = 9;
@@ -60,7 +60,8 @@ describe('Teste do quinto requisito', () => {
 
         const namePokemonPsychic = screen.getByText('Mew');
         fireEvent.click(nameButtonNext);
-        
+
+        expect(namePokemonPsychic).toBeInTheDocument();
       });
     });
   });
