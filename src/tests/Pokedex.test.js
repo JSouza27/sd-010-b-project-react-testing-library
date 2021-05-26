@@ -43,9 +43,23 @@ describe('Testando página Pokedex', () => {
     const { getByRole, getByText } = renderWithRouter(<App />);
     const btnAll = getByRole('button', { name: 'All' });
     const btnNext = getByRole('button', { name: 'Próximo pokémon' });
-    expect(btnAll).toBeVisible();
+    fireEvent.click(btnAll);
     expect(getByText(/Pikachu/i));
     fireEvent.click(btnNext);
     expect(getByText(/Charmander/i));
+  });
+
+  it('Testa se é criado dinamicamente um botão de filtro para cada tipo', () => {
+    const { getByRole, getAllByTestId } = renderWithRouter(<App />);
+    const seven = 7;
+    const btnAll = getByRole('button', { name: 'All' });
+    const btnTypeArr = getAllByTestId('pokemon-type-button');
+    const typeList = ['Electric', 'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon'];
+    expect(btnTypeArr.length).toBe(seven);
+    typeList.forEach((type) => {
+      const btnType = getByRole('button', { name: [type] });
+      expect(btnType).toBeInTheDocument();
+      expect(btnAll).toBeVisible();
+    });
   });
 });
