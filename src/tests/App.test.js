@@ -58,8 +58,24 @@ test('clicking on the About link redirects you to the /about route', () => {
 
   const aboutText = getByRole('heading', {
     level: 2,
-    name: /About Pokédexs/i,
+    name: /About Pokédex/i,
   });
 
   expect(aboutText).toBeInTheDocument();
+});
+
+test('clicking on the Favorite Pokemons link goes to the /favorites route', () => {
+  const { getByRole } = renderWithRouter(<App />);
+  const favoritePokemons = getByRole('link', {
+    name: /Favorite Pokémons/i,
+  });
+
+  userEvent.click(favoritePokemons);
+
+  const favoritePokemonsText = getByRole('heading', {
+    level: 2,
+    name: /Favorite pokémons/i,
+  });
+
+  expect(favoritePokemonsText).toBeInTheDocument();
 });
