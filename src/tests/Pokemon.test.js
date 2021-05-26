@@ -62,6 +62,7 @@ describe('Checks Pokemon', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/pokemons/10');
   });
+
   it('Test if there is a star icon on favorite Pokémon', () => {
     renderWithRouter(
       <Pokemon
