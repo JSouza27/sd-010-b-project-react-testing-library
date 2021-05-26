@@ -16,7 +16,7 @@ describe('test App component', () => {
 
   it('header has links,first being the "Home"then "About" and finally "Favorite Pokemon"',
     () => {
-      const { getByText, getByTestId } = renderWithRouter(<App />);
+      const { getByText, getByRole } = renderWithRouter(<App />);
       const home = getByText('Home');
       const about = getByText('About');
       const favoritePokemon = getByText('Favorite Pokémons');
@@ -25,7 +25,7 @@ describe('test App component', () => {
       expect(about).toBeInTheDocument();
       expect(favoritePokemon).toBeInTheDocument();
 
-      const nav = getByTestId('nav-header');
+      const nav = getByRole('navigation');
 
       expect(nav.childNodes[0]).toBe(home);
       expect(nav.childNodes[1]).toBe(about);

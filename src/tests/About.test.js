@@ -14,8 +14,8 @@ describe('Test About Component', () => {
   });
 
   it('should contain 2 paragraphs', () => {
-    const { getAllByTestId } = renderWithRouter(<About />);
-    const paragraphs = getAllByTestId('text-p');
+    const { container } = renderWithRouter(<About />);
+    const paragraphs = container.querySelectorAll('p');
     expect(paragraphs.length).toBe(2);
     expect(paragraphs[0]).toBeInTheDocument();
     expect(paragraphs[1]).toBeInTheDocument();
