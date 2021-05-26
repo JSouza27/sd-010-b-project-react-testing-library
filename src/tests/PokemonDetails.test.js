@@ -33,4 +33,14 @@ describe('Teste se os detalhades do Pokémon selecionado são mostradas na tela.
     const titleSummary = screen.getByRole('heading', { name: /summary/i });
     expect(titleSummary).toBeInTheDocument();
   });
+
+  test('A seção de detalhes deve conter um parágrafo com o resumo.', () => {
+    renderWithRouter(<App />);
+
+    const details = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(details);
+
+    const paragraph = screen.getByText(/this intelligent pokémon roasts hard/i);
+    expect(paragraph).toBeInTheDocument();
+  });
 });
