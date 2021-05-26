@@ -27,5 +27,18 @@ describe('Teste do quinto requisito', () => {
 
       expect(testePokemon).toBeInTheDocument();
     });
+
+    test('O primeiro Pokémon da lista deve ser mostrado ao chegar no último', () => {
+      renderWithRouter(<App />);
+      const btnText = screen.getByRole('button', { name: 'Próximo pokémon' });
+      const testePokemon = screen.getByText('Pikachu');
+
+      const numeroClick = 9;
+      for (let i = 0; i < numeroClick; i += 1) {
+        userEvent.click(btnText);
+      }
+
+      expect(testePokemon).toBeInTheDocument();
+    });
   });
 });
