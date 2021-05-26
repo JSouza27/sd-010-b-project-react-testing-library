@@ -28,4 +28,13 @@ describe('tests the <App /> component', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/');
   });
+  // checks if the link has the text About and redirects to URL /about by clicking on the About link
+  test('checks if the link has the text About', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    const linkAbout = getByText(/about/i);
+    expect(linkAbout).toBeInTheDocument();
+    fireEvent.click(getByText(/About/i));
+    const { pathname } = history.location;
+    expect(pathname).toBe('/about');
+  });
 });
