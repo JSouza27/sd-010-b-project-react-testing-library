@@ -55,7 +55,7 @@ describe('Test Pokemon Component', () => {
       isFavorite
     />);
 
-    const { id, name } = charmander;
+    const { id } = charmander;
     const link = getByText('More details');
 
     expect(link).toBeInTheDocument();
