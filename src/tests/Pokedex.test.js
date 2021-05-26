@@ -16,6 +16,6 @@ describe('Teste do quinto requisito', () => {
       renderWithRouter(<App />);
       const btnText = screen.getByText('Próximo pokémon');
 
-    expect(btnText).toBeInTheDocument();
+      expect(btnText).toBeInTheDocument();
+    });
   });
-});
