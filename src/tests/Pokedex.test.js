@@ -37,7 +37,7 @@ describe('Testa o componente <Pokedex />', () => {
       name: /próximo pokémon/i,
     });
 
-    // verifica se em casa iteração do botão aparece um pokemon determinado.
+    // verifica se em casa iteração do botão aparece um pokemon determinado do array.
     for (let index = 0; index < numberOfClicks; index += 1) {
       userEvent.click(btnNext);
       const nextPokemon = screen.getByText(namesPokemons[index]);
@@ -58,5 +58,31 @@ describe('Testa o componente <Pokedex />', () => {
 
     const containsPokémon = screen.getByText(/pikachu/i);
     expect(containsPokémon).toBeInTheDocument();
+  });
+
+  test('Teste se é mostrado apenas um Pokémon por vez.', () => {
+    RenderWithRouter(<App />);
+    const quantityThatAppears = screen.getAllByText(/More details/i);
+    expect(quantityThatAppears.length).toBe(1);
+  });
+
+  test('A partir da seleção de um botão de tipo', () => {
+    RenderWithRouter(<App />);
+
+    const typesButtonsFilter = [
+      'Electric',
+      'Fire',
+      'Bug',
+      'Poison',
+      'Psychic',
+      'Normal',
+      'Dragon',
+    ];
+
+    const allButtons = screen.getAllByTestId('pokemon-type-button');
+
+    allButtons.forEach((button, index) => {
+      expect(button.textContent).toBe(typesButtonsFilter[index]);
+    });
   });
 });
