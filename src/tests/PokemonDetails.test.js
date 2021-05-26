@@ -92,7 +92,7 @@ describe('testing the pokemonDetails component', () => {
       getByLabelText,
       getByRole,
       getByText,
-      getByAltText
+      getByAltText,
     } = renderWithRouter(<App />);
     const goToDetails = getByRole('link', {
       name: MoreDetails,
@@ -115,6 +115,5 @@ describe('testing the pokemonDetails component', () => {
 
     userEvent.click(checkBoxElement);
     expect(goldenStar).not.toBeInTheDocument();
-
   });
 });
