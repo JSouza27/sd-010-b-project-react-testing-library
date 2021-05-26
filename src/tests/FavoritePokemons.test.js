@@ -34,4 +34,8 @@ test('favorite a pokémon and see if it is shown', () => {
   render(<FavoritePokemons />);
   const summary = screen.getByText(/summary/i);
   expect(summary).toBeInTheDocument();
+  const favoriteLink = screen.getByText('Favorite Pokémons');
+  userEvent.click(favoriteLink);
+  const pokemonName = screen.getByText('Pikachu');
+  expect(pokemonName).toBeInTheDocument();
 });
