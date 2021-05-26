@@ -22,3 +22,9 @@ test('Testa se é exibido cards de favorito `', () => {
   const favoritePokemon = getByTestId('pokemon-name');
   expect(favoritePokemon).toBeInTheDocument();
 });
+
+test('Testa se nenhum card é exibido se nao for favorito `', () => {
+  const { queryByTestId } = renderWithRouter(<FavoritePokemons />);
+  const pokemonName = queryByTestId('pokemon-name');
+  expect(pokemonName).not.toBeInTheDocument();
+});
