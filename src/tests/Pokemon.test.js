@@ -42,8 +42,16 @@ it('Teste se o card contém um link de navegação para exibir detalhes', () => 
 });
 
 it('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
-  
-  
+  const { getByText, getAllByRole, history } = renderWithRouter(<App />);
+
+  const rota = '/pokemons/25';
+  history.push(rota);
+  const favorite = getByText('Pokémon favoritado?');
+  userEvent.click(favorite);
+
+  const star = getAllByRole('img');
+  expect(star[1]).toHaveAttribute('src', '/star-icon.svg');
+  expect(star[1]).toHaveAttribute('alt', 'Pikachu is marked as favorite');
 });
 
 //   it('Os próximos Pokémons da lista devem ser mostrados', () => {
