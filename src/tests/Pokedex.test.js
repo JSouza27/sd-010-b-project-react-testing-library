@@ -56,27 +56,34 @@ describe('Test Pokedex Component', () => {
     }
   });
 
-  it('when select a type button, then should show only pokes with that type', () => {
+  it('buttons should filter or be disabled if has only one poke of that type', () => {
     const { getAllByTestId, getByTestId } = renderWithRouter(PokedexWithProps);
 
     const button = getAllByTestId('pokemon-type-button');
-    const TypeButton = button[0];
-    expect(TypeButton).toBeInTheDocument();
+    const fireButtonType = button[1];
+    expect(fireButtonType).toBeInTheDocument();
+
+    fireEvent.click(fireButtonType);
 
     const nextPokeButton = getByTestId('next-pokemon');
     expect(nextPokeButton).toBeInTheDocument();
 
-    const buttontype = TypeButton.textContent;
-
-    const filteredPokes = pokemons.filter(({ type }) => type === buttontype);
+    const buttontype = fireButtonType.textContent;
 
     const pokes = [];
-    for (let index = 0; index < filteredPokes.length; index += 1) {
-      const { type, name } = filteredPokes[index];
+
+    for (let index = 0; index < pokemons.length; index += 1) {
+      const type = getByTestId('pokemon-type').textContent;
+      const name = getByTestId('pokemon-name').textContent;
       if (!pokes.includes(name)) expect(type).toBe(buttontype);
       pokes.push(name);
       fireEvent.click(nextPokeButton);
     }
+
+    const electricButton = button[0];
+    expect(electricButton).toBeInTheDocument();
+    fireEvent.click(electricButton);
+    expect(nextPokeButton).toBeDisabled();
   });
 
   it('When select button "all" it should reset the filter', () => {
@@ -89,7 +96,7 @@ describe('Test Pokedex Component', () => {
     const noFilterButton = getByText('All');
     expect(noFilterButton).toBeInTheDocument();
 
-    const nextPokeButton = getByTestId('next-pokemon');
+    const nextPokeButton = getByText('Próximo pokémon');
     expect(nextPokeButton).toBeInTheDocument();
 
     fireEvent.click(TypeButton);
@@ -104,5 +111,17 @@ describe('Test Pokedex Component', () => {
       fireEvent.click(nextPokeButton);
     }
     expect(pokes.length).toBe(pokemons.length);
+  });
+
+  it('buttons should be dinamically rendered based on all types of pokemons', () => {
+    const { getAllByTestId, getByText } = renderWithRouter(PokedexWithProps);
+    const allButtonType = getByText('All');
+    const types = [...new Set(pokemons.map(({ type }) => type))];
+    const buttonTypes = getAllByTestId('pokemon-type-button');
+    console.log(buttonTypes[0].textContent);
+    expect(allButtonType).toBeInTheDocument();
+    for (let index = 0; index < types.length; index += 1) {
+      expect(types).toContain(buttonTypes[index].textContent);
+    }
   });
 });
