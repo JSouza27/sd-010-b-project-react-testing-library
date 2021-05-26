@@ -1,9 +1,10 @@
-test('', () => {});
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render, fireEvent } from '@testing-library/react';
+// import { MemoryRouter } from 'react-router-dom';
+import { fireEvent } from '@testing-library/react';
 import FavoritePokemons from '../components/FavoritePokemons';
 import renderWithRouter from './renderWithRouter';
+
+test('', () => {});
 
 describe('Verifica se a URL /about renderizam a pagina about', () => {
   test('Verifica se ao clicar nos links renderisa o conteudo da pagina', () => {
@@ -12,4 +13,4 @@ describe('Verifica se a URL /about renderizam a pagina about', () => {
     fireEvent.click(getByText(/Favorite Pokémons/i));
     expect(getByText(/No favorite pokemon found/)).toBeInTheDocument();
   });
-})
+});
