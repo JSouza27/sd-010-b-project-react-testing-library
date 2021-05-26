@@ -1,1 +1,92 @@
-test('', () => {});
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { render, screen, fireEvent } from '@testing-library/react';
+import Pokedex from '../components/Pokedex';
+import pokemons from '../data';
+
+const isPokemonFavoriteById = {};
+
+describe('Testing pokedex component', () => {
+  it('render a h2 element with encountered pokémons text', () => {
+    render(
+      <Router>
+        <Pokedex
+          pokemons={ pokemons }
+          isPokemonFavoriteById={ isPokemonFavoriteById }
+        />
+        )
+      </Router>,
+    );
+    const heading = screen.getByRole('heading', {
+      name: /encountered pokémons/i,
+      level: 2,
+    });
+    expect(heading).toBeInTheDocument();
+  });
+  it('next button shows up a new pokemon', () => {
+    render(
+      <Router>
+        <Pokedex
+          pokemons={ pokemons }
+          isPokemonFavoriteById={ isPokemonFavoriteById }
+        />
+        )
+      </Router>,
+    );
+    const firstPokemon = screen.getByRole('img', {
+      name: /pikachu sprite/i,
+    });
+    const nextButton = screen.getByRole('button', {
+      name: 'Próximo pokémon',
+    });
+
+    expect(firstPokemon).toBeInTheDocument();
+    expect(nextButton).toBeInTheDocument();
+    fireEvent.click(nextButton);
+
+    const nextPokemon = screen.getByRole('img', {
+      name: /charmander sprite/i,
+    });
+    expect(nextPokemon).toBeInTheDocument();
+  });
+  // it('if shows up only a pokemon by turn', () => {
+  //   render(
+  //     <Router>
+  //       <Pokedex
+  //         pokemons={ pokemons }
+  //         isPokemonFavoriteById={ isPokemonFavoriteById }
+  //       />
+  //       )
+  //     </Router>,
+  //   );
+  //   const pokemonCard = screen.getAllByRole('img');
+  //   expect(pokemonCard).toHaveLength(1);
+  // });
+  it('pokedex has filter buttons', () => {
+    render(
+      <Router>
+        <Pokedex
+          pokemons={ pokemons }
+          isPokemonFavoriteById={ isPokemonFavoriteById }
+        />
+        )
+      </Router>,
+    );
+    const NUMBER_SEVEN = 7;
+    const filterButtons = screen.getAllByTestId('pokemon-type-button');
+    expect(filterButtons).toHaveLength(NUMBER_SEVEN);
+  });
+  it('a button that reset filter type', () => {
+    render(
+      <Router>
+        <Pokedex
+          pokemons={ pokemons }
+          isPokemonFavoriteById={ isPokemonFavoriteById }
+        />
+        )
+      </Router>,
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'All' }));
+    expect(onClick).toHaveBeenCalled();
+  });
+});
