@@ -14,4 +14,12 @@ describe('Testa o componente Pokemon.js', () => {
     expect(img).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/1/18/Spr_5b_023.png');
     expect(img).toHaveAttribute('alt', 'Ekans sprite');
   });
+
+  it('Testa se é feito o redirecionamento da aplicação para a página de detalhes', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    const moreDetails = getByText(/More details/i);
+    fireEvent.click(moreDetails);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/pokemons/25');
+  });
 });
