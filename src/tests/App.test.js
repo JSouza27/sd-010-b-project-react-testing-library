@@ -8,5 +8,7 @@ describe('Teste o componente <App.js />', () => {
   it('Teste se a página principal da Pokédex é renderizada ao carregar a aplicação no caminho de URL /.', () => {
     const { getByText, history } = renderWithRouter(<App />)
     const heading = getByText(/Pokédex/i);
-  expect(heading).toBeInTheDocument();
+    const { pathname } = history.location;
+    expect(pathname).toBe('/')
+    expect(heading).toBeInTheDocument();
 });
