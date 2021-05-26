@@ -3,7 +3,7 @@ import { Router } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 
-const renderWitRouter = (component) => {
+const renderWithRouter = (component) => {
   const history = createMemoryHistory();
 
   return {
@@ -16,4 +16,4 @@ const renderWitRouter = (component) => {
   }
 };
 
-export default renderWitRouter;
+export default renderWithRouter;
