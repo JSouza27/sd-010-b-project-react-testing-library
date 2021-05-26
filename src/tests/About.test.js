@@ -12,7 +12,9 @@ describe('teste no componente About.js', () => {
     expect(aboutPokedex).toBeInTheDocument();
   });
   test('testando se dois valores no componente <p>', () => {
-    const { getAllByText } = renderWithRouter(<About />);
+    const { container } = renderWithRouter(<About />);
+    const paragraph = container.querySelectorAll('p');
+    expect(paragraph.length).toBe(2);
   });
   test('testando se a página renderiza a imagem com src Pokédex', () => {
     const { getByAltText } = renderWithRouter(<About />);
