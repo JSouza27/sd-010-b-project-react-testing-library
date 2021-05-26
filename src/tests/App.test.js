@@ -21,7 +21,7 @@ describe('testing in-app directions', () => {
       </MemoryRouter>,
     );
 
-    expect(getByText('pokémons')).toBeInTheDocument();
+    expect(getByText('Encountered pokémons')).toBeInTheDocument();
   });
 
   it(
