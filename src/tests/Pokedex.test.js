@@ -6,7 +6,6 @@ import renderWithRouter from './renderWithRouter';
 // import Pokedex from '../components/Pokedex';
 import App from '../App';
 import pokemons from '../data';
-import { pokemonType } from '../types';
 
 // import pokemons from '../data';
 
@@ -56,6 +55,19 @@ describe('Test pokedex component', () => {
     buttons.forEach((pokeType, index) => {
       const typeButtons = screen.getAllByTestId('pokemon-type-button');
       expect(typeButtons[index]).toHaveTextContent(pokeType);
+    });
+  });
+  test('if the pokemons are filtered', () => {
+    renderWithRouter(<App />);
+
+    pokemons.forEach(({ type }) => {
+      const filterButton = screen.getByRole('button', { name: type });
+      expect(filterButton).toBeInTheDocument();
+
+      userEvent.click(filterButton);
+
+      const filteredPokemon = screen.getByTestId('pokemon-type');
+      expect(filteredPokemon).toHaveTextContent(type);
     });
   });
 });
