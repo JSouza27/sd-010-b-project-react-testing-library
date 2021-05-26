@@ -20,4 +20,11 @@ describe('Teste o componente <Pokemon.js />', () => {
     const imagePokemon = screen.getByRole('img');
     expect(imagePokemon).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
   });
+
+  test('Teste se o link de detalhes é exibido em tela pelo ID;', () => {
+    renderWithRouter(<App />);
+
+    const linkDetails = screen.getByText('More details');
+    expect(linkDetails).toHaveAttribute('href', '/pokemons/25');
+  });
 });
