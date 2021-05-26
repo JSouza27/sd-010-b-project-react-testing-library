@@ -105,8 +105,8 @@ describe('Teste o componente <Pokedex.js />', () => {
   test('Teste se a Pokédex tem os botões de filtro', () => {
     renderWithRouter(<App />);
 
-    const typeButton = screen.getByRole('button', { name: /fire/i });
-    userEvent.click(typeButton);
+    // const typeButton = screen.getByRole('button', { name: /fire/i });
+    // userEvent.click(typeButton);
 
     const allButtons = screen.getAllByTestId('pokemon-type-button');
 
