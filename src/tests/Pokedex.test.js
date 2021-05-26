@@ -18,9 +18,7 @@ describe('Testando página Pokedex', () => {
     const { getByTestId } = renderWithRouter(<App />);
     const btnNextPokemon = getByTestId('next-pokemon');
     const pokemonName = getByTestId('pokemon-name');
-
     expect(btnNextPokemon.textContent).toBe('Próximo pokémon');
-
     onlyNames.forEach((name) => {
       expect(pokemonName.textContent).toBe(name);
       fireEvent.click(btnNextPokemon);
@@ -31,5 +29,13 @@ describe('Testando página Pokedex', () => {
     const { getAllByTestId } = renderWithRouter(<App />);
     const pokemonNameArr = getAllByTestId('pokemon-name');
     expect(pokemonNameArr.length).toBe(1);
+  });
+
+  it('Testa se a Pokédex tem os botões de filtro e os mesmos funcionam', () => {
+    const { getByRole, getByText } = renderWithRouter(<App />);
+    const btnDragon = getByRole('button', { name: 'Dragon' });
+    fireEvent.click(btnDragon);
+    const dragonair = getByText(/Dragonair/i);
+    expect(dragonair).toBeInTheDocument();
   });
 });
