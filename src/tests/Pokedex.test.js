@@ -102,8 +102,9 @@ describe('Testa o componente <Pokedex />', () => {
     expect(btnAll.textContent).toBe('All');
 
     userEvent.click(btnAll);
-
     const nameFirstPkemon = screen.getByText(/pikachu/i);
     expect(nameFirstPkemon).toBeInTheDocument();
+
+    // podera ser refatorado para mais teste;
   });
 });
