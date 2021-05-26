@@ -80,14 +80,29 @@ describe('Test Pokedex Component', () => {
   });
 
   it('When select button "all" it should reset the filter', () => {
-    const { getAllByTestId, getByTestId } = renderWithRouter(PokedexWithProps);
+    const { getAllByTestId, getByTestId, getByText } = renderWithRouter(PokedexWithProps);
 
     const button = getAllByTestId('pokemon-type-button');
     const TypeButton = button[1];
     expect(TypeButton).toBeInTheDocument();
 
-    const buttontype = TypeButton.textContent;
+    const noFilterButton = getByText('All');
+    expect(noFilterButton).toBeInTheDocument();
 
-    const filteredPokes = pokemons.filter(({ type }) => type === buttontype);
+    const nextPokeButton = getByTestId('next-pokemon');
+    expect(nextPokeButton).toBeInTheDocument();
+
+    fireEvent.click(TypeButton);
+    fireEvent.click(noFilterButton);
+
+    const pokes = [];
+    for (let index = 0; index < pokemons.length; index += 1) {
+      const { name } = pokemons[index];
+      const pokeRenderedName = getByTestId('pokemon-name').textContent;
+      expect(name).toBe(pokeRenderedName);
+      pokes.push(name);
+      fireEvent.click(nextPokeButton);
+    }
+    expect(pokes.length).toBe(pokemons.length);
   });
 });
