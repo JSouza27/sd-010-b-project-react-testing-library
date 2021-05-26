@@ -11,4 +11,11 @@ describe('Teste o componente <About.js /.', () => {
     });
     expect(heading).toBeInTheDocument();
   });
+
+  test('Teste se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
+    const { getAllByText } = renderWithRouter(<About />);
+    const phar = getAllByText(/Pokédex/i);
+    expect(phar[0]).toBeInTheDocument();
+    expect(phar[1]).toBeInTheDocument();
+  });
 });
