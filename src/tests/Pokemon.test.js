@@ -47,6 +47,7 @@ describe('Teste requisito 5 Pokemon.js ', () => {
     fireEvent.click(getByRole('checkbox'));
     const star = getAllByRole('img');
     expect(star[1].src).toBe('http://localhost/star-icon.svg');
+    expect(star[1]).toBeInTheDocument();
     expect(star[1]).toHaveAttribute('alt', `${data[0].name} is marked as favorite`);
   });
 });
