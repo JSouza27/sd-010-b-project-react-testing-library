@@ -28,4 +28,21 @@ describe('Testing FavoritePokemons.js', () => {
     expect(getByText('Charmander')).toBeInTheDocument();
     expect(getByText('Rapidash')).toBeInTheDocument();
   });
+  it('Verifies if all favorite pokemon cards show up', () => {
+    const { getByLabelText, getByText, history } = renderWithRouter(<App />);
+    const FAVORITE = 'Pokémon favoritado?';
+
+    history.push('/pokemons/4');
+    let favorited = getByLabelText(FAVORITE);
+    userEvent.click(favorited);
+    expect(favorited.checked).toBeTruthy();
+
+    history.push('/pokemons/78');
+    favorited = getByLabelText(FAVORITE);
+    userEvent.click(favorited);
+    expect(favorited.checked).toBeTruthy();
+
+    history.push('/favorites');
+    expect(getByText('No favorite pokemon found')).toBeInTheDocument();
+  });
 });
