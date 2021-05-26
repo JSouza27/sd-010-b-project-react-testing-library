@@ -5,7 +5,7 @@ import App from '../App';
 import RenderRouter from '../services/RenderRouter';
 
 test('teste se o pokemon é renderizado', () => {
-  const { getByAltText, history } = RenderRouter(<App />);
+  const { getByAltText } = RenderRouter(<App />);
   const buttonType = screen.getAllByRole('button');
   expect(buttonType[5]).toHaveTextContent('Psychic');
   userEvent.click(buttonType[5]);

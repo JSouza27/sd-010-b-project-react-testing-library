@@ -45,8 +45,8 @@ test('Teste se existe na página uma seção com os mapas', () => {
     level: 2,
     name: /Game Locations of Pikachu/i,
   })).toBeInTheDocument();
-
-  const location = screen.getAllByAltText('Pikachu location');
+  const pikachuLocation = 'Pikachu location';
+  const location = screen.getAllByAltText(pikachuLocation);
   const locationLength = 2;
   expect(location).toHaveLength(locationLength);
   const locationText = screen.getByText('Kanto Viridian Forest');
@@ -56,8 +56,8 @@ test('Teste se existe na página uma seção com os mapas', () => {
 
   expect(location[0].src).toContain('https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png');
   expect(location[1].src).toContain('https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
-  expect(location[0]).toHaveAttribute('alt', 'Pikachu location');
-  expect(location[1]).toHaveAttribute('alt', 'Pikachu location');
+  expect(location[0]).toHaveAttribute('alt', pikachuLocation);
+  expect(location[1]).toHaveAttribute('alt', pikachuLocation);
 });
 
 test('Se existe checkbox no details', () => {
