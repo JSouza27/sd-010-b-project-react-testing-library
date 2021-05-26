@@ -2,27 +2,31 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from '../components/renderWithRouter';
+import pokemons from '../data';
 
 describe('render pokemons\'s card properly', () => {
   it('render pokemon\'s card with name, type, weight and image', () => {
     const { getByRole, getByTestId } = renderWithRouter(<App />);
 
     userEvent.click(getByRole('button', { name: 'Electric' }));
-
-    expect(getByTestId('pokemon-name')).toHaveTextContent('Pikachu');
-    expect(getByTestId('pokemon-type')).toHaveTextContent('Electric');
-    expect(getByTestId('pokemon-weight')).toHaveTextContent(/Average weight:/i);
-    expect(getByRole('img')).toHaveAttribute('alt', 'Pikachu sprite');
-    expect(getByRole('img')).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
+    const { name, type, averageWeight: { value, measurementUnit }, image } = pokemons[0];
+    expect(getByTestId('pokemon-name')).toHaveTextContent(name);
+    expect(getByTestId('pokemon-type')).toHaveTextContent(type);
+    expect(getByTestId('pokemon-weight')).toHaveTextContent(
+      `Average weight: ${value} ${measurementUnit}`,
+    );
+    expect(getByRole('img')).toHaveAttribute('alt', `${name} sprite`);
+    expect(getByRole('img')).toHaveAttribute('src', image);
   });
 
   it('renders a link to the detail page', () => {
     const { getByRole, getByText, history } = renderWithRouter(<App />);
+    const { type, id } = pokemons[0];
 
-    userEvent.click(getByRole('button', { name: 'Electric' }));
+    userEvent.click(getByRole('button', { name: type }));
     const moreDetailsLink = getByText('More details');
     expect(moreDetailsLink).toBeInTheDocument();
-    expect(moreDetailsLink).toHaveAttribute('href', '/pokemons/25');
+    expect(moreDetailsLink).toHaveAttribute('href', `/pokemons/${id}`);
 
     userEvent.click(moreDetailsLink);
     expect(history.location.pathname).toBe('/pokemons/25');
@@ -35,7 +39,8 @@ describe('render pokemons\'s card properly', () => {
     userEvent.click(getByText('More details'));
     userEvent.click(getByRole('checkbox', { id: 'favorite' }));
 
-    const favoriteImg = getByAltText(/is marked as favorite/i);
+    const { name } = pokemons[0];
+    const favoriteImg = getByAltText(`${name} is marked as favorite`);
     expect(favoriteImg).toBeInTheDocument();
     expect(favoriteImg).toHaveAttribute('src', '/star-icon.svg');
   });
