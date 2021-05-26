@@ -86,7 +86,7 @@ describe('Teste o componente <Pokedex.js />', () => {
     userEvent.click(typeButton);
 
     const allButtons = screen.getAllByTestId('pokemon-type-button');
-    allButtons.forEach((type, index) => {
+    pokemons.forEach((type, index) => {
       expect(type.textContent).toBe(pokemons.type[index]);
     });
   });
