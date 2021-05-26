@@ -110,7 +110,6 @@ describe('Tests the buttons on the Pokedex component', () => {
     filteredTypes.forEach((el) => {
       if (el.length === 1) {
         typeBtn = getByRole('button', { name: el[0].type });
-        console.log(typeBtn);
         userEvent.click(typeBtn);
         expect(btnNext).toBeDisabled();
       }
