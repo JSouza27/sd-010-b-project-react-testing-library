@@ -69,4 +69,11 @@ describe('tests the whole App', () => {
 
     expect(pathname).toBe('/favorites');
   });
+
+  it('show Not Found page when happens', () => {
+    const { history, getByText } = renderWithRouter(<App />);
+    history.push('/whatever');
+
+    expect(getByText(/Page requested not found/i)).toBeInTheDocument();
+  });
 });
