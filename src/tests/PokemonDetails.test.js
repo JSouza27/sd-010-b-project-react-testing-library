@@ -1,9 +1,8 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
-import userEvent from '@testing-library/user-event';
 import pokemons from '../data';
-import { getByRole } from '@testing-library/dom';
 
 describe('7. Teste o componente <PokemonDetails.js />', () => {
   test('Se as informações detalhadas do Pokémon são mostradas na tela.', () => {
@@ -21,7 +20,7 @@ describe('7. Teste o componente <PokemonDetails.js />', () => {
     const summaryHeading = getByRole('heading', {
       level: 2,
       name: 'Summary',
-    })
+    });
     expect(summaryHeading).toBeInTheDocument();
 
     const paragraphText = 'This intelligent Pokémon'
@@ -39,7 +38,7 @@ describe('7. Teste o componente <PokemonDetails.js />', () => {
     const locationsHeading = getByRole('heading', {
       level: 2,
       name: `Game Locations of ${name}`,
-    })
+    });
     expect(locationsHeading).toBeInTheDocument();
 
     const pokemonLocations = getAllByRole('img');

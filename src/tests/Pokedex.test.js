@@ -38,7 +38,9 @@ describe('5. Teste o componente <Pokedex.js />', () => {
   test('Se a Pokédex tem os botões de filtro.', () => {
     const { getByRole, getAllByText, getAllByTestId } = renderWithRouter(<App />);
 
-    const allTypes = pokemons.reduce((typeAcc, pokemon) => (typeAcc.includes(pokemon.type) ? typeAcc : [...typeAcc, pokemon.type]), []);
+    const allTypes = pokemons.reduce((typeAcc, pokemon) => (
+      typeAcc.includes(pokemon.type) ? typeAcc : [...typeAcc, pokemon.type]), []);
+
     const allButtons = getAllByTestId('pokemon-type-button');
 
     expect(allButtons.length).toBe(allTypes.length);
