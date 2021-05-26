@@ -1,21 +1,21 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
-import App from '../App';
+import { screen } from '@testing-library/react';
+import renderWithRouter from '../services/renderWithRouter';
+import { NotFound } from '../components';
 
 describe('Testing App', () => {
-  test('', () => {
-    render(
-      <MemoryRouter initialEntries={ ['/'] }>
-        <App />
-      </MemoryRouter>,
-    );
+  test('Test if the page contains "h2" with the text "Page requested not found"', () => {
+    renderWithRouter(<NotFound />);
 
-    const homeText = screen.getByRole('heading', {
-      level: 2,
-      name: 'Encountered pokémons',
-    });
+    const pageNotEncountered = screen.getByText('Page requested not found');
+    expect(pageNotEncountered).toBeInTheDocument();
+  });
 
-    expect(homeText).toBeInTheDocument();
+  test('Test if the page shows the image `https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif`', () => {
+    renderWithRouter(<NotFound />);
+
+    const notFoundImage = screen.getAllByRole('img');
+
+    expect(notFoundImage[1].src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
   });
 });
