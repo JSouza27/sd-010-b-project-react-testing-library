@@ -4,8 +4,6 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 
 import App from '../App';
-import Pokedex from '../components/Pokedex';
-import pokemons from '../data';
 
 const typesPokemons = [
   'Electric',
@@ -70,6 +68,19 @@ describe('Teste o componente <Pokedex.js />', () => {
 
     const firstCard = screen.getByRole('img', 'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
     expect(firstCard).toBeInTheDocument();
+
+    // //solução encontrada pelo Renan Braga
+    // const btnNext = screen.getAllByRole('button', {
+    //   name: /próximo pokémon/i,
+    // });
+
+    // const clicks = 9;
+    // for (let index = 0; index < clicks; index += 1) {
+    //   userEvent.click(btnNext);
+    // }
+
+    // const pokemon = screen.getByText(/Pikachu/i);
+    // expect(pokemon).toBeInTheDocument();
   });
 
   test('Teste se é mostrado apenas um Pokémon por vez', () => {
