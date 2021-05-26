@@ -29,5 +29,6 @@ describe('Testa o componente Pokemon.js', () => {
     fireEvent.click(getByLabelText(/Pokémon favoritado?/i));
     const favorite = getByAltText('Pikachu is marked as favorite');
     expect(favorite).toBeInTheDocument();
+    expect(favorite).toHaveAttribute('src', '/star-icon.svg');
   });
 });
