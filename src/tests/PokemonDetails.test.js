@@ -27,7 +27,7 @@ describe('Requirement 7', () => {
 
     const locationGame = getByRole('heading', {
       level: 2,
-      name: /Game Locations of/i,
+      name: /Game Locations of Pikachu/i,
     });
     expect(locationGame).toBeInTheDocument();
   });
