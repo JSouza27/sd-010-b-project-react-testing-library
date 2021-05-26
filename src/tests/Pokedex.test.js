@@ -1,6 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
+import pokemonList from '../data';
 import App from '../App';
 
 // test('', () => {});
@@ -72,30 +73,43 @@ describe('Teste o componente <Pokedex.js />', () => {
       expect(button[0]).toHaveTextContent('All');
     });
 
-    //   it('deverá mostrar os Pokémons normalmente quando o botão All for clicado', () => {
+    it('deverá mostrar os Pokémons normalmente quando o botão All for clicado', () => {
+      const { getAllByRole, getByText } = renderWithRouter(<App />);
+      const button = getAllByRole('button');
+      userEvent.click(button[0]);
 
-    //   });
+      const proxPoke = getByText(texto);
+      userEvent.click(proxPoke);
+      const next = getByText(/charmander/i);
+      expect(next).toBeInTheDocument();
+    });
 
-    //   it('Ao carregar a página, o filtro selecionado deverá ser All', () => {
+    it('Ao carregar a página, o filtro selecionado deverá ser All', () => {
+      const { getByText } = renderWithRouter(<App />);
 
-    //   });
+      const proxPoke = getByText(texto);
+      userEvent.click(proxPoke);
+      const next = getByText(/charmander/i);
+      expect(next).toBeInTheDocument();
+    });
+  });
+
+  describe('Teste se é criado um botão de filtro para cada tipo de Pokémon', () => {
+    // it('Os botões de filtragem devem ser dinâmicos', () => {
+
     // });
 
-    // describe('Teste se é criado um botão de filtro para cada tipo de Pokémon', () => {
-    //   it('Os botões de filtragem devem ser dinâmicos', () => {
+    it('Deve existir um botão de filtragem para cada tipo de Pokémon', () => {
+      const { getAllByTestId } = renderWithRouter(<App />);
+      const button = getAllByTestId('pokemon-type-button');
+      expect(button.length).toBe(7);
+    });
 
-    //   });
-
-    //   it('Deve existir um botão de filtragem para cada tipo de Pokémon', () => {
-
-    //   });
-
-    //   it('Deve ser mostrado como opção de filtro, um botão para cada um dos tipos', () => {
-
-    //   });
-    // });
-    // it('O botão de Próximo pokémon deve ser desabilitado quando tiver um pokémon', () => {
+    // it('Deve ser mostrado como opção de filtro, um botão para cada um dos tipos', () => {
 
     // });
   });
+  // it('O botão de Próximo pokémon deve ser desabilitado quando tiver um pokémon', () => {
+
+  // });
 });
