@@ -11,36 +11,36 @@ describe('Test requirement01', () => {
     expect(heading).toBeInTheDocument();
   });
   test('Testando se na navegação existe link', () => {
-    const { getByText } = renderWithRouter(<App />)
+    const { getByText } = renderWithRouter(<App />);
     const linkHome = getByText('Home');
     const linkAbout = getByText('About');
     const linkFavorite = getByText('Favorite Pokémons');
-    
+
     expect(linkHome).toBeInTheDocument();
     expect(linkAbout).toBeInTheDocument();
     expect(linkFavorite).toBeInTheDocument();
-  })
+  });
   test('Testa se a aplicação é redirecionada para pagina inicial', () => {
     const { getByText, history } = renderWithRouter(<App />);
     fireEvent.click(getByText(/Home/));
-    const pathname = history.location.pathname;
+    const { pathname } = history.location;
 
-    expect(pathname).toBe('/')
-  })
+    expect(pathname).toBe('/');
+  });
   test('Testa se aplicação redireciona para about', () => {
     const { getByText, history } = renderWithRouter(<App />);
     fireEvent.click(getByText(/About/i));
-    const pathname = history.location.pathname;
+    const { pathname } = history.location;
 
     expect(pathname).toBe('/about');
-  })
+  });
   test('Testa se a aplicação redireciona para Pokemons Favorites', () => {
     const { getByText, history } = renderWithRouter(<App />);
     fireEvent.click(getByText(/Favorite Pokémons/i));
-    const pathname = history.location.pathname;
+    const { pathname } = history.location;
 
     expect(pathname).toBe('/favorites');
-  })
+  });
   test('Testa se a aplicação é redirecionada para Not Found', () => {
     const { getByText, history } = renderWithRouter(<App />);
     history.push('/pagina/que-não-existe/');
@@ -48,4 +48,4 @@ describe('Test requirement01', () => {
 
     expect(noMatch).toBeInTheDocument();
   });
-})
+});
