@@ -115,4 +115,74 @@ a Pokédex deve circular somente pelos pokémons daquele tipo`, () => {
       expect(randomPokemonName).toHaveTextContent(/^charmander$/i);
     });
   });
+
+  describe('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+    it('O texto do botão deve ser All', () => {
+      const { getByRole } = renderWithRouter(
+        <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isFavoritePokemons } />,
+      );
+      const btnFilterAll = getByRole('button', { name: 'All' });
+      expect(btnFilterAll).toBeInTheDocument();
+    });
+
+    it(`A Pokedéx deverá mostrar os Pokémons normalmente (sem filtros)
+quando o botão All for clicado`, () => {
+      const { getByRole, getByTestId } = renderWithRouter(
+        <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isFavoritePokemons } />,
+      );
+      const btnNextPokemon = getByRole('button', { name: 'Próximo pokémon' });
+      const btnFilterAll = getByRole('button', { name: 'All' });
+
+      const btnFilterFire = getByRole('button', { name: 'Fire' });
+      userEvent.click(btnFilterFire);
+      const firePokemons = pokemons.filter(({ type }) => type === 'Fire');
+      firePokemons.forEach((pokemon) => {
+        const { value, measurementUnit } = pokemon.averageWeight;
+
+        const randomPokemonName = getByTestId('pokemon-name');
+        const randomPokemonType = getByTestId('pokemon-type');
+        const randomPokemonWeight = getByTestId('pokemon-weight');
+        expect(randomPokemonName).toHaveTextContent(pokemon.name);
+        expect(randomPokemonType).toHaveTextContent(pokemon.type);
+        expect(randomPokemonWeight)
+          .toHaveTextContent(`Average weight: ${value} ${measurementUnit}`);
+
+        userEvent.click(btnNextPokemon);
+      });
+
+      userEvent.click(btnFilterAll);
+      pokemons.forEach((pokemon) => {
+        const { value, measurementUnit } = pokemon.averageWeight;
+
+        const randomPokemonName = getByTestId('pokemon-name');
+        const randomPokemonType = getByTestId('pokemon-type');
+        const randomPokemonWeight = getByTestId('pokemon-weight');
+        expect(randomPokemonName).toHaveTextContent(pokemon.name);
+        expect(randomPokemonType).toHaveTextContent(pokemon.type);
+        expect(randomPokemonWeight)
+          .toHaveTextContent(`Average weight: ${value} ${measurementUnit}`);
+        userEvent.click(btnNextPokemon);
+      });
+    });
+
+    it('Ao carregar a página, o filtro selecionado deverá ser All', () => {
+      const { getByRole, getByTestId } = renderWithRouter(
+        <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isFavoritePokemons } />,
+      );
+      const btnNextPokemon = getByRole('button', { name: 'Próximo pokémon' });
+
+      pokemons.forEach((pokemon) => {
+        const { value, measurementUnit } = pokemon.averageWeight;
+
+        const randomPokemonName = getByTestId('pokemon-name');
+        const randomPokemonType = getByTestId('pokemon-type');
+        const randomPokemonWeight = getByTestId('pokemon-weight');
+        expect(randomPokemonName).toHaveTextContent(pokemon.name);
+        expect(randomPokemonType).toHaveTextContent(pokemon.type);
+        expect(randomPokemonWeight)
+          .toHaveTextContent(`Average weight: ${value} ${measurementUnit}`);
+        userEvent.click(btnNextPokemon);
+      });
+    });
+  });
 });
