@@ -3,7 +3,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import NotFound from '../components/NotFound';
 
-test('se página contém um heading h2 com o texto Page requested not found', () => {
+test('Testa se página contém um heading h2 com o texto Page requested not found', () => {
   const { getByRole } = render(<NotFound />);
   const heading = getByRole('heading', { level: 2 });
   expect(heading).toHaveTextContent(/Page requested not found/i);

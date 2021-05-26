@@ -24,6 +24,6 @@ test('Verifica se a página contém uma imagem com uma determinada Url', () => {
   const { getByAltText } = render(<About />);
   const image = getByAltText('Pokédex');
   expect(image.src).toContain(
-    'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png',
+    'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png'
   );
 });
