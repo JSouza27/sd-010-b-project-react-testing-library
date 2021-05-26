@@ -79,3 +79,16 @@ test('clicking on the Favorite Pokemons link goes to the /favorites route', () =
 
   expect(favoritePokemonsText).toBeInTheDocument();
 });
+
+test('when entering an unknown route goes to NotFound', () => {
+  const { history, getByRole } = renderWithRouter(<App />);
+  const routeNonexistent = '/not-found-page';
+  history.push(routeNonexistent);
+
+  const notFoundText = getByRole('heading', {
+    level: 2,
+    name: /Page requested not found/i,
+  });
+
+  expect(notFoundText).toBeInTheDocument();
+});
