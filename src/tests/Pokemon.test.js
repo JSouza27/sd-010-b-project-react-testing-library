@@ -17,6 +17,7 @@ describe('test component Pokemon', () => {
       const pokemonType = screen.getByTestId('pokemon-type');
       const pokemonWeight = screen.getByTestId('pokemon-weight');
       const pokemonImage = screen.getByRole('img');
+      const moreInfoLink = screen.getByRole('link', { name: /More details/i });
 
       expect(pokemonName).toHaveTextContent(name);
       expect(pokemonType).toHaveTextContent(type);
@@ -24,6 +25,7 @@ describe('test component Pokemon', () => {
       // ** SOURCE https://dev.to/raphaelchaula/a-simple-image-test-in-react-3p6f */
       expect(pokemonImage).toHaveAttribute('src', image);
       expect(pokemonImage).toHaveAttribute('alt', `${name} sprite`);
+      expect(moreInfoLink).toBeInTheDocument();
 
       const nextButton = screen.getByRole('button', { name: /Próximo pokémon/i });
       userEvent.click(nextButton);
