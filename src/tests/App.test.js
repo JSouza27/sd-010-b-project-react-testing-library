@@ -38,7 +38,7 @@ describe('testes na App.js', () => {
     expect(history.location.pathname).toBe('/favorites');
     expect(favorite).toBeInTheDocument();
   });
-  test('Exibição de tela NOT FOUND', () => {
+  test('Testando a exibição de tela NOT FOUND', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const notFound = '/pageError';
     history.push(notFound);
