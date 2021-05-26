@@ -13,9 +13,11 @@ class PokemonDetails extends React.Component {
         <h2>{`Game Locations of ` + `${name}`}</h2>
         <div className="pokemon-habitat">
           {foundAt.map(({ location, map }) => (
-            <div key={ location }>
-              <img src={ `${map}` } alt={`${name} ` + `location`} />
-              <p><em>{location}</em></p>
+            <div key={location}>
+              <img src={`${map}`} alt={`${name} ` + `location`} />
+              <p>
+                <em>{location}</em>
+              </p>
             </div>
           ))}
         </div>
@@ -54,9 +56,9 @@ class PokemonDetails extends React.Component {
           <input
             type="checkbox"
             id="favorite"
-            checked={ isFavorite }
-            onChange={
-              ({ target: { checked } }) => onUpdateFavoritePokemons(pokemonId, checked)
+            checked={isFavorite}
+            onChange={({ target: { checked } }) =>
+              onUpdateFavoritePokemons(pokemonId, checked)
             }
           />
         </label>
@@ -68,7 +70,9 @@ class PokemonDetails extends React.Component {
     const { renderHabitat, renderSummary } = PokemonDetails;
     const { renderFavoriteInput } = this;
     const {
-      match: { params: { id } },
+      match: {
+        params: { id },
+      },
       isPokemonFavoriteById,
     } = this.props;
 
@@ -79,9 +83,9 @@ class PokemonDetails extends React.Component {
       <section className="pokemon-details">
         <h2>{`${pokemon.name} ` + `Details`}</h2>
         <Pokemon
-          pokemon={ pokemon }
-          showDetailsLink={ false }
-          isFavorite={ isFavorite }
+          pokemon={pokemon}
+          showDetailsLink={false}
+          isFavorite={isFavorite}
         />
         {renderSummary(pokemon)}
         {renderHabitat(pokemon)}

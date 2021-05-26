@@ -13,7 +13,6 @@ test('Teste se é renderizado um card com as informações de determinado pokém
   );
 
   const poke = pokemons[0];
-
   expect(getByText(poke.name)).toBeInTheDocument();
   expect(getAllByText(poke.type)).toBeDefined();
   expect(
@@ -22,7 +21,6 @@ test('Teste se é renderizado um card com as informações de determinado pokém
     ),
   ).toBeInTheDocument();
   const img = getByAltText(`${poke.name} sprite`);
-  expect(img.src).toEqual(poke.image);
   expect(img.src).toEqual(poke.image);
 });
 
