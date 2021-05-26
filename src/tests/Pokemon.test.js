@@ -1,5 +1,5 @@
 import React from 'react';
-import { matchPath, MemoryRouter, Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
@@ -20,7 +20,7 @@ const pokemonCheck = (pok, typ) => {
   const linkDetails = screen.getByRole('link', {
     name: /more details/i,
   });
-  expect(img.src).not.toBe("");
+  expect(img.src).not.toBe('');
   let { href } = linkDetails;
   const htmlSize = 26;
   href = href.slice(0, htmlSize);
