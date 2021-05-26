@@ -23,3 +23,13 @@ test('Testa se card do pokemon possui link de navegação', () => {
   const linkDetails = getByText(moreDetails);
   expect(linkDetails.href).toContain('/pokemons/25');
 });
+
+test('Ao clicar em More Details redireciona para (URL /pokemons/id)', () => {
+  const { getByText, history } = renderWithRouter(<App />);
+  const details = getByText(moreDetails);
+  userEvent.click(details);
+  const { pathname } = history.location;
+  expect(pathname).toBe('/pokemons/25');
+  const screenText = getByText('Pikachu Details');
+  expect(screenText).toBeInTheDocument();
+});
