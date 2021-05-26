@@ -96,6 +96,6 @@ describe('Teste da página Pokédex', () => {
 
     const pokemonName = screen.getByTestId(pokemonNa);
 
-    expect(pokemonName).toHaveTextContent('Pikachu');
+    expect(pokemonName).toHaveTextContent(pokemons[0].name);
   });
 });
