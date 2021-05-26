@@ -13,17 +13,17 @@ test('renders a reading with the text `Pokédex`', () => {
   expect(heading).toBeInTheDocument();
 
   const homeLink = screen.getByRole('link', {
-    name: /Home/i
-  })
-  expect(homeLink).toBeInTheDocument()
+    name: /Home/i,
+  });
+  expect(homeLink).toBeInTheDocument();
 
   const aboutLink = screen.getByRole('link', {
-    name: /about/i
-  })
-  expect(aboutLink).toBeInTheDocument()
+    name: /about/i,
+  });
+  expect(aboutLink).toBeInTheDocument();
 
   const favoriteLink = screen.getByRole('link', {
-    name: /favorite pokémons/i
-  })
-  expect(favoriteLink).toBeInTheDocument()
+    name: /favorite pokémons/i,
+  });
+  expect(favoriteLink).toBeInTheDocument();
 });
