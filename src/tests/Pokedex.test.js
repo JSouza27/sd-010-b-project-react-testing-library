@@ -86,7 +86,12 @@ describe('Testing pokedex component', () => {
         )
       </Router>,
     );
-    fireEvent.click(screen.getByRole('button', { name: 'All' }));
-    expect(onClick).toHaveBeenCalled();
+    const pikachu = screen.getByRole('img', { name: /pikachu sprite/i });
+    expect(pikachu).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /fire/i }));
+    const charmander = screen.getByRole('img', { name: /charmander sprite/i });
+    expect(charmander).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /all/i }));
+    expect(pikachu).toBeInTheDocument();
   });
 });
