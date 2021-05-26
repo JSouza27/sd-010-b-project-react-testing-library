@@ -1,13 +1,13 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
-// import Pokedex from '../components/Pokedex';
+
 import App from '../App';
 import pokemons from '../data';
 
-// import pokemons from '../data';
+const pokemon = 'pokemon-name';
 
 describe('Test pokedex component', () => {
   test('If the page contais title "Encountered pokémons"', () => {
@@ -29,21 +29,22 @@ describe('Test pokedex component', () => {
 
     userEvent.click(nextButton);
 
-    const pokemon = screen.getByTestId('pokemon-name');
-    expect(pokemon).toHaveTextContent('Charmander');
+    const currentPokemon = screen.getByTestId(pokemon);
+    expect(currentPokemon).toHaveTextContent('Charmander');
   });
+
   test('if the first pokemon is rendered, when the list ends', () => {
     renderWithRouter(<App />);
     const nextButton = screen.getByRole('button', { name: /Próximo pokémon/i });
     expect(nextButton).toBeInTheDocument();
 
-    const pokemon = screen.getByTestId('pokemon-name');
+    const firstPokemon = screen.getByTestId(pokemon);
 
     pokemons.forEach((poke, index) => {
       if (poke[index] < pokemons.length) {
         userEvent.click(nextButton);
       }
-      expect(pokemon).toHaveTextContent(pokemons[0].name);
+      expect(firstPokemon).toHaveTextContent(pokemons[0].name);
     });
   });
   test('if it have the filter buttons', () => {
@@ -76,5 +77,15 @@ describe('Test pokedex component', () => {
 
     const allButton = screen.getByRole('button', { name: 'All' });
     expect(allButton).toBeInTheDocument();
+
+    userEvent.click(allButton);
+
+    const nextButton = screen.getByRole('button', { name: /Próximo pokémon/i });
+
+    pokemons.forEach(({ name }) => {
+      const pokemonRendered = screen.getByText(name);
+      expect(pokemonRendered).toBeInTheDocument();
+      fireEvent.click(nextButton);
+    });
   });
 });
