@@ -48,4 +48,22 @@ describe('Renders Pokédex page', () => {
     });
   });
 
+  it('renders all pokemons available', () => {
+    const { getByText, getByTestId } = renderWithRouter(<App />);
+
+    expect(getByText('All')).toBeInTheDocument();
+    userEvent.click(getByText('All'));
+
+    const pokemonsDisplayed = [];
+
+    for (let i = 0; i < numberOfPokemons; i += 1) { // get all pokemons displayed
+      const currPokemon = getByTestId('pokemon-name').textContent;
+      pokemonsDisplayed.push(currPokemon);
+      userEvent.click(getByTestId(nextBtntext));
+    }
+    pokemons.forEach(({ name }) => { // compare pokemons displayed with the data
+      const comparation = pokemonsDisplayed.find((elem) => elem === name);
+      expect(comparation).toBe(name);
+    });
+  });
 });
