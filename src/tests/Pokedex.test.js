@@ -49,5 +49,17 @@ describe('Teste do quinto requisito', () => {
 
       expect(image.length).toBe(1);
     });
+    describe('Teste se a Pokédex tem os botões de filtro', () => {
+      test('A Pokédex deve circular somente pelos pokémons daquele tipo', () => {
+        renderWithRouter(<App />);
+        const psychic = screen.getByRole('button', { name: Psychic });
+        const namePsychic = screen.getByText('Psychic');
+        fireEvent.click(psychic);
+
+        expect(namePsychic).toBeInTheDocument();
+
+        
+      });
+    });
   });
 });
