@@ -5,11 +5,12 @@ import App from '../App';
 
 // test('', () => {});
 const linkPikachu = '/pokemons/25';
+const maisDetalhes = 'More details';
 
 describe('Teste se as informações detalhadas do Pokémon são mostradas na tela', () => {
   it('texto <name> Details, onde <name> é o nome do Pokémon', () => {
     const { getByText, getByRole } = renderWithRouter(<App />);
-    const link = getByText('More details');
+    const link = getByText(maisDetalhes);
     expect(link).toHaveAttribute('href', linkPikachu);
     userEvent.click(link);
 
@@ -26,7 +27,7 @@ describe('Teste se as informações detalhadas do Pokémon são mostradas na tel
 
   it('A seção de detalhes deve conter um heading h2 com o texto Summary', () => {
     const { getByText, getByRole } = renderWithRouter(<App />);
-    const link = getByText('More details');
+    const link = getByText(maisDetalhes);
     expect(link).toHaveAttribute('href', linkPikachu);
     userEvent.click(link);
 
@@ -39,7 +40,7 @@ describe('Teste se as informações detalhadas do Pokémon são mostradas na tel
 
   it('seção de detalhes deve conter parágrafo com resumo do Pokémon visualizado', () => {
     const { getByText } = renderWithRouter(<App />);
-    const link = getByText('More details');
+    const link = getByText(maisDetalhes);
     expect(link).toHaveAttribute('href', linkPikachu);
     userEvent.click(link);
 
@@ -51,7 +52,7 @@ describe('Teste se as informações detalhadas do Pokémon são mostradas na tel
 describe('Teste se existe na página uma seção com os mapas de localização', () => {
   it('deverá existir um heading h2 com o texto Game Locations of <name>', () => {
     const { getByText, getByRole } = renderWithRouter(<App />);
-    const link = getByText('More details');
+    const link = getByText(maisDetalhes);
     expect(link).toHaveAttribute('href', linkPikachu);
     userEvent.click(link);
 
@@ -82,7 +83,7 @@ describe('Teste se existe na página uma seção com os mapas de localização',
 describe('Teste se o usuário pode favoritar pokémon na página de detalhes', () => {
   it('A página deve exibir um checkbox que permite favoritar o Pokémon', () => {
     const { getByText, getByRole } = renderWithRouter(<App />);
-    const link = getByText('More details');
+    const link = getByText(maisDetalhes);
     expect(link).toHaveAttribute('href', linkPikachu);
     userEvent.click(link);
 
@@ -92,7 +93,7 @@ describe('Teste se o usuário pode favoritar pokémon na página de detalhes', (
 
   it('Cliques alternados devem adicionar e remover da lista de favoritos', () => {
     const { getByText, getAllByRole } = renderWithRouter(<App />);
-    const link = getByText('More details');
+    const link = getByText(maisDetalhes);
     expect(link).toHaveAttribute('href', linkPikachu);
     userEvent.click(link);
 
@@ -113,7 +114,7 @@ describe('Teste se o usuário pode favoritar pokémon na página de detalhes', (
 
   it('O label do checkbox deve conter o texto Pokémon favoritado?', () => {
     const { getByText, getByLabelText } = renderWithRouter(<App />);
-    const link = getByText('More details');
+    const link = getByText(maisDetalhes);
     expect(link).toHaveAttribute('href', linkPikachu);
     userEvent.click(link);
 
