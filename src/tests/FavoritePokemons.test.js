@@ -18,4 +18,12 @@ describe('Test favorite pokémons page', () => {
     const pokemonCard = screen.getAllByTestId('pokemon-name');
     expect(pokemonCard.length).not.toBe(0);
   });
+
+  test('if there is no favorite pokemons, 0 cards are rendered', () => {
+    const emptyPokemonsArray = [];
+    renderWithRouter(<FavoritePokemons pokemons={ emptyPokemonsArray } />);
+
+    const pokemonCard = screen.getAllByTestId('pokemon-name');
+    expect(pokemonCard).toBeNull();
+  });
 });
