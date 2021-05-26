@@ -50,5 +50,23 @@ describe('tests the whole App', () => {
     expect(pathname).toBe('/');
   });
 
+  it('tests if aplication is redirected to About page by clicking About link', () => {
+    const { history } = renderWithRouter(<App />);
+
+    userEvent.click(screen.getByText(/About/i));
+
+    const { location: { pathname } } = history;
+
+    expect(pathname).toBe('/about');
+  });
+
+  it('redirected to Favorite Pokémons page by clicking Favorite Pokémons link', () => {
+    const { history } = renderWithRouter(<App />);
+
+    userEvent.click(screen.getByText(/Favorite Pokémons/i));
+
+    const { location: { pathname } } = history;
+
+    expect(pathname).toBe('/favorites');
   });
 });
