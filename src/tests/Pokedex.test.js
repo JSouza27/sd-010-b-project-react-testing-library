@@ -31,7 +31,7 @@ describe('Test Pokedex Component', () => {
 
   it('should render only one pokemon card at time', () => {
     const { getAllByTestId } = renderWithRouter(PokedexWithProps);
-    const card = getAllByTestId('pokemon-card');
+    const card = getAllByTestId('pokemon-weight');
     expect(card[0]).toBeInTheDocument();
     expect(card.length).toBe(1);
   });
@@ -95,8 +95,7 @@ describe('Test Pokedex Component', () => {
   });
 
   it('When select button "all" it should reset the filter', () => {
-    const { getAllByTestId, getByTestId, getByText } = renderWithRouter(PokedexWithProps);
-
+    const { getAllByTestId, getByText, container } = renderWithRouter(PokedexWithProps);
     const button = getAllByTestId('pokemon-type-button');
     const TypeButton = button[1];
     expect(TypeButton).toBeInTheDocument();
@@ -113,7 +112,8 @@ describe('Test Pokedex Component', () => {
     const pokes = [];
     for (let index = 0; index < pokemons.length; index += 1) {
       const { name } = pokemons[index];
-      const pokeRenderedName = getByTestId('pokemon-card_test').firstChild.textContent;
+      const pokeRenderedName = container
+        .querySelector('.pokemon-overview').firstChild.textContent;
       expect(name).toBe(pokeRenderedName);
       pokes.push(name);
       fireEvent.click(nextPokeButton);

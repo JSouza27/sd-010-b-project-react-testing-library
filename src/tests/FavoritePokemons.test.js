@@ -14,7 +14,7 @@ describe('Test FavoritePokemons component', () => {
     const { getAllByTestId, getAllByText } = renderWithRouter(<FavoritePokemons
       pokemons={ pokemons }
     />);
-    const cards = getAllByTestId('favorite-card');
+    const cards = getAllByTestId('pokemon-name');
     expect(cards.length).toBe(pokemons.length);
 
     const allDetailsText = getAllByText('More details');
@@ -23,7 +23,7 @@ describe('Test FavoritePokemons component', () => {
 
   it('Should render 0 cards if there is no favorited pokemon', () => {
     const { queryByTestId } = renderWithRouter(<FavoritePokemons pokemons={ [] } />);
-    const cards = queryByTestId('favorite-card');
+    const cards = queryByTestId('pokemon-name');
     expect(cards).toBeNull();
   });
 });
