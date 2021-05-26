@@ -1,8 +1,7 @@
-// Iniciando o projeto
+import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
 import App from '../App';
+import renderWithRouter from '../renderWithRouter';
 
 describe('Teste o componente <App.js />', () => {
   it('Teste se a página principal da Pokédex é renderizada ao carregar a aplicação no caminho de URL /.', () => {
