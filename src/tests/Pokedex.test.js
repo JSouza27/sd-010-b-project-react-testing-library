@@ -18,5 +18,14 @@ describe('Teste do quinto requisito', () => {
 
       expect(btnText).toBeInTheDocument();
     });
+
+    test('Teste se os próximos Pokémons são mostrados', () => {
+      renderWithRouter(<App />);
+      const btnText = screen.getByRole('button', { name: 'Próximo pokémon' });
+      fireEvent.click(btnText);
+      const testePokemon = screen.getByText('Charmander');
+
+      expect(testePokemon).toBeInTheDocument();
+    });
   });
 });
