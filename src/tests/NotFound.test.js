@@ -15,4 +15,13 @@ describe('Test page not found', () => {
     });
     expect(pageTitle).toBeInTheDocument();
   });
+
+  test('if the page contains pikachu crying image', () => {
+    renderWithRouter(<NotFound />);
+
+    const altTextImage = 'Pikachu crying because the page requested was not found';
+
+    const pikachuImage = screen.getByAltText(altTextImage);
+    expect(pikachuImage.src).toContain('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+  });
 });
