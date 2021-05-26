@@ -13,7 +13,7 @@ describe('Test favorite pokémons page', () => {
   });
 
   test('if the favorite cards render', () => {
-    // ** Source https://github.com/tryber/sd-010-b-project-react-testing-library/pull/84/files */ para pegar o array de pokemons
+    // ** Source https://github.com/tryber/sd-010-b-project-react-testing-library/pull/84/files */ para pegar o array de pokemons via props
     renderWithRouter(<FavoritePokemons pokemons={ pokemons } />);
 
     const pokemonCard = screen.getAllByTestId('pokemon-name');
