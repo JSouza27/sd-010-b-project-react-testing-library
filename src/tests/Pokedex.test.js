@@ -50,12 +50,9 @@ test('test if selecting Electric and then All shows all pokémons', () => {
 test('Test if there are all filter buttons', () => {
   const filters = ['Electric', 'Bug', 'Fire', 'Poison', 'Psychic', 'Normal', 'Dragon'];
   renderWithRouter(<App />);
-  filters.forEach((element) => {
-    const button = screen.getByRole('button', { name: element });
-    expect(button).toBeInTheDocument();
-  });
+  const filterButtons = screen.queryAllByTestId('pokemon-type-button');
+  expect(filterButtons.length).toBe(filters.length);
 });
-
 describe('Test if each category shows only its own pokémon', () => {
   test('Electric category shows Pikachu and next button is disabled', () => {
     const electric = 'Pikachu';
