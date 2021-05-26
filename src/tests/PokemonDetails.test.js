@@ -63,13 +63,29 @@ describe('Teste se existe na página uma seção com os mapas de localização',
     expect(local).toBeInTheDocument();
   });
 
-  // it('Todas as localizações do Pokémon devem ser mostradas na seção de detalhes', () => {
+  it('Todas as localizações do Pokémon devem ser mostradas na seção de detalhes', () => {
+    const { getByText, getAllByAltText } = renderWithRouter(<App />);
+    const link = getByText(maisDetalhes);
+    expect(link).toHaveAttribute('href', linkPikachu);
+    userEvent.click(link);
 
-  // });
+    const local = getAllByAltText(/location/i);
+    expect(local.length).toBe(2);
+  });
 
-  // it('Devem ser exibidos o nome e uma imagem do mapa em cada localização', () => {
+  it('Devem ser exibidos o nome e uma imagem do mapa em cada localização', () => {
+    const { getByText, getAllByAltText } = renderWithRouter(<App />);
+    const link = getByText(maisDetalhes);
+    expect(link).toHaveAttribute('href', linkPikachu);
+    userEvent.click(link);
 
-  // });
+    const local = getAllByAltText(/location/i);
+    expect(local[0]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png');
+    expect(local[0]).toHaveAttribute('alt', 'Pikachu location');
+
+    expect(local[1]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
+    expect(local[1]).toHaveAttribute('alt', 'Pikachu location');
+  });
 
   // it('A imagem da localização deve ter um atributo src com a URL da localização', () => {
 
