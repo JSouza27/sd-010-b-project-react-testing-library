@@ -12,7 +12,7 @@ describe('Testar o FavoritePokemons.js', () => {
     expect(getByText('No favorite pokemon found')).toBeDefined();
   });
 
-  test('testando o link de navegação Home', () => {
+  test('Testando se renderiza os pokémons favoritos', () => {
     renderWithRouter(<App />);
 
     const moreDetails = screen.getByRole('link', {
