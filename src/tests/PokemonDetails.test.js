@@ -37,4 +37,24 @@ describe('Renders detailed information about the pokemon', () => {
       expect(locations[index]).toHaveAttribute('src', map);
     });
   });
+
+  it('renders a checkbox that allows user to add a pokemon as a favorite', () => {
+    const { getByText, getByAltText, getByRole, queryByText } = renderWithRouter(<App />);
+    const { name } = pokemons[0];
+
+    userEvent.click(getByText('More details'));
+
+    const favoriteBtn = getByRole('checkbox', { id: 'favorite' });
+    expect(favoriteBtn.parentElement).toHaveTextContent('Pokémon favoritado?');
+    expect(favoriteBtn).toBeInTheDocument();
+
+    userEvent.click(favoriteBtn);
+
+    const favoriteImg = getByAltText(`${name} is marked as favorite`);
+    expect(favoriteImg).toBeInTheDocument();
+
+    userEvent.click(favoriteBtn);
+
+    expect(queryByText(`${name} is marked as favorite`)).toBeNull();
+  });
 });
