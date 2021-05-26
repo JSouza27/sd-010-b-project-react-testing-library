@@ -38,4 +38,14 @@ describe('Testando página Pokedex', () => {
     const dragonair = getByText(/Dragonair/i);
     expect(dragonair).toBeInTheDocument();
   });
+
+  it('Testa se a Pokédex contém um botão para resetar o filtro', () => {
+    const { getByRole, getByText } = renderWithRouter(<App />);
+    const btnAll = getByRole('button', { name: 'All' });
+    const btnNext = getByRole('button', { name: 'Próximo pokémon' });
+    expect(btnAll).toBeVisible();
+    expect(getByText(/Pikachu/i));
+    fireEvent.click(btnNext);
+    expect(getByText(/Charmander/i));
+  });
 });
