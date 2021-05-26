@@ -6,6 +6,7 @@ import renderWithRouter from './renderWithRouter';
 
 import App from '../App';
 import pokemons from '../data';
+import { Pokemon } from '../components';
 
 describe('test component Pokemon', () => {
   test('tests if a pokemon card is rendered', () => {
@@ -30,5 +31,19 @@ describe('test component Pokemon', () => {
       const nextButton = screen.getByRole('button', { name: /Próximo pokémon/i });
       userEvent.click(nextButton);
     });
+  });
+
+  test('if pokemon card contains a "more information" Link', () => {
+    const { history } = renderWithRouter(<Pokemon pokemon={ pokemons[0] } isFavorite />);
+
+    const { id } = pokemons[0];
+
+    const moreInfoLink = screen.getByRole('link', { name: /More details/i });
+    expect(moreInfoLink).toBeInTheDocument();
+
+    userEvent.click(moreInfoLink);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe(`/pokemons/${id}`);
   });
 });
