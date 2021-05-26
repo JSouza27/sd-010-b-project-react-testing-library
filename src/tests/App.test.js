@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
@@ -29,4 +30,20 @@ test('contains a set of fixed navigation links', () => {
   expect(home).toBeInTheDocument();
   expect(about).toBeInTheDocument();
   expect(favoritePokemons).toBeInTheDocument();
+});
+
+test('redirects to the home page, at the `/` route, by clicking on the Home link', () => {
+  const { getByRole } = renderWithRouter(<App />);
+  const home = getByRole('link', {
+    name: /home/i,
+  });
+
+  userEvent.click(home);
+
+  const homeText = getByRole('heading', {
+    level: 2,
+    name: /Encountered pokémons/i,
+  });
+
+  expect(homeText).toBeInTheDocument();
 });
