@@ -8,6 +8,7 @@ import pokemons from '../data';
 
 describe('Teste do componente <Pokedex.js />', () => {
   const testIdName = 'pokemon-name';
+  const testIdNextButton = 'next-pokemon';
   test('Verifica se contém um heading h2 com o texto Encountered pokémons.', () => {
     const history = createMemoryHistory();
     const { getByRole } = render(
@@ -25,7 +26,7 @@ describe('Teste do componente <Pokedex.js />', () => {
 
   test('Verifica se é mostrado o próximo pokemon quando apertado o botão', () => {
     const history = createMemoryHistory();
-    const { queryByTestId } = render(
+    const { queryByTestId, getByText } = render(
       <Router history={ history }>
         <App pokemons={ pokemons } />
       </Router>,
@@ -35,7 +36,8 @@ describe('Teste do componente <Pokedex.js />', () => {
       const currentPokemon = queryByTestId(testIdName);
       const currentPokemonName = Object.values(currentPokemon)[1].children;
       expect(currentPokemonName).toBe(pokemon.name);
-      const nextButton = queryByTestId('next-pokemon');
+      const nextButton = getByText('Próximo pokémon');
+      expect(nextButton).toBeInTheDocument();
       userEvent.click(nextButton);
       return 0;
     });
@@ -89,7 +91,7 @@ describe('Teste do componente <Pokedex.js />', () => {
     let pokemonName = Object.values(pokemon)[1].children;
     expect(pokemonName).toBe('Pikachu');
 
-    const nextButton = queryByTestId('next-pokemon');
+    const nextButton = queryByTestId(testIdNextButton);
     userEvent.click(nextButton);
     pokemon = queryByTestId(testIdName);
     pokemonName = Object.values(pokemon)[1].children;
@@ -120,5 +122,23 @@ describe('Teste do componente <Pokedex.js />', () => {
     expect(buttonAll).toBeInTheDocument();
     expect(Object.values(typeButtons[6])[1].children).toBe('Dragon');
     expect(buttonAll).toBeInTheDocument();
+  });
+
+  test('Verifica se o botão de próximo é desabilidatado quando só tem um pokemon', () => {
+    const history = createMemoryHistory();
+    const { queryByTestId, getByRole } = render(
+      <Router history={ history }>
+        <App pokemons={ pokemons } />
+      </Router>,
+    );
+    const nextButton = queryByTestId(testIdNextButton);
+    const electricButton = getByRole('button', {
+      name: 'Electric',
+    });
+    expect(nextButton && electricButton).toBeInTheDocument();
+
+    userEvent.click(electricButton);
+
+    expect(nextButton).toBeDisabled();
   });
 });
