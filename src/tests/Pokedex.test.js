@@ -79,10 +79,8 @@ describe('Teste o componente <Pokedex.js />', () => {
       const button = getAllByTestId(texto2);
       expect(button[0]).toHaveTextContent('Electric');
       expect(button[1]).toHaveTextContent('Fire');
-      expect(button[2]).toHaveTextContent('Bug');
       expect(button[3]).toHaveTextContent('Poison');
       expect(button[4]).toHaveTextContent('Psychic');
-      expect(button[5]).toHaveTextContent('Normal');
       expect(button[6]).toHaveTextContent('Dragon');
     });
   });
