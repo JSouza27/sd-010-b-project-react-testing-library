@@ -19,3 +19,4 @@ describe('Teste do quinto requisito', () => {
       expect(btnText).toBeInTheDocument();
     });
   });
+});
