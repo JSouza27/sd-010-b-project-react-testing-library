@@ -8,17 +8,17 @@ test('check if the about page has a heading named Pokedex', () => {
 
   const aboutMeText = screen.getByRole('heading', {
     level: 2,
-    name: /Pokédex/i,
+    name: /About Pokédex/i,
   });
   expect(aboutMeText).toBeInTheDocument();
 });
 
 test('check if there are two paragraphs', () => {
-  renderWithRouter(<About />);
+  const { container } = renderWithRouter(<About />);
+  const parag = container.querySelectorAll('p');
 
-  const paragraphs = screen.getByText((element) => element.toContain('One can filter'));
-
-  expect(paragraphs).toBeInTheDocument();
+  expect(parag.length).toEqual(2);
+  // As linhas 21 e 22 não fazem parte do requisito, mas foram adicionadas para aprendizado no plantão pelo Zambelli.
 });
 
 test('check if there is an image of a pokedex', () => {
