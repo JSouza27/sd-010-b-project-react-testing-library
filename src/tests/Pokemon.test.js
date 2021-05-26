@@ -23,6 +23,7 @@ describe('6. Teste o componente <Pokemon.js />', () => {
 
     const pokemonImage = getAllByRole('img');
     expect(pokemonImage[0]).toHaveAttribute('src', image);
+    expect(pokemonImage[0]).toHaveAttribute('alt', `${name} sprite`);
 
     const isFavoritePokemon = getByAltText(`${name} is marked as favorite`);
     expect(isFavoritePokemon).toHaveAttribute('src', '/star-icon.svg');
