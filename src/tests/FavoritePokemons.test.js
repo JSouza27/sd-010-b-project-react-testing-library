@@ -24,7 +24,7 @@ describe('Test favorite pokémons page', () => {
     const emptyPokemonsArray = [];
     renderWithRouter(<FavoritePokemons pokemons={ emptyPokemonsArray } />);
 
-    const pokemonCard = screen.getByTestId('pokemon-name');
+    const pokemonCard = screen.queryByTestId('pokemon-name'); // query retorna null
     expect(pokemonCard).toBeNull();
   });
 });
