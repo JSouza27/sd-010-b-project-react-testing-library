@@ -51,8 +51,6 @@ describe('Tests the buttons on the Pokedex component', () => {
       expect(filterBtn).toBeInTheDocument();
       // expect(filterBtn.length).toBe(1);
     });
-    // filterBtn = findAllByTestId('pokemon-type-button');
-    // console.log(filterBtn);
   });
 
   it('Test if the Pokédex contains a button to reset the filter', () => {
@@ -74,9 +72,25 @@ describe('Tests the buttons on the Pokedex component', () => {
     expect(allBtn).toBeDefined();
   });
 
-  // it('tests whether a filter btn is created dynamically for each type of Pokémon', () => {
+  it('tests whether a filter btn is created dynamically for each type of Pokémon', () => {
+    const isPokemonFavoriteById = {};
+    pokemons.reduce((acc, poke) => {
+      isPokemonFavoriteById[poke.id] = false;
+      return acc;
+    }, {});
+    const { getAllByTestId } = renderWithRouter(
+      <Pokedex
+        pokemons={ pokemons }
+        isPokemonFavoriteById={ isPokemonFavoriteById }
+      />,
+    );
+    const filterBtn = getAllByTestId('pokemon-type-button');
 
-  // });
+    const arrayOfTypes = [...new
+    Set(pokemons.reduce((types, { type }) => [...types, type], []))];
+
+    expect(filterBtn.length).toBe(arrayOfTypes.length);
+  });
 
   // it('test if the Next Pokémon btn its disabled whenever theres only one Pokémon', () => {
 
