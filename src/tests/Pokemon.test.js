@@ -4,6 +4,8 @@ import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
 // test('', () => {});
+const linkPikachu = '/pokemons/25';
+
 describe('Teste o componente <Pokemon.js />', () => {
   it('O nome correto do Pokémon deve ser mostrado na tela', () => {
     const { getByTestId } = renderWithRouter(<App />);
@@ -35,16 +37,16 @@ describe('Teste o componente <Pokemon.js />', () => {
 it('Teste se o card contém um link de navegação para exibir detalhes', () => {
   const { getByText, history } = renderWithRouter(<App />);
   const link = getByText('More details');
-  expect(link).toHaveAttribute('href', '/pokemons/25');
+  expect(link).toHaveAttribute('href', linkPikachu);
   userEvent.click(link);
   const { pathname } = history.location;
-  expect(pathname).toBe('/pokemons/25');
+  expect(pathname).toBe(linkPikachu);
 });
 
 it('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
   const { getByText, getAllByRole, history } = renderWithRouter(<App />);
 
-  const rota = '/pokemons/25';
+  const rota = linkPikachu;
   history.push(rota);
   const favorite = getByText('Pokémon favoritado?');
   userEvent.click(favorite);
