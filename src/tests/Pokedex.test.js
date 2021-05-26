@@ -1,6 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { exact } from 'prop-types';
 import RenderWithRouter from './RenderWithRouter';
 
 import App from '../App';
@@ -66,9 +67,8 @@ describe('Testa o componente <Pokedex />', () => {
     expect(quantityThatAppears.length).toBe(1);
   });
 
-  test('A partir da seleção de um botão de tipo', () => {
+  test('Selecionando um tipo de botão, a app deve circular apenas nele', () => {
     RenderWithRouter(<App />);
-
     const typesButtonsFilter = [
       'Electric',
       'Fire',
@@ -80,9 +80,30 @@ describe('Testa o componente <Pokedex />', () => {
     ];
 
     const allButtons = screen.getAllByTestId('pokemon-type-button');
-
     allButtons.forEach((button, index) => {
       expect(button.textContent).toBe(typesButtonsFilter[index]);
     });
+  });
+
+  test('O texto do botão deve corresponder ao nome do tipo, ex. Psychic;', () => {
+    RenderWithRouter(<App />);
+    const btn = screen.getByRole('button', {
+      name: /psychic/i,
+    });
+    userEvent.click(btn);
+    const allTypePokemons = screen.getByTestId('pokemon-type');
+
+    expect(allTypePokemons.textContent).toBe('Psychic');
+  });
+
+  test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+    RenderWithRouter(<App />);
+    const btnAll = screen.getByRole('button', { name: /all/i });
+    expect(btnAll.textContent).toBe('All');
+
+    userEvent.click(btnAll);
+
+    const nameFirstPkemon = screen.getByText(/pikachu/i);
+    expect(nameFirstPkemon).toBeInTheDocument();
   });
 });
