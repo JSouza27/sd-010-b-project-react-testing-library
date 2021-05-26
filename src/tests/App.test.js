@@ -25,3 +25,22 @@ test('Testa se a pagina inicial é renderizada com o caminho "/"', () => {
   });
   expect(heading).toBeInTheDocument();
 });
+
+describe('testa um conjunto de links', () => {
+  it('Se primeiro link possui o texto "Home" ', () => {
+    const { getAllByRole } = renderWithRouter(<App />);
+    const links = getAllByRole('link');
+    expect(links[0].textContent).toBe('Home');
+  });
+  it('Se segundo link possui o texto "About" ', () => {
+    const { getAllByRole } = renderWithRouter(<App />);
+    const links = getAllByRole('link');
+    expect(links[1].textContent).toBe('About');
+  });
+  it('Se terceiro link possui o texto "Favorite Pokémons" ', () => {
+    const { getAllByRole } = renderWithRouter(<App />);
+    const links = getAllByRole('link');
+    expect(links[2].textContent).toBe('Favorite Pokémons');
+  });
+});
+
