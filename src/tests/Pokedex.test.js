@@ -36,7 +36,6 @@ describe('Renders Pokédex page', () => {
 
   it('renders the pokemons by the type ', () => {
     const { getByTestId, getAllByTestId } = renderWithRouter(<App />);
-
     const pokemonTypeBtn = getAllByTestId('pokemon-type-button');
 
     pokemonTypeBtn.forEach((elem) => {
@@ -69,7 +68,6 @@ describe('Renders Pokédex page', () => {
 
   it('disable nextButton when there is just one pokemon of a type', () => {
     const { getAllByTestId, getByTestId } = renderWithRouter(<App />);
-
     const pokemonTypeBtn = getAllByTestId('pokemon-type-button');
 
     pokemonTypeBtn.forEach((elem) => {
