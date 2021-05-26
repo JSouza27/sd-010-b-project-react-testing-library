@@ -68,4 +68,26 @@ describe('Teste o componente <Pokedex.js />', () => {
     const textDetails = screen.getAllByText('More details');
     expect(textDetails.length).toBe(1);
   });
+
+  test('Testa se o botão tipo apresenta somente pelos pokémons daquele tipo.', () => {
+    renderWithRouter(<App />);
+
+    const typeButton = screen.getByRole('button', { name: /fire/i });
+    userEvent.click(typeButton);
+
+    const charmander = screen.getByRole('img', 'https://cdn2.bulbagarden.net/upload/0/0a/Spr_5b_004.png');
+    expect(charmander).toBeInTheDocument();
+  });
+
+  test('Testa se o botão tipo apresenta somente pelos pokémons daquele tipo.', () => {
+    renderWithRouter(<App />);
+
+    const typeButton = screen.getByRole('button', { name: /fire/i });
+    userEvent.click(typeButton);
+
+    const allButtons = screen.getAllByTestId('pokemon-type-button');
+    allButtons.forEach((type, index) => {
+      expect(type.textContent).toBe(pokemons.type[index]);
+    });
+  });
 });
