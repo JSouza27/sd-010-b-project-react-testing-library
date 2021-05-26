@@ -11,7 +11,6 @@ test('Testa mensagem No favorite pokemon found quando nao tem favorito `', () =>
   expect(message).toBeInTheDocument();
 });
 
-
 test('Testa se é exibido cards de favorito `', () => {
   const { getByRole, getByLabelText } = renderWithRouter(<App />);
   const moreDetails = getByRole('link', { name: /more details/i });
