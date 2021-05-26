@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, fireEvent } from '@testing-library/react';
+import { screen, fireEvent, getByText } from '@testing-library/react';
 import renderWithRouter from '../components/renderWithRouter';
 import App from '../App';
 
@@ -76,13 +76,27 @@ describe('Teste do quinto requisito', () => {
         button.forEach((buttons, index) => {
           expect(buttons.textContent).toBe(typesPokemons[index]);
         });
+      });
 
-        describe('este se a Pokédex contém um botão para resetar o filtro', () => {
-          test('O texto do botão deve ser All', () => {
-            renderWithRouter(<App />);
-            const buttonAll = screen.getByRole('button', { name: 'All' });
-            expect(buttonAll).toBeInTheDocument();
-          });
+      describe('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+        test('O texto do botão deve ser All', () => {
+          renderWithRouter(<App />);
+          const buttonAll = screen.getByRole('button', { name: 'All' });
+
+          expect(buttonAll).toBeInTheDocument();
+        });
+
+        test('A Pokedéx deverá mostrar os Pokémons normalmente', () => {
+          renderWithRouter(<App />);
+          const buttonAll = screen.getByRole('button', { name: 'All' });
+          fireEvent.click(buttonAll);
+
+          const nextButton = screen.getByText(nameButtonNext);
+          fireEvent.click(nextButton);
+
+          const testePokemon = screen.getByText('Charmander');
+
+          expect(testePokemon).toBeInTheDocument();
         });
       });
     });
