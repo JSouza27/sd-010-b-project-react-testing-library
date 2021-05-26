@@ -58,6 +58,7 @@ describe('Teste do quinto requisito', () => {
 
         expect(namePokemon).toBeInTheDocument();
       });
+
       test('O texto do botão deve corresponder ao nome do tipo, ex. Psychic', () => {
         renderWithRouter(<App />);
         const button = screen.getAllByTestId('pokemon-type-button');
