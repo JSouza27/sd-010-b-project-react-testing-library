@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Pokedex from '../components/Pokedex';
 import pokemons from '../data';
+import App from '../App';
 
 const isPokemonFavoriteById = {};
 
@@ -49,19 +50,15 @@ describe('Testing pokedex component', () => {
     });
     expect(nextPokemon).toBeInTheDocument();
   });
-  // it('if shows up only a pokemon by turn', () => {
-  //   render(
-  //     <Router>
-  //       <Pokedex
-  //         pokemons={ pokemons }
-  //         isPokemonFavoriteById={ isPokemonFavoriteById }
-  //       />
-  //       )
-  //     </Router>,
-  //   );
-  //   const pokemonCard = screen.getAllByRole('img');
-  //   expect(pokemonCard).toHaveLength(1);
-  // });
+  it('if shows up only a pokemon by turn', () => {
+    render(
+      <Router>
+        <App />
+      </Router>,
+    );
+    const pokemonCard = screen.getAllByRole('img');
+    expect(pokemonCard.length).toBe(1);
+  });
   it('pokedex has filter buttons', () => {
     render(
       <Router>
