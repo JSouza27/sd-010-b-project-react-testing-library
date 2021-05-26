@@ -61,4 +61,4 @@ test('Teste para favoritar pokemon', () => {
 });
 
 // Source https://testing-library.com/docs/queries/byrole/
-// Feito em parceria com Paulo Xavier
+// Feito em parceria com Wellington Passo
