@@ -16,3 +16,11 @@ test('Testa se contém Heading com About Pokedex', () => {
   });
   expect(heading).toBeInTheDocument();
 });
+
+test('Testa se a página tem 2 parágrafos', () => {
+  const { getByText } = renderWithRouter(<About />);
+  const p = getByText(/encyclopedia containing/i);
+  expect(p).toBeInTheDocument();
+  const p2 = getByText(/and see more/i);
+  expect(p2).toBeInTheDocument();
+});
