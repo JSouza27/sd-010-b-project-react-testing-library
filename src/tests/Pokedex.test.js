@@ -48,11 +48,23 @@ describe('testing component Pokedex.js', () => {
     expect(pokémon).toHaveTextContent('Mew');
   });
 
-  test('botton reset filter \'All\'', () => {
+  test('button reset filter \'All\'', () => {
     const { getByRole, getByTestId } = renderWithRouter(<App />);
     const buttonAll = getByRole('button', { name: /all/i });
     fireEvent.click(buttonAll);
     const pokémon = getByTestId(ID_POKEMON_NAME);
     expect(pokémon).toHaveTextContent('Pikachu');
+  });
+
+  test('shows buttons filter by type', () => {
+    const { getAllByTestId, getByRole } = renderWithRouter(<App />);
+    const allButtons = getAllByTestId('pokemon-type-button');
+    const buttonAll = getByRole('button', { name: /all/i });
+    const types = [];
+    pokemons.filter((pokemon) => (
+      types.includes(pokemon.type) ? null : types.push(pokemon.type)
+    ));
+    expect(allButtons.length).toBe(types.length);
+    expect(buttonAll).toBeInTheDocument();
   });
 });
