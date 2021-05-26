@@ -5,7 +5,7 @@ import App from '../App';
 import data from '../data';
 
 describe('Teste requisito 5 Pokemon.js ', () => {
-  test(`'Teste se é renderizado um card com as informações
+  it(`'Teste se é renderizado um card com as informações
    de determinado pokémon'`, () => {
     const { getByTestId, getByAltText } = renderWithRouter(<App />);
     const { name, image } = data[0];
@@ -23,7 +23,7 @@ describe('Teste requisito 5 Pokemon.js ', () => {
     expect(img.src).toBe(image);
   });
 
-  test(`'Teste se o card do Pokémon indicado na Pokédex 
+  it(`'Teste se o card do Pokémon indicado na Pokédex 
     contém um link de navegação para exibir detalhes deste 
     Pokémon. O link deve possuir a URL /pokemons/<id>, onde 
     <id> é o id do Pokémon exibido'`, () => {
@@ -32,7 +32,7 @@ describe('Teste requisito 5 Pokemon.js ', () => {
     expect(link).toHaveAttribute('href', '/pokemons/25');
   });
 
-  test('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
+  it('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const link = getByText('More details');
     fireEvent.click(link);
@@ -40,7 +40,7 @@ describe('Teste requisito 5 Pokemon.js ', () => {
     expect(pathname).toBe('/pokemons/25');
   });
 
-  test(`'O ícone deve ser uma imagem com o atributo src contendo o caminho /star-icon.svg
+  it(`'O ícone deve ser uma imagem com o atributo src contendo o caminho /star-icon.svg
   '`, () => {
     const { getByText, getByRole, getAllByRole } = renderWithRouter(<App />);
     fireEvent.click(getByText('More details'));

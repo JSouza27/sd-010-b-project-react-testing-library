@@ -5,13 +5,13 @@ import App from '../App';
 import Pokemons from '../data';
 
 describe('Teste requisito 5 Pokedex.js.', () => {
-  test('Teste se página contém um heading h2 com o texto Encountered pokémons', () => {
+  it('Teste se página contém um heading h2 com o texto Encountered pokémons', () => {
     const { getByText } = renderWithRouter(<App />);
     const h2 = getByText('Encountered pokémons');
     expect(h2).toBeInTheDocument();
   });
 
-  test('O botão deve conter o texto Próximo pokémon', () => {
+  it('O botão deve conter o texto Próximo pokémon', () => {
     const { getByTestId, getByText } = renderWithRouter(<App />);
     const nextPokemon = getByTestId('next-pokemon');
     expect(nextPokemon).toHaveTextContent('Próximo pokémon');
@@ -28,14 +28,14 @@ describe('Teste requisito 5 Pokedex.js.', () => {
     expect(getByText('Pikachu')).toBeInTheDocument();
   });
 
-  test('Teste se é mostrado apenas um Pokémon por vez.', () => {
+  it('Teste se é mostrado apenas um Pokémon por vez.', () => {
     const { getAllByRole } = renderWithRouter(<App />);
     const pokeImage = getAllByRole('img');
 
     expect(pokeImage.length).toBe(1);
   });
 
-  test('Teste se a Pokédex tem os botões de filtro.', () => {
+  it('Teste se a Pokédex tem os botões de filtro.', () => {
     const { getAllByTestId } = renderWithRouter(<App />);
     const pokemonButton = getAllByTestId('pokemon-type-button');
     const PokemonsElements = [
@@ -52,7 +52,7 @@ describe('Teste requisito 5 Pokedex.js.', () => {
     );
   });
 
-  test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+  it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
     const { getByRole } = renderWithRouter(<App />);
     const button = getByRole('button', { name: 'All' });
     expect(button).toBeInTheDocument();
@@ -60,7 +60,7 @@ describe('Teste requisito 5 Pokedex.js.', () => {
     expect(button.innerHTML).toBe('All');
   });
 
-  test('Teste se é criado, um botão de filtro para cada tipo de Pokémon', () => {
+  it('Teste se é criado, um botão de filtro para cada tipo de Pokémon', () => {
     const { getByRole } = renderWithRouter(<App />);
     Pokemons.forEach(({ type }) => {
       expect(getByRole('button', { name: type })).toBeInTheDocument();
@@ -69,7 +69,7 @@ describe('Teste requisito 5 Pokedex.js.', () => {
     expect(buttonAll).toBeInTheDocument();
   });
 
-  test(`'Deve existir um botão de filtragem para cada tipo 
+  it(`'Deve existir um botão de filtragem para cada tipo 
     de Pokémon disponível do tipo Fire, Psychic, 
     Electric, Bug, Poison, Dragon e Normal'`, () => {
     const { getByText, getAllByTestId } = renderWithRouter(<App />);
@@ -84,7 +84,7 @@ describe('Teste requisito 5 Pokedex.js.', () => {
     });
   });
 
-  test(`'O botão de Próximo pokémon deve ser desabilitado 
+  it(`'O botão de Próximo pokémon deve ser desabilitado 
   quando a lista filtrada de Pokémons tiver um só pokémon'`, () => {
     const { getByText, getAllByText } = renderWithRouter(<App />);
     const eletric = getAllByText('Electric');

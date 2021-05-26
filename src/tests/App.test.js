@@ -4,7 +4,7 @@ import renderWithRouter from '../helpers/renderWithRouters';
 import App from '../App';
 
 describe('Testa requisito 1 App.js', () => {
-  test('renders a reading with the text `Pokédex`', () => {
+  it('renders a reading with the text `Pokédex`', () => {
     const { getByText } = renderWithRouter(
       <App />,
     );
@@ -12,7 +12,7 @@ describe('Testa requisito 1 App.js', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test('shows the Pokédex when the route is "/" ', () => {
+  it('shows the Pokédex when the route is "/" ', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const route = '/';
     history.push(route);
@@ -22,7 +22,7 @@ describe('Testa requisito 1 App.js', () => {
     expect(getByText('Encountered pokémons')).toBeInTheDocument();
   });
 
-  test('Renderiza o segundo link com texto About ', () => {
+  it('Renderiza o segundo link com texto About ', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const route = '/';
     history.push(route);
@@ -31,7 +31,7 @@ describe('Testa requisito 1 App.js', () => {
     expect(about).toBeInTheDocument();
   });
 
-  test('Renderiza o terceiro link Favorite Pokémons', () => {
+  it('Renderiza o terceiro link Favorite Pokémons', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const route = '/';
     history.push(route);
@@ -40,7 +40,7 @@ describe('Testa requisito 1 App.js', () => {
     expect(favorite).toBeInTheDocument();
   });
 
-  test('Testa se primeiro link redireciona para "/"', () => {
+  it('Testa se primeiro link redireciona para "/"', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     const home = getByText('Home');
@@ -48,7 +48,7 @@ describe('Testa requisito 1 App.js', () => {
     expect(history.location.pathname).toBe('/');
   });
 
-  test('Testa se primeiro link redireciona para "About"', () => {
+  it('Testa se primeiro link redireciona para "About"', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     const about = getByText('About');
@@ -56,7 +56,7 @@ describe('Testa requisito 1 App.js', () => {
     expect(history.location.pathname).toBe('/about');
   });
 
-  test('Testa se primeiro link redireciona para "Favorites"', () => {
+  it('Testa se primeiro link redireciona para "Favorites"', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     const favorite = getByText('Favorite Pokémons');
@@ -64,7 +64,7 @@ describe('Testa requisito 1 App.js', () => {
     expect(history.location.pathname).toBe('/favorites');
   });
 
-  test('Testa se primeiro link redireciona para "Not Found"', () => {
+  it('Testa se primeiro link redireciona para "Not Found"', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     history.push('/notFound');

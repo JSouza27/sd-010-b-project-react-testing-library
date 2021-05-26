@@ -7,7 +7,7 @@ import data from '../data';
 const moreDetails = 'More details';
 
 describe('Test requisito 7 PokemonDetails.js', () => {
-  test(`'Teste se as informações detalhadas do Pokémon 
+  it(`'Teste se as informações detalhadas do Pokémon 
     selecionado são mostradas na tela.'`, () => {
     const { getByText } = renderWithRouter(<App />);
 
@@ -25,7 +25,7 @@ describe('Test requisito 7 PokemonDetails.js', () => {
     expect(resume).toBeInTheDocument();
   });
 
-  test(`'Teste se existe na página uma seção com os mapas 
+  it(`'Teste se existe na página uma seção com os mapas 
     contendo as localizações do pokémon'`, () => {
     const { getByText,
       getAllByAltText,
@@ -47,7 +47,7 @@ describe('Test requisito 7 PokemonDetails.js', () => {
     });
   });
 
-  test(`'Teste se o usuário pode favoritar um pokémon
+  it(`'Teste se o usuário pode favoritar um pokémon
    através da página de detalhes'`, () => {
     const { getByText, getByLabelText } = renderWithRouter(<App />);
     const details = getByText(moreDetails);

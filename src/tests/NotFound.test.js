@@ -3,7 +3,7 @@ import renderWithRouter from '../helpers/renderWithRouters';
 import App from '../App';
 
 describe('Teste requisito 4 NotFound.js', () => {
-  test('Teste a página contém um heading h2 com texto Page requested not found 😭', () => {
+  it('Teste a página contém um heading h2 com texto Page requested not found 😭', () => {
     const { getByRole, history } = renderWithRouter(<App />);
     history.push('/ash');
 
@@ -11,7 +11,7 @@ describe('Teste requisito 4 NotFound.js', () => {
     expect(text).toBeInTheDocument();
   });
 
-  test('Teste se página mostra a imagem https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif.', () => {
+  it('Teste se página mostra a imagem https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif.', () => {
     const { getByRole, history } = renderWithRouter(<App />);
     history.push('/ash');
 

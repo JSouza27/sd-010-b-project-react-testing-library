@@ -6,14 +6,14 @@ import data from '../data';
 import App from '../App';
 
 describe('Teste requisito 3 FavoritePokemons.js', () => {
-  test(
+  it(
     'Teste mensagem favoritePokemonFound, se não tiver pokémons favoritos.', () => {
       const { getByText } = renderWithRouter(<FavoritePokemons />);
       expect(getByText('No favorite pokemon found')).toBeInTheDocument();
     },
   );
 
-  test('Teste se é exibido todos os cards de pokémons favoritados', () => {
+  it('Teste se é exibido todos os cards de pokémons favoritados', () => {
     const { getByText, getByTestId, getByLabelText } = renderWithRouter(
       <App />,
     );
@@ -39,7 +39,7 @@ describe('Teste requisito 3 FavoritePokemons.js', () => {
     expect(weight).toHaveTextContent(`Average weight: ${value} ${measurementUnit}`);
   });
 
-  test('Teste se nenhum card de pokémon é exibido, se ele não estiver favoritado', () => {
+  it('Teste se nenhum card de pokémon é exibido, se ele não estiver favoritado', () => {
     const { getByText, getByLabelText } = renderWithRouter(<App />);
 
     const details = getByText('More details');
