@@ -89,5 +89,7 @@ describe('Teste o componente <Pokedex.js />', () => {
     pokemons.forEach((type, index) => {
       expect(type.textContent).toBe(pokemons.type[index]);
     });
+
+    // teste
   });
 });
