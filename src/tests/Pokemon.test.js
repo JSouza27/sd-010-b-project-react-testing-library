@@ -34,7 +34,6 @@ describe('Teste dos cards dos Pokémons', () => {
       name: /More details/i,
     });
 
-    console.log(pokeLink.href);
     expect(pokeLink.href).toBe(`http://localhost/pokemons/${pokemons[0].id}`);
   });
   test('Teste se é feito o redirecionamento', () => {
@@ -66,6 +65,28 @@ describe('Teste dos cards dos Pokémons', () => {
     expect(atualPage).toBe(`/pokemons/${pokemons[1].id}`);
   });
   test('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
+    renderRouter(<App />);
 
+    const pokeLink = screen.getByRole('link', {
+      name: /More details/i,
+    });
+    userEvent.click(pokeLink);
+
+    const checkFav = screen.getByText('Pokémon favoritado?');
+    userEvent.click(checkFav);
+
+    const favImage2 = screen.getByRole('img', {
+      name: `${pokemons[0].name} is marked as favorite`,
+    });
+    const favImage = screen.getByAltText(`${pokemons[0].name} is marked as favorite`);
+    expect(favImage2.src).toBe('http://localhost/star-icon.svg');
+    expect(favImage).toBeInTheDocument();
+
+    const homeLink = screen.getByRole('link', {
+      name: /home/i,
+    });
+    userEvent.click(homeLink);
+    const favImg = screen.getByAltText(`${pokemons[0].name} is marked as favorite`);
+    expect(favImg).toBeInTheDocument();
   });
 });

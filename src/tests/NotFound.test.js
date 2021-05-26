@@ -15,7 +15,7 @@ describe('Teste da página Not Found', () => {
     expect(textNotFound).toBeInTheDocument();
   });
 
-  test('Teste se a página contém uma image', () => {
+  test('Teste se a página contém uma imagem', () => {
     render(<NotFound />);
 
     const imageNotFound = screen.getByRole('img', {
