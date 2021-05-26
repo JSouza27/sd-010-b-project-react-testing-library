@@ -34,3 +34,9 @@ test('Teste se é exibido todos os cards de pokémons favoritados.', () => {
   const pokemonFavorite = screen.getByText(/pikachu/i);
   expect(pokemonFavorite).toBeInTheDocument();
 });
+
+test('Teste se nenhum card de pokémon é exibido, se ele não estiver favoritado.', () => {
+  renderWithRouter(<FavoritePokemons />);
+  const nullFavorite = screen.queryByText(/Average weight:/i);
+  expect(nullFavorite).toBeNull();
+});
