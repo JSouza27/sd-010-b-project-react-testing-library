@@ -11,4 +11,10 @@ describe('Testa o componente <NotFound.js />', () => {
     });
     expect(heading).toBeInTheDocument();
   });
+
+  test('Testa se mostra a imagem https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif', () => {
+    const { getByText } = renderWithRouter(<NotFound />);
+    const img = 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif';
+    expect(getByText((image, { src }) => src === img)).toBeInTheDocument();
+  });
 });
