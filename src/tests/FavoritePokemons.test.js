@@ -1,10 +1,10 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
-import userEvent from '@testing-library/user-event';
 
 describe('Teste o componente <FavoritePokemons.js />', () => {
-  test('Se é exibido na tela a mensagem No favorite pokemon found, se a pessoa não tiver pokémons favoritos.', () => {
+  test('Se é exibido na tela a mensagem No favorite pokemon found,', () => {
     const { getByText } = renderWithRouter(<App />, '/favorites');
 
     const noPokemonFound = getByText('No favorite pokemon found');
@@ -27,4 +27,4 @@ describe('Teste o componente <FavoritePokemons.js />', () => {
     const pokemon = getByText('Pikachu');
     expect(pokemon).toBeInTheDocument();
   });
-})
+});

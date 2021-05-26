@@ -6,15 +6,16 @@ import { Router } from 'react-router-dom';
 const renderWithRouter = (componentToRender, _route) => {
   const history = createMemoryHistory();
 
-  const renderObject = {...render(
+  const renderObject = { ...render(
     <Router history={ history }>
       { componentToRender }
     </Router>,
-  ), history
+  ),
+  history,
   };
 
-  if(_route) {
-    renderObject.history.push(_route)
+  if (_route) {
+    renderObject.history.push(_route);
   }
 
   return renderObject;

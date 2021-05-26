@@ -17,6 +17,6 @@ describe('Teste o componente <NotFound.js />', () => {
     const { getAllByRole } = renderWithRouter(<App />, '/rota-inexistente');
 
     const notFoundImage = getAllByRole('img', {})[1];
-    expect(notFoundImage).toHaveAttribute('src', 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif')
+    expect(notFoundImage).toHaveAttribute('src', 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
   });
-})
+});

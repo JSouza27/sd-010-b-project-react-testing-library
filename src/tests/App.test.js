@@ -5,7 +5,7 @@ import renderWithRouter from './renderWithRouter';
 //  *SOURCE* https://testing-library.com/docs/queries/byrole
 
 test('renders a reading with the text `Pokédex`', () => {
-  const { getByText } = renderWithRouter( <App />);
+  const { getByText } = renderWithRouter(<App />);
 
   const heading = getByText(/Pokédex/i);
   expect(heading).toBeInTheDocument();
@@ -19,7 +19,7 @@ describe('Requisito 01 - Testar o componente App.js', () => {
       name: 'Home',
     });
 
-    expect(linkHome).toBeInTheDocument()
+    expect(linkHome).toBeInTheDocument();
   });
 
   test('Se o segundo link deve possuir o texto About.', () => {
@@ -29,7 +29,7 @@ describe('Requisito 01 - Testar o componente App.js', () => {
       name: 'About',
     });
 
-    expect(linkAbout).toBeInTheDocument()
+    expect(linkAbout).toBeInTheDocument();
   });
 
   test('Se o terceiro link deve possuir o texto Favorite Pokémons.', () => {
@@ -39,6 +39,6 @@ describe('Requisito 01 - Testar o componente App.js', () => {
       name: 'Favorite Pokémons',
     });
 
-    expect(linkFavorites).toBeInTheDocument()
+    expect(linkFavorites).toBeInTheDocument();
   });
-})
+});

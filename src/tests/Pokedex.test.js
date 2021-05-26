@@ -1,7 +1,7 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
-import userEvent from '@testing-library/user-event';
 import pokemons from '../data';
 
 describe('5. Teste o componente <Pokedex.js />', () => {
@@ -12,17 +12,17 @@ describe('5. Teste o componente <Pokedex.js />', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test('Se é exibido o próximo Pokémon da lista quando o botão Próximo pokémon é clicado.', () => {
+  test('Se é exibido o próximo Pokémon da lista', () => {
     const { getByText, getByRole } = renderWithRouter(<App />);
 
     const nextButton = getByRole('button', {
       name: /Próximo pokémon/i,
-    })
+    });
     expect(nextButton).toBeInTheDocument();
 
-    const allPokemons = pokemons.reduce((pokemonAcc, pokemon) => {
-      return [...pokemonAcc, pokemon.name];
-    }, []);
+    const allPokemons = pokemons.reduce(
+      (pokemonAcc, pokemon) => [...pokemonAcc, pokemon.name], [],
+    );
 
     allPokemons.forEach((pokemon) => {
       const pokemonName = getByText(pokemon);
@@ -34,27 +34,35 @@ describe('5. Teste o componente <Pokedex.js />', () => {
     expect(firstPokemon).toBeInTheDocument();
   });
 
+  //  * SOURCE * https://igluonline.com/como-remover-elementos-duplicados-de-uma-array-no-javascript-es6/
   test('Se a Pokédex tem os botões de filtro.', () => {
-    const { getByRole, getAllByText } = renderWithRouter(<App />);
+    const { getByRole, getAllByText, getAllByTestId } = renderWithRouter(<App />);
 
-    const allTypes = pokemons.reduce((typeAcc, pokemon) => {
-      return typeAcc.includes(pokemon.type) ? typeAcc : [...typeAcc, pokemon.type];
-    }, []);
+    const allTypes = pokemons.reduce((typeAcc, pokemon) => (typeAcc.includes(pokemon.type) ? typeAcc : [...typeAcc, pokemon.type]), []);
+    const allButtons = getAllByTestId('pokemon-type-button');
+
+    expect(allButtons.length).toBe(allTypes.length);
 
     allTypes.forEach((type) => {
       const typedButton = getByRole('button', { name: type });
       userEvent.click(typedButton);
       expect(getAllByText(type)[0]).toBeInTheDocument();
-    })
+    });
   });
 
   test('Se a Pokédex contém um botão para resetar o filtro', () => {
-    const { getByRole } = renderWithRouter(<App />);
+    const { getByRole, getByText } = renderWithRouter(<App />);
 
     const allButton = getByRole('button', {
-      name: /all/i,
+      name: 'All',
     });
-    
+
     expect(allButton).toBeInTheDocument();
+
+    const firstPokemon = getByText('Pikachu');
+
+    userEvent.click(allButton);
+
+    expect(firstPokemon).toBeInTheDocument();
   });
-})
+});
