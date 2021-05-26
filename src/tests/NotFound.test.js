@@ -16,6 +16,10 @@ describe('Testando o componente <NotFound />', () => {
     });
 
   it('Teste se página mostra a imagem <https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif>', () => {
-    
+    const { getByAltText } = renderWithRouter(<NotFound />);
+    const pikachuCrying = getByAltText(
+      'Pikachu crying because the page requested was not found',
+    );
+    expect(pikachuCrying).toHaveAttribute('src', 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
   });
 });
