@@ -20,4 +20,9 @@ describe('Teste o componente <FavoritePokemons.js />', () => {
       expect(img[id]).toBeInTheDocument();
     });
   });
+
+  test('Nenhum card é exibido, se ele não estiver favoritado.', () => {
+    const { getByText } = renderWithRouter(<FavoritePokemons pokemons={ [] } />);
+    expect(getByText('No favorite pokemon found')).toBeInTheDocument();
+  });
 });
