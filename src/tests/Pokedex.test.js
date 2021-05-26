@@ -90,8 +90,8 @@ describe('Teste se a Pokédex tem os botões de filtro', () => {
       'Dragon',
     ];
 
-    button.forEach((button, index) => {
-      expect(button.textContent).toBe(tipos[index]);
+    button.forEach((buttons, index) => {
+      expect(buttons.textContent).toBe(tipos[index]);
     });
   });
 });
