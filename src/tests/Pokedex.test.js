@@ -5,6 +5,7 @@ import renderWithRouter from '../renderWithRouter';
 
 import App from '../App';
 import Pokedex from '../components/Pokedex';
+import pokemons from '../data';
 
 describe('Teste o componente <Pokedex.js />', () => {
   test('Teste se página contém um h2 com o texto Encountered pokémons.', async () => {
@@ -14,13 +15,27 @@ describe('Teste o componente <Pokedex.js />', () => {
     expect(headingH2).toBeInTheDocument();
   });
 
-  test('Teste se após clicar no botão próximo, o pokemon é exibido em tela.', () => {
+  test('Testa se o botão tem o texto "Próximo pokémon"', () => {
     renderWithRouter(<App />);
 
     const buttonNext = screen.getByRole('button', { name: /próximo pokémon/i });
-    userEvent.click(buttonNext);
+    expect(buttonNext).toBeInTheDocument();
+  });
 
-    const queryImage = screen.getByRole('img', { name: /charmander sprite/i });
-    expect(queryImage).toBeInTheDocument();
+  test('Testa próximos Pokémons mostrados, ao clicar sucessivamente no botão', () => {
+    renderWithRouter(<App />);
+
+    pokemons.forEach(({ name }) => {
+      const textDetails = screen.getAllByText('More details');
+      expect(textDetails.length).toBe(1);
+
+      const getName = screen.getByText(name);
+      expect(getName).toBeInTheDocument();
+
+      const getButton = screen.getByText('Próximo pokémon');
+      userEvent.click(getButton);
+    });
+    const getFirstPokemon = screen.getByText(pokemons[0].name);
+    expect(getFirstPokemon).toBeInTheDocument();
   });
 });
