@@ -75,6 +75,14 @@ describe('Teste do quinto requisito', () => {
         button.forEach((buttons, index) => {
           expect(buttons.textContent).toBe(typesPokemons[index]);
         });
+
+        describe('este se a Pokédex contém um botão para resetar o filtro', () => {
+          test('O texto do botão deve ser All', () => {
+            renderWithRouter(<App />);
+            const buttonAll = screen.getByRole('button', { name: 'All' });
+            expect(buttonAll).toBeInTheDocument();
+          });
+        });
       });
     });
   });
