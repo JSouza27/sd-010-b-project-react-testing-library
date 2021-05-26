@@ -4,25 +4,25 @@ import { render } from '@testing-library/react';
 import App from '../App';
 
 describe('tests the whole App', () => {
-test('renders a reading with the text `Pokédex`', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
-  const heading = getByText(/Pokédex/i);
-  expect(heading).toBeInTheDocument();
-});
+  test('renders a reading with the text `Pokédex`', () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    );
+    const heading = getByText(/Pokédex/i);
+    expect(heading).toBeInTheDocument();
+  });
 
-test('shows the Pokédex when the route is `/`', () => {
-  const { getByText } = render(
-    <MemoryRouter initialEntries={ ['/'] }>
-      <App />
-    </MemoryRouter>,
-  );
+  test('shows the Pokédex when the route is `/`', () => {
+    const { getByText } = render(
+      <MemoryRouter initialEntries={ ['/'] }>
+        <App />
+      </MemoryRouter>,
+    );
 
-  expect(getByText('Encountered pokémons')).toBeInTheDocument();
-});
+    expect(getByText('Encountered pokémons')).toBeInTheDocument();
+  });
 
   it('tests whether the top of the application contains a fixed set of navigation links',
     () => {
@@ -37,4 +37,8 @@ test('shows the Pokédex when the route is `/`', () => {
       expect(links[1]).toHaveTextContent('About');
       expect(links[2]).toHaveTextContent('Favorite Pokémons');
     });
+
+  it('tests if aplication is redirected to the main page by clicking Home link', () => {
+
+  });
 });
