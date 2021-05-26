@@ -4,7 +4,7 @@ import { fireEvent } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from '../services/renderWithRouter';
 
-describe('Testa o componente App', () => {
+describe('Testa o componente "App"', () => {
   test('Verifica se o pathname "/" leva para a home', () => {
     const { history, getByRole } = renderWithRouter(<App />);
 
