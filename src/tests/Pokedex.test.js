@@ -1,7 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
-import pokemonList from '../data';
 import App from '../App';
 
 // test('', () => {});
@@ -102,7 +101,8 @@ describe('Teste o componente <Pokedex.js />', () => {
     it('Deve existir um botão de filtragem para cada tipo de Pokémon', () => {
       const { getAllByTestId } = renderWithRouter(<App />);
       const button = getAllByTestId('pokemon-type-button');
-      expect(button.length).toBe(7);
+      const number = 7;
+      expect(button.length).toBe(number);
     });
 
     it('Deve ser mostrado como opção de filtro, um botão para cada um dos tipos', () => {
