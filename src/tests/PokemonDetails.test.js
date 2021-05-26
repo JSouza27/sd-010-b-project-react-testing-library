@@ -72,23 +72,16 @@ describe('Testa o componente Detalhes', () => {
     const title = getByTestId('pokemon-name');
     expect(title.innerHTML).toBe('Pikachu');
   });
-  // it('Testa duplo clique na checkbox', async () => {
-  //   const { getByRole, getByText, history } = renderWithRouter(<App />);
-  //   const detailsLink = getByRole('link', {
-  //     name: moreDetails,
-  //   });
-  //   fireEvent.click(detailsLink);
-  //   let checkbox = getByRole('checkbox');
-  //   fireEvent.click(checkbox);
-  //   const favoriteLink = getByRole('link', {
-  //     name: 'Favorite Pokémons',
-  //   });
-  //   fireEvent.click(favoriteLink);
-  //   history.push('pokemons/25')
-  //   checkbox = getByRole('checkbox');
-  //   fireEvent.click(checkbox);
-  //   history.push('/favorites');
-  //   const noFavorites = getByText('No favorite pokemon found');
-  //   expect(noFavorites).toBeInTheDocument();
-  // });
+  it('Testa duplo clique na checkbox', async () => {
+    const { getByRole, getByText, history } = renderWithRouter(<App />);
+    const detailsLink = getByRole('link', {
+      name: moreDetails,
+    });
+    fireEvent.click(detailsLink);
+    const checkbox = getByRole('checkbox');
+    fireEvent.click(checkbox);
+    history.push('/favorites');
+    const noFavorites = getByText('No favorite pokemon found');
+    expect(noFavorites).toBeInTheDocument();
+  });
 });
