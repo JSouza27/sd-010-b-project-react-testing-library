@@ -5,10 +5,11 @@ import data from '../data';
 import App from '../App';
 
 describe('testing the pokemonDetails component', () => {
+  const MoreDetails = 'More details';
   it('Testing details about a pokemon', () => {
     const { getByTestId, getByRole, getByText, history } = renderWithRouter(<App />);
     const goToDetails = getByRole('link', {
-      name: 'More details',
+      name: MoreDetails,
     });
 
     expect(goToDetails).toBeInTheDocument();
@@ -52,7 +53,7 @@ describe('testing the pokemonDetails component', () => {
     } = renderWithRouter(<App />);
 
     const goToDetails = getByRole('link', {
-      name: 'More details',
+      name: MoreDetails,
     });
 
     expect(goToDetails).toBeInTheDocument();
@@ -86,4 +87,34 @@ describe('testing the pokemonDetails component', () => {
     expect(secondPikachuLocation.src).toBe(secondSrcName);
   });
 
+  it('Test the checkbox favorite funcionality', () => {
+    const {
+      getByLabelText,
+      getByRole,
+      getByText,
+      getByAltText
+    } = renderWithRouter(<App />);
+    const goToDetails = getByRole('link', {
+      name: MoreDetails,
+    });
+
+    expect(goToDetails).toBeInTheDocument();
+    expect(goToDetails).toHaveTextContent(MoreDetails);
+    userEvent.click(goToDetails);
+
+    const checkBoxText = getByText('Pokémon favoritado?');
+    expect(checkBoxText).toBeInTheDocument();
+    expect(checkBoxText).toHaveTextContent('Pokémon favoritado?');
+
+    const checkBoxElement = getByLabelText(checkBoxText.textContent);
+    expect(checkBoxElement).toBeInTheDocument();
+    userEvent.click(checkBoxElement);
+
+    const goldenStar = getByAltText('Pikachu is marked as favorite');
+    expect(goldenStar).toBeInTheDocument();
+
+    userEvent.click(checkBoxElement);
+    expect(goldenStar).not.toBeInTheDocument();
+
+  });
 });
