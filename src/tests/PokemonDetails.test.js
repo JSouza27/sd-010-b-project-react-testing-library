@@ -23,4 +23,14 @@ describe('Teste se os detalhades do Pokémon selecionado são mostradas na tela.
 
     expect(details).not.toBeInTheDocument();
   });
+
+  test('A seção de detalhes deve conter um heading h2 com o texto Summary.', () => {
+    renderWithRouter(<App />);
+
+    const details = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(details);
+
+    const titleSummary = screen.getByRole('heading', { name: /summary/i });
+    expect(titleSummary).toBeInTheDocument();
+  });
 });
