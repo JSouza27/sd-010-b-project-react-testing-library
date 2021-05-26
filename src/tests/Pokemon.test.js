@@ -33,3 +33,16 @@ test('Ao clicar em More Details redireciona para (URL /pokemons/id)', () => {
   const screenText = getByText('Pikachu Details');
   expect(screenText).toBeInTheDocument();
 });
+
+test('Verifica estrela no Pokemon favoritado', () => {
+  const { getByText, getByLabelText, getAllByRole } = renderWithRouter(<App />);
+  const pokemonDetails = getByText(moreDetails);
+  expect(pokemonDetails).toBeInTheDocument();
+  userEvent.click(pokemonDetails);
+  const favorite = getByLabelText('Pokémon favoritado?');
+  userEvent.click(favorite);
+
+  const favoriteImage = getAllByRole('img');
+  expect(favoriteImage[1].alt).toBe('Pikachu is marked as favorite');
+  expect(favoriteImage[1].src).toContain('/star-icon.svg');
+});
