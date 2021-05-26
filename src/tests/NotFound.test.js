@@ -12,4 +12,9 @@ describe('Testing NotFound.js', () => {
 
     expect(notFound).toBeInTheDocument();
   });
+  it('Verifies if the showed img is an specific gif', () => {
+    const { getAllByRole } = renderWithRouter(<NotFound />);
+    const img = getAllByRole('img');
+    expect(img[1].src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+  });
 });
