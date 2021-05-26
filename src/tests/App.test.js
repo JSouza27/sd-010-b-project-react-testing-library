@@ -54,4 +54,11 @@ describe('Testing App.js', () => {
       expect(pathname).toBe('/favorites');
     });
   // Teste se a aplicação é redirecionada para a página Not Found ao entrar em uma URL desconhecida.
+  it('tests if founds "Not Found" when going to a unknow path',
+    () => {
+      const { getByText, history } = renderWithRouter(<App />);
+      history.push('/not-existing-page');
+      const notFound = getByText(/not found/i);
+      expect(notFound).toBeInTheDocument();
+    });
 });
