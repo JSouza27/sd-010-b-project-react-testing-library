@@ -10,14 +10,6 @@ test('nome do pokemon correto', () => {
   expect(nome).toBeInTheDocument();
 });
 
-test('type do pokemon correto', () => {
-  const { getByText, getByTestId } = renderWithRouter(<App />);
-  const typePokemon = getByTestId(/pokemon-type/i);
-  expect(typePokemon).toBeInTheDocument();
-  const nome = getByText(/Electric/i);
-  expect(nome).toBeInTheDocument();
-});
-
 test('weight do pokemon correto', () => {
   const { getByText, getByTestId } = renderWithRouter(<App />);
   const weigthPokemon = getByTestId(/pokemon-weight/i);
