@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
@@ -20,5 +20,12 @@ describe('tests the <App /> component', () => {
     expect(pathname).toBe('/');
     const linkHome = getByText(/Home/i);
     expect(linkHome).toBeInTheDocument();
+  });
+  test('redirects to URL / by clicking on the Home link', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    history.push('/about');
+    fireEvent.click(getByText(/Home/i));
+    const { pathname } = history.location;
+    expect(pathname).toBe('/');
   });
 });
