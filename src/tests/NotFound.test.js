@@ -19,8 +19,5 @@ describe('Teste o componente Not Found', () => {
 
     const NotFoundGif = screen.getAllByRole('img');
     expect(NotFoundGif[1].src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
-
-    /* const NotFoundGif = screen.getAllByRole('img');
-    expect(NotFoundGif).toHaveAttribute('scr', 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif'); */
   });
 });
