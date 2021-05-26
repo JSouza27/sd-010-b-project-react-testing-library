@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent } from '@testing-library/dom';
+import { findByText, fireEvent } from '@testing-library/dom';
 import renderWithRouter from '../helper/renderWithRouter';
 import Favorite from '../components/FavoritePokemons';
 import App from '../App';
@@ -12,18 +12,28 @@ describe('Test `Favorite pokémon` component', () => {
     expect(notFound).toBeInTheDocument();
   });
 
-  it('Test pokemon card in favorites', () => {
-    const { getByRole, getByTestId, history } = renderWithRouter(<App />);
-    const moreBtn = getByRole('link', { name: /More details/i });
-    fireEvent.click(moreBtn);
+  afterEach(() => jest.clearAllMocks());
+  it('Test pokemon card in favorites', async () => {
+    const pukemion = {
+      id: 25,
+      name: 'Pikachu',
+      type: 'Electric',
+      averageWeight: {
+        value: '6.0',
+        measurementUnit: 'kg',
+      },
+    };
+
+    global.fetch(jest.fn().mockResolvedValue({
+      json: jest.fn().mockResolvedValue(pukemion),
+    }));
+
+    const { getByRole } = renderWithRouter(<App />);
+    fireEvent.click(getByRole('link', { name: /more details/i }));
     fireEvent.click(getByRole('checkbox'));
-    const name = getByTestId('pokemon-name');
-    const favBtn = getByRole('link', { name: /Favorite Pokémons/i });
-    fireEvent.click(favBtn);
-    const { location: { pathname } } = history;
-    // history.push('/favorites');
-    console.log(name);
-    expect(pathname).toBe('/favorites');
-    // mock da "api" teste
+    fireEvent.click(getByRole('link', { name: /favorite pokémon/i }));
+    await findByText('Pikachu');
+    // const { location: { pathname } } = history;
+    // expect(pathname).toBe('/favorites');
   });
 });
