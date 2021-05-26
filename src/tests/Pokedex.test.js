@@ -1,11 +1,8 @@
 import { screen } from '@testing-library/dom';
-import { render } from '@testing-library/react';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import FavoritePokemons from '../components/FavoritePokemons';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
-import { Pokedex } from '../components';
 import data from '../data';
 
 describe('Testar o Pokedex.js', () => {
@@ -62,7 +59,6 @@ describe('Testar o Pokedex.js', () => {
     const Pikachu = getByText(/Pikachu/i);
     expect(Pikachu).toBeInTheDocument();
   });
-
   // test('Teste se a Pokédex tem os botões de filtro.', () => {
   //   renderWithRouter(<App />);
 
@@ -92,6 +88,23 @@ describe('Testar o Pokedex.js', () => {
   //     }
   //   });
   // });
+
+  test('Teste se a Pokédex tem todos os botões de filtro.', () => {
+    const { getAllByTestId } = renderWithRouter(<App />);
+
+    const typesPokemon = [];
+    data.forEach(({ type }) => {
+      if (!typesPokemon.includes(type)) {
+        typesPokemon.push(type);
+      }
+    });
+
+    const number = 7;
+    typesPokemon.forEach(() => {
+      const typeButton = getAllByTestId('pokemon-type-button');
+      expect(typeButton.length).toBe(number);
+    });
+  });
 
   // test('Testando se renderiza os pokémons favoritos', () => {
   //   renderWithRouter(<App />);
