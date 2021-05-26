@@ -52,9 +52,9 @@ describe('Teste do quinto requisito', () => {
     describe('Teste se a Pokédex tem os botões de filtro', () => {
       test('A Pokédex deve circular somente pelos pokémons daquele tipo', () => {
         renderWithRouter(<App />);
-        const psychic = screen.getByRole('button', { name: 'Fire' });
+        const psychic = screen.getByRole('button', { name: 'Psychic' });
         fireEvent.click(psychic);
-        const namePokemon = screen.getByText('Charmander');
+        const namePokemon = screen.getByText('Alakazam');
 
         expect(namePokemon).toBeInTheDocument();
 
