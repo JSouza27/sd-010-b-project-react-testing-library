@@ -1,12 +1,12 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+// import userEvent from '@testing-library/user-event';
 import RenderWithRouter from './RenderWithRouter';
 
 import App from '../App';
 
 describe('Testes do Componente <Pokemon />', () => {
-  test('Teste se é renderizado um card com as informações de determinado pokémon.', () => {
+  test('Teste renderiza um card com as informações exatas.', () => {
     RenderWithRouter(<App />);
 
     const namePokemon = screen.getByTestId('pokemon-name');
