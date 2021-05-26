@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from '../helper';
 
-describe('Favorite Page', () => {
+describe('Not Found', () => {
   test(`Testa se a página tem um h2 com o texto:
    Page requested not found`, () => {
     const { getByText, history } = renderWithRouter(<App />);
