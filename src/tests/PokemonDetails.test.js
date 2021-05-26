@@ -26,4 +26,14 @@ describe('Testa o componente PokemonDetails', () => {
     expect(locationList[0]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png');
     expect(locationList[1]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
   });
+
+  it('Teste se pode favoritar um pokémon através da página de detalhes', () => {
+    const { getByText, getByAltText } = renderWithRouter(<App />);
+    fireEvent.click(getByText(/More details/i));
+    const pokemonFavoritado = getByText(/Pokémon favoritado/i);
+    expect(pokemonFavoritado).toBeInTheDocument();
+    fireEvent.click(pokemonFavoritado);
+    const favorite = getByAltText(/Pikachu is marked as favorite/i);
+    expect(favorite).toBeInTheDocument();
+  });
 });
