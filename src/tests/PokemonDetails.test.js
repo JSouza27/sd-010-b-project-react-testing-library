@@ -5,8 +5,9 @@ import pokemons from '../data';
 import renderWithRouter from './renderWithRouter';
 
 const getPikachu = pokemons.filter((pokemon) => pokemon.name === 'Pikachu');
-const { name, summary } = getPikachu[0];
-
+const { name, summary, foundAt } = getPikachu[0];
+const locations = foundAt.map(({ location }) => location);
+const maps = foundAt.map(({ map }) => map);
 const DATAILS = 'More details';
 
 describe('testing component PokemonsDetails.js', () => {
@@ -15,17 +16,23 @@ describe('testing component PokemonsDetails.js', () => {
     fireEvent.click(getByText(DATAILS));
     const textDatails = getByText(`${name} Details`);
     expect(textDatails).toBeInTheDocument();
-    // const linkDetails = getByRole('link', { name: DATAILS });
     const summaryDetails = getByRole('heading', { level: 2, name: 'Summary' });
     expect(summaryDetails).toBeInTheDocument();
     expect(getByText(`${summary}`)).toBeInTheDocument();
   });
 
   test('shows maps in page details', () => {
-    const { getByText } = renderWithRouter(<App />);
+    const { getByText, getAllByRole } = renderWithRouter(<App />);
     fireEvent.click(getByText(DATAILS));
     const textDatails = getByText(`Game Locations of ${name}`);
     expect(textDatails).toBeInTheDocument();
+    // feito com ajuda de Herique Zozimo
+    locations.forEach((locati) => expect(getByText(locati)).toBeInTheDocument());
+    const image = getAllByRole('img');
+    const src = image.map((img) => img.src);
+    maps.forEach((map) => expect(src).toContain(map));
+    const alt = image.map((img) => img.alt);
+    expect(alt).toContain(`${name} location`);
   });
 
   test('if user can favorite pokemon', () => {
