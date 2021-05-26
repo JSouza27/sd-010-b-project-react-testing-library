@@ -55,4 +55,29 @@ describe('Test Pokemon Details Component', () => {
       expect(img.alt).toBe(`${name} location`);
     });
   });
+  it('should be able to toggle favorite pokemon', () => {
+    const { getByLabelText, getByText, getAllByRole } = renderWithRouter(<App />);
+
+    const nextPoke = getByText('Próximo pokémon');
+    expect(nextPoke).toBeInTheDocument();
+    for (let index = 0; index < Poke; index += 1) {
+      fireEvent.click(nextPoke);
+    }
+    const Link = getByText('More details');
+    expect(Link).toBeInTheDocument();
+    fireEvent.click(Link);
+
+    const input = getByLabelText('Pokémon favoritado?');
+    expect(input).toBeInTheDocument();
+    expect(input.type).toBe('checkbox');
+
+    fireEvent.click(input);
+    expect(input).toBeChecked();
+    const favoriteIcon = getAllByRole('img')[1];
+    expect(favoriteIcon).toBeInTheDocument();
+
+    fireEvent.click(input);
+    expect(input).not.toBeChecked();
+    expect(favoriteIcon).not.toBeInTheDocument();
+  });
 });
