@@ -14,4 +14,3 @@ function renderWithRouter(component) {
 }
 
 export default renderWithRouter;
-
