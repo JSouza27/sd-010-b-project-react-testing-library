@@ -2,7 +2,6 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { fireEvent, render } from '@testing-library/react';
 import App from '../App';
-import { PokemonDetails } from '../components';
 
 const pokemons = {
   id: 25,
@@ -16,7 +15,7 @@ const pokemons = {
 };
 
 describe('Requisito 6', () => {
-  it('Testa se é renderizado um card com as informações de determinado pokémon.', () =>{
+  it('Testa se é renderizado um card com as informações de determinado pokémon.', () => {
     const { getByTestId, getByRole, getByText } = render(
       <MemoryRouter>
         <App />
