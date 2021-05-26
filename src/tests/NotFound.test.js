@@ -12,3 +12,8 @@ test('Testa se contem h2 com Page requested not found', () => {
   expect(heading).toBeInTheDocument();
 });
 
+test('Testa se a página mostra uma imagem', () => {
+  const { getAllByRole } = renderWithRouter(<NotFound />);
+  const img = getAllByRole('img');
+  expect(img[1].src).toContain('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+});
