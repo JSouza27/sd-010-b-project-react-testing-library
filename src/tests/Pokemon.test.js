@@ -35,4 +35,15 @@ describe('testing component Pokemon.js', () => {
     const textDatails = getByText(`${name} Details`);
     expect(textDatails).toBeInTheDocument();
   });
+
+  test('icon favorite', () => {
+    // rolé para marcar o favorito
+    const { getByText, getByRole } = renderWithRouter(<App />);
+    fireEvent.click(getByText(/More details/i));
+    fireEvent.click(getByRole('checkbox'));
+    // capturar o icone e verificar se ele está na pagina
+    const favoriteIcon = getByRole('img', { name: `${name} is marked as favorite` });
+    expect(favoriteIcon).toHaveAttribute('src', '/star-icon.svg');
+    expect(favoriteIcon).toHaveAttribute('alt', 'Pikachu is marked as favorite');
+  });
 });
