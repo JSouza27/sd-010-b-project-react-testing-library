@@ -42,6 +42,13 @@ describe('tests the whole App', () => {
     });
 
   it('tests if aplication is redirected to the main page by clicking Home link', () => {
+    const { history: { location } } = renderWithRouter(<App />);
+
+    userEvent.click(screen.getByText('Home'));
+    const { pathname } = location;
+
+    expect(pathname).toBe('/');
+  });
 
   });
 });
