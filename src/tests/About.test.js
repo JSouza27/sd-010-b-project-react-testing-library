@@ -11,4 +11,9 @@ describe('Testing About.js', () => {
     });
     expect(pokedexText).toBeInTheDocument();
   });
+  it('Verifies if have 2 paragraphs', () => {
+    const { getAllByTestId } = renderWithRouter(<About />);
+    const paragraphs = getAllByTestId('paragraph');
+    expect(paragraphs.length).toBe(2);
+  });
 });
