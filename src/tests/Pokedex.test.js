@@ -14,8 +14,13 @@ describe('Teste o componente <Pokedex.js />', () => {
     expect(headingH2).toBeInTheDocument();
   });
 
-  // test('Teste se após clicar no botão próximo, o pokemon é exibido em tela.', () => {
-  //   renderWithRouter(<App />);
+  test('Teste se após clicar no botão próximo, o pokemon é exibido em tela.', () => {
+    renderWithRouter(<App />);
 
-  // });
+    const buttonNext = screen.getByRole('button', { name: /próximo pokémon/i });
+    userEvent.click(buttonNext);
+
+    const queryImage = screen.getByRole('img', { name: /charmander sprite/i });
+    expect(queryImage).toBeInTheDocument();
+  });
 });
