@@ -32,7 +32,7 @@ test('contains a set of fixed navigation links', () => {
   expect(favoritePokemons).toBeInTheDocument();
 });
 
-test('redirects to the home page, at the `/` route, by clicking on the Home link', () => {
+test('clicking on the Home link redirects you to the / route', () => {
   const { getByRole } = renderWithRouter(<App />);
   const home = getByRole('link', {
     name: /home/i,
@@ -46,4 +46,20 @@ test('redirects to the home page, at the `/` route, by clicking on the Home link
   });
 
   expect(homeText).toBeInTheDocument();
+});
+
+test('clicking on the About link redirects you to the /about route', () => {
+  const { getByRole } = renderWithRouter(<App />);
+  const about = getByRole('link', {
+    name: /about/i,
+  });
+
+  userEvent.click(about);
+
+  const aboutText = getByRole('heading', {
+    level: 2,
+    name: /About Pokédexs/i,
+  });
+
+  expect(aboutText).toBeInTheDocument();
 });
