@@ -2,7 +2,7 @@ import React from 'react';
 import { About } from '../components';
 import renderWithRouter from '../components/renderWithRouter';
 
-describe('Render <About /> component', () => {
+describe('Renders <About /> component with information about Pokédex', () => {
   it('renders a heading with the text `About Pokédex`', () => {
     const { getByRole } = renderWithRouter(<About />);
     const heading = getByRole('heading', { level: 2 });
@@ -15,7 +15,14 @@ describe('Render <About /> component', () => {
     const firstParagraph = getByText(/simulates a Pokédex/i);
     const secondParagraph = getByText(/filter Pokémons/i);
 
-    expect(firstParagraph).toHaveTextContent(/simulates a Pokédex/i);
-    expect(secondParagraph).toHaveTextContent(/filter Pokémons/i);
+    expect(firstParagraph).toBeInTheDocument();
+    expect(secondParagraph).toBeInTheDocument();
+  });
+
+  it('renders a image of a Pokédex', () => {
+    const { getByRole } = renderWithRouter(<About />);
+    const pokedexImg = getByRole('img');
+
+    expect(pokedexImg).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
   });
 });
