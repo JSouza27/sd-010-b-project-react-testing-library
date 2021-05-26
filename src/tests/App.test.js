@@ -3,6 +3,7 @@ import { Router/* , MemoryRouter */ } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
 describe('Teste component App', () => {
@@ -49,6 +50,16 @@ describe('Teste component App', () => {
       name: 'Favorite pokémons',
     });
     expect(favoriteText).toBeInTheDocument();
+  });
+  test('Testa redireciona página About ao cliccar no link About', () => {
+    const { history } = renderWithRouter(<App />);
+    const about = screen.getByRole('link', {
+      name: 'About',
+    });
+    console.log(about);
+    userEvent.click(about);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/about');
   });
 });
 
