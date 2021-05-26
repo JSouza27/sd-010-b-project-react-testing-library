@@ -4,9 +4,9 @@ import Pokedex from '../components/Pokedex';
 import pokemons from '../data';
 import renderWithRouter from '../renderWithRouter';
 
-const isPokemonFavoriteById = {};
-
 describe('Checks Pokedex', () => {
+  const isPokemonFavoriteById = {};
+
   it('Test if the page contains "h2" with the text "Encountered pokémons"', () => {
     renderWithRouter(
       <Pokedex
@@ -57,7 +57,6 @@ describe('Checks Pokedex', () => {
     expect(pokemon.length).toEqual(1);
 
     const buttonNextPokemon = screen.getByTestId('next-pokemon');
-
     fireEvent.click(buttonNextPokemon);
     expect(pokemon[0]).toBeInTheDocument();
     expect(pokemon.length).toEqual(1);
@@ -113,7 +112,8 @@ describe('Checks Pokedex', () => {
 
     const filterButtons = screen.getAllByTestId('pokemon-type-button');
     const resetButton = screen.getByRole('button', {
-      name: /All/i });
+      name: /All/i,
+    });
 
     filterButtons.forEach((element, index) => {
       expect(element.textContent).toBe(types[index]);
@@ -130,7 +130,8 @@ describe('Checks Pokedex', () => {
     );
 
     const resetButton = screen.getByRole('button', {
-      name: /All/i });
+      name: /All/i,
+    });
 
     expect(resetButton).toBeInTheDocument();
 

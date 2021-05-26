@@ -15,7 +15,6 @@ describe('Checks NotFound', () => {
 
     const image = screen.getByAltText('Pikachu crying because'
     + ' the page requested was not found');
-
     expect(image.src).toEqual('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
   });
 });

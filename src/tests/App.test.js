@@ -10,6 +10,7 @@ describe('Checks all App', () => {
     const linkHome = screen.getByRole('link', {
       name: 'Home',
     });
+
     expect(linkHome).toBeInTheDocument();
 
     fireEvent.click(linkHome);
@@ -24,6 +25,7 @@ describe('Checks all App', () => {
     const linkAbout = screen.getByRole('link', {
       name: 'About',
     });
+
     expect(linkAbout).toBeInTheDocument();
 
     fireEvent.click(linkAbout);
@@ -38,6 +40,7 @@ describe('Checks all App', () => {
     const linkFavorites = screen.getByRole('link', {
       name: 'Favorite Pokémons',
     });
+
     expect(linkFavorites).toBeInTheDocument();
 
     fireEvent.click(linkFavorites);
@@ -50,8 +53,8 @@ describe('Checks all App', () => {
     const { history } = renderWithRouter(<App />);
 
     history.push('/not-exist');
-    const noMatch = screen.getByText('Page requested not found');
 
+    const noMatch = screen.getByText('Page requested not found');
     expect(noMatch).toBeInTheDocument();
   });
 });

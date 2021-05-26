@@ -4,9 +4,9 @@ import pokemons from '../data';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
-const pikachu = pokemons[0];
-
 describe('Checks PokemonDetails', () => {
+  const pikachu = pokemons[0];
+
   it('Test whether detailed Pokémon information is shown on the screen', () => {
     renderWithRouter(<App />);
     const linkMoreDetails = screen.getByRole('link', {

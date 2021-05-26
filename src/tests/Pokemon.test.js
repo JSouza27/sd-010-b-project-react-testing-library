@@ -4,10 +4,10 @@ import pokemons from '../data';
 import renderWithRouter from '../renderWithRouter';
 import Pokemon from '../components/Pokemon';
 
-const caterpie = pokemons[2];
-const isPokemonFavoriteById = {};
-
 describe('Checks Pokemon', () => {
+  const caterpie = pokemons[2];
+  const isPokemonFavoriteById = {};
+
   it('Test whether a card is rendered with your information.', () => {
     renderWithRouter(
       <Pokemon

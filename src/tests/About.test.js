@@ -16,6 +16,7 @@ describe('Checks About', () => {
 
   it('Checks if the page has two paragraphs about Pokédex', () => {
     render(<About />);
+
     const firstParagraph = screen.getByText('This application simulates a Pokédex'
     + ', a digital encyclopedia containing all Pokémons');
     expect(firstParagraph).toBeInTheDocument();
