@@ -57,11 +57,13 @@ describe('Test Pokedex Component', () => {
   });
 
   it('buttons should filter or be disabled if has only one poke of that type', () => {
-    const { getAllByTestId, getByTestId } = renderWithRouter(PokedexWithProps);
+    const { getAllByTestId, getByTestId, getByText } = renderWithRouter(PokedexWithProps);
 
-    const button = getAllByTestId('pokemon-type-button');
-    const fireButtonType = button[1];
+    const buttonTypes = getAllByTestId('pokemon-type-button');
+    const fireButtonType = buttonTypes[1];
     expect(fireButtonType).toBeInTheDocument();
+
+    const allButtonType = getByText('All');
 
     fireEvent.click(fireButtonType);
 
@@ -80,7 +82,13 @@ describe('Test Pokedex Component', () => {
       fireEvent.click(nextPokeButton);
     }
 
-    const electricButton = button[0];
+    const types = [...new Set(pokemons.map(({ type }) => type))];
+    expect(allButtonType).toBeInTheDocument();
+    for (let index = 0; index < types.length; index += 1) {
+      expect(types).toContain(buttonTypes[index].textContent);
+    }
+
+    const electricButton = buttonTypes[0];
     expect(electricButton).toBeInTheDocument();
     fireEvent.click(electricButton);
     expect(nextPokeButton).toBeDisabled();
@@ -105,23 +113,11 @@ describe('Test Pokedex Component', () => {
     const pokes = [];
     for (let index = 0; index < pokemons.length; index += 1) {
       const { name } = pokemons[index];
-      const pokeRenderedName = getByTestId('pokemon-name').textContent;
+      const pokeRenderedName = getByTestId('pokemon-card_test').firstChild.textContent;
       expect(name).toBe(pokeRenderedName);
       pokes.push(name);
       fireEvent.click(nextPokeButton);
     }
     expect(pokes.length).toBe(pokemons.length);
-  });
-
-  it('buttons should be dinamically rendered based on all types of pokemons', () => {
-    const { getAllByTestId, getByText } = renderWithRouter(PokedexWithProps);
-    const allButtonType = getByText('All');
-    const types = [...new Set(pokemons.map(({ type }) => type))];
-    const buttonTypes = getAllByTestId('pokemon-type-button');
-    console.log(buttonTypes[0].textContent);
-    expect(allButtonType).toBeInTheDocument();
-    for (let index = 0; index < types.length; index += 1) {
-      expect(types).toContain(buttonTypes[index].textContent);
-    }
   });
 });
