@@ -12,3 +12,12 @@ test('contains h2 tag with definid text', () => {
 
   expect(notFoundText).toBeInTheDocument();
 });
+
+test('contains image with defined src', () => {
+  const { getAllByRole } = renderWithRouter(<NotFound />);
+
+  const notFoundImg = getAllByRole('img');
+
+  expect(notFoundImg[1]).toHaveAttribute('src',
+    'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+});
