@@ -11,6 +11,7 @@ describe('Teste do quinto requisito', () => {
     expect(heading).toHaveTextContent('Encountered pokémons');
   });
 
+  describe('Proximo Pokémon da lista quando o botão Próximo pokémon é clicado', () => {
   test('Teste se o botão tem o texto Próximo pokémon', () => {
     renderWithRouter(<App />);
     const btnText = screen.getByText('Próximo pokémon');
