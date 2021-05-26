@@ -70,4 +70,11 @@ describe('Test pokedex component', () => {
       expect(filteredPokemon).toHaveTextContent(type);
     });
   });
+
+  test('the button all', () => {
+    renderWithRouter(<App />);
+
+    const allButton = screen.getByRole('button', { name: 'All' });
+    expect(allButton).toBeInTheDocument();
+  });
 });
