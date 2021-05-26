@@ -3,7 +3,8 @@ import { screen, fireEvent } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from '../helper';
 import pokes from '../data';
-import { Button } from '../components';
+
+const Next = 'Próximo pokémon';
 
 describe('Pokedex', () => {
   test(`Teste se página contém um heading h2 com o texto
@@ -17,21 +18,20 @@ describe('Pokedex', () => {
   test(`Teste se é exibido o próximo Pokémon da lista quando o
    botão Próximo pokémon é clicado`, () => {
     const { getByText } = renderWithRouter(<App />);
-    const next = getByText('Próximo pokémon');
+    const next = getByText(Next);
     pokes.forEach((poke) => {
       expect(getByText(poke.name)).toBeInTheDocument();
       fireEvent.click(next);
     });
   });
   test('Teste se existem os filtros', () => {
-    const { getByText } = renderWithRouter(<App />);
+    renderWithRouter(<App />);
     const btn = screen.getAllByRole('button');
     const maxFilter = 8;
     for (let i = 1; i < maxFilter; i += 1) {
       const poke = screen.getByTestId('pokemon-type');
       fireEvent.click(btn[i]);
       expect(btn[i].innerHTML).toEqual(poke.innerHTML);
-      const next = getByText('Próximo pokémon');
     }
   });
   test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
@@ -39,7 +39,7 @@ describe('Pokedex', () => {
     const reset = getByText('All');
     fireEvent.click(reset);
     pokes.forEach((poke) => {
-      const next = getByText('Próximo pokémon');
+      const next = getByText(Next);
       expect(getByText(poke.name)).toBeInTheDocument();
       fireEvent.click(next);
     });
@@ -52,7 +52,7 @@ describe('Pokedex', () => {
       const poke = screen.getByTestId('pokemon-type');
       fireEvent.click(btn[i]);
       expect(btn[i].innerHTML).toEqual(poke.innerHTML);
-      const next = screen.getByText('Próximo pokémon');
+      const next = screen.getByText(Next);
       const pokeArray = pokes.filter(({ type }) => type === btn[i].innerHTML);
       if (pokeArray.length === 1) {
         expect(next.disabled).toBe(true);
