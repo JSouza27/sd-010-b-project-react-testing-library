@@ -1,4 +1,5 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
@@ -20,5 +21,15 @@ describe('Testing App.js', () => {
     expect(links[1].textContent).toBe('About');
     // O terceiro link deve possuir o texto Favorite Pokémons
     expect(links[2].textContent).toBe('Favorite Pokémons');
+  });
+  // Teste se a aplicação é redirecionada para a página inicial, na URL / ao clicar no link Home da barra de navegação.
+  it('tests if clicking at "Home" link, redirects to path "/"', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    const linkHome = getByText('Home');
+
+    userEvent.click(linkHome);
+    const { location: { pathname } } = history;
+
+    expect(pathname).toBe('/');
   });
 });
