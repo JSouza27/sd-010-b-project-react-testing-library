@@ -22,4 +22,12 @@ describe('Testa o componente Pokemon.js', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/pokemons/25');
   });
+
+  it('Teste se existe um ícone de estrela nos Pokémons favoritado', () => {
+    const { getByText, getByLabelText, getByAltText } = renderWithRouter(<App />);
+    fireEvent.click(getByText(/More details/i));
+    fireEvent.click(getByLabelText(/Pokémon favoritado?/i));
+    const favorite = getByAltText('Pikachu is marked as favorite');
+    expect(favorite).toBeInTheDocument();
+  });
 });
