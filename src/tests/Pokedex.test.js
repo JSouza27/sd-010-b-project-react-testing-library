@@ -61,4 +61,11 @@ describe('Teste o componente <Pokedex.js />', () => {
     const firstCard = screen.getByRole('img', 'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
     expect(firstCard).toBeInTheDocument();
   });
+
+  test('Teste se é mostrado apenas um Pokémon por vez', () => {
+    renderWithRouter(<App />);
+
+    const textDetails = screen.getAllByText('More details');
+    expect(textDetails.length).toBe(1);
+  });
 });
