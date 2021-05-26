@@ -19,3 +19,7 @@ test('Mensagem No favorite pokemon found', () => {
   const noFavorite = screen.getByText('No favorite pokemon found');
   expect(noFavorite).toBeInTheDocument();
 });
+
+// test('Favorited pokemon is rendered', () => {
+
+// })
