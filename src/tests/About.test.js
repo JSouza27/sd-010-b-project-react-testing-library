@@ -7,6 +7,14 @@ describe('Tests the About component.', () => {
   it('tests if the page contains the info about Pokédex', () => {
     const { getByRole } = render(<About />);
 
+    const aboutTitle = getByRole('heading', { level: 2 });
+
+    expect(aboutTitle).toBeInTheDocument();
+    expect(aboutTitle.innerHTML).toBe('About Pokédex');
+  });
+  it('', () => {
+    const { getByRole } = render(<About />);
+
     const h2 = getByRole('heading', { level: 2 });
 
     expect(h2).toBeInTheDocument();
