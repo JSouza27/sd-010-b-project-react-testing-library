@@ -32,4 +32,26 @@ describe('Testing App.js', () => {
 
     expect(pathname).toBe('/');
   });
+  // Teste se a aplicação é redirecionada para a página de About, na URL /about, ao clicar no link About da barra de navegação.
+  it('tests if clicking at "About" link, redirects to path "/about"', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    const linkHome = getByText('About');
+
+    userEvent.click(linkHome);
+    const { location: { pathname } } = history;
+
+    expect(pathname).toBe('/about');
+  });
+  // Teste se a aplicação é redirecionada para a página de Pokémons Favoritados, na URL /favorites, ao clicar no link Favorite Pokémons da barra de navegação.
+  it('tests if clicking at "Favorite Pokemons" link, redirects to path "/favorites"',
+    () => {
+      const { getByText, history } = renderWithRouter(<App />);
+      const linkHome = getByText('Favorite Pokémons');
+
+      userEvent.click(linkHome);
+      const { location: { pathname } } = history;
+
+      expect(pathname).toBe('/favorites');
+    });
+  // Teste se a aplicação é redirecionada para a página Not Found ao entrar em uma URL desconhecida.
 });
