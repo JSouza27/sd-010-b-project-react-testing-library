@@ -46,4 +46,14 @@ describe('test component Pokemon', () => {
     const { pathname } = history.location;
     expect(pathname).toBe(`/pokemons/${id}`);
   });
+
+  test('if there is a favorite icon', () => {
+    renderWithRouter(<Pokemon pokemon={ pokemons[0] } isFavorite />);
+
+    const { name } = pokemons[0];
+
+    const favoriteIcon = screen.getByAltText(`${name} is marked as favorite`);
+
+    expect(favoriteIcon).toHaveAttribute('src', '/star-icon.svg');
+  });
 });
