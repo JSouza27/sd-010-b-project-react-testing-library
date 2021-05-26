@@ -31,4 +31,10 @@ describe('Renders favorites Pokémons when needed', () => {
 
     expect(pikachu).toBeInTheDocument();
   });
+
+  it('renders a msg when no Pokémon is selected as a favorite', () => {
+    const { getByText } = renderWithRouter(<FavoritePokemons pokemons={ [] } />);
+
+    expect(getByText('No favorite pokemon found')).toBeInTheDocument();
+  });
 });
