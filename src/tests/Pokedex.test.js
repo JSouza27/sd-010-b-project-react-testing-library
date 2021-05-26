@@ -32,14 +32,13 @@ describe('Teste do componente <Pokedex.js />', () => {
       </Router>,
     );
     const firstPokemon = queryByTestId(testIdName);
-    pokemons.map((pokemon) => {
+    pokemons.forEach((pokemon) => {
       const currentPokemon = queryByTestId(testIdName);
-      const currentPokemonName = Object.values(currentPokemon)[1].children;
+      const currentPokemonName = currentPokemon.innerHTML;
       expect(currentPokemonName).toBe(pokemon.name);
       const nextButton = getByText('Próximo pokémon');
       expect(nextButton).toBeInTheDocument();
       userEvent.click(nextButton);
-      return 0;
     });
     expect(firstPokemon).toBeInTheDocument();
   });
@@ -64,15 +63,14 @@ describe('Teste do componente <Pokedex.js />', () => {
     );
 
     const typeButtons = queryAllByTestId('pokemon-type-button');
-    const buttonType = Object.values(typeButtons[1])[1].children;
-    expect(buttonType).toBe('Fire');
+    expect(typeButtons[1]).toHaveTextContent('Fire');
 
     userEvent.click(typeButtons[1]);
 
     const pokeType = getByTestId('pokemon-type');
-    const pokeFireType = Object.values(pokeType)[1].children;
+    const pokeFireType = pokeType.innerHTML;
 
-    expect(buttonType).toBe(pokeFireType);
+    expect(typeButtons[1]).toHaveTextContent(pokeFireType);
   });
 
   test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
@@ -88,14 +86,12 @@ describe('Teste do componente <Pokedex.js />', () => {
 
     userEvent.click(buttonAll);
     let pokemon = queryByTestId(testIdName);
-    let pokemonName = Object.values(pokemon)[1].children;
-    expect(pokemonName).toBe('Pikachu');
+    expect(pokemon).toHaveTextContent('Pikachu');
 
     const nextButton = queryByTestId(testIdNextButton);
     userEvent.click(nextButton);
     pokemon = queryByTestId(testIdName);
-    pokemonName = Object.values(pokemon)[1].children;
-    expect(pokemonName).toBe('Charmander');
+    expect(pokemon).toHaveTextContent('Charmander');
   });
 
   test('Verifica se existe um botão de filtro para cada tipo de Pokémon', () => {
