@@ -11,3 +11,9 @@ test('Test if the page contains an h2 heading with the text '
   const text = getByRole('heading', { level: 2 }).innerHTML;
   expect(text.indexOf('Page requested not')).toBe(0);
 });
+
+test('Test if the page shows the image https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif', () => {
+  const { getByRole, history } = renderWithRouter(<App />);
+  history.push('/que-nao-existe');
+  expect(getByRole('img', { name: /Pikachu/i }).src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+});
