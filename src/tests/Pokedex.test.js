@@ -42,5 +42,12 @@ describe('Teste do quinto requisito', () => {
 
       expect(testePokemon).toBeInTheDocument();
     });
+
+    test('Teste se é mostrado apenas um Pokémon por vez', () => {
+      renderWithRouter(<App />);
+      const image = screen.getAllByRole('img');
+
+      expect(image.length).toBe(1);
+    });
   });
 });
