@@ -6,6 +6,7 @@ import NotFound from '../components/NotFound';
 describe('Testando o componente <NotFound />', () => {
   test('Contém um heading h2', () => {
     renderWithRouter(<NotFound />);
+
     const pageNotFound = screen.getByRole('heading', {
       level: 2,
       name: /Page requested not found/i,

@@ -12,16 +12,21 @@ describe('Testando o componente <PokemonDetails />', () => {
     });
     fireEvent.click(moreDetails);
 
+    // Verifica se contém o texto 'pikachu details'
     const pokeName = screen.getByText(/pikachu details/i);
     expect(pokeName).toBeInTheDocument();
+
+    // O link de detalhes não pode estar na tela
     expect(moreDetails).not.toBeInTheDocument();
 
+    // Contém um heading com o texto 'summary'
     const summary = screen.getByRole('heading', {
       level: 2,
       name: /Summary/i,
     });
     expect(summary).toBeInTheDocument();
 
+    // Contém um paragrafo com um resumo sobre o pokemon(Pikachu)
     const info = /This intelligent Pokémon/i;
     const paragraph = screen.getByText(info);
     expect(paragraph).toBeInTheDocument();
