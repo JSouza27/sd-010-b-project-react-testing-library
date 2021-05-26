@@ -27,4 +27,15 @@ describe('Teste o componente <Pokemon.js />', () => {
     const linkDetails = screen.getByText('More details');
     expect(linkDetails).toHaveAttribute('href', '/pokemons/25');
   });
+
+  test('Teste se ao clicar no link de navegação, redireciona para detalhes', () => {
+    const { history } = renderWithRouter(<App />);
+
+    const linkDetails = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(linkDetails);
+
+    const pikachuDetails = screen.getByRole('heading', { name: /pikachu details/i });
+    expect(pikachuDetails).toBeInTheDocument();
+    expect(history.location.pathname).toBe('/pokemons/25');
+  });
 });
