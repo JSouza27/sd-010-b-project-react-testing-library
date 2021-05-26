@@ -85,12 +85,30 @@ test('Test if only one Pokémon is displayed at a time.', () => {
 describe('Test if the Pokédex has the filter buttons', () => {
   it('From the selection of a type button,'
   + ' the Pokédex should only circulate through the Pokémon of that type', () => {
-    const { getAllByRole } = renderWithRouter(
+    const { getAllByRole, getByText, getByTestId } = renderWithRouter(
       <Pokedex
         pokemons={ data }
         isPokemonFavoriteById={ isPokemonFavoriteById }
       />,
     );
-    getAllByRole('button').forEach((button) => console.log(button.innerHTML));
+    const buttonNext = getByText(/Próximo pokémon/i);
+    getAllByRole('button').forEach((button) => {
+      console.log(button.innerHTML);
+      fireEvent.click(button);
+      if (button.innerHTML === 'All') {
+        data.forEach((poke) => {
+          expect(getByText(poke.name).innerHTML).toBe(poke.name);
+          fireEvent.click(buttonNext);
+        });
+      } else if (button.innerHTML !== 'Próximo pokémon') {
+        (data.filter((poke) => button.innerHTML === poke.type))
+          .forEach(((type) => {
+            // console.log(type.type);
+            expect(getByTestId('pokemon-type').innerHTML).toBe(type.type);
+            console.log(getByTestId('pokemon-name').innerHTML);
+            fireEvent.click(buttonNext);
+          }));
+      }
+    });
   });
 });
