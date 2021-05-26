@@ -24,18 +24,28 @@ describe('Teste o componente <Pokedex.js />', () => {
 
   test('Testa próximos Pokémons mostrados, ao clicar sucessivamente no botão', () => {
     renderWithRouter(<App />);
+    // (método o qual fiz com ForEach)
+    // pokemons.forEach(({ name }) => {
+    //   const textDetails = screen.getAllByText('More details');
+    //   expect(textDetails.length).toBe(1);
 
-    pokemons.forEach(({ name }) => {
-      const textDetails = screen.getAllByText('More details');
-      expect(textDetails.length).toBe(1);
+    //   const getName = screen.getByText(name);
+    //   expect(getName).toBeInTheDocument();
 
-      const getName = screen.getByText(name);
-      expect(getName).toBeInTheDocument();
+    //   const getButton = screen.getByText('Próximo pokémon');
+    //   userEvent.click(getButton);
+    // });
+    // const getFirstPokemon = screen.getByText(pokemons[0].name);
+    // expect(getFirstPokemon).toBeInTheDocument();
 
-      const getButton = screen.getByText('Próximo pokémon');
-      userEvent.click(getButton);
-    });
-    const getFirstPokemon = screen.getByText(pokemons[0].name);
-    expect(getFirstPokemon).toBeInTheDocument();
+    // método abaixo sugerido pelo instrutor Eduardo Santos
+    const lastCard = screen.getByRole('img', 'https://cdn2.bulbagarden.net/upload/2/2c/Spr_5b_148.png');
+    expect(lastCard).toBeInTheDocument();
+
+    const getButton = screen.getByText('Próximo pokémon');
+    userEvent.click(getButton);
+
+    const firstCard = screen.getByRole('img', 'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
+    expect(firstCard).toBeInTheDocument();
   });
 });
