@@ -43,18 +43,15 @@ describe('Tests the buttons on the Pokedex component', () => {
   });
 
   it('tests if the Pokédex has the filter buttons', () => {
-    // const { getByText, findAllByTestId, getByRole } = renderWithRouter(<App />);
     const { getByRole } = renderWithRouter(<App />);
     let filterBtn;
     pokemons.forEach((pokemon) => {
       filterBtn = getByRole('button', { name: pokemon.type });
       expect(filterBtn).toBeInTheDocument();
-      // expect(filterBtn.length).toBe(1);
     });
   });
 
   it('Test if the Pokédex contains a button to reset the filter', () => {
-    // const { getByRole } = renderWithRouter(<App />);
     const isPokemonFavoriteById = {};
     pokemons.reduce((acc, poke) => {
       isPokemonFavoriteById[poke.id] = false;
@@ -92,7 +89,31 @@ describe('Tests the buttons on the Pokedex component', () => {
     expect(filterBtn.length).toBe(arrayOfTypes.length);
   });
 
-  // it('test if the Next Pokémon btn its disabled whenever theres only one Pokémon', () => {
-
-  // });
+  it('test if the Next btn its disabled when there is one Pokémon of that type', () => {
+    const isPokemonFavoriteById = {};
+    pokemons.reduce((acc, poke) => {
+      isPokemonFavoriteById[poke.id] = false;
+      return acc;
+    }, {});
+    const { getByRole } = renderWithRouter(
+      <Pokedex
+        pokemons={ pokemons }
+        isPokemonFavoriteById={ isPokemonFavoriteById }
+      />,
+    );
+    const arrayOfTypes = [...new
+    Set(pokemons.reduce((types, { type }) => [...types, type], []))];
+    const filteredTypes = arrayOfTypes
+      .map((types) => pokemons.filter((poke) => poke.type === types));
+    const btnNext = getByRole('button', { name: 'Próximo pokémon' });
+    let typeBtn;
+    filteredTypes.forEach((el) => {
+      if (el.length === 1) {
+        typeBtn = getByRole('button', { name: el[0].type });
+        console.log(typeBtn);
+        userEvent.click(typeBtn);
+        expect(btnNext).toBeDisabled();
+      }
+    });
+  });
 });
