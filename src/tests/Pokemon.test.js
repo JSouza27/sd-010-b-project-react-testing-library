@@ -38,6 +38,7 @@ describe('Testando toda a aplicação da tela Pokemon', () => {
     />);
     const icon = getByAltText(/is marked as favorite/i);
     expect(icon.src).toBe('http://localhost/star-icon.svg');
+    expect(icon.alt).toBe(`${pokemons[0].name} is marked as favorite`);
   });
 
   it('Verifica imagem pokemon', () => {
