@@ -17,13 +17,13 @@ dos casos de uso criados pelo Stryker`, () => {
 
     const imgAtribute = getByAltText(/pokédex/i);
     const pokedexTitle = getByText(/about pokédex/i);
-    const paragraphOne = getByText(/(pokémons by)/i);
-    const paragraphTwo = getByText(/(pokédex, a)/i);
+    const pOne = getByText(/(One can filter Pokémons by type)/i);
+    const pTwo = getByText(/(This application simulates a Pokédex, a)/i);
 
     expect(imgAtribute.alt).toBe('Pokédex');
     expect(pokedexTitle.textContent).toBe('About Pokédex');
-    expect(paragraphOne.textContent).toMatch('One can filter Pokémons');
-    expect(paragraphTwo.textContent).toMatch('This application simulates');
+    expect(pOne.textContent).toMatch('One can filter Pokémons');
+    expect(pTwo.textContent).toMatch('This application simulates');
     expect(imgAtribute.src).toBe(
       'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png',
     );
