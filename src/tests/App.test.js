@@ -1,14 +1,12 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
 import App from '../App';
+import renderWithRouter from './renderWithRouter';
 
-test('renders a reading with the text `Pokédex`', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
-  const heading = getByText(/Pokédex/i);
-  expect(heading).toBeInTheDocument();
+describe('Testing App.js', () => {
+  it(' tests if App.js is rendered at "/" path', () => {
+    const { history } = renderWithRouter(<App />);
+    const { location: { pathname } } = history;
+
+    expect(pathname).toBe('/');
+  });
 });
