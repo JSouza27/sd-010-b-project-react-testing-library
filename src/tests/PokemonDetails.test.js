@@ -1,6 +1,5 @@
 import React from 'react';
 import { fireEvent } from '@testing-library/react';
-import PokemonDetails from '../components/PokemonDetails';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
 import pokemons from '../data';
@@ -22,9 +21,16 @@ describe('Test Pokemon Details Component', () => {
   //   />
   // );
 
+  const Poke = 0;
+
   it('should have detailed information on the pokemon', () => {
     const { getByText } = renderWithRouter(<App />);
-    const { name, summary } = pokemons[0];
+    const { name, summary, foundAt } = pokemons[Poke];
+    const nextPoke = getByText('Próximo pokémon');
+    expect(nextPoke).toBeInTheDocument();
+    for (let index = 0; index < Poke; index += 1) {
+      fireEvent.click(nextPoke);
+    }
     const Link = getByText('More details');
     expect(Link).toBeInTheDocument();
     fireEvent.click(Link);
@@ -38,5 +44,15 @@ describe('Test Pokemon Details Component', () => {
 
     const summaryText = getByText(summary);
     expect(summaryText).toBeInTheDocument();
+
+    const locationsHeader = getByText(`Game Locations of ${name}`);
+    expect(locationsHeader).toBeInTheDocument();
+    foundAt.forEach(({ location, map }) => {
+      const pokeLocation = getByText(location);
+      const img = getByText(location).parentElement.parentElement.firstChild;
+      expect(pokeLocation).toBeInTheDocument();
+      expect(img.src).toBe(map);
+      expect(img.alt).toBe(`${name} location`);
+    });
   });
 });
