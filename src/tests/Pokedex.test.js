@@ -125,9 +125,15 @@ describe('Teste se a Pokédex contém um botão para resetar o filtro', () => {
 });
 
 describe('Teste se é criado um botão de filtro para cada tipo de Pokémon', () => {
-  // it('Os botões de filtragem devem ser dinâmicos', () => {
+  it('Os botões de filtragem devem ser dinâmicos', () => {
+    const { getAllByTestId } = renderWithRouter(<App />);
+    const button = getAllByTestId(texto2);
 
-  // });
+    const num = 6;
+    for (let i = 0; i <= num; i += 1) {
+      expect(button[i]).toBeInTheDocument();
+    }
+  });
 
   it('Deve existir um botão de filtragem para cada tipo de Pokémon', () => {
     const { getAllByTestId } = renderWithRouter(<App />);
