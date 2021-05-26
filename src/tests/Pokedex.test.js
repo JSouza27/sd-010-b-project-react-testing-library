@@ -40,7 +40,7 @@ describe('Test if the next Pokémon in the list is'
 
   it('The next Pokémon in the list must be shown,'
   + ' one by one, by successively clicking on the button', () => {
-    const { getByText, history } = renderWithRouter(
+    const { getByText } = renderWithRouter(
       <Pokedex
         pokemons={ data }
         isPokemonFavoriteById={ isPokemonFavoriteById }
@@ -65,9 +65,32 @@ describe('Test if the next Pokémon in the list is'
     const buttonNext = getByText(/Próximo pokémon/i);
     data.forEach((pok) => {
       const namePokemon = getByText(pok.name);
-      const condicao = namePokemon.innerHTML === 'Dragonair';
+      const condicao = namePokemon.innerHTML === data[8].name;
       fireEvent.click(buttonNext);
       if (condicao) expect(namePokemon.innerHTML).toBe('Pikachu');
     });
+  });
+});
+
+test('Test if only one Pokémon is displayed at a time.', () => {
+  const { getAllByRole } = renderWithRouter(
+    <Pokedex
+      pokemons={ data }
+      isPokemonFavoriteById={ isPokemonFavoriteById }
+    />,
+  );
+  expect(getAllByRole('img').length).toBe(1);
+});
+
+describe('Test if the Pokédex has the filter buttons', () => {
+  it('From the selection of a type button,'
+  + ' the Pokédex should only circulate through the Pokémon of that type', () => {
+    const { getAllByRole } = renderWithRouter(
+      <Pokedex
+        pokemons={ data }
+        isPokemonFavoriteById={ isPokemonFavoriteById }
+      />,
+    );
+    getAllByRole('button').forEach((button) => console.log(button.innerHTML));
   });
 });
