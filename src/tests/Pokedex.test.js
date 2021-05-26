@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, fireEvent, getByText } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import renderWithRouter from '../components/renderWithRouter';
 import App from '../App';
 
