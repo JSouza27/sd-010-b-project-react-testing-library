@@ -13,7 +13,7 @@ describe('Testing About.js', () => {
   });
 
   test('Teste se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
-    const { getByText, getByAltText } = render(<About />);
+    const { getByText } = render(<About />);
     const paragraphOne = getByText(/This application simulates a Pokédex/i);
     expect(paragraphOne).toBeInTheDocument();
 
