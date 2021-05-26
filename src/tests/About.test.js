@@ -1,5 +1,4 @@
 import React from 'react';
-// import { fireEvent } from '@testing-library/dom';
 import renderWithRouter from '../helper/renderWithRouter';
 import About from '../components/About';
 
