@@ -7,6 +7,16 @@ import App from '../App';
 import Pokedex from '../components/Pokedex';
 import pokemons from '../data';
 
+const typesPokemons = [
+  'Electric',
+  'Fire',
+  'Bug',
+  'Poison',
+  'Psychic',
+  'Normal',
+  'Dragon',
+];
+
 describe('Teste o componente <Pokedex.js />', () => {
   test('Teste se página contém um h2 com o texto Encountered pokémons.', async () => {
     renderWithRouter(<App />);
@@ -79,17 +89,17 @@ describe('Teste o componente <Pokedex.js />', () => {
     expect(charmander).toBeInTheDocument();
   });
 
-  test('Testa se o botão tipo apresenta somente pelos pokémons daquele tipo.', () => {
+  test('Teste se a Pokédex tem os botões de filtro', () => {
     renderWithRouter(<App />);
 
     const typeButton = screen.getByRole('button', { name: /fire/i });
     userEvent.click(typeButton);
 
     const allButtons = screen.getAllByTestId('pokemon-type-button');
-    pokemons.forEach((type, index) => {
-      expect(type.textContent).toBe(pokemons.type[index]);
-    });
 
-    // teste
+    allButtons.forEach((buttons, index) => {
+      expect(buttons.textContent).toBe(typesPokemons[index]);
+    });
+    // feito com a colaboração do colega Felippe Correa
   });
 });
