@@ -75,8 +75,6 @@ test('Teste se o usuário pode favoritar um pokémon através da página de deta
 
   const inputCheck = getByLabelText('Pokémon favoritado?');
   expect(inputCheck).toBeInTheDocument();
-  fireEvent.change(inputCheck, {
-    target: 'on',
-  });
+  fireEvent.change(inputCheck);
   expect(inputCheck.value).toBe('on');
 });
