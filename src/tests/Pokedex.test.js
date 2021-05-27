@@ -1,7 +1,6 @@
 import React from 'react';
 import { fireEvent } from '@testing-library/dom';
 import renderWithRouter from '../helper/renderWithRouter';
-// import Pokedex from '../components/Pokedex';
 import App from '../App';
 
 const pokemons = [
@@ -81,7 +80,8 @@ describe('Testing the `Pokédex` component', () => {
     expect(btnAll).toBeInTheDocument();
     fireEvent.click(btnAll);
     expect(nextPoke.disabled).toBe(false);
-
-
   });
+
+  // it('should Teste se é criado, dinamicamente, um botão de filtro para cada tipo de Pokémon.', () => {
+  // });
 });
