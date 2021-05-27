@@ -18,6 +18,16 @@ const renderWithRouter = (component) => {
 
 const pokemonN = 'pokemon-name';
 
+const pokemonsType = [
+  'Electric',
+  'Fire',
+  'Bug',
+  'Poison',
+  'Psychic',
+  'Normal',
+  'Dragon',
+];
+
 describe('routes', () => {
   test('tests if there s a h2 with the text `Encountered pokémons`', () => {
     const { getByRole } = renderWithRouter(<App />);
@@ -82,7 +92,7 @@ describe('routes', () => {
     });
   });
 
-  test('tests if the filter by type exists and ', () => {
+  test('tests if the filter by type exists', () => {
     const { getByRole, getAllByTestId } = renderWithRouter(<App />);
 
     const button = getAllByTestId('pokemon-type-button');
@@ -92,17 +102,8 @@ describe('routes', () => {
     });
     expect(buttonNext).toBeInTheDocument();
 
-    const pokemonsType = [
-      'Electric',
-      'Fire',
-      'Bug',
-      'Poison',
-      'Psychic',
-      'Normal',
-      'Dragon',
-    ];
-
     button.forEach((type, index) => {
+      // console.log(type.textContent);
       expect(type.textContent).toBe(pokemonsType[index]);
     });
   });
@@ -121,25 +122,27 @@ describe('routes', () => {
     expect(pokemon.textContent).toBe('Pikachu');
   });
 
-  test('tests if the filter by type buttons actually works', () => {
-    const { getAllByTestId } = renderWithRouter(<App />);
+  test('tests if the filter by type exists and works', () => {
+    const { getByRole, getByText } = renderWithRouter(<App />);
 
-    const pokemonsType = [
-      'Electric',
-      'Fire',
-      'Bug',
-      'Poison',
-      'Psychic',
-      'Normal',
-      'Dragon',
-    ];
+    const nextButton = getByText(/Próximo pokémon/i);
 
-    const button = getAllByTestId('pokemon-type-button');
+    const pokemonTypefilter = (newPokemonType) => pokemons
+      .filter(({ type }) => type === newPokemonType);
 
-    button.forEach((type, index) => {
-      // console.log(type.textContent);
-      // console.log(pokemonsType[index]);
-      expect(type.textContent).toBe(pokemonsType[index]);
+    const typesMapped = pokemons.map(({ type }) => type);
+    // console.log(typesMapped);
+
+    typesMapped.forEach((pokemonType) => {
+      // console.log(pokemonType);
+      const buttonType = getByRole('button', { name: pokemonType });
+      // console.log(buttonType);
+      userEvent.click(buttonType);
+      pokemonTypefilter(pokemonType).forEach(({ name: pokemon }) => {
+        // console.log(pokemon);
+        expect(getByText(pokemon)).toBeInTheDocument();
+        userEvent.click(nextButton);
+      });
     });
   });
 });
