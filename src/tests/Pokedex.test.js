@@ -1,4 +1,4 @@
-import { fireEvent, getByRole, screen } from '@testing-library/dom';
+import { fireEvent, screen } from '@testing-library/dom';
 import React from 'react';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
