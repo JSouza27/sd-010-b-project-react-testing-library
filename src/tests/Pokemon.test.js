@@ -63,3 +63,16 @@ para exibir detalhes deste Pokémon.
     expect(moreDetails).toHaveAttribute('href', `/pokemons/${id}`);
   });
 });
+
+describe(`Teste se ao clicar no link de navegação do Pokémon, é feito o redirecionamento
+da aplicação para a página de detalhes de Pokémon`, () => {
+  it('', () => {
+    const { getByRole, history } = renderWithRouter(
+      <Pokemon pokemon={ dragonair } isFavorite={ false } showDetailsLink />,
+    );
+    const moreDetails = getByRole('link', { name: 'More details' });
+    userEvent.click(moreDetails);
+    const { location: { pathname } } = history;
+    expect(pathname).toBe(`/pokemons/${id}`);
+  });
+});
