@@ -94,3 +94,14 @@ describe(`Teste também se a URL exibida no navegador muda para /pokemon/<id>, o
   });
 });
 
+describe('Teste se existe um ícone de estrela nos Pokémons favoritados.', () => {
+  it(`O ícone deve ser uma imagem com o atributo src contendo o caminho 
+/star-icon.svg e um atributo alt igual a <pokemon> is marked as favorite,
+onde <pokemon> é o nome do Pokémon exibido.`, () => {
+    const { getByRole } = renderWithRouter(
+      <Pokemon pokemon={ dragonair } isFavorite showDetailsLink />,
+    );
+    const favoriteStar = getByRole('img', { name: `${name} is marked as favorite` });
+    expect(favoriteStar).toHaveAttribute('src', '/star-icon.svg');
+  });
+});
