@@ -16,7 +16,7 @@ describe('testa o requisito 6', () => {
 
     expect(pkmnType).toBeInTheDocument();
     expect(pkmnType.textContent).toBe('Electric');
-    
+
     expect(pkmnWeight).toBeInTheDocument();
     expect(pkmnWeight.textContent).toBe('Average weight: 6.0 kg');
 
@@ -33,8 +33,8 @@ describe('testa o requisito 6', () => {
     });
     expect(moreDetails).toHaveAttribute('href', '/pokemons/25');
     userEvent.click(moreDetails);
-    
-    const pkmnDetails = screen.getByText(/pikachu details/i)
+
+    const pkmnDetails = screen.getByText(/pikachu details/i);
     expect(pkmnDetails).toBeInTheDocument();
 
     const favCheckBox = screen.getByRole('checkbox', {
