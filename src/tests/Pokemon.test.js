@@ -22,7 +22,9 @@ describe('test component Pokemon', () => {
 
       expect(pokemonName).toHaveTextContent(name);
       expect(pokemonType).toHaveTextContent(type);
-      expect(pokemonWeight).toHaveTextContent(`${value} ${measurementUnit}`);
+      expect(pokemonWeight).toHaveTextContent(
+        `Average weight: ${value} ${measurementUnit}`,
+      );
       // ** SOURCE https://dev.to/raphaelchaula/a-simple-image-test-in-react-3p6f */
       expect(pokemonImage).toHaveAttribute('src', image);
       expect(pokemonImage).toHaveAttribute('alt', `${name} sprite`);

@@ -82,6 +82,7 @@ describe('Test pokedex component', () => {
 
     const nextButton = screen.getByRole('button', { name: /Próximo pokémon/i });
 
+    // Resolvido com as dicas do Zambelli no plantão
     pokemons.forEach(({ name }) => {
       const pokemonRendered = screen.getByText(name);
       expect(pokemonRendered).toBeInTheDocument();
