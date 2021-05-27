@@ -4,6 +4,8 @@ import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
 describe('Testing Pokedex.js', () => {
+  const NEXT_BUTTON = 'Próximo pokémon';
+
   it('Verifies if have a h2 text with "Encountered pokémons"', () => {
     const { getByRole } = renderWithRouter(<App />);
     const encounteredPokemons = getByRole('heading', {
@@ -16,7 +18,7 @@ describe('Testing Pokedex.js', () => {
 
   it('Verifies if when clicking at "Próximo pokémon" button, changes pokémon', () => {
     const { getByText } = renderWithRouter(<App />);
-    const nextButton = getByText('Próximo pokémon');
+    const nextButton = getByText(NEXT_BUTTON);
     expect(nextButton.type).toBe('button');
 
     const CURRENT_POKEMON = 'Pikachu';
@@ -29,7 +31,7 @@ describe('Testing Pokedex.js', () => {
 
   it('Verifies if when passes through all pokemons, returns to Pikachu', () => {
     const { getByText } = renderWithRouter(<App />);
-    const nextButton = getByText('Próximo pokémon');
+    const nextButton = getByText(NEXT_BUTTON);
     expect(nextButton.type).toBe('button');
 
     const POKEMON_AMOUNT = 9;
@@ -47,5 +49,20 @@ describe('Testing Pokedex.js', () => {
     // Must have only one 'More details'
     const moreDetails = getAllByText('More details');
     expect(moreDetails.length).toBe(1);
+  });
+
+  it('Clicks in a button type and only shows up that type of pokemon', () => {
+    const { getByText, getAllByText } = renderWithRouter(<App />);
+    const TYPE = 'Fire'; // Type to test
+    const nextButton = getByText(NEXT_BUTTON);
+    const typeButton = getByText(TYPE);
+    expect(typeButton.type).toBe('button');
+
+    userEvent.click(typeButton);
+    // Must have the paragraph and button with 'Fire' text
+    expect(getAllByText(TYPE).length).toBe(2);
+
+    userEvent.click(nextButton);
+    expect(getAllByText(TYPE).length).toBe(2);
   });
 });
