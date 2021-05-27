@@ -66,7 +66,7 @@ describe('Testing the `Pokédex` component', () => {
     expect(firstPoke).toBeInTheDocument();
   });
 
-  it('Teste se a Pokédex tem os botões de filtro', () => {
-    console.log('oi');
-  });
+  // it('Teste se a Pokédex tem os botões de filtro', () => {
+  //   console.log('oi');
+  // });
 });
