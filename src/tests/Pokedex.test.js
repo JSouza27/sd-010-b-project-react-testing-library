@@ -182,4 +182,14 @@ describe('Testing Pokedex.js', () => {
     // All, Electric, Fire and Proximo Pokémon
     expect(buttons.length).toBe(MAX_BUTTONS_NUM);
   });
+
+  it('Verifies if have only one pokemon, "next button" are disabled', () => {
+    const { getByText, getByRole } = renderWithRouter(<App />);
+    const nextButton = getByText(NEXT_BUTTON);
+    const electricType = getByRole('button', { name: 'Electric' });
+
+    userEvent.click(electricType);
+
+    expect(nextButton.disabled).toBeTruthy();
+  });
 });
