@@ -5,7 +5,7 @@ import App from '../App';
 
 const nameButtonNext = 'Próximo pokémon';
 
-describe('Teste do quinto requisito', () => {
+describe('Testes do quinto requisito', () => {
   test('Teste se página contém um heading h2 com o texto Encountered pokémons', () => {
     renderWithRouter(<App />);
     const heading = screen.getByRole('heading', { level: 2 });
