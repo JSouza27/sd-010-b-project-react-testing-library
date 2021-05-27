@@ -5,7 +5,7 @@ import { Pokemon } from '../components';
 import data from '../data';
 
 const isPokemonFavoriteById = {
-  4: false,
+  4: true,
   10: false,
   23: false,
   25: false,
@@ -107,4 +107,28 @@ test('Also test if the URL displayed in the browser changes to / pokemon / <id>,
   );
   fireEvent.click(getByText(/more details/i));
   expect(history.location.pathname).toBe(`/pokemons/${pokemon.id}`);
+});
+
+describe('Test if there is a star icon on favorite Pokémon', () => {
+  it('The icon must be an image with the src attribute'
+  + ' containing the path /star-icon.svg', () => {
+    const { getAllByRole } = renderWithRouter(
+      <Pokemon
+        pokemon={ data[1] }
+        isFavorite={ isPokemonFavoriteById[data[1].id] }
+      />,
+    );
+    expect(getAllByRole('img')[1].src).toBe('http://localhost/star-icon.svg');
+  });
+
+  it('The image must have the alt attribute equal to <pokemon> is marked as favorite,'
+  + ' where <pokemon> is the name of the Pokémon displayed.', () => {
+    const { getAllByRole } = renderWithRouter(
+      <Pokemon
+        pokemon={ data[1] }
+        isFavorite={ isPokemonFavoriteById[data[1].id] }
+      />,
+    );
+    expect(getAllByRole('img')[1].alt).toBe(`${data[1].name} is marked as favorite`);
+  });
 });
