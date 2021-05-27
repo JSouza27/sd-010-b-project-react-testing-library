@@ -3,9 +3,15 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './RenderWithRouter';
 import Pokedex from '../components/Pokedex';
+import Data from '../data';
 
 test('check is there is a heading h2', () => {
-  renderWithRouter(<Pokedex />);
+  renderWithRouter(<Pokedex
+    pokemon={ Data[0] }
+    isFavorite={ [Data[0].id] }
+    pokemons={ Data }
+    isPokemonFavoriteById={ Data[0].id }
+  />);
 
   const message = screen.getByRole('heading', {
     level: 2,
@@ -15,7 +21,12 @@ test('check is there is a heading h2', () => {
 });
 
 test('check is there is a next Pokemon button', () => {
-  renderWithRouter(<Pokedex />);
+  renderWithRouter(<Pokedex
+    pokemon={ Data[0] }
+    isFavorite={ [Data[0].id] }
+    pokemons={ Data }
+    isPokemonFavoriteById={ Data[0].id }
+  />);
 
   const nextPokemon = screen.getByRole('button', {
     name: 'Próximo pokémon',
@@ -23,20 +34,16 @@ test('check is there is a next Pokemon button', () => {
   userEvent.click(nextPokemon);
 });
 
-// test('check is there is a filter Pokemon button', () => {
-//   renderWithRouter(<Pokedex />);
+test('check if the first pokemon is shown after the last one', () => {
+  renderWithRouter(<Pokedex
+    pokemon={ Data[0] }
+    isFavorite={ [Data[0].id] }
+    pokemons={ Data }
+    isPokemonFavoriteById={ Data[0].id }
+  />);
 
-//   const nextPokemon = screen.getByRole('button', {
-//     name: 'Próximo pokémon',
-//   });
-//   userEvent.click(nextPokemon);
-// });
-
-// test('check is there is a reset filter Pokemon button', () => {
-//   renderWithRouter(<Pokedex />);
-
-//   const nextPokemon = screen.getByRole('button', {
-//     name: 'Próximo pokémon',
-//   });
-//   userEvent.click(nextPokemon);
-// });
+  const nextPokemon = screen.getByRole('button', {
+    name: '',
+  });
+  userEvent.click(nextPokemon);
+});
