@@ -13,30 +13,30 @@ describe('Teste o componente <Pokedex.js />', () => {
     });
     expect(h2).toBeInTheDocument();
   });
-  // it('Teste se é exibido o próximo Pokémon da lista quando o botão é clicado', () => {
-  //   renderWithRouter(<App />);
-  //   // O botão deve conter o texto Próximo pokémon;
-  //   const txtBtnNext = screen.getByText(/próximo pokémon/i);
-  //   expect(txtBtnNext).toBeInTheDocument();
-  //   // Os próximos Pokémons da lista devem ser mostrados, um a um, ao clicar
-  //   const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
-  //   const pokemons = [
-  //     'Pikachu',
-  //     'Charmander',
-  //     'Caterpie',
-  //     'Ekans',
-  //     'Alakazam',
-  //     'Mew',
-  //     'Rapidash',
-  //     'Snorlax',
-  //     'Dragonair',
-  //   ];
-  //   for (let index = 0; index < pokemons.length; index += 1) {
-  //     const namePokemon = screen.getByText(pokemons[index]);
-  //     expect(namePokemon).toBeInTheDocument();
-  //     userEvent.click(btnNext);
-  //   }
-  // });
+  it('Teste se é exibido o próximo Pokémon da lista quando o botão é clicado', () => {
+    renderWithRouter(<App />);
+    // O botão deve conter o texto Próximo pokémon;
+    const txtBtnNext = screen.getByText(/próximo pokémon/i);
+    expect(txtBtnNext).toBeInTheDocument();
+    // Os próximos Pokémons da lista devem ser mostrados, um a um, ao clicar
+    const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
+    const pokemons = [
+      'Pikachu',
+      'Charmander',
+      'Caterpie',
+      'Ekans',
+      'Alakazam',
+      'Mew',
+      'Rapidash',
+      'Snorlax',
+      'Dragonair',
+    ];
+    for (let index = 0; index < pokemons.length; index += 1) {
+      const namePokemon = screen.getByText(pokemons[index]);
+      expect(namePokemon).toBeInTheDocument();
+      userEvent.click(btnNext);
+    }
+  });
   // it('Teste se é mostrado apenas um Pokémon por vez.', () => {
   //   renderWithRouter(<App />);
   //   const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
