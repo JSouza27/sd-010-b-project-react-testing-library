@@ -44,11 +44,13 @@ describe('Check if the pokemon info are displayed', () => {
       isPokemonFavoriteById={ Data[0].id }
     />);
 
-    const pokeHeading2 = screen.getByRole('heading', {
+    const pokeHeading = screen.getByRole('heading', {
       level: 2,
       name: 'Summary',
     });
-    expect(pokeHeading2.innerHTML).toBe('Summary');
+    expect(pokeHeading.innerHTML).toBe('Summary');
+    const pokeHeading2 = screen.getByText(/This intelligent Pokémon roasts hard/i);
+    expect(pokeHeading2.innerHTML).toContain('This intelligent Pokémon roasts hard');
   });
 
   test('The page must have a paragraph with a ', () => {
