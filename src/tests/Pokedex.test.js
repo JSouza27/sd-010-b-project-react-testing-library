@@ -15,6 +15,7 @@ const isPokemonFavoriteById = {
   148: false,
   151: false,
 };
+const px = 'Próximo pokémon';
 
 test('Test if the page contains an h2 heading with the text Encountered Pokémon', () => {
   const { getByRole } = renderWithRouter(
@@ -35,7 +36,7 @@ describe('Test if the next Pokémon in the list is'
         isPokemonFavoriteById={ isPokemonFavoriteById }
       />,
     );
-    expect(getByText(/Próximo pokémon/i).innerHTML).toBe('Próximo pokémon');
+    expect(getByText(px).innerHTML).toBe(px);
   });
 
   it('The next Pokémon in the list must be shown,'
@@ -46,7 +47,7 @@ describe('Test if the next Pokémon in the list is'
         isPokemonFavoriteById={ isPokemonFavoriteById }
       />,
     );
-    const buttonNext = getByText(/Próximo pokémon/i);
+    const buttonNext = getByText(px);
     data.forEach((pokemon) => {
       const namePokemon = getByText(pokemon.name);
       expect(namePokemon.innerHTML).toBe(pokemon.name);
@@ -62,7 +63,7 @@ describe('Test if the next Pokémon in the list is'
         isPokemonFavoriteById={ isPokemonFavoriteById }
       />,
     );
-    const buttonNext = getByText(/Próximo pokémon/i);
+    const buttonNext = getByText(px);
     data.forEach((pok) => {
       const namePokemon = getByText(pok.name);
       const condicao = namePokemon.innerHTML === data[8].name;
@@ -91,24 +92,79 @@ describe('Test if the Pokédex has the filter buttons', () => {
         isPokemonFavoriteById={ isPokemonFavoriteById }
       />,
     );
-    const buttonNext = getByText(/Próximo pokémon/i);
+    const buttonNext = getByText(px);
     getAllByRole('button').forEach((button) => {
-      console.log(button.innerHTML);
+      // console.log(button.innerHTML);
       fireEvent.click(button);
       if (button.innerHTML === 'All') {
         data.forEach((poke) => {
           expect(getByText(poke.name).innerHTML).toBe(poke.name);
           fireEvent.click(buttonNext);
         });
-      } else if (button.innerHTML !== 'Próximo pokémon') {
+      } else if (button.innerHTML !== px) {
         (data.filter((poke) => button.innerHTML === poke.type))
           .forEach(((type) => {
             // console.log(type.type);
             expect(getByTestId('pokemon-type').innerHTML).toBe(type.type);
-            console.log(getByTestId('pokemon-name').innerHTML);
+            // console.log(getByTestId('pokemon-name').innerHTML);
             fireEvent.click(buttonNext);
           }));
       }
+    });
+  });
+
+  it('The button text must match the type name, eg. Psychic', () => {
+    const { getAllByRole, getByTestId } = renderWithRouter(
+      <Pokedex
+        pokemons={ data }
+        isPokemonFavoriteById={ isPokemonFavoriteById }
+      />,
+    );
+    getAllByRole('button').forEach((button) => {
+      fireEvent.click(button);
+      if ((button.innerHTML !== 'All') && (button.innerHTML !== 'Próximo pokémon')) {
+        expect(button.innerHTML).toBe(getByTestId('pokemon-type').innerHTML);
+      }
+    });
+  });
+});
+
+describe('Test if the Pokédex contains a button to reset the filter', () => {
+  it('The button text must be All', () => {
+    const { getByText } = renderWithRouter(
+      <Pokedex
+        pokemons={ data }
+        isPokemonFavoriteById={ isPokemonFavoriteById }
+      />,
+    );
+    expect(getByText('All').innerHTML).toBe('All');
+  });
+
+  it('Pokedéx should show Pokémon normally (without filters)'
+  + ' when the All button is clicked', () => {
+    const { getByText } = renderWithRouter(
+      <Pokedex
+        pokemons={ data }
+        isPokemonFavoriteById={ isPokemonFavoriteById }
+      />,
+    );
+    const buttonNext = getByText(px);
+    fireEvent.click(getByText('All'));
+    data.forEach((poke) => {
+      expect(getByText(poke.name).innerHTML).toBe(poke.name);
+      fireEvent.click(buttonNext);
+    });
+  });
+
+  it('When loading the page, the selected filter should be All', () => {
+    const { getAllByTestId } = renderWithRouter(
+      <Pokedex
+        pokemons={ data }
+        isPokemonFavoriteById={ isPokemonFavoriteById }
+      />,
+    );
+    (getAllByTestId('pokemon-type-button')).forEach((button) => {
+      expect(button.innerHTML).not.toBe('All');
     });
   });
 });
