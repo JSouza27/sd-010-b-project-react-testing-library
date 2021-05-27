@@ -26,7 +26,8 @@ const pikachu = {
     },
   ],
   summary:
-    'This intelligent Pokémon roasts hard berries with electricity',
+    ('This intelligent Pokémon roasts hard berries with electricity '
+    + 'to make them tender enough to eat.'),
 };
 
 describe('testa Requisito 7', () => {
@@ -100,8 +101,8 @@ describe('testa Requisito 7', () => {
     expect(moreDetails).toBeInTheDocument();
     userEvent.click(moreDetails);
 
-    const { foundAt } = pikachu.foundAt;
-    expect(foundAt.length).toBe(2);
+    const { foundAt } = pikachu;
+    expect((foundAt).length).toBe(2);
   });
 
   it('verifica se cada mapa contém o nome de sua localização', () => {
