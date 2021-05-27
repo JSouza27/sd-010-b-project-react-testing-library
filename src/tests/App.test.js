@@ -3,12 +3,43 @@ import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import App from '../App';
 
-test('shows the Pokédex when the route is `/`', () => {
+test('Exibe a Pokedex quando a rota é `/`', () => {
   const { getByText } = render(
-    <MemoryRouter initialEntries={ ['/'] }>
+    <MemoryRouter>
       <App />
     </MemoryRouter>,
   );
 
-  expect(getByText('Encountered pokémons')).toBeInTheDocument();
+  const initialPage = getByText(/Pokédex/i);
+  expect(initialPage).toBeInTheDocument();
+});
+
+test('Topo da aplicação contém link com o texto `Home`', () => {
+  const { getByText } = render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>,
+  );
+  const homeLink = getByText(/Home/i);
+  expect(homeLink).toBeInTheDocument();
+});
+
+test('Topo da aplicação contém link com o texto `About`', () => {
+  const { getByText } = render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>,
+  );
+  const aboutLink = getByText(/About/i);
+  expect(aboutLink).toBeInTheDocument();
+});
+
+test('Topo da aplicação contém link com o texto `Favorite Pokémons`', () => {
+  const { getByText } = render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>,
+  );
+  const favoritePokemonsLink = getByText(/Favorite Pokémons/i);
+  expect(favoritePokemonsLink).toBeInTheDocument();
 });
