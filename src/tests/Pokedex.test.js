@@ -13,4 +13,17 @@ describe('Testing Pokedex.js', () => {
 
     expect(encounteredPokemons).toBeInTheDocument();
   });
+
+  it('Verify if when clicking at "Próximo pokémon" button, changes pokémon', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const nextButton = getByText('Próximo pokémon');
+    expect(nextButton.type).toBe('button');
+
+    const CURRENT_POKEMON = 'Pikachu';
+    const NEXT_POKEMON = 'Charmander';
+
+    expect(getByText(CURRENT_POKEMON)).toBeInTheDocument();
+    userEvent.click(nextButton);
+    expect(getByText(NEXT_POKEMON)).toBeInTheDocument();
+  });
 });
