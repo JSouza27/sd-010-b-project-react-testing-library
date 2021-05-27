@@ -8,7 +8,7 @@ import App from '../App';
 
 const getByTestId = (dataTestId, valueToMatch) => {
   const testId = screen.getByTestId(dataTestId);
-  expect(testId.innerHTML).toMatch(valueToMatch);
+  expect(testId.innerHTML).toEqual(valueToMatch);
 };
 
 describe('6 - Pokemons info, sprites, image, routes', () => {
