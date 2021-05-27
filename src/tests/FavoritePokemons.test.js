@@ -12,9 +12,6 @@ test('Teste se a pessoa não tiver pokémons favoritos', () => {
 });
 
 test('Teste se é exibido todos os cards de pokémons favoritados.', () => {
-  // É possivel receber props dentro do teste?
-  // renderWithRouter(<FavoritePokemons pokemons={ pokemons } />);
-  // expect(pokemons.length).toBe(pokemonCard.length);
   renderWithRouter(<App />);
   const buttonDetail = screen.getByRole('link', {
     name: /More details/i,
