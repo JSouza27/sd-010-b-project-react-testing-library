@@ -64,6 +64,7 @@ describe('requisito 5', () => {
   test('Pokedex have button reset with name All', () => {
     renderWithRouter(<App />);
     const buttonAll = screen.getByRole('button', { name: 'All' });
+    expect(buttonAll).toBeInTheDocument();
     expect(screen.queryByText(data[0].name)).toBeInTheDocument();
 
     fireEvent.click(buttonAll);
@@ -82,11 +83,13 @@ describe('requisito 5', () => {
 
     expect(screen.getByRole('button', { name: 'All' })).toBeInTheDocument();
     pokemonsTypes.forEach((type) => {
-      expect(screen.getByRole('button', { name: type })).toBeInTheDocument();
+      const buttonType = screen.getByRole('button', { name: type });
+      expect(buttonType).toBeInTheDocument();
+      expect(buttonType.getAttribute('data-testid')).toBe('pokemon-type-button');
     });
   });
 
-  test('', () => {
+  test('The button of next is disable if have only one pokemon type', () => {
     renderWithRouter(<App />);
 
     const buttonTypeEletric = screen.getByRole('button', { name: 'Electric' });
@@ -96,3 +99,5 @@ describe('requisito 5', () => {
     expect(buttonNextPokemon).toBeDisabled();
   });
 });
+
+// getAtribute -> https://stackoverflow.com/questions/41070895/how-do-i-get-an-attribute-of-an-element-nested-in-a-react-component-using-jest-a
