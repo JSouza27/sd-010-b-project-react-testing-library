@@ -26,4 +26,19 @@ describe('Testing Pokedex.js', () => {
     userEvent.click(nextButton);
     expect(getByText(NEXT_POKEMON)).toBeInTheDocument();
   });
+
+  it('verify if when passes through all pokemons, returns to Pikachu', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const nextButton = getByText('Próximo pokémon');
+    expect(nextButton.type).toBe('button');
+
+    const POKEMON_AMOUNT = 9;
+    let currAmount = POKEMON_AMOUNT;
+    while (currAmount !== 0) {
+      userEvent.click(nextButton);
+      currAmount -= 1;
+    }
+
+    expect(getByText('Pikachu')).toBeInTheDocument();
+  });
 });
