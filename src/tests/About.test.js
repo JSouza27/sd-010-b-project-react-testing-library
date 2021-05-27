@@ -1,5 +1,5 @@
 import React from 'react';
-import { queryAllByRole, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import About from '../components/About';
 
