@@ -44,22 +44,22 @@ describe('Teste o componente <Pokedex.js />', () => {
     const linkMoreDetails = screen.getAllByRole('link', { name: /more details/i });
     expect(linkMoreDetails.length).toBe(1);
   });
-  // it('Teste se a Pokédex tem os botões de filtro', () => {
-  //   renderWithRouter(<App />);
-  //   const btnFilters = screen.getAllByTestId('pokemon-type-button');
-  //   const typesPokemons = [
-  //     'Electric',
-  //     'Fire',
-  //     'Bug',
-  //     'Poison',
-  //     'Psychic',
-  //     'Normal',
-  //     'Dragon',
-  //   ];
-  //   btnFilters.forEach((btn, index) => {
-  //     expect(btn.textContent).toBe(typesPokemons[index]);
-  //   });
-  // });
+  it('Teste se a Pokédex tem os botões de filtro', () => {
+    renderWithRouter(<App />);
+    const btnFilters = screen.getAllByTestId('pokemon-type-button');
+    const typesPokemons = [
+      'Electric',
+      'Fire',
+      'Bug',
+      'Poison',
+      'Psychic',
+      'Normal',
+      'Dragon',
+    ];
+    btnFilters.forEach((btn, index) => {
+      expect(btn.textContent).toBe(typesPokemons[index]);
+    });
+  });
   // it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
   //   renderWithRouter(<App />);
   //   const btnAll = screen.getByRole('button', { name: /all/i });
