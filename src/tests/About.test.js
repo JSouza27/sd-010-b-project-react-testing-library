@@ -30,6 +30,11 @@ describe('testing the `About` component', () => {
 
   test('check if the page contains a Pokédex image', () => {
     render(<About />);
-    // preciso recuperar a imagem
+
+    const imageSrc = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
+
+    const imageAlt = 'Pokédex';
+
+    expect(screen.getByAltText(imageAlt)).toHaveAttribute('src', imageSrc);
   });
 });
