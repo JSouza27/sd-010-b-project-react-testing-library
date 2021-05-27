@@ -20,4 +20,13 @@ describe('Testes do sexto requisito ', () => {
 
     expect(typePokemon).toHaveTextContent(type);
   });
+
+  test('O peso deve ser mostrado de forma correta', () => {
+    renderWithRouter(<App />);
+    const { averageWeight: { value, measurementUnit } } = pokemons[0];
+    const weightText = `Average weight: ${value} ${measurementUnit}`;
+    const testId = screen.getByTestId('pokemon-weight');
+
+    expect(testId).toHaveTextContent(weightText);
+  });
 });
