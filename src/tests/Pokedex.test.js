@@ -37,13 +37,13 @@ describe('Teste o componente <Pokedex.js />', () => {
       userEvent.click(btnNext);
     }
   });
-  // it('Teste se é mostrado apenas um Pokémon por vez.', () => {
-  //   renderWithRouter(<App />);
-  //   const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
-  //   userEvent.click(btnNext);
-  //   const linkMoreDetails = screen.getAllByRole('link', { name: /more details/i });
-  //   expect(linkMoreDetails.length).toBe(1);
-  // });
+  it('Teste se é mostrado apenas um Pokémon por vez.', () => {
+    renderWithRouter(<App />);
+    const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
+    userEvent.click(btnNext);
+    const linkMoreDetails = screen.getAllByRole('link', { name: /more details/i });
+    expect(linkMoreDetails.length).toBe(1);
+  });
   // it('Teste se a Pokédex tem os botões de filtro', () => {
   //   renderWithRouter(<App />);
   //   const btnFilters = screen.getAllByTestId('pokemon-type-button');
