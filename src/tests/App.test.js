@@ -15,21 +15,33 @@ test('renders a reading with the text `Pokédex`', () => {
   expect(heading).toBeInTheDocument();
 });
 
-test('check if there are a set of links to Home, About and Favorite Pokemon', () => {
-  renderWithRouter(<App />);
+test('Check if there is a link to Home', () => {
+  const { history } = renderWithRouter(<App />);
 
   const home = screen.getByRole('link', {
     name: /Home/i,
   });
   userEvent.click(home);
+  const { pathname } = history.location;
+  expect(pathname).toBe('/');
+});
 
+test('Check if there is a link to About', () => {
+  const { history } = renderWithRouter(<App />);
   const about = screen.getByRole('link', {
     name: /About/i,
   });
   userEvent.click(about);
+  const { pathname } = history.location;
+  expect(pathname).toBe('/about');
+});
 
+test('Check if there is a link to Favorite Pokemon', () => {
+  const { history } = renderWithRouter(<App />);
   const favorite = screen.getByRole('link', {
     name: /Favorite Pokémons/i,
   });
   userEvent.click(favorite);
+  const { pathname } = history.location;
+  expect(pathname).toBe('/favorites');
 });
