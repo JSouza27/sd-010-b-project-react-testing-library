@@ -56,10 +56,25 @@ describe('Teste component App', () => {
     const about = screen.getByRole('link', {
       name: 'About',
     });
-    console.log(about);
     userEvent.click(about);
     const { pathname } = history.location;
     expect(pathname).toBe('/about');
+  });
+  test('', () => {
+
+  });
+  test('', () => {
+
+  });
+  test('', () => {
+
+  });
+  test('É redirecionada para a página Pokémons Favoritados'
+  + 'URL /favorites ao cliclar no link Favorite Pokémons', () => {
+
+  });
+  test('É redirecionada página Not Found URL desconhecida', () => {
+
   });
 });
 

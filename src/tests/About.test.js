@@ -26,4 +26,10 @@ describe('Teste component About', () => {
 
     expect(img.src).toContain('https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
   });
+  test('Página contém dois paragrafos-1', () => {
+
+  });
+  ttest('Página contém dois paragrafos-2', () => {
+
+  });
 });
