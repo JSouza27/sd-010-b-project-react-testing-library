@@ -43,10 +43,10 @@ describe('test component PokemonDetails', () => {
     expect(pokemonText).toBeInTheDocument();
   });
 
-  test('Heading Game Locations "pokemon Name"', () => {
+  test('Section Game Locations', () => {
     renderWithRouter(<App />);
 
-    const { name } = pokemons[0];
+    const { name, foundAt } = pokemons[0];
 
     const moreDetailsButton = screen.getByRole('link', { name: /more details/i });
     userEvent.click(moreDetailsButton);
@@ -55,5 +55,10 @@ describe('test component PokemonDetails', () => {
       level: 2, name: `Game Locations of ${name}`,
     });
     expect(pageTitle).toBeInTheDocument();
+
+    const maps = screen.getAllByAltText(`${name} location`);
+    foundAt.forEach(({ map }, index) => {
+      expect(maps[index]).toHaveAttribute('src', map);
+    });
   });
 });
