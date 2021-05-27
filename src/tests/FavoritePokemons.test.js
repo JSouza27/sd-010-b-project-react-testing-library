@@ -32,3 +32,11 @@ test('test if card is displayed', () => {
 
   expect(imgFavoriteStar[1]).toHaveAttribute('src', '/star-icon.svg');
 });
+
+test('test if no card is displayed', () => {
+  const { getByText } = renderWithRouter(<FavoritePokemons />);
+
+  const noFavoriteText = getByText(/No favorite pokemon found/i);
+
+  expect(noFavoriteText).toBeInTheDocument();
+});
