@@ -12,4 +12,12 @@ describe('Testes do sexto requisito ', () => {
 
     expect(namePokemon).toHaveTextContent(name);
   });
+
+  test('O tipo correto do pokémon deve ser mostrado na tela', () => {
+    renderWithRouter(<App />);
+    const typePokemon = screen.getByTestId('pokemon-type');
+    const { type } = pokemons[0];
+
+    expect(typePokemon).toHaveTextContent(type);
+  });
 });
