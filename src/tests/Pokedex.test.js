@@ -121,10 +121,39 @@ describe('Teste o componente <Pokedex.js />', () => {
   });
 
   it('Teste se é criado dinamicamente um botão de filtro para cada Pokémon', () => {
+    renderWithRouter(<Pokedex
+      pokemons={ pokemons }
+      isPokemonFavoriteById={ newObject }
+    />);
 
+    const arrayButtons = screen.getAllByTestId('pokemon-type-button');
+    arrayButtons.forEach((currentValue) => {
+      expect(currentValue).toBeInTheDocument();
+    });
+
+    const buttonAll = screen.getByRole('button', {
+      name: /all/i,
+    });
+
+    expect(buttonAll).toBeInTheDocument();
   });
 
   it('O botão de Próximo deve ser desabilitado se a lista tiver um só pokémon', () => {
+    renderWithRouter(<Pokedex
+      pokemons={ pokemons }
+      isPokemonFavoriteById={ newObject }
+    />);
 
+    const bugButton = screen.getByRole('button', {
+      name: /bug/i,
+    });
+
+    userEvent.click(bugButton);
+
+    const nextButton = screen.getByRole('button', {
+      name: /Próximo pokémon/i,
+    });
+
+    expect(nextButton).toBeDisabled();
   });
 });
