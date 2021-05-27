@@ -15,6 +15,7 @@ const isPokemonFavoriteById = {
   148: false,
   151: false,
 };
+const typePokemon = [...new Set(data.reduce((types, { type }) => [...types, type], []))];
 const px = 'Próximo pokémon';
 
 test('Test if the page contains an h2 heading with the text Encountered Pokémon', () => {
@@ -168,3 +169,22 @@ describe('Test if the Pokédex contains a button to reset the filter', () => {
     });
   });
 });
+
+describe('Test whether a filter button is created dynamically for each type of Pokémon.',
+  () => {
+    it('The filter buttons must be dynamic;', () => {
+      const { getAllByRole } = renderWithRouter(
+        <Pokedex
+          pokemons={ data }
+          isPokemonFavoriteById={ isPokemonFavoriteById }
+        />,
+      );
+      let index = 0;
+      getAllByRole('button').forEach((buttons) => {
+        if ((buttons.innerHTML !== 'All') && (buttons.innerHTML !== px)) {
+          expect(buttons).toHaveTextContent(typePokemon[index]);
+          index += 1;
+        }
+      });
+    });
+  });
