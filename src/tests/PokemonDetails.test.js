@@ -118,10 +118,22 @@ describe('Teste se o usuário pode favoritar através da página de detalhes.', 
     const btnCheckbox = screen.getByRole('checkbox', { name: /pokémon favoritado/i });
     userEvent.click(btnCheckbox);
 
-    const favoritePokemon = 
+    const trueFavorite = screen.getByAltText('Pikachu is marked as favorite');
+    expect(trueFavorite).toBeInTheDocument();
 
+    userEvent.click(btnCheckbox);
 
+    const falseFavorite = screen.queryByAltText('Pikachu is marked as favorite');
+    expect(falseFavorite).not.toBeInTheDocument();
   });
 
+  test('O label do checkbox deve conter o texto Pokémon favoritado', () => {
+    renderWithRouter(<App />);
 
+    const details = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(details);
+
+    const labelCheckBox = screen.getByLabelText('Pokémon favoritado?');
+    expect(labelCheckBox).toBeInTheDocument();
+  });
 });
