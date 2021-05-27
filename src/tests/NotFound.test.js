@@ -15,4 +15,15 @@ describe('Tests the NotFound component', () => {
     expect(emoji).toBeInTheDocument();
     expect(emoji.innerHTML).toBe(' 😭');
   });
+
+  it('shows the specific image', () => {
+    const { getByRole } = renderWithRouter(<NotFound />);
+
+    const pikachuCrying = getByRole('img', {
+      name: 'Pikachu crying because the page requested was not found',
+    });
+
+    expect(pikachuCrying).toBeInTheDocument();
+    expect(pikachuCrying.src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+  });
 });
