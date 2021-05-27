@@ -46,7 +46,7 @@ describe('Teste se os detalhades do Pokémon selecionado são mostradas na tela.
 });
 
 describe('Teste se existe uma seção com as localizações do pokémon', () => {
-  test('heading h2 com o texto Game Locations of <name>;', () => {
+  test('teste se há um heading h2 com o texto Game Locations of <name>;', () => {
     renderWithRouter(<App />);
 
     const details = screen.getByRole('link', { name: /more details/i });
@@ -55,5 +55,18 @@ describe('Teste se existe uma seção com as localizações do pokémon', () => 
     const gameLocation = screen.getByRole('heading', {
       name: /game locations of pikachu/i });
     expect(gameLocation).toBeInTheDocument();
+  });
+
+  test('Testa as localizações do Pokémon na seção de detalhes;', () => {
+    renderWithRouter(<App />);
+
+    const details = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(details);
+
+    const firstLocal = screen.getByText(/kanto viridian forest/i);
+    expect(firstLocal).toBeInTheDocument();
+
+    const secondLocal = screen.getByText(/kanto power plant/i);
+    expect(secondLocal).toBeInTheDocument();
   });
 });
