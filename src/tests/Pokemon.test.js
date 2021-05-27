@@ -51,3 +51,15 @@ onde <name> é o nome do pokémon`, () => {
     expect(pokemonImage).toHaveAttribute('src', image);
   });
 });
+
+describe(`Teste se o card do Pokémon indicado na Pokédex contém um link de navegação
+para exibir detalhes deste Pokémon.
+  O link deve possuir a URL /pokemons/<id>, onde <id> é o id do Pokémon exibido`, () => {
+  it('', () => {
+    const { getByRole } = renderWithRouter(
+      <Pokemon pokemon={ dragonair } isFavorite={ false } showDetailsLink />,
+    );
+    const moreDetails = getByRole('link');
+    expect(moreDetails).toHaveAttribute('href', `/pokemons/${id}`);
+  });
+});
