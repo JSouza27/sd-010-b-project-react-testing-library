@@ -9,7 +9,7 @@ import App from '../App';
 
 // document.querySelectorAll('.pokemon')
 
-describe(`
+describe(`3-
 Check the message 'No favorite pokemon found'. 
 Checks whether favorite pokemons are rendered. 
 Check that there are no errors in the favorite action.`, () => {
@@ -48,6 +48,7 @@ Check that there are no errors in the favorite action.`, () => {
     userEvent.click(pokemonFavorite);
     // Verifico se a classe pokemon existe e é maior que 0 pois favoritei o pikachu
     const pokemonNumber = document.querySelectorAll('.pokemon').length;
+    // Apenas treinando com matchers e biblioteca por isso esta redundante.
     expect(pokemonNumber).toBeGreaterThan(0);
     expect(pokemonNumber).toBe(1);
     const pikachu = screen.getByRole('img', {
