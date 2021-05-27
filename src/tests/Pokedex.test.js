@@ -81,13 +81,6 @@ describe('Teste o componente <Pokedex.js />', () => {
       });
       expect(getButton).toBeInTheDocument();
     }
-  });
-
-  it('', () => {
-    renderWithRouter(<Pokedex
-      pokemons={ pokemons }
-      isPokemonFavoriteById={ newObject }
-    />);
 
     const getFire = screen.getByRole('button', {
       name: /fire/i,
@@ -103,6 +96,8 @@ describe('Teste o componente <Pokedex.js />', () => {
 
     const getName = screen.getByText('Rapidash');
     expect(getName).toBeInTheDocument();
+
+    expect(getFire).toHaveTextContent('Fire');
   });
 
   it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
