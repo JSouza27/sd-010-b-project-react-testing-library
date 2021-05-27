@@ -7,7 +7,14 @@ import userEvent from '@testing-library/user-event';
 // import data from '../data';
 import App from '../App';
 
+const expectWithClass = (className, arrayIndice, pokemonType) => {
+  const numberMagic = parseInt(arrayIndice, 0);
+  const buttonLocation = document.querySelectorAll(className)[numberMagic];
+  expect(buttonLocation.innerHTML).toMatch(pokemonType);
+};
 const BUTTONTEXTANDFILTER = '.button-text.filter-button';
+const NEXT_POKEMON_ID = 'next-pokemon';
+const POKEMON_NAME = 'pokemon-name';
 
 describe('5 - Pokedex buttons, actions and text of page  ', () => {
   test('1 - Checking if there is a <h2 /> Encountered pokémons ', () => {
@@ -31,12 +38,12 @@ describe('5 - Pokedex buttons, actions and text of page  ', () => {
         <App />
       </Router>,
     );
-    const pokemon = screen.getByTestId('pokemon-name');
+    const pokemon = screen.getByTestId(POKEMON_NAME);
     expect(pokemon).toHaveTextContent('Pikachu');
-    const nextButton = screen.getByTestId('next-pokemon');
+    const nextButton = screen.getByTestId(NEXT_POKEMON_ID);
     expect(nextButton).toHaveTextContent('Próximo pokémon');
     userEvent.click(nextButton);
-    const nextPokemon = screen.getByTestId('pokemon-name');
+    const nextPokemon = screen.getByTestId(POKEMON_NAME);
     expect(nextPokemon).toHaveTextContent('Charmander');
     const quantityOfPokemons = document.querySelectorAll('.pokemon').length;
     expect(quantityOfPokemons).toEqual(1);
@@ -49,11 +56,11 @@ describe('5 - Pokedex buttons, actions and text of page  ', () => {
         <App />
       </Router>,
     );
-    const firstPokemon = screen.getByTestId('pokemon-name');
+    const firstPokemon = screen.getByTestId(POKEMON_NAME);
     expect(firstPokemon).toHaveTextContent('Pikachu');
-    const nextButton = screen.getByTestId('next-pokemon');
+    const nextButton = screen.getByTestId(NEXT_POKEMON_ID);
     userEvent.click(nextButton);
-    const nextPokemon = screen.getByTestId('pokemon-name');
+    const nextPokemon = screen.getByTestId(POKEMON_NAME);
     expect(nextPokemon).toHaveTextContent('Charmander');
     const allButton = screen.getByRole('button', {
       name: 'All',
@@ -71,22 +78,16 @@ describe('5 - Pokedex buttons, actions and text of page  ', () => {
     const buttonFilter = screen.getAllByTestId('pokemon-type-button');
     const SEVEN_BUTTONS = buttonFilter.length;
     expect(buttonFilter.length).toEqual(SEVEN_BUTTONS);
-    const bugButton = document.querySelectorAll('.button-text.filter-button')[3];
-    expect(bugButton.innerHTML).toMatch('Bug');
+    expectWithClass(BUTTONTEXTANDFILTER, '3', 'Bug');
+    const bugButton = document.querySelectorAll(BUTTONTEXTANDFILTER)[3];
     userEvent.click(bugButton);
-    const nextButton = screen.getByTestId('next-pokemon');
+    const nextButton = screen.getByTestId(NEXT_POKEMON_ID);
     expect(nextButton.disabled).toBeTruthy();
-    const eletricButton = document.querySelectorAll(BUTTONTEXTANDFILTER)[1];
-    expect(eletricButton.innerHTML).toMatch('Electric');
-    const fireButton = document.querySelectorAll(BUTTONTEXTANDFILTER)[2];
-    expect(fireButton.innerHTML).toMatch('Fire');
-    const poisonButton = document.querySelectorAll(BUTTONTEXTANDFILTER)[4];
-    expect(poisonButton.innerHTML).toMatch('Poison');
-    const psychicButton = document.querySelectorAll(BUTTONTEXTANDFILTER)[5];
-    expect(psychicButton.innerHTML).toMatch('Psychic');
-    const normalButton = document.querySelectorAll(BUTTONTEXTANDFILTER)[6];
-    expect(normalButton.innerHTML).toMatch('Normal');
-    const dragonButton = document.querySelectorAll(BUTTONTEXTANDFILTER)[7];
-    expect(dragonButton.innerHTML).toMatch('Dragon');
+    expectWithClass(BUTTONTEXTANDFILTER, '1', 'Electric');
+    expectWithClass(BUTTONTEXTANDFILTER, '2', 'Fire');
+    expectWithClass(BUTTONTEXTANDFILTER, '4', 'Poison');
+    expectWithClass(BUTTONTEXTANDFILTER, '5', 'Psychic');
+    expectWithClass(BUTTONTEXTANDFILTER, '6', 'Normal');
+    expectWithClass(BUTTONTEXTANDFILTER, '7', 'Dragon');
   });
 });

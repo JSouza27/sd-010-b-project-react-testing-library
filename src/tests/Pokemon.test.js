@@ -34,5 +34,8 @@ describe('6 - Pokemons info, sprites, image, routes', () => {
     expect(pathname).toMatch('/pokemons/25');
     const checkbox = screen.getByRole('checkbox', { name: 'Pokémon favoritado?' });
     userEvent.click(checkbox);
+    const altOfFavorite = screen.getByAltText('Pikachu is marked as favorite');
+    expect(altOfFavorite.src).toMatch('/star-icon.svg');
+    expect(altOfFavorite.alt).toMatch('Pikachu is marked as favorite');
   });
 });
