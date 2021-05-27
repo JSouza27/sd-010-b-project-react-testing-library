@@ -13,4 +13,11 @@ describe('Teste o componente <NotFound.js />', () => {
     });
     expect(h2).toBeInTheDocument();
   });
+  it('Teste se página mostra a imagem', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/pagina/que-nao-existe/');
+    const img = screen.getByRole('img',
+      { name: /pikachu crying because the page requested was not found/i });
+    expect(img).toHaveAttribute('src', 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+  });
 });
