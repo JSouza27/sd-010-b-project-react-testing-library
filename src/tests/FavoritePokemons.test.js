@@ -35,12 +35,12 @@ describe('Testing FavoritePokemons.js', () => {
     history.push('/pokemons/4');
     let favorited = getByLabelText(FAVORITE);
     userEvent.click(favorited);
-    expect(favorited.checked).toBeTruthy();
+    expect(favorited.checked).toBeFalsy();
 
     history.push('/pokemons/78');
     favorited = getByLabelText(FAVORITE);
     userEvent.click(favorited);
-    expect(favorited.checked).toBeTruthy();
+    expect(favorited.checked).toBeFalsy();
 
     history.push('/favorites');
     expect(getByText('No favorite pokemon found')).toBeInTheDocument();
