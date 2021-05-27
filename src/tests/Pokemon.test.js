@@ -26,4 +26,12 @@ describe('Teste o componente <Pokemon.js />', () => {
     fireEvent.click(getByText(/More details/i));
     expect(history.location.pathname).toBe(`/pokemons/${id}`);
   });
+
+  test('Testa se existe um ícone de estrela nos Pokémons favoritados.', () => {
+    const { getByAltText } = renderWithRouter(
+      <Pokemon pokemon={ pokemons[0] } isFavorite />,
+    );
+    const getPokerVavorite = getByAltText(`${pokemons[0].name} is marked as favorite`);
+    expect(getPokerVavorite).toHaveAttribute('src', '/star-icon.svg');
+  });
 });
