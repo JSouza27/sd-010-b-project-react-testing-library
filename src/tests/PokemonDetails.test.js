@@ -13,7 +13,7 @@ describe('Testing the PokemonDetails Component', () => {
 
     const detailsLink = getByRole('link', { name: details });
     userEvent.click(detailsLink);
-
+    expect(detailsLink).not.toBeInTheDocument();
     const heading = getByRole('heading', { level: 2, name: 'Pikachu Details' });
     expect(heading).toBeInTheDocument();
     const headingSummary = getByRole('heading', { level: 2, name: 'Summary' });
@@ -24,7 +24,7 @@ describe('Testing the PokemonDetails Component', () => {
     expect(paragraph).toBeInTheDocument();
   });
   it('tests if there is a section with maps containing the locations', () => {
-    const { getByRole, getByText, getAllByRole } = renderWithRouter(<App />);
+    const { getByRole, getByText, getAllByAltText } = renderWithRouter(<App />);
 
     const detailsLink = getByRole('link', { name: details });
     userEvent.click(detailsLink);
@@ -32,11 +32,15 @@ describe('Testing the PokemonDetails Component', () => {
     const heading = getByRole('heading', { level: 2, name: 'Game Locations of Pikachu' });
     expect(heading).toBeInTheDocument();
 
-    const piKalocation = pokemons.filter((poke) => poke.name === 'Pikachu')[0].foundAt[0];
-    const imageMapOne = getAllByRole('img', { alt: 'Pikachu location' })[1];
-    expect(imageMapOne).toBeInTheDocument();
-    expect(imageMapOne).toHaveAttribute('src', piKalocation.map);
+    const piKalocation = pokemons.filter((poke) => poke.name === 'Pikachu')[0].foundAt;
+    const imageMap = getAllByAltText('Pikachu location');
+    expect(imageMap[0]).toBeInTheDocument();
+    expect(imageMap[0]).toHaveAttribute('src', piKalocation[0].map);
+    expect(imageMap[1]).toBeInTheDocument();
+    expect(imageMap[1]).toHaveAttribute('src', piKalocation[1].map);
+
     expect(getByText('Kanto Viridian Forest')).toBeInTheDocument();
+    expect(getByText('Kanto Power Plant')).toBeInTheDocument();
   });
   it('tests if the user can favor a pokémon through the details page', () => {
     const { getByRole, getByLabelText, getByAltText } = renderWithRouter(<App />);
