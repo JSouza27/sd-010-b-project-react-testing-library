@@ -67,10 +67,20 @@ describe('test component PokemonDetails', () => {
   test('favorite pokemon checkbox', () => {
     renderWithRouter(<App />);
 
+    const { name } = pokemons[0];
+
     const moreDetailsButton = screen.getByRole('link', { name: /more details/i });
     userEvent.click(moreDetailsButton);
 
     const favorite = screen.getByRole('checkbox', { name: 'Pokémon favoritado?' });
     expect(favorite).toBeInTheDocument();
+
+    userEvent.click(favorite);
+    // ** SOURCE https://testing-library.com/docs/preact-testing-library/example/ */
+    const isFavorite = screen.getByAltText(`${name} is marked as favorite`);
+
+    expect(isFavorite).toBeInTheDocument();
+    userEvent.click(favorite);
+    expect(isFavorite).not.toBeInTheDocument();
   });
 });
