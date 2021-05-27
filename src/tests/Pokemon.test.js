@@ -13,7 +13,7 @@ describe('check if the application page renders a pokemon card', () => {
     />);
 
     const pokeName = screen.getByTestId('pokemon-name');
-    expect(pokeName).toBeInTheDocument();
+    expect(pokeName.innerHTML).toBe('Pikachu');
   });
 
   test('The correct type must be displayed', () => {
@@ -23,7 +23,7 @@ describe('check if the application page renders a pokemon card', () => {
     />);
 
     const pokeType = screen.getByTestId('pokemon-type');
-    expect(pokeType).toBeInTheDocument();
+    expect(pokeType.innerHTML).toBe('Electric');
   });
 
   test('The correct average weight must be displayed', () => {
@@ -33,7 +33,7 @@ describe('check if the application page renders a pokemon card', () => {
     />);
 
     const pokeWeight = screen.getByTestId('pokemon-weight');
-    expect(pokeWeight).toBeInTheDocument();
+    expect(pokeWeight.innerHTML).toContain('6.0');
   });
 
   test('An image must be displayed', () => {
@@ -42,7 +42,7 @@ describe('check if the application page renders a pokemon card', () => {
       isFavorite
     />);
     const pokeImage = screen.getByAltText(/sprite/i);
-    expect(pokeImage).toBeInTheDocument();
+    expect(pokeImage).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
   });
 });
 
