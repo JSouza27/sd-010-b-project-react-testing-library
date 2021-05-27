@@ -29,7 +29,7 @@ describe('Teste component About', () => {
   test('Página contém dois paragrafos-1', () => {
 
   });
-  ttest('Página contém dois paragrafos-2', () => {
+  test('Página contém dois paragrafos-2', () => {
 
   });
 });
