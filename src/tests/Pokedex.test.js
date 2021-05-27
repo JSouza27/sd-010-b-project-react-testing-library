@@ -4,7 +4,7 @@ import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
 describe('Testing Pokedex.js', () => {
-  it('verify if have a h2 text with "Encountered pokémons"', () => {
+  it('Verifies if have a h2 text with "Encountered pokémons"', () => {
     const { getByRole } = renderWithRouter(<App />);
     const encounteredPokemons = getByRole('heading', {
       level: 2,
@@ -14,7 +14,7 @@ describe('Testing Pokedex.js', () => {
     expect(encounteredPokemons).toBeInTheDocument();
   });
 
-  it('Verify if when clicking at "Próximo pokémon" button, changes pokémon', () => {
+  it('Verifies if when clicking at "Próximo pokémon" button, changes pokémon', () => {
     const { getByText } = renderWithRouter(<App />);
     const nextButton = getByText('Próximo pokémon');
     expect(nextButton.type).toBe('button');
@@ -27,7 +27,7 @@ describe('Testing Pokedex.js', () => {
     expect(getByText(NEXT_POKEMON)).toBeInTheDocument();
   });
 
-  it('verify if when passes through all pokemons, returns to Pikachu', () => {
+  it('Verifies if when passes through all pokemons, returns to Pikachu', () => {
     const { getByText } = renderWithRouter(<App />);
     const nextButton = getByText('Próximo pokémon');
     expect(nextButton.type).toBe('button');
@@ -40,5 +40,12 @@ describe('Testing Pokedex.js', () => {
     }
 
     expect(getByText('Pikachu')).toBeInTheDocument();
+  });
+
+  it('Verifies if shows up only one pokemon', () => {
+    const { getAllByText } = renderWithRouter(<App />);
+    // Must have only one 'More details'
+    const moreDetails = getAllByText('More details');
+    expect(moreDetails.length).toBe(1);
   });
 });
