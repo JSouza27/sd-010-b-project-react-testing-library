@@ -42,4 +42,18 @@ describe('test component PokemonDetails', () => {
     const pokemonText = screen.getByText(summary);
     expect(pokemonText).toBeInTheDocument();
   });
+
+  test('Heading Game Locations "pokemon Name"', () => {
+    renderWithRouter(<App />);
+
+    const { name } = pokemons[0];
+
+    const moreDetailsButton = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(moreDetailsButton);
+
+    const pageTitle = screen.getByRole('heading', {
+      level: 2, name: `Game Locations of ${name}`,
+    });
+    expect(pageTitle).toBeInTheDocument();
+  });
 });
