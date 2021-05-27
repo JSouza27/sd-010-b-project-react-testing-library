@@ -84,4 +84,48 @@ describe('Test the component ṔokemonDetails ', () => {
     const aboutPokemon = getByText(infoPikachu.summary);
     expect(aboutPokemon).toBeInTheDocument();
   });
+
+  test('renders a section with the maps about location of the pokemons', () => {
+    const { getByRole, history } = renderWithRouter(<App />);
+
+    const linkDetails = getByRole('link', { name: /more details/i });
+    fireEvent.click(linkDetails);
+
+    const pathPokemonId =  history.location.pathname;
+    expect(pathPokemonId).toBe(`/pokemons/${infoPikachu.id}`);
+
+    const gameLocation = getByRole('heading', { 
+      level: 2,
+      name: `Game Locations of ${infoPikachu.name}`,
+    });
+    expect(gameLocation).toBeInTheDocument();
+  });
+
+  test('renders of all of the locations', () => {
+    const { foundAt } = infoPikachu;
+    const { getAllByRole, getByRole, history } = renderWithRouter(<App />);
+
+    const linkDetails = getByRole('link', { name: /more details/i });
+    fireEvent.click(linkDetails);
+
+    const pathPokemonId =  history.location.pathname;
+    expect(pathPokemonId).toBe(`/pokemons/${infoPikachu.id}`);
+
+    const locationMap = getAllByRole('img', { name: `${infoPikachu.name} location` });
+    expect(locationMap[0]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png' );
+    expect(locationMap[1]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png' );
+  });
+
+  test('check if the user can save your favorite pokemon', () => {
+    const { getByRole, history } = renderWithRouter(<App />);
+
+    const linkDetails = getByRole('link', { name: /more details/i });
+    fireEvent.click(linkDetails);
+
+    const pathPokemonId =  history.location.pathname;
+    expect(pathPokemonId).toBe(`/pokemons/${infoPikachu.id}`);
+
+    const checkbox = getByRole('checkbox', { name: /Pokémon favoritado\?/i });
+    expect(checkbox).toBeInTheDocument();
+  });
 });
