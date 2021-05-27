@@ -31,7 +31,7 @@ test('renders two paragraphs with text about Pokédex', () => {
   expect(getByText(p2)).toBeInTheDocument();
 });
 
-test('shows the respective of a POkédex', () => {
+test('shows the respective of a Pokédex', () => {
   const { getByAltText } = renderWithRouter(<About />);
   const pokedexImg = getByAltText('Pokédex');
   expect(pokedexImg).toHaveAttribute(
