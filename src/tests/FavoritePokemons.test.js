@@ -8,7 +8,7 @@ import App from '../App';
 describe('Teste requisito 3', () => { // o terceiro teste deste requisito no README é basicamente a mesma coisa que esse daqui, então esse vale pelos dois.
   test('Teste se aparece:No favorite pokemon found(se não há nada favoritado)', () => {
     renderWithRouter(<FavoritePokemons />);
-    expect(screen.queryByText('No favorite pokemon found')).toBeDefined();
+    expect(screen.getByText('No favorite pokemon found')).toBeDefined(); // Tava fazendo com o queryByText, mas o stryker acusava erro. Mudei pro getByText e aí parou de dar erro.
   });
   // esse teste abaixo eu tive a ajuda do meu colega Alexandre Damasceno. Link do PR dele: https://github.com/tryber/sd-010-b-project-react-testing-library/pull/83/commits/d8255df3f2e23fa8cb94bc3c3cf67aa9560e8332
   test('Testa se é exibido todos os cards de pokémons favoritados', () => {
