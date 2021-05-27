@@ -60,20 +60,20 @@ describe('Teste o componente <Pokedex.js />', () => {
       expect(btn.textContent).toBe(typesPokemons[index]);
     });
   });
-  // it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
-  //   renderWithRouter(<App />);
-  //   const btnAll = screen.getByRole('button', { name: /all/i });
-  //   expect(btnAll.textContent).toBe('All');
+  it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+    renderWithRouter(<App />);
+    const btnAll = screen.getByRole('button', { name: /all/i });
+    expect(btnAll.textContent).toBe('All');
 
-  //   const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
-  //   userEvent.click(btnNext);
-  //   const btnBug = screen.getByRole('button', { name: /bug/i });
-  //   userEvent.click(btnBug);
-  //   userEvent.click(btnAll);
+    const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
+    userEvent.click(btnNext);
+    const btnBug = screen.getByRole('button', { name: /bug/i });
+    userEvent.click(btnBug);
+    userEvent.click(btnAll);
 
-  //   const pikachu = screen.getByText(/pikachu/i);
-  //   expect(pikachu).toBeInTheDocument();
-  // });
+    const pikachu = screen.getByText(/pikachu/i);
+    expect(pikachu).toBeInTheDocument();
+  });
   // it('Teste se é criado, um botão de filtro para cada tipo de Pokémon', () => {
   //   renderWithRouter(<App />);
   //   const btnEletric = screen.getByRole('button', { name: /electric/i });
