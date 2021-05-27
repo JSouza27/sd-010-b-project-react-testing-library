@@ -1,8 +1,10 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import renderWithRouter from '../components/renderWithRouter';
 import App from '../App';
 import pokemons from '../data';
+
+const detailsText = 'More details';
 
 describe('Testes do sexto requisito ', () => {
   test('O nome correto do Pokémon deve ser mostrado na tela', () => {
@@ -41,7 +43,7 @@ describe('Testes do sexto requisito ', () => {
 
   test('O card do Pokémon indicado na Pokédex contém um link detalhes', () => {
     renderWithRouter(<App />);
-    const detailsLink = screen.getByText('More details');
+    const detailsLink = screen.getByText(detailsText);
     const { id } = pokemons[0];
 
     expect(detailsLink).toHaveAttribute('href', `/pokemons/${id}`);
@@ -49,7 +51,7 @@ describe('Testes do sexto requisito ', () => {
 
   test('Ao clicar no link de navegação, é feito o redirecionamento para detalhe ', () => {
     renderWithRouter(<App />);
-    const detailsLink = screen.getByText('More details');
+    const detailsLink = screen.getByText(detailsText);
     const { name } = pokemons[0];
     fireEvent.click(detailsLink);
     const textName = screen.getByText(name);
