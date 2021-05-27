@@ -97,3 +97,15 @@ describe('Teste se existe uma seção com as localizações do pokémon', () => 
     expect(totalLocal[1]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
   });
 });
+
+describe('Teste se o usuário pode favoritar através da página de detalhes.', () => {
+  test('A página deve exibir um checkbox que permite favoritar o Pokémon;', () => {
+    renderWithRouter(<App />);
+
+    const details = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(details);
+
+    const btnCheckbox = screen.getByRole('checkbox', { name: /pokémon favoritado/i });
+    expect(btnCheckbox).toBeInTheDocument();
+  });
+});
