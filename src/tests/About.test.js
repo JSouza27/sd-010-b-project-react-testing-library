@@ -5,7 +5,7 @@ import { Router } from 'react-router-dom';
 import { screen } from '@testing-library/dom';
 import About from '../components/About';
 
-describe('Check title, content and image url.  ', () => {
+describe('2 - Check title, content and image url.  ', () => {
   test('Checking if there is a <h2 /> for the title. ', () => {
     const history = createMemoryHistory();
     render(

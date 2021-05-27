@@ -8,7 +8,7 @@ import App from '../App';
 
 // component
 
-describe('Check if Pokedex is the home page and if the route links work ', () => {
+describe('1 - Check if Pokedex is the home page and if the route links work ', () => {
   // Home
   test('Check home', () => {
     const history = createMemoryHistory(); // checando a home page
