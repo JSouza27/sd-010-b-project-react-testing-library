@@ -44,3 +44,16 @@ describe('Teste se os detalhades do Pokémon selecionado são mostradas na tela.
     expect(paragraph).toBeInTheDocument();
   });
 });
+
+describe('Teste se existe uma seção com as localizações do pokémon', () => {
+  test('heading h2 com o texto Game Locations of <name>;', () => {
+    renderWithRouter(<App />);
+
+    const details = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(details);
+
+    const gameLocation = screen.getByRole('heading', {
+      name: /game locations of pikachu/i });
+    expect(gameLocation).toBeInTheDocument();
+  });
+});
