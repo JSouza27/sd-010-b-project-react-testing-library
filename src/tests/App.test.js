@@ -1,10 +1,11 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
-describe('testing in-app directions', () => {
-  test('mostrar um texto com valor  `Pokédex`', () => {
+describe('screem from app', () => {
+  it('renders a reading with the text `Pokédex`', () => {
     const { getByText } = render(
       <MemoryRouter>
         <App />
@@ -14,28 +15,16 @@ describe('testing in-app directions', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test('pokédex for the route `/`', () => {
-    const { getByText } = render(
-      <MemoryRouter initialEntries={ ['/'] }>
-        <App />
-      </MemoryRouter>,
-    );
+  it('iterar os links do nav', () => {
+    const { getByText } = renderWithRouter(<App />);
 
-    expect(getByText('Encountered pokémons')).toBeInTheDocument();
+    const Home = getByText('Home');
+    expect(Home).toBeInTheDocument();
+
+    const About = getByText('About');
+    expect(About).toBeInTheDocument();
+
+    const Favorite = getByText('Favorite Pokémons');
+    expect(Favorite).toBeInTheDocument();
   });
-
-  it(
-    'test that the set of links has a correct route',
-    () => {
-      const { getAllByRole } = render(
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>,
-      );
-      const componets = getAllByRole('link');
-      expect(componets[0]).toHaveTextContent('Home');
-      expect(componets[1]).toHaveTextContent('About');
-      expect(componets[2]).toHaveTextContent('Favorite Pokémons');
-    },
-  );
 });
