@@ -80,5 +80,17 @@ da aplicação para a página de detalhes de Pokémon`, () => {
   });
 });
 
+describe(`Teste também se a URL exibida no navegador muda para /pokemon/<id>, onde <id>
+é o id do Pokémon cujos detalhes se deseja ver`, () => {
+  it('', () => {
+    const { getByRole, history } = renderWithRouter(
+      <Pokemon pokemon={ dragonair } isFavorite={ false } showDetailsLink />,
+    );
+    const moreDetails = getByRole('link', { name: 'More details' });
+    userEvent.click(moreDetails);
 
+    const { location: { pathname } } = history;
+    expect(pathname).toBe(`/pokemons/${id}`);
+  });
+});
 
