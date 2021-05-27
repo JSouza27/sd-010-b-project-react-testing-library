@@ -25,7 +25,7 @@ describe('Testes do Componente <Pokemon />', () => {
     expect(imgPkemon).toHaveAttribute('alt', 'Pikachu sprite');
   });
 
-  test('Teste se o card do Pokémon indicado na Pokédex contém um link de navegação para exibir detalhes deste Pokémon.', () => {
+  test('Teste se card do Pokémon indicado na Pokédex contém um link de navegação', () => {
     const { history } = RenderWithRouter(<App />);
     const btnDetails = screen.getByRole('link', { name: /more details/i });
     userEvent.click(btnDetails);
@@ -34,7 +34,7 @@ describe('Testes do Componente <Pokemon />', () => {
   });
 
   test('Teste se existe um ícone de estrela nos Pokémons favoritados.', () => {
-    const { history } = RenderWithRouter(<App />);
+    RenderWithRouter(<App />);
 
     const btnDetails = screen.getByRole('link', { name: /more details/i });
     userEvent.click(btnDetails);
