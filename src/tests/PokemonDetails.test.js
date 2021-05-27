@@ -63,4 +63,15 @@ describe('test component PokemonDetails', () => {
       expect(maps[index]).toHaveAttribute('src', map);
     });
   });
+
+  test('favorite pokemon checkbox', () => {
+    renderWithRouter(<App />);
+
+    const moreDetailsButton = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(moreDetailsButton);
+
+    const favorite = screen.getByRole('checkbox', { name: 'Pokémon favoritado?'});
+    expect(favorite).toBeInTheDocument();
+
+  });
 });
