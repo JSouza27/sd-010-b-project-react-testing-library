@@ -45,12 +45,12 @@ describe('Requirement 2 - Test the <About.js> component', () => {
   it('Tests if the page contains a specific image of a Pokédex', () => {
     // Acessar componentes
     const { getByRole } = renderWithRouter(<About />);
-    const srcPath = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
+    const imageSrc = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
 
     // Manipular componentes
 
     // Testar componentes
     const imagePath = getByRole('img');
-    expect(imagePath).toHaveAttribute('src', srcPath);
+    expect(imagePath).toHaveAttribute('src', imageSrc);
   });
 });
