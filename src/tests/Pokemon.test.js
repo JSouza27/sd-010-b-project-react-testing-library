@@ -22,7 +22,8 @@ describe('6 - Pokemons info, sprites, image, routes', () => {
     // testando infos
     getByTestId('pokemon-name', 'Pikachu');
     getByTestId('pokemon-type', 'Electric');
-    getByTestId('pokemon-weight', '6.0 kg');
+    const weightId = screen.getByTestId('pokemon-weight');
+    expect(weightId.innerHTML).toEqual('Average weight: 6.0 kg');
     const spriteOfPikachu = screen.getByAltText('Pikachu sprite');
     expect(spriteOfPikachu.alt).toMatch('Pikachu sprite');
     expect(spriteOfPikachu.src).toMatch('https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
