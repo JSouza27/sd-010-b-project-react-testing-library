@@ -13,6 +13,6 @@ describe('Testando componente NotFound', () => {
     const alt = getByAltText('Pikachu crying because the page requested was not found');
     // Na documentação entendi o getByAltText pega a teg pela chave alt e o toHaveAttribute verifica se o valor que eu passei esta dentro do src.
     const url = 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif';
-    expect(alt).toHaveAttribute('src', url );
+    expect(alt).toHaveAttribute('src', url);
   });
 });
