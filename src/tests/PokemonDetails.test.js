@@ -50,4 +50,28 @@ describe('Testes do Componente <PokemonDetails/>', () => {
 
     expect(imgLocation[1]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
   });
+
+  test('Se o usuário pode favoritar um pokémon através da página de detalhes.', () => {
+    RenderWithRouter(<App />);
+    const linkMoreDetails = screen.getByRole('link',
+      { name: /more details/i });
+    userEvent.click(linkMoreDetails);
+
+    const checkFavorite = screen.getByRole('checkbox',
+      { name: /pokémon favoritado\?/i });
+    userEvent.click(checkFavorite);
+
+    const starFavorite = screen.getByRole('img',
+      { name: /pikachu is marked as favorite/i });
+
+    // Verifica se o pokemon foi favoritado.
+    expect(starFavorite).toBeInTheDocument();
+
+    // Verifica se o pokemon NÃO foi favoritado.
+    userEvent.click(checkFavorite);
+    expect(starFavorite).not.toBeInTheDocument();
+
+    const textLabelCheckbox = screen.getByLabelText('Pokémon favoritado?');
+    expect(textLabelCheckbox).toBeInTheDocument();
+  });
 });
