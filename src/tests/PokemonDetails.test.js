@@ -1,4 +1,5 @@
 import React from 'react';
+import { fireEvent } from '@testing-library/dom';
 import renderWithRouter from './renderWithRouter';
 import PokemonDetails from '../components/PokemonDetails';
 import pokemons from '../data';
@@ -46,5 +47,18 @@ describe('tests the PokemonDetails component', () => {
     expect(pikachuLocations[1].nextElementSibling).toBe(secondLocation.parentElement);
     expect(pikachuLocations[0].outerHTML).toContain(`src="${pikachu.foundAt[0].map}"`);
     expect(pikachuLocations[1].outerHTML).toContain(`src="${pikachu.foundAt[1].map}"`);
+  });
+  it('tests if the user can favorite a pokemon in this page', () => {
+    const { getByRole, getByLabelText } = renderWithRouter(<PokemonDetails
+      isPokemonFavoriteById={ isFavorite }
+      pokemons={ pokemons }
+      match={ match }
+      onUpdateFavoritePokemons={ service.updateFavoritePokemons }
+    />);
+    const checkbox = getByRole('checkbox');
+    expect(checkbox).toBeInTheDocument();
+    fireEvent.click(checkbox);
+    expect(localStorage.getItem('favoritePokemonIds')).toContain(match.params.id);
+    expect(getByLabelText('Pokémon favoritado?')).toBe(checkbox);
   });
 });
