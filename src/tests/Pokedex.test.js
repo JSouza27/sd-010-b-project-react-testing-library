@@ -78,3 +78,10 @@ test('Testa botão de Próximo pokémon quando tiver um pokémon.', () => {
   });
   expect(nextPokemon).toBeDisabled();
 });
+
+test('', () => {
+  renderWithRouter(<App />);
+  const buttonType = screen.getAllByTestId('pokemon-type-button');
+  const a = 7;
+  expect(buttonType).toHaveLength(a);
+});
