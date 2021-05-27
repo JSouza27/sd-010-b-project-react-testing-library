@@ -2,6 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './RenderWithRouter';
 import Pokemon from '../components/Pokemon';
+import App from '../App';
 import pokemons from '../data';
 
 const [,,,,,,,,
@@ -67,12 +68,17 @@ para exibir detalhes deste Pokémon.
 describe(`Teste se ao clicar no link de navegação do Pokémon, é feito o redirecionamento
 da aplicação para a página de detalhes de Pokémon`, () => {
   it('', () => {
-    const { getByRole, history } = renderWithRouter(
-      <Pokemon pokemon={ dragonair } isFavorite={ false } showDetailsLink />,
-    );
+    const { getByRole } = renderWithRouter(<App />);
     const moreDetails = getByRole('link', { name: 'More details' });
     userEvent.click(moreDetails);
-    const { location: { pathname } } = history;
-    expect(pathname).toBe(`/pokemons/${id}`);
+
+    const heading = getByRole('heading', {
+      level: 2,
+      name: /pikachu details/i,
+    });
+    expect(heading).toBeInTheDocument();
   });
 });
+
+
+
