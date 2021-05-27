@@ -1,6 +1,6 @@
 import React from 'react';
 import App from '../App';
-import NotFound from '../components';
+// import NotFound from '../components';
 import renderWithRouter from './renderWithRouter';
 
 describe('tests the <FavoritePokemons /> component', () => {
