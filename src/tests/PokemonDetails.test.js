@@ -69,4 +69,25 @@ describe('Teste se existe uma seção com as localizações do pokémon', () => 
     const secondLocal = screen.getByText(/kanto power plant/i);
     expect(secondLocal).toBeInTheDocument();
   });
+
+  test('Testa exibição da localização e uma imagem do mapa em cada localização;', () => {
+    renderWithRouter(<App />);
+
+    const details = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(details);
+
+    const firstLocal = screen.getByText(/kanto viridian forest/i);
+    expect(firstLocal).toBeInTheDocument();
+
+    const secondLocal = screen.getByText(/kanto power plant/i);
+    expect(secondLocal).toBeInTheDocument();
+
+    const totalLocal = screen.getAllByAltText('Pikachu location');
+    expect(totalLocal.length).toBe(2);
+  });
+
+  // test('A imagem da localização deve ter um atributo src com a URL;', () => {
+  //   renderWithRouter(<App />);
+
+  // });
 });
