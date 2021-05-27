@@ -9,6 +9,9 @@ import {
   PokemonDetails,
 } from './components';
 
+import Locations from './components/Locations';
+import Generations from './components/Generations';
+
 import {
   readFavoritePokemonIds,
   updateFavoritePokemons,
@@ -86,6 +89,8 @@ class App extends Component {
           render={ () => <FavoritePokemons pokemons={ favoritePokemons } /> }
         />
         <Route path="/about" component={ About } />
+        <Route path="/locations" component={ Locations } />
+        <Route path="/generations" component={ Generations }/>
         <Route component={ NotFound } />
       </Switch>
     );
@@ -99,6 +104,8 @@ class App extends Component {
           <Link className="link" to="/">{`Home`}</Link>
           <Link className="link" to="/about">{`About`}</Link>
           <Link className="link" to="/favorites">{`Favorite Pokémons`}</Link>
+          <Link className="link" to="/locations">{`Locations`}</Link>
+          <Link className="link" to="/generations">{`Generations`}</Link>
         </nav>
         {this.renderRoutes()}
       </div>
