@@ -38,4 +38,12 @@ describe('Testes do sexto requisito ', () => {
     expect(img).toHaveAttribute('src', image);
     expect(img).toHaveAttribute('alt', `${name} sprite`);
   });
+
+  test('O card do Pokémon indicado na Pokédex contém um link detalhes', () => {
+    renderWithRouter(<App />);
+    const detailsLink = screen.getByText('More details');
+    const { id } = pokemons[0];
+
+    expect(detailsLink).toHaveAttribute('href', `/pokemons/${id}`);
+  });
 });
