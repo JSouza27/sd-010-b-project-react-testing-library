@@ -74,20 +74,20 @@ describe('Teste o componente <Pokedex.js />', () => {
     const pikachu = screen.getByText(/pikachu/i);
     expect(pikachu).toBeInTheDocument();
   });
-  // it('Teste se é criado, um botão de filtro para cada tipo de Pokémon', () => {
-  //   renderWithRouter(<App />);
-  //   const btnEletric = screen.getByRole('button', { name: /electric/i });
-  //   userEvent.click(btnEletric);
+  it('Teste se é criado, um botão de filtro para cada tipo de Pokémon', () => {
+    renderWithRouter(<App />);
+    const btnEletric = screen.getByRole('button', { name: /electric/i });
+    userEvent.click(btnEletric);
 
-  //   const textType = screen.getByTestId('pokemon-type');
-  //   expect(textType.textContent).toBe('Electric');
+    const textType = screen.getByTestId('pokemon-type');
+    expect(textType.textContent).toBe('Electric');
 
-  //   const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
-  //   expect(btnNext).toHaveAttribute('disabled');
+    const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
+    expect(btnNext).toHaveAttribute('disabled');
 
-  //   const btnPsychic = screen.getByRole('button', { name: /psychic/i });
-  //   userEvent.click(btnPsychic);
-  //   userEvent.click(btnNext);
-  //   expect(textType.textContent).toBe('Psychic');
-  // });
+    const btnPsychic = screen.getByRole('button', { name: /psychic/i });
+    userEvent.click(btnPsychic);
+    userEvent.click(btnNext);
+    expect(textType.textContent).toBe('Psychic');
+  });
 });
