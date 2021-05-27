@@ -1,6 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
+import renderWithRouter from '../RenderWithRouter';
 import App from '../App';
 
 test('renders a reading with the text `Pokédex`', () => {
@@ -21,4 +22,12 @@ test('shows the Pokédex when the route is `/`', () => {
   );
 
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
+});
+
+describe('renderize um conjunto de links', () => {
+  it('Se o primeiro link possui o texto "Home"', () => {
+    const { getAllByRole } = renderWithRouter(<App />);
+    const links = getAllByRole('link');
+    expect(links[0].textContent).toBe('Home');
+  });
 });
