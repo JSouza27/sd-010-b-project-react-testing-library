@@ -4,19 +4,8 @@ import renderWithRouter from '../services/renderWithRouter';
 import Pokedex from '../components/Pokedex';
 import pokemons from '../data';
 
-const pokemonIds = {
-  4: false,
-  10: false,
-  23: false,
-  25: false,
-  65: false,
-  78: false,
-  143: false,
-  148: false,
-  151: false,
-};
-
 const types = ['Fire', 'Psychic', 'Electric', 'Bug', 'Poison', 'Dragon', 'Normal'];
+const pokemonIds = pokemons.map((pokemon) => pokemon.id);
 
 describe('Testando toda a aplicação Pokedex', () => {
   it('Verificando se os elementos aparecem na tela', () => {
