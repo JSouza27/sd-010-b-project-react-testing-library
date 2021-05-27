@@ -65,6 +65,7 @@ describe('Testing Pokedex.js', () => {
     userEvent.click(nextButton);
     expect(getAllByText(TYPE).length).toBe(2);
   });
+
   it('Verifies if have all button types', () => {
     const { getByRole } = renderWithRouter(<App />);
     const TYPES = ['Electric', 'Fire', 'Psychic', 'Bug', 'Poison', 'Normal', 'Dragon'];
@@ -73,5 +74,36 @@ describe('Testing Pokedex.js', () => {
       const buttonType = getByRole('button', { name: type });
       expect(buttonType).toBeInTheDocument();
     });
+  });
+
+  it('Verifies if have an "all" button', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const allButton = getByRole('button', { name: /all/i });
+    expect(allButton).toBeInTheDocument();
+  });
+
+  it('Verifies if "all" button filters all pokemons', () => {
+    const { getByText, getByRole } = renderWithRouter(<App />);
+
+    const allButton = getByRole('button', { name: /all/i });
+    userEvent.click(allButton);
+
+    const nextButton = getByText(NEXT_BUTTON);
+    userEvent.click(nextButton);
+    expect(getByText('Charmander')).toBeInTheDocument();
+
+    userEvent.click(nextButton);
+    expect(getByText('Caterpie')).toBeInTheDocument();
+  });
+
+  it('Starts with "All" button selected', () => {
+    const { getByText } = renderWithRouter(<App />);
+
+    const nextButton = getByText(NEXT_BUTTON);
+    userEvent.click(nextButton);
+    expect(getByText('Charmander')).toBeInTheDocument();
+
+    userEvent.click(nextButton);
+    expect(getByText('Caterpie')).toBeInTheDocument();
   });
 });
