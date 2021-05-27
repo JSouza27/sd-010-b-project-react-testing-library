@@ -185,4 +185,41 @@ quando o botão All for clicado`, () => {
       });
     });
   });
+
+  describe('Teste se é criado, dinamicamente, um botão de filtro para cada tipo de Pokémon.', () => {
+    it('Os botões de filtragem devem ser dinâmicos', () => {
+      const firePokemons = pokemons.filter(({ type }) => type === 'Fire');
+      const { getAllByTestId } = renderWithRouter(
+        <Pokedex pokemons={ firePokemons } isPokemonFavoriteById={ isFavoritePokemons } />,
+        );
+        const button = getAllByTestId('pokemon-type-button');
+        expect(button).toHaveLength(1);
+    });
+
+    it(`Deve existir um botão de filtragem para cada tipo de Pokémon disponível nos dados
+, sem repetição. Ou seja, a sua Pokédex deve possuir pokémons do tipo
+Fire, Psychic, Electric, Bug, Poison, Dragon e Normal`, () => {
+      const { getAllByRole } = renderWithRouter(
+        <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isFavoritePokemons } />,
+      );
+      types.forEach((type) => {
+        const typeButton = getAllByRole('button', { name: type });
+        expect(typeButton.length).not.toBeGreaterThan(2);
+      });
+    });
+
+    it(`Deve ser mostrado como opção de filtro, um botão para cada um dos tipos.
+Além disso, o botão All precisa estar sempre visível.`, () => {
+      const { getByRole } = renderWithRouter(
+        <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isFavoritePokemons } />,
+      );
+      types.forEach((type) => {
+        const typeButton = getByRole('button', { name: type });
+        expect(typeButton).toBeInTheDocument();
+      });
+
+      const btnFilterAll = getByRole('button', { name: 'All' });
+      expect(btnFilterAll).toBeInTheDocument();
+    });
+  });
 });
