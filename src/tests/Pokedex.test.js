@@ -65,4 +65,13 @@ describe('Testing Pokedex.js', () => {
     userEvent.click(nextButton);
     expect(getAllByText(TYPE).length).toBe(2);
   });
+  it('Verifies if have all button types', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const TYPES = ['Electric', 'Fire', 'Psychic', 'Bug', 'Poison', 'Normal', 'Dragon'];
+
+    TYPES.forEach((type) => {
+      const buttonType = getByRole('button', { name: type });
+      expect(buttonType).toBeInTheDocument();
+    });
+  });
 });
