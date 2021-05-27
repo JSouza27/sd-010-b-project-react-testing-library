@@ -19,4 +19,13 @@ describe('test component PokemonDetails', () => {
     const pageTitle = screen.getByRole('heading', { name: `${name} Details` });
     expect(pageTitle).toBeInTheDocument();
   });
+
+  test('if link more detais is not render in the details, page', () => {
+    renderWithRouter(<App />);
+
+    const moreDetailsButton = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(moreDetailsButton);
+
+    expect(moreDetailsButton).not.toBeInTheDocument();
+  });
 });
