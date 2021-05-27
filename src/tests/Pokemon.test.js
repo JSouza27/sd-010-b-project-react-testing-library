@@ -46,4 +46,14 @@ describe('Testes do sexto requisito ', () => {
 
     expect(detailsLink).toHaveAttribute('href', `/pokemons/${id}`);
   });
+
+  test('Ao clicar no link de navegação, é feito o redirecionamento para detalhe ', () => {
+    renderWithRouter(<App />);
+    const detailsLink = screen.getByText('More details');
+    const { name } = pokemons[0];
+    fireEvent.click(detailsLink);
+    const textName = screen.getByText(name);
+
+    expect(textName).toBeInTheDocument();
+  });
 });
