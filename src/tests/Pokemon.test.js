@@ -33,7 +33,7 @@ describe('check if the application page renders a pokemon card', () => {
     />);
 
     const pokeWeight = screen.getByTestId('pokemon-weight');
-    expect(pokeWeight.innerHTML).toContain('6.0');
+    expect(pokeWeight.innerHTML).toBe('Average weight: 6.0 kg');
   });
 
   test('An image must be displayed', () => {
