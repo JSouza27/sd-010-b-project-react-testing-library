@@ -29,4 +29,13 @@ describe('Testes do sexto requisito ', () => {
 
     expect(testId).toHaveTextContent(weightText);
   });
+
+  test('A imagem do Pokémon deve ser exibida', () => {
+    renderWithRouter(<App />);
+    const { image, name } = pokemons[0];
+    const img = screen.getByRole('img');
+
+    expect(img).toHaveAttribute('src', image);
+    expect(img).toHaveAttribute('alt', `${name} sprite`);
+  });
 });
