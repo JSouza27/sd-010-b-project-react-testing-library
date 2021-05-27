@@ -82,4 +82,5 @@ test('The icon must have an image', () => {
 
   const pokeImage = screen.getByAltText(/is marked as favorite/i);
   expect(pokeImage).toHaveAttribute('src', '/star-icon.svg');
+  expect(pokeImage).toContainHTML('Pikachu is marked as favorite');
 });
