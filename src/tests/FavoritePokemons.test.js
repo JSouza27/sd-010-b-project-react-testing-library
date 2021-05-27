@@ -34,6 +34,9 @@ describe('Testar o FavoritePokemons.js', () => {
       name: /marked as favorite/i,
     });
     expect(favoriteIcon).toHaveAttribute('src', '/star-icon.svg');
+
+    const { getByText } = render(<FavoritePokemons />);
+    expect(getByText('Pikachu')).toBeDefined();
   });
 
   test('verificando se tem pokemon dentro de FavoritePokemons', () => {

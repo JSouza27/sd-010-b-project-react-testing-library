@@ -15,14 +15,16 @@ describe('Testar o Pokedex.js', () => {
   test('Testa se é exibido o próximo Pokémon clicando em proximo pokémon.', () => {
     const { getByText } = renderWithRouter(<App />);
 
-    const quantity = data.length;
-
-    for (let index = 0; index < quantity; index += 1) {
+    data.forEach(({ name }) => {
       const buttonNext = screen.getByRole('button', {
         name: /Próximo pokémon/i,
       });
+
+      const firstPokemon = getByText(name);
+      expect(firstPokemon).toBeInTheDocument();
+
       userEvent.click(buttonNext);
-    }
+    });
 
     const firstPokemon = getByText(/Pikachu/i);
     expect(firstPokemon).toBeInTheDocument();
@@ -59,35 +61,6 @@ describe('Testar o Pokedex.js', () => {
     const Pikachu = getByText(/Pikachu/i);
     expect(Pikachu).toBeInTheDocument();
   });
-  // test('Teste se a Pokédex tem os botões de filtro.', () => {
-  //   renderWithRouter(<App />);
-
-  //   const typesPokemon = [];
-  //   data.forEach(({ type }) => {
-  //     if (!typesPokemon.includes(type)) {
-  //       typesPokemon.push(type);
-  //     }
-  //   });
-
-  //   data.forEach(({ type }) => {
-  //     let quantity = 0;
-
-  //     if (typesPokemon.includes(type)) {
-  //       quantity += 1;
-  //     }
-  //     if (quantity > 1) {
-  //       const buttonType = screen.getByRole('button', {
-  //         name: type,
-  //       });
-  //       userEvent.click(buttonType);
-  //       const buttonNext = screen.getByRole('button', {
-  //         name: type,
-  //       });
-  //       userEvent.click(buttonNext);
-  //       expect(type).toBeInTheDocument();
-  //     }
-  //   });
-  // });
 
   test('Teste se a Pokédex tem todos os botões de filtro.', () => {
     const { getAllByTestId } = renderWithRouter(<App />);
@@ -105,40 +78,4 @@ describe('Testar o Pokedex.js', () => {
       expect(typeButton.length).toBe(number);
     });
   });
-
-  // test('Testando se renderiza os pokémons favoritos', () => {
-  //   renderWithRouter(<App />);
-
-  //   const moreDetails = screen.getByRole('link', {
-  //     name: /More details/i,
-  //   });
-  //   userEvent.click(moreDetails);
-
-  //   const favorite = screen.getByRole('checkbox', {
-  //     name: /Pokémon favoritado?/i,
-  //   });
-  //   userEvent.click(favorite);
-
-  //   const clickFavorite = screen.getByRole('link', {
-  //     name: /Favorite Pokémons/i,
-  //   });
-  //   userEvent.click(clickFavorite);
-
-  //   const favoriteIcon = screen.getByRole('img', {
-  //     name: /marked as favorite/i,
-  //   });
-  //   expect(favoriteIcon).toHaveAttribute('src', '/star-icon.svg');
-  // });
-
-  // test('verificando se tem pokemon dentro de FavoritePokemons', () => {
-  //   renderWithRouter(<App />);
-
-  //   const favoriteLink = screen.getByRole('link', {
-  //     name: /Favorite Pokémons/i,
-  //   });
-  //   userEvent.click(favoriteLink);
-
-  //   const { getByText } = render(<FavoritePokemons />);
-  //   expect(getByText('No favorite pokemon found')).toBeDefined();
-  // });
 });
