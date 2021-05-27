@@ -1,6 +1,5 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
 import userEvent from '@testing-library/user-event';
 import RenderWithRouter from './RenderWithRouter';
 
@@ -46,5 +45,7 @@ describe('Testes do Componente <Pokemon />', () => {
     const starFavorite = screen.getByRole('img',
       { name: /pikachu is marked as favorite/i });
     expect(starFavorite).toBeInTheDocument();
+    expect(starFavorite).toHaveAttribute('src', '/star-icon.svg');
+    expect(starFavorite).toHaveAttribute('alt', 'Pikachu is marked as favorite');
   });
 });
