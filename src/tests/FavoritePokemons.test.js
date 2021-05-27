@@ -4,6 +4,17 @@
 
 // describe('Testing the FavoritePokemons.js', () => {
 //   test('if show the message No favorite pokemon found if no favorited pokemon', () => {
-//     const { getByText, getByRole } = renderWithRouter(<FavoritePokemons />);
+//     const { getByText } = renderWithRouter(<FavoritePokemons />);
+//       const not = getByText(/no favorite pokemon found/i);
+//       expect(not).toBeInTheDocument();
+//   });
+
+//   test('if all the pokemon cards are renderized if favorited', () => {
+//     const { getByRole } = renderWithRouter(<FavoritePokemons />);
+
+//   });
+
+//   test('if anyone card is renderized if not favorited', () => {
+//     const { getByRole } = renderWithRouter(<FavoritePokemons />);
 //   });
 // });
