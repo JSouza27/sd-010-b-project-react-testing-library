@@ -13,17 +13,18 @@ const infoPikachu = {
     measurementUnit: 'kg',
   },
   moreInfo: 'https://bulbapedia.bulbagarden.net/wiki/Pikachu_(Pok%C3%A9mon)',
-    foundAt: [
-      {
-        location: 'Kanto Viridian Forest',
-        map: 'https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png',
-      },
-      {
-        location: 'Kanto Power Plant',
-        map: 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png',
-      },
-    ],
-  summary: 'This intelligent Pokémon roasts hard berries with electricity to make them tender enough to eat.',
+  foundAt: [
+    {
+      location: 'Kanto Viridian Forest',
+      map: 'https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png',
+    },
+    {
+      location: 'Kanto Power Plant',
+      map: 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png',
+    },
+  ],
+  summary: ('This intelligent Pokémon roasts hard berries with '
+  + 'electricity to make them tender enough to eat.'),
 };
 
 describe('Test the component ṔokemonDetails ', () => {
@@ -33,7 +34,7 @@ describe('Test the component ṔokemonDetails ', () => {
     const linkDetails = getByRole('link', { name: /more details/i });
     fireEvent.click(linkDetails);
 
-    const pathPokemonId =  history.location.pathname;
+    const pathPokemonId = history.location.pathname;
     expect(pathPokemonId).toBe(`/pokemons/${infoPikachu.id}`);
 
     const h2 = getByRole('heading', {
@@ -50,7 +51,7 @@ describe('Test the component ṔokemonDetails ', () => {
     const linkDetails = getByRole('link', { name: /more details/i });
     fireEvent.click(linkDetails);
 
-    const pathPokemonId =  history.location.pathname;
+    const pathPokemonId = history.location.pathname;
     expect(pathPokemonId).toBe(`/pokemons/${infoPikachu.id}`);
 
     expect(linkDetails).not.toBeInTheDocument();
@@ -62,7 +63,7 @@ describe('Test the component ṔokemonDetails ', () => {
     const linkDetails = getByRole('link', { name: /more details/i });
     fireEvent.click(linkDetails);
 
-    const pathPokemonId =  history.location.pathname;
+    const pathPokemonId = history.location.pathname;
     expect(pathPokemonId).toBe(`/pokemons/${infoPikachu.id}`);
 
     const summary = getByRole('heading', {
@@ -78,7 +79,7 @@ describe('Test the component ṔokemonDetails ', () => {
     const linkDetails = getByRole('link', { name: /more details/i });
     fireEvent.click(linkDetails);
 
-    const pathPokemonId =  history.location.pathname;
+    const pathPokemonId = history.location.pathname;
     expect(pathPokemonId).toBe(`/pokemons/${infoPikachu.id}`);
 
     const aboutPokemon = getByText(infoPikachu.summary);
@@ -91,10 +92,10 @@ describe('Test the component ṔokemonDetails ', () => {
     const linkDetails = getByRole('link', { name: /more details/i });
     fireEvent.click(linkDetails);
 
-    const pathPokemonId =  history.location.pathname;
+    const pathPokemonId = history.location.pathname;
     expect(pathPokemonId).toBe(`/pokemons/${infoPikachu.id}`);
 
-    const gameLocation = getByRole('heading', { 
+    const gameLocation = getByRole('heading', {
       level: 2,
       name: `Game Locations of ${infoPikachu.name}`,
     });
@@ -102,18 +103,17 @@ describe('Test the component ṔokemonDetails ', () => {
   });
 
   test('renders of all of the locations', () => {
-    const { foundAt } = infoPikachu;
     const { getAllByRole, getByRole, history } = renderWithRouter(<App />);
 
     const linkDetails = getByRole('link', { name: /more details/i });
     fireEvent.click(linkDetails);
 
-    const pathPokemonId =  history.location.pathname;
+    const pathPokemonId = history.location.pathname;
     expect(pathPokemonId).toBe(`/pokemons/${infoPikachu.id}`);
 
     const locationMap = getAllByRole('img', { name: `${infoPikachu.name} location` });
-    expect(locationMap[0]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png' );
-    expect(locationMap[1]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png' );
+    expect(locationMap[0]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png');
+    expect(locationMap[1]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
   });
 
   test('check if the user can save your favorite pokemon', () => {
@@ -122,7 +122,7 @@ describe('Test the component ṔokemonDetails ', () => {
     const linkDetails = getByRole('link', { name: /more details/i });
     fireEvent.click(linkDetails);
 
-    const pathPokemonId =  history.location.pathname;
+    const pathPokemonId = history.location.pathname;
     expect(pathPokemonId).toBe(`/pokemons/${infoPikachu.id}`);
 
     const checkbox = getByRole('checkbox', { name: /Pokémon favoritado\?/i });
