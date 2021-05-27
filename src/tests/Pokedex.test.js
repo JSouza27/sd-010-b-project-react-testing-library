@@ -154,6 +154,7 @@ describe('Teste o componente <Pokedex.js />', () => {
       name: /Próximo pokémon/i,
     });
 
-    expect(nextButton).toBeDisabled();
+    expect(nextButton.disabled).toBe(true);
+    // expect(nextButton).toBeDisabled();
   });
 });
