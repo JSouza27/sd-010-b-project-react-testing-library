@@ -28,13 +28,18 @@ describe('test component PokemonDetails', () => {
 
     expect(moreDetailsButton).not.toBeInTheDocument();
   });
-  test('Summary heading', () => {
+  test('Summary heading and text', () => {
     renderWithRouter(<App />);
+
+    const { summary } = pokemons[0];
 
     const moreDetailsButton = screen.getByRole('link', { name: /more details/i });
     userEvent.click(moreDetailsButton);
 
     const pageTitle = screen.getByRole('heading', { level: 2, name: 'Summary' });
     expect(pageTitle).toBeInTheDocument();
+
+    const pokemonText = screen.getByText(summary);
+    expect(pokemonText).toBeInTheDocument();
   });
 });
