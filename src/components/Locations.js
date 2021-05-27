@@ -42,7 +42,6 @@ class Locations extends React.Component{
 
   render() {
     const { locations, offset } = this.state;
-    console.log(offset);
     return(
       <section>
         <h2>All locations</h2>

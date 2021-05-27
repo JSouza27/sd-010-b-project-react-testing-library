@@ -60,3 +60,20 @@ describe('Testa a navegação na lista', () => {
     expect(checkNextButton).toHaveAttribute('disabled');
   });
 });
+
+describe('testa as listas e os botões', () => {
+  beforeAll(() => { jest.useFakeTimers(); });
+  afterAll(() => { jest.useRealTimers(); });
+
+  it('Testa a primeira cidade da lista', async () => {
+    renderWithRouter(<Locations />);
+    expect(await screen.findByText('canalave-city')).toBeInTheDocument();
+    screen.debug();
+  });
+
+  it('Testa a última cidade da lista', async () => {
+    renderWithRouter(<Locations />);
+    expect(await screen.findByText('wayward-cave')).toBeInTheDocument();
+    screen.debug();
+  });
+});
