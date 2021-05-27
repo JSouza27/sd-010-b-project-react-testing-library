@@ -19,6 +19,7 @@ describe('Teste o componente <Pokemon.js />', () => {
 
     const imagePokemon = screen.getByRole('img');
     expect(imagePokemon).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
+    expect(imagePokemon).toHaveAttribute('alt', 'Pikachu sprite');
   });
 
   test('Teste se o link de detalhes é exibido em tela pelo ID;', () => {
