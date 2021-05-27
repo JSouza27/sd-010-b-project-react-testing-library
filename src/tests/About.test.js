@@ -16,6 +16,7 @@ describe('teste no componente About.js', () => {
     const paragraph = container.querySelectorAll('p');
     expect(paragraph.length).toBe(2);
   });
+  //https://stackoverflow.com/questions/54234515/get-by-html-element-with-react-testing-library
   test('testando se a página renderiza a imagem com src Pokédex', () => {
     const { getByAltText } = renderWithRouter(<About />);
     const altText = getByAltText('Pokédex');

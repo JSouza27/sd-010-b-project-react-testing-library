@@ -23,11 +23,12 @@ describe('teste no componente FavoritePokemon.js', () => {
     const pikachu = getByText('Pikachu');
     expect(pikachu).toBeInTheDocument();
   });
+
+  // https://stackoverflow.com/questions/53389956/how-to-test-a-classname-with-the-jest-and-react-testing-library
   test('testando se nenhum card de pokémon é exibido', () => {
-    const { getByText } = renderWithRouter(<FavoritePokemons />);
-    const favoriteLink = getByText('Favorite pokémons');
-    fireEvent.click(favoriteLink);
-    const notFoundFavorite = getByText('No favorite pokemon found');
-    expect(notFoundFavorite).toBeInTheDocument();
+    const { container } = renderWithRouter(<FavoritePokemons />);
+
+    const star = container.getElementsByClassName('favorite-icon');
+    expect(star).not.toBeNull();
   });
 });
