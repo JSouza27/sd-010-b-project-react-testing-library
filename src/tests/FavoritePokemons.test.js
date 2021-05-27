@@ -9,7 +9,6 @@ test('Testando o component Pokemon', () => {
       <FavoritePokemons />
     </BrowserRouter>,
   );
-
   const textPokemon = screen.getByRole('heading', {
     level: 2,
     name: /Favorite pokémons/i,
