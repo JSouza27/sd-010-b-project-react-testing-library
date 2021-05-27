@@ -1,1 +1,130 @@
-test('', () => {});
+import React from 'react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import Pokedex from '../components/Pokedex';
+import pokemons from '../data';
+import renderWithRouter from './renderWithRouter';
+
+const newObject = {
+  4: false,
+  10: false,
+  23: false,
+  25: false,
+  65: false,
+  78: false,
+  143: false,
+  148: false,
+  151: false,
+};
+
+describe('Teste o componente <Pokedex.js />', () => {
+  it('Renderiza um h2 na página com o texto: Encountered pokémons.', () => {
+    renderWithRouter(<Pokedex
+      pokemons={ pokemons }
+      isPokemonFavoriteById={ newObject }
+    />);
+
+    const screenTitle = screen.getByText(/encountered pokémons/i);
+
+    expect(screenTitle).toBeInTheDocument();
+  });
+
+  it('Renderiza o proximo pokemon quando é clicado', () => {
+    renderWithRouter(<Pokedex
+      pokemons={ pokemons }
+      isPokemonFavoriteById={ newObject }
+    />);
+
+    const getNextButton = screen.getByText(/próximo pokémon/i);
+    const magicNumber = 8;
+
+    for (let index = 0; index < magicNumber; index += 1) {
+      const getPokemon = screen.getByText(pokemons[index].name);
+      expect(getPokemon).toBeInTheDocument();
+      userEvent.click(getNextButton);
+    }
+  });
+
+  it('Teste se é mostrado apenas um Pokémon por vez.', () => {
+    renderWithRouter(<Pokedex
+      pokemons={ pokemons }
+      isPokemonFavoriteById={ newObject }
+    />);
+
+    const imgPokemon = screen.getAllByRole('img', {
+      name: 'Pikachu sprite',
+    });
+
+    expect(imgPokemon[0]).toBeInTheDocument();
+  });
+
+  it('Teste se a Pokédex tem os botões de filtro', () => {
+    renderWithRouter(<Pokedex
+      pokemons={ pokemons }
+      isPokemonFavoriteById={ newObject }
+    />);
+
+    const buttonsName = [
+      'All',
+      'Electric',
+      'Fire',
+      'Bug',
+      'Poison',
+      'Psychic',
+      'Normal',
+      'Dragon',
+    ];
+
+    for (let index = 0; index < buttonsName.length; index += 1) {
+      const getButton = screen.getByRole('button', {
+        name: buttonsName[index],
+      });
+      expect(getButton).toBeInTheDocument();
+    }
+  });
+
+  it('', () => {
+    renderWithRouter(<Pokedex
+      pokemons={ pokemons }
+      isPokemonFavoriteById={ newObject }
+    />);
+
+    const getFire = screen.getByRole('button', {
+      name: /fire/i,
+    });
+
+    userEvent.click(getFire);
+
+    const getNextButton = screen.getByRole('button', {
+      name: /próximo pokémon/i,
+    });
+
+    userEvent.click(getNextButton);
+
+    const getName = screen.getByText('Rapidash');
+    expect(getName).toBeInTheDocument();
+  });
+
+  it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+    renderWithRouter(<Pokedex
+      pokemons={ pokemons }
+      isPokemonFavoriteById={ newObject }
+    />);
+
+    const resetButton = screen.getByRole('button', {
+      name: /all/i,
+    });
+    const firstPokemon = screen.getByText(/pikachu/i);
+
+    expect(resetButton).toBeInTheDocument();
+    expect(firstPokemon).toBeInTheDocument();
+  });
+
+  it('Teste se é criado dinamicamente um botão de filtro para cada Pokémon', () => {
+
+  });
+
+  it('O botão de Próximo deve ser desabilitado se a lista tiver um só pokémon', () => {
+
+  });
+});
