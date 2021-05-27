@@ -59,8 +59,8 @@ describe('test component PokemonDetails', () => {
     const maps = screen.getAllByAltText(`${name} location`);
     foundAt.forEach(({ map, location }, index) => {
       const locationText = screen.getByText(location);
-      expect(maps[index]).toHaveAttribute('src', map);
       expect(locationText).toBeInTheDocument();
+      expect(maps[index]).toHaveAttribute('src', map);
     });
   });
 });
