@@ -29,3 +29,4 @@ dos casos de uso criados pelo Stryker`, () => {
     );
   });
 });
+// Muito obrigado a parceira Mariana Mohr, que solucionou meu problema.
