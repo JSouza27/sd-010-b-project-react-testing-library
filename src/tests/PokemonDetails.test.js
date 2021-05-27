@@ -6,17 +6,13 @@ import RenderWithRouter from './RenderWithRouter';
 import App from '../App';
 
 describe('Testes do Componente <PokemonDetails/>', () => {
-  test('Teste as informações detalhadas do Pokémon selecionado em Details.', () => {
+  test('Verifica informações detalhadas do Pokémon selecionado em Details.', () => {
     RenderWithRouter(<App />);
 
-    const linkMoreDetails = screen.getByRole('link', {
-      name: /more details/i,
-    });
+    const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
     userEvent.click(linkMoreDetails);
 
-    const text = screen.getByRole('heading', {
-      name: /pikachu details/i,
-    });
+    const text = screen.getByRole('heading', { name: /pikachu details/i });
     // testa se existe o heading com o texto pikachu details.
     expect(text).toBeInTheDocument();
     // testa se o link de more details não esta na tela.
@@ -29,6 +25,29 @@ describe('Testes do Componente <PokemonDetails/>', () => {
     const detailParagraph = screen.getByText(
       /this intelligent pokémon roasts hard berries/i, { exact: false },
     );
+    // testa se o paragrafo esta renderizado
     expect(detailParagraph).toBeInTheDocument();
+  });
+
+  test('Verifica se existe na página uma seção com mapas com locais dos pokémon', () => {
+    RenderWithRouter(<App />);
+
+    const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(linkMoreDetails);
+
+    const h2GameLocation = screen.getByRole('heading',
+      { name: /game locations of pikachu/i });
+    expect(h2GameLocation).toBeInTheDocument();
+
+    const textMapLocation1 = screen.getByText(/kanto viridian forest/i);
+    expect(textMapLocation1).toBeInTheDocument();
+
+    const textMapLocation2 = screen.getByText(/kanto power plant/i);
+    expect(textMapLocation2).toBeInTheDocument();
+
+    const imgLocation = screen.getAllByRole('img', { name: /Pikachu location/i });
+    expect(imgLocation[0]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png');
+
+    expect(imgLocation[1]).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
   });
 });
