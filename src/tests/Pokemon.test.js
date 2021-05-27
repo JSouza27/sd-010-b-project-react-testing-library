@@ -68,4 +68,27 @@ describe('Testes do sexto requisito ', () => {
 
     expect(pathname).toBe(`/pokemons/${id}`);
   });
+
+  describe('Teste se existe um ícone de estrela nos Pokémons favoritados.', () => {
+    test('Imagem com o atributo src contendo o caminho /star-icon.svg', () => {
+      renderWithRouter(<App />);
+      const detailsLink = screen.getByText(detailsText);
+      fireEvent.click(detailsLink);
+      const favorite = screen.getByText('Pokémon favoritado?');
+      fireEvent.click(favorite);
+      const star = screen.getAllByRole('img');
+
+      expect(star[1]).toHaveAttribute('src', '/star-icon.svg');
+    });
+
+    test('A imagem deve ter o atributo alt', () => {
+      renderWithRouter(<App />);
+      const detailsLink = screen.getByText(detailsText);
+      const { name } = pokemons[0];
+      fireEvent.click(detailsLink);
+      const star = screen.getAllByRole('img');
+
+      expect(star[1]).toHaveAttribute('alt', `${name} is marked as favorite`);
+    });
+  });
 });
