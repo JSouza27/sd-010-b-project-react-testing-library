@@ -1,5 +1,4 @@
 import { fireEvent } from '@testing-library/dom';
-import { array } from 'prop-types';
 import React from 'react';
 import App from '../App';
 import renderWithRouter from '../components/renderWithRouter';
