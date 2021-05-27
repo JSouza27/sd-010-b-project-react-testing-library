@@ -19,5 +19,8 @@ describe('Testes do Componente <PkemonDetails/>', () => {
     });
     expect(text).toBeInTheDocument();
     expect(linkMoreDetails).not.toBeInTheDocument();
+
+    const h2Summary = screen.getByRole('heading', { name: /Summary/i });
+    expect(h2Summary).toBeInTheDocument();
   });
 });
