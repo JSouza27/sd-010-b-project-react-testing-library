@@ -56,4 +56,14 @@ describe('Testes do sexto requisito ', () => {
 
     expect(textName).toBeInTheDocument();
   });
+  // https://reactrouter.com/web/api/history
+  test('se a URL exibida no navegador muda para /pokemon/<id>', () => {
+    const { history } = renderWithRouter(<App />);
+    const detailsLink = screen.getByText(detailsText);
+    const { id } = pokemons[0];
+    fireEvent.click(detailsLink);
+    const { location: { pathname } } = history;
+
+    expect(pathname).toBe(`/pokemons/${id}`);
+  });
 });
