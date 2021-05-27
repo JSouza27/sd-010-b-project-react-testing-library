@@ -16,7 +16,7 @@ describe('test component PokemonDetails', () => {
     userEvent.click(moreDetailsButton);
 
     const { name } = pokemons[0];
-    const pageTitle = screen.getByRole('heading', { name: `${name} Details` });
+    const pageTitle = screen.getByRole('heading', { level: 2, name: `${name} Details` });
     expect(pageTitle).toBeInTheDocument();
   });
 
@@ -27,5 +27,14 @@ describe('test component PokemonDetails', () => {
     userEvent.click(moreDetailsButton);
 
     expect(moreDetailsButton).not.toBeInTheDocument();
+  });
+  test('Summary heading', () => {
+    renderWithRouter(<App />);
+
+    const moreDetailsButton = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(moreDetailsButton);
+
+    const pageTitle = screen.getByRole('heading', { level: 2, name: 'Summary' });
+    expect(pageTitle).toBeInTheDocument();
   });
 });
