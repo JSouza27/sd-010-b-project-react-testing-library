@@ -70,8 +70,7 @@ describe('test component PokemonDetails', () => {
     const moreDetailsButton = screen.getByRole('link', { name: /more details/i });
     userEvent.click(moreDetailsButton);
 
-    const favorite = screen.getByRole('checkbox', { name: 'Pokémon favoritado?'});
+    const favorite = screen.getByRole('checkbox', { name: 'Pokémon favoritado?' });
     expect(favorite).toBeInTheDocument();
-
   });
 });
