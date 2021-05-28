@@ -68,7 +68,7 @@ describe('Teste se é renderizado um card com as informações de '
     );
     const image = screen.getByAltText(`${pokemons[0].name} sprite`);
     expect(image.src)
-      .toBe('https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
+      .toBe('https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
     expect(image.alt).toBe('Pikachu sprite');
   });
 });
