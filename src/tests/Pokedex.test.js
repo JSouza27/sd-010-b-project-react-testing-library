@@ -23,14 +23,32 @@ describe('testes na Pokedex.js', () => {
     const chamander = getByText('Charmander');
     expect(chamander).toBeInTheDocument();
     Data.forEach((pokemon) => {
-    //   fireEvent.click(nextButton);
-    //   const pokemonName = getByText(pokemon.name)
-    // expect(pokemonName).toBeInTheDocument();
       if (pokemon.name === 'Dragonair') {
         fireEvent.click(nextButton);
         expect(pikachu).toBeInTheDocument();
       }
     });
+    // ajudado na logica abaixo pelo Wolf/ a ser implementada
+    // const { getByText } = renderWithRouter(<App />);
+    // const nextButton = getByText(btnPokemon);
+    // jest.assertions(Data.length +2)
+    // expect(nextButton).toBeInTheDocument();
+    // /* const pikachu = getByText('Pikachu');
+    // fireEvent.click(nextButton);
+    // const chamander = getByText('Charmander');
+    // expect(chamander).toBeInTheDocument(); */
+    // Data.forEach((pokemon) => {
+    //   const pokeUI = getByText(pokemon.name);
+    //   expect(pokeUI).toBeInTheDocument()
+
+    // //   fireEvent.click(nextButton);
+    // //   const pokemonName = getByText(pokemon.name)
+    // // expect(pokemonName).toBeInTheDocument();
+
+    //     fireEvent.click(nextButton);
+
+    // });
+    // expect()
   });
   test('Testando se é mostrado apenas um Pokémon por vez', () => {
     const { getAllByTestId } = renderWithRouter(<App />);

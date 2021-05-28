@@ -28,6 +28,6 @@ describe('teste no componente FavoritePokemon.js', () => {
   test('testando se nenhum card de pokémon é exibido', () => {
     const { container } = renderWithRouter(<FavoritePokemons />);
     const star = container.getElementsByClassName('favorite-icon');
-    expect(star).not.toBeNull();
+    expect(star).toHaveLength(0);
   });
 });
