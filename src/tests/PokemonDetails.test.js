@@ -21,7 +21,7 @@ const isFavoritePokemons = {
   [dragonair.id]: false,
 };
 
-const { id, name, summary } = ekans;
+const { id, name, summary, foundAt } = ekans;
 const parsedId = id.toString();
 
 describe(`Teste se as informações detalhadas do Pokémon
@@ -115,5 +115,20 @@ Game Locations of <name>; onde <name> é o nome do Pokémon exibido`, () => {
       name: `Game Locations of ${name}`,
     });
     expect(headingGameLocations).toBeInTheDocument();
+  });
+
+  it('Todas as localizações do Pokémon devem ser mostradas na seção de detalhes', () => {
+    const { getAllByRole } = renderWithRouter(
+      <PokemonDetails
+        isPokemonFavoriteById={ isFavoritePokemons }
+        match={ { params: { id: parsedId } } }
+        pokemons={ pokemons }
+        onUpdateFavoritePokemons={ (pokemonId, isFavorite) => (
+          updateFavoritePokemons(pokemonId, isFavorite)
+        ) }
+      />,
+    );
+    const imgsGameLocations = getAllByRole('img', { name: `${name} location` });
+    expect(imgsGameLocations).toHaveLength(foundAt.length);
   });
 });
