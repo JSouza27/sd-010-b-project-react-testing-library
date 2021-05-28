@@ -10,12 +10,6 @@ test('Testando o pokemon favorito', () => {
       <FavoritePokemons pokemons={ [data[0]] } />
     </BrowserRouter>,
   );
-  const textPokemon = screen.getByRole('heading', {
-    level: 2,
-    name: /Favorite pokémons/i,
-  });
-  expect(textPokemon).toBeInTheDocument();
-
   const getFavorite = screen.getByText('Favorite pokémons');
   expect(getFavorite).toBeInTheDocument();
   const getByClass = container.querySelector('.favorite-pokemons');
