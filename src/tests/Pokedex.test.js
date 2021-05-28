@@ -129,6 +129,58 @@ describe('renders a button to reset filters', () => {
     const pokemon = getByText('Pikachu');
     expect(pokemon).toBeInTheDocument();
   });
+
+  test('when render Home page, the filter must be "All"', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const pokemon = getByText('Pikachu');
+    expect(pokemon).toBeInTheDocument();
+  });
+});
+
+describe('for each type of Pokémon a filter button is created dynamically', () => {
+  test('there must be a filter button for each type of Pokémon,  no repeats', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const fireBtn = getByRole('button', {
+      name: /fire/i,
+    });
+    const psychicBtn = getByRole('button', {
+      name: /psychic/i,
+    });
+    const electricBtn = getByRole('button', {
+      name: /electric/i,
+    });
+    const bugBtn = getByRole('button', {
+      name: /bug/i,
+    });
+    const poisonBtn = getByRole('button', {
+      name: /poison/i,
+    });
+    const dragonBtn = getByRole('button', {
+      name: /dragon/i,
+    });
+    const normalBtn = getByRole('button', {
+      name: /normal/i,
+    });
+    expect(fireBtn).toBeInTheDocument();
+    expect(psychicBtn).toBeInTheDocument();
+    expect(electricBtn).toBeInTheDocument();
+    expect(bugBtn).toBeInTheDocument();
+    expect(poisonBtn).toBeInTheDocument();
+    expect(dragonBtn).toBeInTheDocument();
+    expect(normalBtn).toBeInTheDocument();
+  });
+
+  test('button all must be always visible', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const fireBtn = getByRole('button', {
+      name: /fire/i,
+    });
+    userEvent.click(fireBtn);
+    const resetBtn = getByRole('button', {
+      name: /all/i,
+    });
+    expect(resetBtn).toBeInTheDocument();
+  });
 });
 
 describe('', () => {
@@ -137,6 +189,6 @@ describe('', () => {
   });
 
   test('', () => {
-    const { getByRole, getByText } = renderWithRouter(<App />);
+    const { getByRole } = renderWithRouter(<App />);
   });
 });
