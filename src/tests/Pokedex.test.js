@@ -36,9 +36,9 @@ describe('Teste o componente <Pokedex.js />', () => {
     />);
 
     const getNextButton = screen.getByText(/próximo pokémon/i);
-    const magicNumber = 8;
+    const EIGHT = 8;
 
-    for (let index = 0; index < magicNumber; index += 1) {
+    for (let index = 0; index < EIGHT; index += 1) {
       const getPokemon = screen.getByText(pokemons[index].name);
       expect(getPokemon).toBeInTheDocument();
       userEvent.click(getNextButton);
