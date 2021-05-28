@@ -8,10 +8,8 @@ import App from '../App';
 describe('Testes do componente <About.js/>', () => {
   test('Teste se a página contém as informações sobre a Pokédex.', () => {
     RenderWithRouter(<App />);
-    const linkAbout = screen.getByRole('link', {
-      name: /About/i,
-    });
 
+    const linkAbout = screen.getByRole('link', { name: /About/i });
     userEvent.click(linkAbout);
 
     const h1 = screen.getByText('this application simulates a pokédex', { exact: false });
@@ -21,15 +19,10 @@ describe('Testes do componente <About.js/>', () => {
   test('Teste se a página contém um heading h2 com o texto About Pokédex.', () => {
     RenderWithRouter(<App />);
 
-    const linkAbout = screen.getByRole('link', {
-      name: /About/i,
-    });
+    const linkAbout = screen.getByRole('link', { name: /About/i });
     userEvent.click(linkAbout);
 
-    const h2 = screen.getByRole('heading', {
-      level: 2,
-      name: /about pokédex/i,
-    });
+    const h2 = screen.getByRole('heading', { level: 2, name: /about pokédex/i });
 
     expect(h2).toBeInTheDocument();
   });
@@ -37,9 +30,7 @@ describe('Testes do componente <About.js/>', () => {
   test('Teste se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
     RenderWithRouter(<App />);
 
-    const linkAbout = screen.getByRole('link', {
-      name: /About/i,
-    });
+    const linkAbout = screen.getByRole('link', { name: /About/i });
     userEvent.click(linkAbout);
 
     const firstParagraph = screen.getByText(
@@ -55,9 +46,7 @@ describe('Testes do componente <About.js/>', () => {
   test('Teste se a página contém uma determinada imagem de uma Pokédex', () => {
     RenderWithRouter(<App />);
 
-    const linkAbout = screen.getByRole('link', {
-      name: /About/i,
-    });
+    const linkAbout = screen.getByRole('link', { name: /About/i });
     userEvent.click(linkAbout);
 
     const specificImg = screen.getByRole('img', {

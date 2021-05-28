@@ -19,7 +19,6 @@ describe('Testa o componente <Pokedex />', () => {
   test('Teste se clicando no botão é exibido o próximo Pokémon da lista.', () => {
     RenderWithRouter(<App />);
     // Feito em colaboração com Rafael Mathias, Renan Braga, João Herculano,
-
     const numberOfClicks = 9;
     const namesPokemons = [
       'Charmander',
@@ -33,11 +32,9 @@ describe('Testa o componente <Pokedex />', () => {
       'Pikachu',
     ];
 
-    const btnNext = screen.getByRole('button', {
-      name: /próximo pokémon/i,
-    });
+    const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
 
-    // verifica se em casa iteração do botão aparece um pokemon determinado do array.
+    // verifica se em cada iteração do botão aparece um pokemon determinado do array.
     for (let index = 0; index < numberOfClicks; index += 1) {
       userEvent.click(btnNext);
       const nextPokemon = screen.getByText(namesPokemons[index]);
@@ -47,10 +44,9 @@ describe('Testa o componente <Pokedex />', () => {
 
   test('Testa se volta ao "Pikachu" após passar pelo o "Dragonair"', () => {
     RenderWithRouter(<App />);
-    const btnNext = screen.getByRole('button', {
-      name: /próximo pokémon/i,
-    });
+    const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
 
+    // Realiza 8 iterações ao botão Proximo Pokemon
     const numberOfClicks = 9;
     for (let index = 0; index < numberOfClicks; index += 1) {
       userEvent.click(btnNext);
@@ -78,6 +74,7 @@ describe('Testa o componente <Pokedex />', () => {
       'Dragon',
     ];
 
+    // Loop que verifica se cada botão é do type específico
     const allButtons = screen.getAllByTestId('pokemon-type-button');
     allButtons.forEach((button, index) => {
       expect(button.textContent).toBe(typesButtonsFilter[index]);
@@ -86,12 +83,10 @@ describe('Testa o componente <Pokedex />', () => {
 
   test('O texto do botão deve corresponder ao nome do tipo, ex. Psychic;', () => {
     RenderWithRouter(<App />);
-    const btn = screen.getByRole('button', {
-      name: /psychic/i,
-    });
+    const btn = screen.getByRole('button', { name: /psychic/i });
     userEvent.click(btn);
-    const allTypePokemons = screen.getByTestId('pokemon-type');
 
+    const allTypePokemons = screen.getByTestId('pokemon-type');
     expect(allTypePokemons.textContent).toBe('Psychic');
   });
 
@@ -103,7 +98,5 @@ describe('Testa o componente <Pokedex />', () => {
     userEvent.click(btnAll);
     const nameFirstPkemon = screen.getByText(/pikachu/i);
     expect(nameFirstPkemon).toBeInTheDocument();
-
-    // podera ser refatorado para mais teste;
   });
 });

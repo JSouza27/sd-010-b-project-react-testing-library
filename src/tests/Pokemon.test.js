@@ -19,9 +19,8 @@ describe('Testes do Componente <Pokemon />', () => {
     expect(weightPokemon).toHaveTextContent('Average weight: 6.0 kg');
 
     const imgPkemon = screen.getByRole('img', { name: /pikachu sprite/i });
-    expect(imgPkemon).toHaveAttribute(
-      'src', 'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png',
-    );
+    expect(imgPkemon).toHaveAttribute('src',
+      'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
     expect(imgPkemon).toHaveAttribute('alt', 'Pikachu sprite');
   });
 
@@ -29,6 +28,7 @@ describe('Testes do Componente <Pokemon />', () => {
     const { history } = RenderWithRouter(<App />);
     const btnDetails = screen.getByRole('link', { name: /more details/i });
     userEvent.click(btnDetails);
+
     const { pathname } = history.location;
     expect(pathname).toBe('/pokemons/25');
   });
@@ -42,8 +42,8 @@ describe('Testes do Componente <Pokemon />', () => {
     const checkFavorite = screen.getByRole('checkbox', { name: /pokémon favoritado\?/i });
     userEvent.click(checkFavorite);
 
-    const starFavorite = screen.getByRole('img',
-      { name: /pikachu is marked as favorite/i });
+    const starFavorite = screen.getByRole('img', {
+      name: /pikachu is marked as favorite/i });
     expect(starFavorite).toBeInTheDocument();
     expect(starFavorite).toHaveAttribute('src', '/star-icon.svg');
     expect(starFavorite).toHaveAttribute('alt', 'Pikachu is marked as favorite');

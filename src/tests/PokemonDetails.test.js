@@ -53,21 +53,16 @@ describe('Testes do Componente <PokemonDetails/>', () => {
 
   test('Se o usuário pode favoritar um pokémon através da página de detalhes.', () => {
     RenderWithRouter(<App />);
-    const linkMoreDetails = screen.getByRole('link',
-      { name: /more details/i });
+    const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
     userEvent.click(linkMoreDetails);
 
-    const checkFavorite = screen.getByRole('checkbox',
-      { name: /pokémon favoritado\?/i });
+    const checkFavorite = screen.getByRole('checkbox', { name: /pokémon favoritado\?/i });
     userEvent.click(checkFavorite);
 
-    const starFavorite = screen.getByRole('img',
-      { name: /pikachu is marked as favorite/i });
-
-    // Verifica se o pokemon foi favoritado.
+    const starFavorite = screen.getByRole('img', {
+      name: /pikachu is marked as favorite/i });
     expect(starFavorite).toBeInTheDocument();
 
-    // Verifica se o pokemon NÃO foi favoritado.
     userEvent.click(checkFavorite);
     expect(starFavorite).not.toBeInTheDocument();
 

@@ -10,15 +10,12 @@ describe('Testa o componente <NotFound.js />', () => {
     const { history } = RenderWithRouter(<App />);
     history.push('/nãoexiste');
 
-    const text = screen.getByRole(
-      'heading', { name: /Page requested not found/i },
-    );
+    const text = screen.getByRole('heading', { name: /Page requested not found/i });
 
     expect(text).toBeInTheDocument();
   });
   test('Teste se página mostra a imagem', () => {
     const { history } = RenderWithRouter(<App />);
-
     history.push('/not-found');
 
     const img = screen.getByRole('img', {
