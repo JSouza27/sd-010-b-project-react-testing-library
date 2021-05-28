@@ -169,4 +169,20 @@ uma imagem do mapa em cada localização`, () => {
       expect(imgGameLocation).toHaveAttribute('src', map);
     });
   });
+
+  it(`A imagem da localização deve ter um atributo alt com o texto <name> location,
+onde <name> é o nome do Pokémon`, () => {
+    const { getAllByAltText } = renderWithRouter(
+      <PokemonDetails
+        isPokemonFavoriteById={ isFavoritePokemons }
+        match={ { params: { id: parsedId } } }
+        pokemons={ pokemons }
+        onUpdateFavoritePokemons={ (pokemonId, isFavorite) => (
+          updateFavoritePokemons(pokemonId, isFavorite)
+        ) }
+      />,
+    );
+    const imgGameLocation = getAllByAltText(`${name} location`);
+    expect(imgGameLocation).toHaveLength(foundAt.length);
+  });
 });
