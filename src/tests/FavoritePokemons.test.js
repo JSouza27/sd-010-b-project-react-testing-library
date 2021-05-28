@@ -104,3 +104,12 @@ test('shows the lenght of the list of favorite pokemons', () => {
   const favoritePokemons = 3;
   expect(getAllByTestId('pokemon-name')).toHaveLength(favoritePokemons);
 });
+
+test('shows if no pokemon is rendered if there are no favorites', () => {
+  const { queryByTestId } = render(
+    <MemoryRouter>
+      <FavoritePokemons pokemons={ [] } />
+    </MemoryRouter>,
+  );
+  expect(queryByTestId('pokemon-name')).toBe(null);
+});
