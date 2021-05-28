@@ -37,7 +37,20 @@ describe('Testa o componente <PokemonDetails.js />', () => {
     const { queryByText } = renderWithRouter(<App />);
     const details = /More details/i;
     fireEvent.click(queryByText(details));
-    const paragraph = queryByText((params, tag) => tag.tagName === 'P' && params.includes('This intelligent Pokémon'));
+    const paragraph = queryByText((params, tag) => tag.tagName === 'P'
+     && params.includes('This intelligent Pokémon'));
     expect(paragraph).toBeInTheDocument();
+  });
+
+  test('Testa se existe uma seção com os mapas contendo as localizações do Poke.', () => {
+    const { queryByText, getAllByAltText } = renderWithRouter(<App />);
+    const details = /More details/i;
+    fireEvent.click(queryByText(details));
+    const { foundAt, name } = pokemons[0];
+    foundAt.forEach(({ location, map }, id) => {
+      expect(queryByText(location));
+      const img = getAllByAltText(`${name} location`)[id];
+      expect(img).toHaveAttribute('src', map);
+    });
   });
 });
