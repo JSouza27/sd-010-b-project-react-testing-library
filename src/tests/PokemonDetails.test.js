@@ -186,3 +186,30 @@ onde <name> é o nome do Pokémon`, () => {
     expect(imgGameLocation).toHaveLength(foundAt.length);
   });
 });
+
+describe(`Teste se o usuário pode favoritar um pokémon
+através da página de detalhes.`, () => {
+  it('A página deve exibir um checkbox que permite favoritar o Pokémon', () => {
+    const { getByRole } = renderWithRouter(
+      <PokemonDetails
+        isPokemonFavoriteById={ isFavoritePokemons }
+        match={ { params: { id: parsedId } } }
+        pokemons={ pokemons }
+        onUpdateFavoritePokemons={ (pokemonId, isFavorite) => (
+          updateFavoritePokemons(pokemonId, isFavorite)
+        ) }
+      />,
+    );
+    const favoriteCheckbox = getByRole('checkbox');
+    expect(favoriteCheckbox).toBeInTheDocument();
+  });
+
+  it(`Cliques alternados no checkbox devem adicionar e
+remover respectivamente o Pokémon da lista de favoritos`, () => {
+
+  });
+
+  it('O label do checkbox deve conter o texto Pokémon favoritado?', () => {
+    
+  });
+});
