@@ -112,6 +112,12 @@ describe('Teste o componente <Pokedex.js />', () => {
 
     userEvent.click(resetButton);
 
+    const nextClick = screen.getByRole('button', {
+      name: 'Próximo pokémon',
+    });
+
+    userEvent.click(nextClick);
+
     const getCharm = screen.getByText('Charmander');
     expect(getCharm).toBeInTheDocument();
   });
