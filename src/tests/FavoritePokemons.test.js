@@ -27,7 +27,6 @@ describe('teste no componente FavoritePokemon.js', () => {
   // https://stackoverflow.com/questions/53389956/how-to-test-a-classname-with-the-jest-and-react-testing-library
   test('testando se nenhum card de pokémon é exibido', () => {
     const { container } = renderWithRouter(<FavoritePokemons />);
-
     const star = container.getElementsByClassName('favorite-icon');
     expect(star).not.toBeNull();
   });

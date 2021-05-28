@@ -57,6 +57,7 @@ describe('testes na Pokedex.js', () => {
   });
   test('Teste se é criado, um botão de filtro para cada tipo de Pokémon', () => {
     const { getByRole } = renderWithRouter(<App />);
+    // const newarray = Data.map((pokemon) => { console.log(pokemon.type);})
     const array = [
       'All',
       'Electric',
