@@ -22,6 +22,7 @@ const isFavoritePokemons = {
 };
 
 const { id, name, summary, foundAt } = ekans;
+const [ goldenrodGameCorner ] = foundAt;
 const parsedId = id.toString();
 
 describe(`Teste se as informações detalhadas do Pokémon
@@ -149,6 +150,23 @@ uma imagem do mapa em cada localização`, () => {
       const nameGameLocation = getByText(location);
       expect(imgGameLocation).toBeInTheDocument();
       expect(nameGameLocation).toBeInTheDocument();
+    });
+  });
+
+  it('A imagem da localização deve ter um atributo src com a URL da localização', () => {
+    const { getByRole } = renderWithRouter(
+      <PokemonDetails
+        isPokemonFavoriteById={ isFavoritePokemons }
+        match={ { params: { id: parsedId } } }
+        pokemons={ pokemons }
+        onUpdateFavoritePokemons={ (pokemonId, isFavorite) => (
+          updateFavoritePokemons(pokemonId, isFavorite)
+        ) }
+      />,
+    );
+    foundAt.forEach(({ map }) => {
+      const imgGameLocation = getByRole('img', { name: `${name} location` });
+      expect(imgGameLocation).toHaveAttribute('src', map);
     });
   });
 });
