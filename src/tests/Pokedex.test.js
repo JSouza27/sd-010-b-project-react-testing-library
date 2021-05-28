@@ -183,12 +183,21 @@ describe('for each type of Pokémon a filter button is created dynamically', () 
   });
 });
 
-describe('', () => {
-  test('', () => {
-    const { getByRole } = renderWithRouter(<App />);
+test('"Next Pokémon" button should be disabled when list has only one Pokémon', () => {
+  const { getByRole } = renderWithRouter(<App />);
+  const filterBtn = getByRole('button', {
+    name: /electric/i,
   });
+  const nextBtn = getByRole('button', {
+    name: /próximo pokémon/i,
+  });
+  userEvent.click(filterBtn);
+  expect(nextBtn).toHaveStyle('background-color: ButtonFace');
+});
 
-  test('', () => {
-    const { getByRole } = renderWithRouter(<App />);
-  });
+test('reviewing dataTestId', () => {
+  const { getAllByTestId } = renderWithRouter(<App />);
+  const numberOfBtns = 7;
+  const buttons = getAllByTestId('pokemon-type-button');
+  expect(buttons.length).toBe(numberOfBtns);
 });
