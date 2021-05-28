@@ -12,7 +12,6 @@ describe('testa componente favoritepokemon', () => {
     });
     userEvent.click(favoritepokemon);
     const msg = /No favorite pokemon found/i;
-
     expect(screen.getByText(msg)).toBeInTheDocument();
   });
 });
