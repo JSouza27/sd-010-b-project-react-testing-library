@@ -44,6 +44,22 @@ onde <name> é o nome do Pokémon`, () => {
     });
     expect(heading2).toBeInTheDocument();
   });
+
+  it(`Não deve existir o link de navegação
+para os detalhes do Pokémon selecionado.`, () => {
+    const { queryByRole } = renderWithRouter(
+      <PokemonDetails
+        isPokemonFavoriteById={ isFavoritePokemons }
+        match={ { params: { id: parsedId } } }
+        pokemons={ pokemons }
+        onUpdateFavoritePokemons={ (pokemonId, isFavorite) => (
+          updateFavoritePokemons(pokemonId, isFavorite)
+        ) }
+      />,
+    );
+    const moreDetails = queryByRole('link', { name: 'More details' });
+    expect(moreDetails).not.toBeInTheDocument();
+  });
 });
 
 /*
