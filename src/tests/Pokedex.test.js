@@ -83,7 +83,6 @@ describe('Teste o componente <Pokedex.js />', () => {
     const getFire = screen.getByRole('button', {
       name: /fire/i,
     });
-
     userEvent.click(getFire);
 
     const getNextButton = screen.getByRole('button', {
