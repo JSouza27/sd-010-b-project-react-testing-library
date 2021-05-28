@@ -10,10 +10,10 @@ describe('Testes do Componente <Pokemon />', () => {
     RenderWithRouter(<App />);
 
     const namePokemon = screen.getByTestId('pokemon-name');
-    expect(namePokemon).toBeInTheDocument();
+    expect(namePokemon).toHaveTextContent('Pikachu');
 
     const typePokemon = screen.getByTestId('pokemon-type');
-    expect(typePokemon).toBeInTheDocument();
+    expect(typePokemon).toHaveTextContent('Electric');
 
     const weightPokemon = screen.getByTestId('pokemon-weight');
     expect(weightPokemon).toHaveTextContent('Average weight: 6.0 kg');
