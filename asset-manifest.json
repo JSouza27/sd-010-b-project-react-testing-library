@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "//app-toot-pokedex/static/css/main.88a5c871.chunk.css",
+    "main.js": "//app-toot-pokedex/static/js/main.5754a4fc.chunk.js",
+    "main.js.map": "//app-toot-pokedex/static/js/main.5754a4fc.chunk.js.map",
+    "runtime-main.js": "//app-toot-pokedex/static/js/runtime-main.616ab8f1.js",
+    "runtime-main.js.map": "//app-toot-pokedex/static/js/runtime-main.616ab8f1.js.map",
+    "static/js/2.9cbb527b.chunk.js": "//app-toot-pokedex/static/js/2.9cbb527b.chunk.js",
+    "static/js/2.9cbb527b.chunk.js.map": "//app-toot-pokedex/static/js/2.9cbb527b.chunk.js.map",
+    "index.html": "//app-toot-pokedex/index.html",
+    "precache-manifest.21a1f4b88c2bd772e213114f81f60e84.js": "//app-toot-pokedex/precache-manifest.21a1f4b88c2bd772e213114f81f60e84.js",
+    "service-worker.js": "//app-toot-pokedex/service-worker.js",
+    "static/css/main.88a5c871.chunk.css.map": "//app-toot-pokedex/static/css/main.88a5c871.chunk.css.map",
+    "static/js/2.9cbb527b.chunk.js.LICENSE.txt": "//app-toot-pokedex/static/js/2.9cbb527b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.616ab8f1.js",
+    "static/js/2.9cbb527b.chunk.js",
+    "static/css/main.88a5c871.chunk.css",
+    "static/js/main.5754a4fc.chunk.js"
+  ]
+}
