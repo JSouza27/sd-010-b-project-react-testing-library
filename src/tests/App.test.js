@@ -70,6 +70,5 @@ describe('renderize um conjunto de links', () => {
       const noMatch = getByText(/page requested not found/i);
       expect(noMatch).toBeInTheDocument();
     });
-    
   });
 });
