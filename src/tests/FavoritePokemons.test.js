@@ -5,9 +5,7 @@ import FavoritePokemons from '../components/FavoritePokemons';
 
 test('renders a reading with the text `No favorite pokemon found`', () => {
   const { getByText } = render(
-    <MemoryRouter>
-      <FavoritePokemons pokemons={ [] } />
-    </MemoryRouter>,
+    <FavoritePokemons pokemons={ [] } />,
   );
   const noPokemon = getByText(/No favorite pokemon found/i);
   expect(noPokemon).toBeInTheDocument();
@@ -107,9 +105,7 @@ test('shows the lenght of the list of favorite pokemons', () => {
 
 test('shows if no pokemon is rendered if there are no favorites', () => {
   const { queryByTestId } = render(
-    <MemoryRouter>
-      <FavoritePokemons pokemons={ [] } />
-    </MemoryRouter>,
+    <FavoritePokemons pokemons={ [] } />,
   );
   expect(queryByTestId('pokemon-name')).toBe(null);
 });
