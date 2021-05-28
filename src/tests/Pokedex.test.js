@@ -1,6 +1,5 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { getByText } from '@testing-library/dom';
 import renderWithRouter from '../Helpers/renderWithRouter';
 // import { Pokedex } from '../components';
 import App from '../App';
@@ -102,14 +101,42 @@ describe('renders the filter buttons', () => {
   });
 
   test('selecting a filter, shows only the respective Pokémons', () => {
-    const { getByRole } = renderWithRouter(<App />);
+    const { getByRole, getByTestId } = renderWithRouter(<App />);
     const filterBtn = getByRole('button', {
       name: /psychic/i,
     });
     userEvent.click(filterBtn);
-    const pokemonType = getByRole('paragraph', {
-      name: /psychic/i,
-    });
+    const pokemonType = getByTestId('pokemon-type');
     expect(pokemonType).toBeInTheDocument();
+  });
+});
+
+describe('renders a button to reset filters', () => {
+  test('button text must be "All"', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const resetBtn = getByRole('button', {
+      name: /all/i,
+    });
+    expect(resetBtn).toBeInTheDocument();
+  });
+
+  test('must show all Pokémons when click the reset button (with no filters)', () => {
+    const { getByRole, getByText } = renderWithRouter(<App />);
+    const resetBtn = getByRole('button', {
+      name: /all/i,
+    });
+    userEvent.click(resetBtn);
+    const pokemon = getByText('Pikachu');
+    expect(pokemon).toBeInTheDocument();
+  });
+});
+
+describe('', () => {
+  test('', () => {
+    const { getByRole } = renderWithRouter(<App />);
+  });
+
+  test('', () => {
+    const { getByRole, getByText } = renderWithRouter(<App />);
   });
 });
