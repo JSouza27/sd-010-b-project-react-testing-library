@@ -53,4 +53,17 @@ describe('Testa o componente <PokemonDetails.js />', () => {
       expect(img).toHaveAttribute('src', map);
     });
   });
+
+  test('Testa se o usuário pode favoritar um pokémon através da página detalhes.', () => {
+    const { getByText, getByRole, getByLabelText, queryByAltText } = renderWithRouter(
+      <App />,
+    );
+    const details = /More details/i;
+    fireEvent.click(getByText(details));
+    expect(getByLabelText('Pokémon favoritado?')).toBeInTheDocument();
+    fireEvent.click(getByRole('checkbox'));
+    expect(queryByAltText(/marked/)).toBeInTheDocument();
+    fireEvent.click(getByRole('checkbox'));
+    expect(queryByAltText(/marked/)).toBeNull();
+  });
 });
