@@ -165,7 +165,7 @@ describe('Testing Pokedex.js', () => {
   });
 
   it('Verify if buttons are created dinamically', () => {
-    const { getByRole, getAllByRole } = renderWithRouter(
+    const { getByRole, getAllByTestId } = renderWithRouter(
       <Pokedex pokemons={ POKEMONS_TEST } isPokemonFavoriteById={ FAVORITE_OBJ } />,
     );
 
@@ -177,10 +177,10 @@ describe('Testing Pokedex.js', () => {
     expect(fireType).toBeInTheDocument();
     expect(allType).toBeInTheDocument();
 
-    const buttons = getAllByRole('button');
-    const MAX_BUTTONS_NUM = 4;
+    const typeButtons = getAllByTestId('pokemon-type-button');
+    const MAX_TYPE_BUTTONS_NUM = 2;
     // All, Electric, Fire and Proximo Pokémon
-    expect(buttons.length).toBe(MAX_BUTTONS_NUM);
+    expect(typeButtons.length).toBe(MAX_TYPE_BUTTONS_NUM);
   });
 
   it('Verifies if have only one pokemon, "next button" are disabled', () => {
