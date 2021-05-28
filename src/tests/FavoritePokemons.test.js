@@ -5,7 +5,7 @@ import renderWithRouter from '../renderWithRouter';
 import { FavoritePokemons } from '../components';
 
 describe('Requirement 3 - Test the <FavoritePokemons.js> component', () => {
-  test('Tests if the message \'No favorite pokemon found\' is displayed', () => {
+  it('Tests if the message \'No favorite pokemon found\' is displayed', () => {
     // Acessar componentes
     const { getByText } = renderWithRouter(<FavoritePokemons />);
 
@@ -16,7 +16,7 @@ describe('Requirement 3 - Test the <FavoritePokemons.js> component', () => {
     expect(noFavorites).toBeInTheDocument();
   });
 
-  test('Tests if all your favorite Pokémon cards are displayed.', () => {
+  it('Tests if all your favorite Pokémon cards are displayed.', () => {
     // Acessar componentes
     const { getByText, getByRole, queryByText, history } = renderWithRouter(<App />);
 

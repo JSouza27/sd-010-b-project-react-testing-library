@@ -3,7 +3,7 @@ import { NotFound } from '../components';
 import renderWithRouter from '../renderWithRouter';
 
 describe('Requirement 4 - Test the <NotFound.js> component', () => {
-  test('', () => {
+  it('Tests if a page contains an h2 header with  aspecific text', () => {
     // Acessar componentes
     const { getByRole } = renderWithRouter(<NotFound />);
 
