@@ -50,10 +50,32 @@ describe('Pokemon Component tests', () => {
   });
 });
 
-// describe('testing the link component in pokemon cards', () => {
-//   it('shows a link to more details of in each card', () => {
-//     const { getByRole } = renderWithRouter(<App />);
-//     const detailsLink = getByRole('link', { name: /more details/i });
-//     expect(detailsLink).toBeInTheDocument();
-//   });
-// });
+describe('testing the link component in pokemon cards', () => {
+  it('shows a link to more details of a pokemon in each card', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    pokemons.forEach((pokemon) => {
+      const detailsLink = getByRole('link', { name: /more details/i });
+      expect(detailsLink).toBeInTheDocument();
+      expect(detailsLink).toHaveAttribute('href', `/pokemons/${pokemon.id}`);
+      nextButton();
+      fireEvent.click(nextButton()[0]);
+    });
+  });
+  it('shows a star icon if the pokemon is marked as favorite', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const detailsLink = getByRole('link', { name: /more details/i });
+    expect(detailsLink).toBeInTheDocument();
+    fireEvent.click(detailsLink);
+    const headingName = getByRole('heading', { name: /pikachu details/i });
+    expect(headingName).toBeInTheDocument();
+    const favBox = getByRole('checkbox', { name: /pokémon favoritado\?/i });
+    expect(favBox).toBeInTheDocument();
+    expect(favBox).not.toBeChecked();
+    fireEvent.click(favBox);
+    expect(favBox).toBeChecked();
+    const starIcon = getByRole('img', { name: /pikachu is marked as favorite/i });
+    expect(starIcon).toBeInTheDocument();
+    expect(starIcon).toHaveAttribute('alt', 'Pikachu is marked as favorite');
+    expect(starIcon).toHaveAttribute('src', '/star-icon.svg');
+  });
+});
