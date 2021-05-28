@@ -60,16 +60,22 @@ para os detalhes do Pokémon selecionado.`, () => {
     const moreDetails = queryByRole('link', { name: 'More details' });
     expect(moreDetails).not.toBeInTheDocument();
   });
+
+  it('A seção de detalhes deve conter um heading h2 com o texto Summary', () => {
+    const { getByRole } = renderWithRouter(
+      <PokemonDetails
+        isPokemonFavoriteById={ isFavoritePokemons }
+        match={ { params: { id: parsedId } } }
+        pokemons={ pokemons }
+        onUpdateFavoritePokemons={ (pokemonId, isFavorite) => (
+          updateFavoritePokemons(pokemonId, isFavorite)
+        ) }
+      />,
+    );
+    const heading2 = getByRole('heading', {
+      level: 2,
+      name: 'Summary',
+    });
+    expect(heading2).toBeInTheDocument();
+  });
 });
-
-/*
-<PokemonDetails
-  isPokemonFavoriteById={ isPokemonFavoriteById }
-  match={ { match: { params: { id } } } }
-  pokemons={ pokemons }
-  onUpdateFavoritePokemons={ (pokemonId, isFavorite) => (
-    updateFavoritePokemons(pokemonId, isFavorite)
-  ) }
-/>,
-
-*/
