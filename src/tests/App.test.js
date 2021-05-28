@@ -49,7 +49,7 @@ describe('Teste requisito 1', () => {
     const { history } = renderWithRouter(<App />);
     const aboutLink = screen.getByRole('link', {
       name: 'About',
-    });
+    }); // aqui peguei o LInk pelo seu papel como Link. Mas poderia ter apenas pegado esse link pelo texto que este link contém.
     userEvent.click(aboutLink);
     const { pathname } = history.location; // IMPORTANTE: Aqui que uso isso do history.location, DEPOIS do click. O histórico tem que ser depois do click, senão fica o histórico desde o HOME de novo, e aí daria erro.
     expect(pathname).toBe('/about');
