@@ -50,12 +50,10 @@ describe('Teste o componente <Pokedex.js />', () => {
       pokemons={ pokemons }
       isPokemonFavoriteById={ newObject }
     />);
+    const numb = 1;
 
-    const imgPokemon = screen.getAllByRole('img', {
-      name: 'Pikachu sprite',
-    });
-
-    expect(imgPokemon[0]).toBeInTheDocument();
+    const getPokemonId = screen.getAllByTestId('pokemon-name');
+    expect(getPokemonId.length).toBe(numb);
   });
 
   it('Teste se a Pokédex tem os botões de filtro', () => {
@@ -107,12 +105,15 @@ describe('Teste o componente <Pokedex.js />', () => {
     />);
 
     const resetButton = screen.getByRole('button', {
-      name: /all/i,
+      name: 'All',
     });
-    const firstPokemon = screen.getByText(/pikachu/i);
 
     expect(resetButton).toBeInTheDocument();
-    expect(firstPokemon).toBeInTheDocument();
+
+    userEvent.click(resetButton);
+
+    const getCharm = screen.getByText('Charmander');
+    expect(getCharm).toBeInTheDocument();
   });
 
   it('Teste se é criado dinamicamente um botão de filtro para cada Pokémon', () => {
