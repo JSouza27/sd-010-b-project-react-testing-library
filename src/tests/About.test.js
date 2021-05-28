@@ -13,6 +13,18 @@ test('renders a reading with the text `About Pokédex`', () => {
   expect(heading).toBeInTheDocument();
 });
 
+test('renders a reading with two paragraphs', () => {
+  const { getByText } = render(
+    <MemoryRouter>
+      <About />
+    </MemoryRouter>,
+  );
+  const paragraph1 = getByText(/This application simulates/i);
+  const paragraph2 = getByText(/One can filter/i);
+  expect(paragraph1).toBeInTheDocument();
+  expect(paragraph2).toBeInTheDocument();
+});
+
 test('renders a reading with the Pokédex image', () => {
   render(
     <MemoryRouter>
