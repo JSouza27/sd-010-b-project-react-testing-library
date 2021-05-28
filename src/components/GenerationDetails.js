@@ -15,7 +15,6 @@ class GenerationDetails extends React.Component {
   componentDidMount() {
     const { generation } = this.props.match.params
     const array = generation.split('-');
-    console.log(array[1]);
     let id;
     switch (array[1]) {
       case 'i':
@@ -47,7 +46,6 @@ class GenerationDetails extends React.Component {
   }
 
   fetchGenerations(generation) {
-    console.log(generation);
     const url = `https://pokeapi.co/api/v2/generation/${generation}/`
     fetch(url)
       .then((response) => response.json())
@@ -59,12 +57,10 @@ class GenerationDetails extends React.Component {
 
   render() {
     const { generation, name } = this.state
-    console.log(generation);
-    console.log(name);
     return (
       <section>
         <h2>Region: {name.toUpperCase()}</h2>
-        <h3>Pokémons introduced:</h3>
+        <h3>Pokémons introduced: ({ generation.length })</h3>
         <ul>
           { generation.map((entry) => <li key={entry.name}>{entry.name}</li>)} 
         </ul>

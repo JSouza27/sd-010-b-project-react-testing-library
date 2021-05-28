@@ -20,9 +20,13 @@ test('renders the three navigation links', () => {
   const home = getByText('Home');
   const about = getByText('About');
   const favorites = getByText('Favorite Pokémons');
+  const locations = getByText('Locations');
+  const generations = getByText('Generations');
   expect(home).toBeInTheDocument();
   expect(about).toBeInTheDocument();
   expect(favorites).toBeInTheDocument();
+  expect(locations).toBeInTheDocument();
+  expect(generations).toBeInTheDocument();
 });
 
 test('Test if About link directs to home', () => {
@@ -69,4 +73,20 @@ test('shows the Pokédex when the route is `/`', () => {
   );
 
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
+});
+
+test('Test if Locations link directs to Locations', () => {
+  const { getByText, history } = renderWithRouter(<App />);
+  const location = getByText('Locations');
+  userEvent.click(location);
+  const { pathname } = history.location;
+  expect(pathname).toBe('/locations');
+});
+
+test('Test if Generations link directs to Generations', () => {
+  const { getByText, history } = renderWithRouter(<App />);
+  const generations = getByText('Generations');
+  userEvent.click(generations);
+  const { pathname } = history.location;
+  expect(pathname).toBe('/generations');
 });

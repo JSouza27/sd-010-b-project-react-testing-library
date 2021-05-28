@@ -39,6 +39,10 @@ describe('Testa a navegação na lista', () => {
     const previousButton = screen.getByText('Anterior');
     const nextButton = screen.getByText('Próxima');
     expect(previousButton).toBeInTheDocument();
+    expect(previousButton).toHaveAttribute('disabled');
+    expect(nextButton).toBeInTheDocument();
+    userEvent.click(nextButton);
+    expect(previousButton).not.toHaveAttribute('disabled');
     expect(nextButton).toBeInTheDocument();
   });
 
@@ -75,5 +79,39 @@ describe('testa as listas e os botões', () => {
     renderWithRouter(<Locations />);
     expect(await screen.findByText('wayward-cave')).toBeInTheDocument();
     screen.debug();
+  });
+
+  it('Testa se a lista tem 20 cidades', async () => {
+    const numberOfCities = 20;
+    renderWithRouter(<Locations />);
+    const list = await screen.findAllByRole('listitem');
+    expect(list.length).toBe(numberOfCities);
+  });
+});
+
+test('testa a exibição de pagina 1 e 2 de 4o', () => {
+  renderWithRouter(<Locations />);
+  const text = screen.getByText('Página 1 de 40');
+  expect(text).toBeInTheDocument();
+  const nextButton = screen.getByText('Próxima');
+  userEvent.click(nextButton);
+  const text2 = screen.getByText('Página 2 de 40');
+  expect(text2).toBeInTheDocument();
+});
+
+test(' testa a exibição do título', () => {
+  renderWithRouter(<Locations />);
+  const title = screen.getByRole('heading', { level: 2 });
+  expect(title).toBeInTheDocument();
+});
+
+describe('Testa a exibição do offset', () => {
+  beforeAll(() => { jest.useFakeTimers(); });
+  afterAll(() => { jest.useRealTimers(); });
+
+  test('Testa se o offset da primeira página está sendo exibido', async () => {
+    renderWithRouter(<Locations />);
+    const offset = await screen.findByText(/1 a 20 de 796/);
+    expect(offset).toBeInTheDocument();
   });
 });

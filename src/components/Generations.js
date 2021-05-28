@@ -27,7 +27,6 @@ class Generations extends React.Component {
 
   render() {
     const { generations } = this.state;
-    console.log(generations);
     return (
       <section>
         <h2>GENERATIONS</h2>

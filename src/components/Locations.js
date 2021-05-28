@@ -44,12 +44,13 @@ class Locations extends React.Component{
     const { locations, offset } = this.state;
     return(
       <section>
-        <h2>All locations</h2>
+        <h2>Localizações</h2>
         <ul>
           { locations.filter((_, index) => index >= offset && index < (offset + 20)).map((entry) => {
             return <li key={entry.name}>{entry.name}</li>
           })}
         </ul>
+        <p>Mostrando localizações de { (offset+1) } a { (offset+20) } de { locations.length }</p>
         <button disabled={(offset === 0) ? true : false } onClick={ this.previousPage }>Anterior</button>
         <button disabled={(offset === 780) ? true : false }onClick={ this.nextPage }>Próxima</button>
         <p>Página {(offset === 0) ? 1 : (offset/20) + 1 } de 40</p>
