@@ -95,3 +95,25 @@ resumo do Pokémon específico sendo visualizado`, () => {
     expect(summaryParagraph).toBeInTheDocument();
   });
 });
+
+describe(`Teste se existe na página uma seção com os mapas
+contendo as localizações do pokémon`, () => {
+  it(`Na seção de detalhes deverá existir um heading h2 com o texto
+Game Locations of <name>; onde <name> é o nome do Pokémon exibido`, () => {
+    const { getByRole } = renderWithRouter(
+      <PokemonDetails
+        isPokemonFavoriteById={ isFavoritePokemons }
+        match={ { params: { id: parsedId } } }
+        pokemons={ pokemons }
+        onUpdateFavoritePokemons={ (pokemonId, isFavorite) => (
+          updateFavoritePokemons(pokemonId, isFavorite)
+        ) }
+      />,
+    );
+    const headingGameLocations = getByRole('heading', {
+      level: 2,
+      name: `Game Locations of ${name}`,
+    });
+    expect(headingGameLocations).toBeInTheDocument();
+  });
+});
