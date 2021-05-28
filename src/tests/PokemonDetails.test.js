@@ -21,7 +21,7 @@ const isFavoritePokemons = {
   [dragonair.id]: false,
 };
 
-const { id, name } = ekans;
+const { id, name, summary } = ekans;
 const parsedId = id.toString();
 
 describe(`Teste se as informações detalhadas do Pokémon
@@ -77,5 +77,21 @@ para os detalhes do Pokémon selecionado.`, () => {
       name: 'Summary',
     });
     expect(heading2).toBeInTheDocument();
+  });
+
+  it(`A seção de detalhes deve conter um parágrafo com o
+resumo do Pokémon específico sendo visualizado`, () => {
+    const { getByText } = renderWithRouter(
+      <PokemonDetails
+        isPokemonFavoriteById={ isFavoritePokemons }
+        match={ { params: { id: parsedId } } }
+        pokemons={ pokemons }
+        onUpdateFavoritePokemons={ (pokemonId, isFavorite) => (
+          updateFavoritePokemons(pokemonId, isFavorite)
+        ) }
+      />,
+    );
+    const summaryParagraph = getByText(summary);
+    expect(summaryParagraph).toBeInTheDocument();
   });
 });
