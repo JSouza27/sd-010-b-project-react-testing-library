@@ -1,7 +1,8 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import { getByText } from '@testing-library/dom';
 import renderWithRouter from '../Helpers/renderWithRouter';
-import { Pokedex } from '../components';
+// import { Pokedex } from '../components';
 import App from '../App';
 
 test('shows a h2 element with text "Encountered pokémons"', () => {
@@ -14,15 +15,16 @@ test('shows a h2 element with text "Encountered pokémons"', () => {
 });
 
 describe('shows the next Pokémon in the list when click "Próximo pokémon" button', () => {
+  const buttonValue = 'Próximo pokémon';
   test('button should contain the text "Próximo pokémon"', () => {
     const { getByText } = renderWithRouter(<App />);
-    const nextBtn = getByText('Próximo pokémon');
+    const nextBtn = getByText(buttonValue);
     expect(nextBtn).toBeInTheDocument();
   });
 
   test('shows the next Pokémon, one by one, when click button', () => {
     const { getByText } = renderWithRouter(<App />);
-    const button = getByText('Próximo pokémon');
+    const button = getByText(buttonValue);
     // Pikachu
     let pokemon = getByText('Pikachu');
     expect(pokemon).toBeInTheDocument();
@@ -62,7 +64,7 @@ describe('shows the next Pokémon in the list when click "Próximo pokémon" but
 
   test('shows first Pokémon when in the last one and click the button', () => {
     const { getByText } = renderWithRouter(<App />);
-    const button = getByText('Próximo pokémon');
+    const button = getByText(buttonValue);
     userEvent.click(button);
     userEvent.click(button);
     userEvent.click(button);
@@ -74,5 +76,40 @@ describe('shows the next Pokémon in the list when click "Próximo pokémon" but
     userEvent.click(button); // Last Pokemon
     const firstPokemon = getByText('Pikachu');
     expect(firstPokemon).toBeInTheDocument();
+  });
+});
+
+test('show only one Pokémon at a time', () => {
+  const { getByTestId } = renderWithRouter(<App />);
+  const pokemon = getByTestId('pokemon-name');
+  expect(pokemon).not.toBe('Charmander');
+  expect(pokemon).not.toBe('Caterpie');
+  expect(pokemon).not.toBe('Ekans');
+  expect(pokemon).not.toBe('Alakazam');
+  expect(pokemon).not.toBe('Mew');
+  expect(pokemon).not.toBe('Rapidash');
+  expect(pokemon).not.toBe('Snorlax');
+  expect(pokemon).not.toBe('Dragonair');
+});
+
+describe('renders the filter buttons', () => {
+  test('shows the filter buttons', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const filterBtn = getByRole('button', {
+      name: /psychic/i,
+    });
+    expect(filterBtn).toBeInTheDocument();
+  });
+
+  test('selecting a filter, shows only the respective Pokémons', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const filterBtn = getByRole('button', {
+      name: /psychic/i,
+    });
+    userEvent.click(filterBtn);
+    const pokemonType = getByRole('paragraph', {
+      name: /psychic/i,
+    });
+    expect(pokemonType).toBeInTheDocument();
   });
 });
