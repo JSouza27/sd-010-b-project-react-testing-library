@@ -74,7 +74,6 @@ class PokemonDetails extends React.Component {
 
     const pokemon = this.findPokemon(parseInt(id, 10));
     const isFavorite = isPokemonFavoriteById[id];
-
     return (
       <section className="pokemon-details">
         <h2>{`${pokemon.name} ` + `Details`}</h2>
