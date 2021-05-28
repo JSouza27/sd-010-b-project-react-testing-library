@@ -131,4 +131,24 @@ Game Locations of <name>; onde <name> é o nome do Pokémon exibido`, () => {
     const imgsGameLocations = getAllByRole('img', { name: `${name} location` });
     expect(imgsGameLocations).toHaveLength(foundAt.length);
   });
+
+  it(`Devem ser exibidos, o nome da localização e
+uma imagem do mapa em cada localização`, () => {
+    const { getByRole, getByText } = renderWithRouter(
+      <PokemonDetails
+        isPokemonFavoriteById={ isFavoritePokemons }
+        match={ { params: { id: parsedId } } }
+        pokemons={ pokemons }
+        onUpdateFavoritePokemons={ (pokemonId, isFavorite) => (
+          updateFavoritePokemons(pokemonId, isFavorite)
+        ) }
+      />,
+    );
+    foundAt.forEach(({ location }) => {
+      const imgGameLocation = getByRole('img', { name: `${name} location` });
+      const nameGameLocation = getByText(location);
+      expect(imgGameLocation).toBeInTheDocument();
+      expect(nameGameLocation).toBeInTheDocument();
+    });
+  });
 });
