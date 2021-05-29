@@ -31,19 +31,31 @@ test('show if app has a fixed nav bar', () => {
   const aboutLink = getByText('About');
   const favoriteLink = getByText('Favorite Pokémons');
 
-  expect(homeLink).toBeInTheDocument();
-  expect(aboutLink).toBeInTheDocument();
-  expect(favoriteLink).toBeInTheDocument();
+  const navBar = [homeLink, aboutLink, favoriteLink];
 
-  fireEvent.click(aboutLink);
+  navBar.forEach((link) => {
+    fireEvent.click(link);
+    expect(homeLink).toBeInTheDocument();
+    expect(aboutLink).toBeInTheDocument();
+    expect(favoriteLink).toBeInTheDocument();
+  });
+});
+test('show if click on Home btn leads to home', () => {
+  const { getByText } = render(
+    <MemoryRouter initialEntries={ ['/about'] }>
+      <App />
+    </MemoryRouter>,
+  );
+  fireEvent.click(getByText('Home'));
+  expect(getByText('Encountered pokémons')).toBeInTheDocument();
+});
+test('show if NotFound page works', () => {
+  const { getByText } = render(
+    <MemoryRouter initialEntries={ ['/pagina-errada'] }>
+      <App />
+    </MemoryRouter>,
+  );
+  const notFound = getByText(/Page requested not found/i);
 
-  expect(homeLink).toBeInTheDocument();
-  expect(aboutLink).toBeInTheDocument();
-  expect(favoriteLink).toBeInTheDocument();
-
-  fireEvent.click(favoriteLink);
-
-  expect(homeLink).toBeInTheDocument();
-  expect(aboutLink).toBeInTheDocument();
-  expect(favoriteLink).toBeInTheDocument();
+  expect(notFound).toBeInTheDocument();
 });
