@@ -2,6 +2,7 @@ import React from 'react';
 import { fireEvent } from '@testing-library/dom';
 import renderWithRouter from '../helper/renderWithRouter';
 import App from '../App';
+import data from '../data';
 
 const pokemons = [
   {
@@ -24,7 +25,8 @@ const pokemons = [
         map: 'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png',
       },
     ],
-    summary: 'This intelligent Pokémon roasts hard berries with electricity',
+    summary: `This intelligent Pokémon roasts hard berries with electricity 
+to make them tender enough to eat.`,
   },
   {
     id: 4,
@@ -62,22 +64,23 @@ global.fetch(jest.fn().mockResolvedValue({
   json: jest.fn().mockResolvedValue(pokemons),
 }));
 
-const summary1 = 'This intelligent Pokémon roasts hard berries with';
-const summary2 = 'electricity to make them tender enough to eat.';
+const DATA = data[0].summary;
+const TEXT_STRING = pokemons[0].summary.replace(/(\r\n|\n|\r)/gm, '');
 
 describe('Name of the group', () => {
   it('test if the info of the pokemon selected are rendered', () => {
-    const { getByRole, getByText, getByTestId, history } = renderWithRouter(<App />);
+    const { getByRole, getByText, history } = renderWithRouter(<App />);
     history.push(`/pokemons/${pokemons[0].id}`);
 
     expect(getByText(`${pokemons[0].name} Details`));
 
-    const summary = getByRole('heading', { level: 2, name: 'Summary' });
-    expect(summary).toBeInTheDocument();
-    expect(summary.innerHTML).toBe('Summary');
+    const h2Summary = getByRole('heading', { level: 2, name: 'Summary' });
+    expect(h2Summary).toBeInTheDocument();
+    expect(h2Summary.innerHTML).toBe('Summary');
 
-    expect(getByTestId('pokemon-dale')).toBeInTheDocument();
-    expect(getByTestId('pokemon-dale').innerHTML).toBe(`${summary1} ${summary2}`);
+    const detailsText = getByText(DATA);
+    expect(detailsText).toBeInTheDocument();
+    expect(detailsText.innerHTML).toBe(TEXT_STRING);
   });
 
   it('test if the page have a section for maps of the locations of pokemon', () => {
