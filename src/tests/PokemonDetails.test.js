@@ -1,5 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import App from '../App';
 import PokemonDetails from '../components/PokemonDetails';
 import renderWithRouter from './RenderWithRouter';
 import pokemons from '../data';
@@ -22,7 +23,6 @@ const isFavoritePokemons = {
 };
 
 const { id, name, summary, foundAt } = ekans;
-const [ goldenrodGameCorner ] = foundAt;
 const parsedId = id.toString();
 
 describe(`Teste se as informações detalhadas do Pokémon
@@ -206,10 +206,29 @@ através da página de detalhes.`, () => {
 
   it(`Cliques alternados no checkbox devem adicionar e
 remover respectivamente o Pokémon da lista de favoritos`, () => {
+    const { getByRole, getByTestId } = renderWithRouter(<App />);
 
+    const linkMoreDetails = getByRole('link', { name: 'More details' });
+    userEvent.click(linkMoreDetails);
+
+    const favoriteCheckbox = getByRole('checkbox');
+    userEvent.click(favoriteCheckbox);
+    expect(favoriteCheckbox).toBeChecked();
+
+    const linkFavoritePokemons = getByRole('link', { name: 'Favorite Pokémons' });
+    userEvent.click(linkFavoritePokemons);
+
+    const pokemonName = getByTestId('pokemon-name');
+    expect(pokemonName).toBeInTheDocument();
+
+    const linkHome = getByRole('link', { name: 'Home' });
+    userEvent.click(linkHome);
+
+    userEvent.click(linkMoreDetails);
+    userEvent.click(favoriteCheckbox);
+    expect(favoriteCheckbox).not.toBeChecked();
+    expect(pokemonName).not.toBeInTheDocument();
   });
 
-  it('O label do checkbox deve conter o texto Pokémon favoritado?', () => {
-    
-  });
+  
 });
