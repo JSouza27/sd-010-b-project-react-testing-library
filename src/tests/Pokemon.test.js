@@ -1,3 +1,16 @@
-describe('', () => {
-  test('', () => {});
+import React from 'react';
+import { screen } from '@testing-library/react';
+import renderWithRouter from '../services/renderWithRouter';
+import App from '../App';
+
+describe(`Teste se é renderizado um card
+  com as informações de determinado pokémon`, () => {
+  test('Verificar se é renderizado o nome do pokémon', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/');
+
+    const nomePokemon = screen.getByText('Pikachu');
+
+    expect(nomePokemon).toBeInTheDocument();
+  });
 });
