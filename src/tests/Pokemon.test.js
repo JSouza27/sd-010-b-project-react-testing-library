@@ -30,4 +30,12 @@ describe(`Teste se é renderizado um card
 
     expect(averageWeightPokemon).toBeInTheDocument();
   });
+
+  test('Testando a imagem correta do pokémon deve ser mostrado na tela', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/');
+    const spritePokemon = screen.getByAltText('Pikachu sprite');
+    expect(spritePokemon.alt).toBe('Pikachu sprite');
+    expect(spritePokemon.src).toBe('https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
+  });
 });
