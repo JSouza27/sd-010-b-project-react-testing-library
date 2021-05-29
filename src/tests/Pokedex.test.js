@@ -97,22 +97,3 @@ describe('checa se o botão Próximo pokémon desativa quando tiver um só poké
     expect(getByText(/Próximo pokémon/)).toHaveAttribute('disabled');
   });
 });
-
-// const button = container.querySelectorAll('button');
-// console.log(button.length);
-// expect(button.length).toBe
-// expect(getByText(/All/)).toBeInTheDocument();
-// // expect(getByText(/Electric/)).toBeInTheDocument();
-// expect(getByText(/Fire/)).toBeInTheDocument();
-// expect(getByText(/Bug/)).toBeInTheDocument();
-// expect(getByText(/Poison/)).toBeInTheDocument();
-// expect(getByText(/Psychic/)).toBeInTheDocument();
-// expect(getByText(/Normal/)).toBeInTheDocument();
-// expect(getByText(/Dragon/)).toBeInTheDocument();
-
-// const { getByAltText } = renderWithRouter(<About />);
-// const pokedexImage = getByAltText('Pokédex');
-// expect(pokedexImage).toHaveAttribute(
-//   'src',
-//   'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png',
-// );
