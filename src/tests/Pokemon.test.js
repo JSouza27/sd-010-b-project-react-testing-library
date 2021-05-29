@@ -21,4 +21,13 @@ describe(`Teste se é renderizado um card
     const typePokemon = screen.getByTestId('pokemon-type');
     expect(typePokemon).toHaveTextContent('Electric');
   });
+
+  test('Verificar se é renderizado o peso do pokémon', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/');
+
+    const averageWeightPokemon = screen.getByText('Average weight: 6.0 kg');
+
+    expect(averageWeightPokemon).toBeInTheDocument();
+  });
 });
