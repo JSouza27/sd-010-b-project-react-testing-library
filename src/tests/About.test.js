@@ -13,9 +13,9 @@ describe('Verifica se a página contém as informações sobre a Pokédex.', () 
   });
 
   test('Testa se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
-    const { getAllByText } = renderWithRouter(<About />);
-    const paragraphQuant = getAllByText(/Pokémons/);
-    expect(paragraphQuant.length).toBe(2);
+    const { container } = renderWithRouter(<About />);
+    const p = container.querySelectorAll('p');
+    expect(p.length).toBe(2);
   });
 
   test('Testa se a página contém imagen.', () => {

@@ -42,34 +42,77 @@ describe('Verifica o botão proximo pokemon.', () => {
 
 describe('Teste se é mostrado apenas um Pokémon por vez.', () => {
   test('Teste se é mostrado apenas um Pokémon por vez.', () => {
-
+    const { container } = renderWithRouter(<App />);
+    const p = container.querySelectorAll('p');
+    const quantP = 3;
+    expect(p.length).toBe(quantP);
   });
 });
 
-// Teste se a Pokédex tem os botões de filtro.
+describe('Verifica se a Pokédex tem os botões de filtro.', () => {
+  test('Ao clicar no botão de tipo, a Pokédex mostra so pokémons daquele tipo.', () => {
+    const { getByText } = renderWithRouter(<App />);
+    fireEvent.click(getByText(/Psychic/i));
+    expect(getByText(/Alakazam/)).toBeInTheDocument();
+    fireEvent.click(getByText(/Próximo pokémon/i));
+    expect(getByText(/Mew/)).toBeInTheDocument();
+  });
+});
 
-// A partir da seleção de um botão de tipo, a Pokédex deve circular somente pelos pokémons daquele tipo;
+describe('Verifica se a Pokédex contém um botão para resetar o filtro.', () => {
+  test('Ao clicar no botão de tipo, a Pokédex mostra so pokémons daquele tipo.', () => {
+    const { getByText } = renderWithRouter(<App />);
+    expect(getByText(/All/)).toBeInTheDocument();
+  });
 
-// O texto do botão deve corresponder ao nome do tipo, ex. Psychic;
+  test('Ao clicar no botão de All, a Pokédex mostra todos os pokémons.', () => {
+    const { getByText } = renderWithRouter(<App />);
+    fireEvent.click(getByText(/All/i));
+    expect(getByText(/Pikachu/)).toBeInTheDocument();
+    fireEvent.click(getByText(/Próximo pokémon/i));
+    expect(getByText(/Charmander/)).toBeInTheDocument();
+  });
 
-// Teste se a Pokédex contém um botão para resetar o filtro
+  test('Ao iniciar a pagina, o filtro selecionada deve ser All.', () => {
+    const { getByText } = renderWithRouter(<App />);
+    expect(getByText(/Pikachu/)).toBeInTheDocument();
+    fireEvent.click(getByText(/Próximo pokémon/i));
+    expect(getByText(/Charmander/)).toBeInTheDocument();
+  });
+});
 
-// O texto do botão deve ser All;
+describe('Verifica se a botão de filtro para cada tipo de Pokémon.', () => {
+  test('Verifica se a botão de filtro para cada tipo de Pokémon.', () => {
+    const { getAllByTestId, getAllByRole } = renderWithRouter(<App />);
+    const buttonType = getAllByTestId('pokemon-type-button');
+    const buttons = getAllByRole('button');
+    expect(buttonType.length + 2).toBe(buttons.length);
+  });
+});
 
-// A Pokedéx deverá mostrar os Pokémons normalmente (sem filtros) quando o botão All for clicado;
+describe('checa se o botão Próximo pokémon desativa quando tiver um só pokémon', () => {
+  test('checa se o botão Próximo pokémon desativa quando tiver um só pokémon', () => {
+    const { getByText } = renderWithRouter(<App />);
+    fireEvent.click(getByText(/Bug/i));
+    expect(getByText(/Próximo pokémon/)).toHaveAttribute('disabled');
+  });
+});
 
-// Ao carregar a página, o filtro selecionado deverá ser All;
+// const button = container.querySelectorAll('button');
+// console.log(button.length);
+// expect(button.length).toBe
+// expect(getByText(/All/)).toBeInTheDocument();
+// // expect(getByText(/Electric/)).toBeInTheDocument();
+// expect(getByText(/Fire/)).toBeInTheDocument();
+// expect(getByText(/Bug/)).toBeInTheDocument();
+// expect(getByText(/Poison/)).toBeInTheDocument();
+// expect(getByText(/Psychic/)).toBeInTheDocument();
+// expect(getByText(/Normal/)).toBeInTheDocument();
+// expect(getByText(/Dragon/)).toBeInTheDocument();
 
-// Teste se é criado, dinamicamente, um botão de filtro para cada tipo de Pokémon.
-
-// Os botões de filtragem devem ser dinâmicos;
-
-// Deve existir um botão de filtragem para cada tipo de Pokémon disponível nos dados, sem repetição. Ou seja, a sua Pokédex deve possuir pokémons do tipo Fire, Psychic, Electric, Bug, Poison, Dragon e Normal;
-
-// Deve ser mostrado como opção de filtro, um botão para cada um dos tipos. Além disso, o botão All precisa estar sempre visível.
-
-// O botão de Próximo pokémon deve ser desabilitado quando a lista filtrada de Pokémons tiver um só pokémon.
-
-// O que será verificado:
-
-// Será avaliado se o arquivo teste Pokedex.test.js contemplam 100% dos casos de uso criados pelo Stryker.
+// const { getByAltText } = renderWithRouter(<About />);
+// const pokedexImage = getByAltText('Pokédex');
+// expect(pokedexImage).toHaveAttribute(
+//   'src',
+//   'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png',
+// );
