@@ -27,6 +27,11 @@ test('Testa se existe na página uma seção com mapas', () => {
   const getLink = getByRole('link', { name: /more details/i });
   userEvent.click(getLink);
 
+  const checkFavorite = getByRole('checkbox');
+  expect(checkFavorite).toBeInTheDocument();
+  const favoritePokemon = getByText(/Pokémon favoritado/i);
+  expect(favoritePokemon).toBeInTheDocument();
+
   const total = foundAt.map((item) => item.location);
 
   const gameLocation = getByRole('heading',
@@ -34,10 +39,11 @@ test('Testa se existe na página uma seção com mapas', () => {
   expect(gameLocation).toBeInTheDocument();
   const getDivLocation = container.querySelector('.pokemon-habitat');
   expect(getDivLocation.childElementCount).toEqual(total.length);
-  foundAt.forEach((item) => {
+  foundAt.forEach((item, index) => {
     const elementP = getByText(item.location);
     expect(elementP).toBeInTheDocument();
     const imagePath = getAllByAltText(`${name} location`);
-    expect(imagePath[0]).toBeInTheDocument();
+    expect(imagePath[index]).toBeInTheDocument();
+    expect(imagePath[index]).toHaveAttribute('src', item.map);
   });
 });
