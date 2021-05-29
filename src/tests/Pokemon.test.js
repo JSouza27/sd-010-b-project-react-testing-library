@@ -13,4 +13,12 @@ describe(`Teste se é renderizado um card
 
     expect(nomePokemon).toBeInTheDocument();
   });
+
+  test('Verificar se é renderizado o tipo do pokémon', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/');
+
+    const typePokemon = screen.getByTestId('pokemon-type');
+    expect(typePokemon).toHaveTextContent('Electric');
+  });
 });
