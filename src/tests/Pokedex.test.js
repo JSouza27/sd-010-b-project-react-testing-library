@@ -1,7 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../Helpers/renderWithRouter';
-// import { Pokedex } from '../components';
 import App from '../App';
 
 test('shows a h2 element with text "Encountered pokémons"', () => {
@@ -184,7 +183,8 @@ describe('for each type of Pokémon a filter button is created dynamically', () 
 });
 
 test('"Next Pokémon" button should be disabled when list has only one Pokémon', () => {
-  const { getByRole } = renderWithRouter(<App />);
+  const { getByRole, getAllByTestId } = renderWithRouter(<App />);
+  const numberOfBtns = 7;
   const filterBtn = getByRole('button', {
     name: /electric/i,
   });
@@ -192,12 +192,7 @@ test('"Next Pokémon" button should be disabled when list has only one Pokémon'
     name: /próximo pokémon/i,
   });
   userEvent.click(filterBtn);
-  expect(nextBtn).toHaveStyle('background-color: ButtonFace');
-});
-
-test('reviewing dataTestId', () => {
-  const { getAllByTestId } = renderWithRouter(<App />);
-  const numberOfBtns = 7;
   const buttons = getAllByTestId('pokemon-type-button');
+  expect(nextBtn).toHaveStyle('background-color: ButtonFace');
   expect(buttons.length).toBe(numberOfBtns);
 });
