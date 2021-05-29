@@ -33,7 +33,7 @@ describe('Requisito 1', () => {
     const textoEmH1 = screen.getByRole('heading', {
       level: 1,
       name: 'Pokédex',
-    })
+    });
     expect(textoEmH1).toBeInTheDocument();
   });
 });
