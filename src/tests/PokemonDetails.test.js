@@ -230,5 +230,16 @@ remover respectivamente o Pokémon da lista de favoritos`, () => {
     expect(pokemonName).not.toBeInTheDocument();
   });
 
-  
+  it('O label do checkbox deve conter o texto Pokémon favoritado?', () => {
+    const { getByLabelText } = renderWithRouter(
+      <PokemonDetails
+        isPokemonFavoriteById={ isFavoritePokemons }
+        match={ { params: { id: parsedId } } }
+        pokemons={ pokemons }
+        onUpdateFavoritePokemons={ updateFavoritePokemons }
+      />,
+    );
+    const favoriteCheckbox = getByLabelText('Pokémon favoritado?');
+    expect(favoriteCheckbox).toBeInTheDocument();
+  });
 });
