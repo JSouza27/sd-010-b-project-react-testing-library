@@ -1,5 +1,4 @@
 import React from 'react';
-// import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import About from '../components/About';
 
@@ -16,6 +15,7 @@ describe('Teste o componente <About.js /.>', () => {
     expect(heading).toBe('About Pokédex');
   });
   test('Teste se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
+    // https://stackoverflow.com/questions/54234515/get-by-html-element-with-react-testing-library
     const { container } = render(<About />);
     const paragraphs = container.getElementsByTagName('p');
     expect(paragraphs.length).toBe(2);
