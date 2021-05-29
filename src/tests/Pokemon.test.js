@@ -55,7 +55,7 @@ describe(`Teste se é renderizado um card
     expect(history.location.pathname).toBe('/pokemons/25');
   });
 
-  test('Testando se existe um ícone de estrela', () => {
+  test('Testando se existe um ícone de estrela quando favoritado', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/');
 
