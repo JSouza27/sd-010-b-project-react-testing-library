@@ -31,7 +31,7 @@ describe(`Teste se é renderizado um card
     expect(averageWeightPokemon).toBeInTheDocument();
   });
 
-  test('Testando a imagem correta do pokémon deve ser mostrado na tela', () => {
+  test('Verificar se a imagem correta do pokémon é mostrado na tela', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/');
     const spritePokemon = screen.getByAltText('Pikachu sprite');
