@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import App from '../App';
 
 test('renders a reading with the text `Pokédex`', () => {
@@ -21,4 +21,19 @@ test('shows the Pokédex when the route is `/`', () => {
   );
 
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
+});
+
+describe('Requisito 1', () => {
+  test('Verificar se a pagina inicial e renderizada', () => {
+    render(
+      <MemoryRouter initialEntries={ ['/'] }>
+        <App />
+      </MemoryRouter>,
+    );
+    const textoEmH1 = screen.getByRole('heading', {
+      level: 1,
+      name: 'Pokédex',
+    })
+    expect(textoEmH1).toBeInTheDocument();
+  });
 });
