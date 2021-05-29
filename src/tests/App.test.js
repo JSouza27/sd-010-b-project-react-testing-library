@@ -36,4 +36,40 @@ describe('Requisito 1', () => {
     });
     expect(textoEmH1).toBeInTheDocument();
   });
+
+  test('Verifica se o primeiro texto possui o texto home', () => {
+    render(
+      <MemoryRouter initialEntries={ ['/'] }>
+        <App />
+      </MemoryRouter>,
+    );
+    const linkEmA1 = screen.getByRole('link', {
+      name: 'Home',
+    });
+    expect(linkEmA1).toBeInTheDocument();
+  });
+
+  test('Verifica se o primeiro texto possui o texto home', () => {
+    render(
+      <MemoryRouter initialEntries={ ['/'] }>
+        <App />
+      </MemoryRouter>,
+    );
+    const linkEmA2 = screen.getByRole('link', {
+      name: 'About',
+    });
+    expect(linkEmA2).toBeInTheDocument();
+  });
+
+  test('Verifica se o primeiro texto possui o texto home', () => {
+    render(
+      <MemoryRouter initialEntries={ ['/'] }>
+        <App />
+      </MemoryRouter>,
+    );
+    const linkEmA3 = screen.getByRole('link', {
+      name: 'Favorite Pokémons',
+    });
+    expect(linkEmA3).toBeInTheDocument();
+  });
 });
