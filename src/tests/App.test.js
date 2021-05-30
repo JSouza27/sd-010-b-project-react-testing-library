@@ -1,14 +1,22 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
 import App from '../App';
+import renderWithRouter from '../renderWithRouter';
 
-test('renders a reading with the text `Pokédex`', () => {
+test('shows the Pokédex when the route is `/`', () => {
   const { getByText } = render(
-    <MemoryRouter>
+    <MemoryRouter initialEntries={ ['/'] }>
       <App />
     </MemoryRouter>,
   );
-  const heading = getByText(/Pokédex/i);
-  expect(heading).toBeInTheDocument();
+
+  expect(getByText('Encountered pokémons')).toBeInTheDocument();
+});
+
+describe('if the top of the application contains a fixed set ofnavigation links', () => {
+  it('The first  link must have the text Home', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const link = getByText('Home').innerHTML;
+    expect(link).toBe('Home');
+  });
 });
