@@ -1,6 +1,8 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
+
 import App from '../App';
 
 test('renders a reading with the text `Pokédex`', () => {
@@ -23,12 +25,13 @@ test('shows the Pokédex when the route is `/`', () => {
 });
 
 test('renders a link Home', () => {
-  const { getByText } = render(
-    <MemoryRouter>
+  const memoryHistory = createMemoryHistory();
+  const meuRender = render(
+    <MemoryRouter history={ memoryHistory }>
       <App />
     </MemoryRouter>,
   );
-  const home = getByText(/Home/i);
+  const home = meuRender.getByText(/Home/i);
   expect(home).toBeInTheDocument();
 });
 
