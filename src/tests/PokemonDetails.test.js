@@ -1,10 +1,9 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../Helpers/renderWithRouter';
 import App from '../App';
-import { PokemonDetails } from '../components';
 
 const pokemonPath = '/pokemons/25';
+const pikachuLocation = 'Pikachu location';
 
 describe('shows detailed information of the selected Pokémon', () => {
   test('renders a text like "Pikachu Details"', () => {
@@ -32,7 +31,7 @@ describe('shows detailed information of the selected Pokémon', () => {
     });
     expect(summaryH2).toBeInTheDocument();
   });
-  test('', () => {
+  test('shows a paragraph with specific Pokémon abstract', () => {
     const { getByText, history } = renderWithRouter(<App />);
     history.push(pokemonPath);
     const pokemonDetails = getByText(
@@ -57,7 +56,37 @@ describe('renders maps with locations of the pokémon', () => {
   test('shows all Pokémons locations', () => {
     const { getAllByAltText, history } = renderWithRouter(<App />);
     history.push(pokemonPath);
-    const pkdxLocation = getAllByAltText('Pikachu location');
+    const pkdxLocation = getAllByAltText(pikachuLocation);
     expect(pkdxLocation.length).toBe(2);
+  });
+  test('shows the location name and a map image at each location', () => {
+    const { getAllByAltText, getByText, history } = renderWithRouter(<App />);
+    history.push(pokemonPath);
+    const locationName1 = getByText('Kanto Viridian Forest');
+    const locationName2 = getByText('Kanto Power Plant');
+    expect(locationName1).toBeInTheDocument();
+    expect(locationName2).toBeInTheDocument();
+    const location = getAllByAltText(pikachuLocation);
+    expect(location[0]).toHaveAttribute(
+      'src',
+      'https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png',
+      'alt',
+      pikachuLocation,
+    );
+    expect(location[1]).toHaveAttribute(
+      'src',
+      'https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png',
+      'alt',
+      pikachuLocation,
+    );
+  });
+});
+
+describe('user can favorite a Pokémon in details page', () => {
+  test('shows a checkbox element to favorite a Pokémon', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    history.push(pokemonPath);
+    const favoriteBtn = getByText('Pokémon favoritado?');
+    expect(favoriteBtn).toBeInTheDocument();
   });
 });
