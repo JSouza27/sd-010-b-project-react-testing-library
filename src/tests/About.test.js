@@ -53,9 +53,12 @@ describe('Requisito 2', () => {
     });
     userEvent.click(linkAbout);
 
-    // const p = 'This application simulates a Pokédex, a digital encyclopedia containing all Pokémons';
+    const str1 = 'This application simulates a Pokédex, a';
+    const str2 = ' digital encyclopedia containing all Pokémons';
 
-    const p1About = screen.getByText('This application simulates a Pokédex, a digital encyclopedia containing all Pokémons');
+    const paragrafo = str1 + str2;
+
+    const p1About = screen.getByText(paragrafo);
 
     expect(p1About).toBeInTheDocument();
 
