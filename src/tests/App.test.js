@@ -28,22 +28,43 @@ describe('if on the application contains a fixed set of navigation links', () =>
   });
 
   it('The third link must have the text Favorite Pokémons', () => {
+    const favoritePokemons = 'Favorite Pokémons';
     const { getByText } = renderWithRouter(<App />);
-    const link = getByText('Favorite Pokémons').innerHTML;
-    expect(link).toBe('Favorite Pokémons');
+    const link = getByText(favoritePokemons).innerHTML;
+    expect(link).toBe(favoritePokemons);
   });
 });
 
-test('is redirected to the home page (/) by clicking on the Home link.', () => {
+test('is redirected to the home page (/)', () => {
   const { getByText, history } = renderWithRouter(<App />);
   fireEvent.click(getByText('Home'));
   const { pathname } = history.location;
   expect(pathname).toBe('/');
-  const home = getByText(/Encountered pokémons/);
-  expect(home).toBeInTheDocument();
+  const getData = getByText(/Encountered pokémons/);
+  expect(getData).toBeInTheDocument();
 });
 
-/*   it('The application must be redirected to the Not Found page when entering an unknown URL', () => {
-    const { getByText } = renderWithRouter(<App />);
-    const link
-  */
+test('is redirected to the home page (/about)', () => {
+  const { getByText, history } = renderWithRouter(<App />);
+  fireEvent.click(getByText('About'));
+  const { pathname } = history.location;
+  expect(pathname).toBe('/about');
+  const getData = getByText(/About Pokédex/);
+  expect(getData).toBeInTheDocument();
+});
+
+test('is redirected to the home page (/favorites)', () => {
+  const { getByText, history } = renderWithRouter(<App />);
+  fireEvent.click(getByText('Favorite Pokémons'));
+  const { pathname } = history.location;
+  expect(pathname).toBe('/favorites');
+  const getData = getByText(/Favorite pokémons/);
+  expect(getData).toBeInTheDocument();
+});
+
+test('is redirected to the Not Found page', () => {
+  const { getByText, history } = renderWithRouter(<App />);
+  history.push('/not Found page');
+  const notFound = getByText(/not found/i);
+  expect(notFound).toBeInTheDocument();
+});
