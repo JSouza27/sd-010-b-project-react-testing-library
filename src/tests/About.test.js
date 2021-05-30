@@ -5,8 +5,8 @@ import About from '../components/About';
 
 const { MemoryRouter } = require('react-router');
 
-describe('if the page contains info about pokédex', () => {
-  test('if the page contains a h2 with the text About Pokédex', () => {
+describe('Request 2', () => {
+  it('contains a h2 with the text About Pokédex', () => {
     const { getByRole } = render(
       <MemoryRouter>
         <App />
@@ -19,7 +19,7 @@ describe('if the page contains info about pokédex', () => {
     expect(title).toBeInTheDocument();
   });
 
-  test('if the page contains 2 paragraphs about Pokédex', () => {
+  it('contains 2 paragraphs about Pokédex', () => {
     const { container } = render(
       <MemoryRouter>
         <About />
@@ -30,7 +30,7 @@ describe('if the page contains info about pokédex', () => {
     expect(paragraph[1]).toBeInTheDocument();
   });
 
-  test('if the page contains the following image', () => {
+  it('contains the following image', () => {
     const { getByAltText } = render(
       <MemoryRouter>
         <About />

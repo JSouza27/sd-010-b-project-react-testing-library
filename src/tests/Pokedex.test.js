@@ -1,11 +1,82 @@
 import React from 'react';
+import { screen, fireEvent } from '@testing-library/react';
 import renderWithRoute from '../helper/renderWithRouter';
-import Pokedex from '../components/Pokedex';
+import App from '../App';
+import pokemons from '../data';
 
 describe('Request 5', () => {
   it('if contains a heading lvl 2 with following text', () => {
-    const { getByRole } = renderWithRoute(<Pokedex />);
-    const h2 = getByRole('heading', { level: 2, name: /Encountered pokémons/i });
+    renderWithRoute(<App />);
+
+    const h2 = screen.getByRole('heading', { level: 2, name: /encountered pokémons/i });
     expect(h2).toBeInTheDocument();
+  });
+
+  describe('test if the page shows te next pokemon', () => {
+    it('contains a button for next pokemon and it works right', () => {
+      renderWithRoute(<App />);
+
+      const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
+      expect(btnNext).toBeInTheDocument();
+
+      fireEvent.click(btnNext);
+
+      const nxtPokemon = screen.getByTestId(pokemon);
+      expect(nxtPokemon).toHaveTextContent(/charmander/i);
+    });
+
+    it('shows the 1st pokemon when the list ends', () => {
+      renderWithRoute(<App />);
+
+      const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
+      expect(btnNext).toBeInTheDocument();
+
+      const firstPokemon = screen.getByTestId(pokemon);
+
+      pokemons.forEach((pkmn, index) => {
+        if (pkmn[index] < pokemons.length) {
+          fireEvent.click(btnNext);
+        }
+        expect(firstPokemon).toHaveTextContent(pokemons[0].name);
+      });
+    });
+  });
+
+  it('have filter buttons', () => {
+    renderWithRoute(<App />);
+
+    const filter = screen.getByRole('button', { name: /fire/i });
+    fireEvent.click(filter);
+
+    const pkmn = screen.getByTestId(ID_POKEMON_NAME);
+    expect(pkmn).toHaveTextContent(/charmander/i);
+
+    const btnNext = screen.getByRole('button', { name: /próximo pokémon/i });
+    fireEvent.click(btnNext);
+    expect(pkmn).toHaveTextContent(/rapidash/i);
+  });
+
+  it('have a button to reset filters', () => {
+    renderWithRoute(<App />);
+
+    const btnReset = screen.getByRole('button', { name: /all/i });
+    fireEvent.click(btnReset);
+
+    const firstPokemon = screen.getByTestId(ID_POKEMON_NAME);
+    expect(firstPokemon).toHaveTextContent(/pikachu/i);
+  });
+
+  it('shows type filter buttons', () => {
+    renderWithRoute(<App />);
+
+    const btnReset = screen.getByRole('button', { name: /all/i });
+    const btns = screen.getAllByTestId('pokemon-type-button');
+    const pokemonTypes = [];
+
+    pokemons.filter((pokemon) => (
+      pokemonTypes.includes(pokemon.type) ? null : pokemonTypes.push(pokemon.type)
+    ));
+    expect(btns.length).toBe(pokemonTypes.length);
+    expect(btnReset).toBeInTheDocument();
   });
 });
