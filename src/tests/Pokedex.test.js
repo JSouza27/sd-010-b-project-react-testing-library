@@ -58,7 +58,7 @@ describe('Requirement 5', () => {
 
     userEvent.click(button[0]);
 
-    const nextPokemon = getByText('Próximo pokémon');
+    const nextPokemon = getByText(prxpkm);
     userEvent.click(nextPokemon);
     const next = getByText(/charmander/i);
     expect(next).toBeInTheDocument();
