@@ -31,11 +31,11 @@ describe('Requisito 1', () => {
         <App />
       </MemoryRouter>,
     );
-    const textoEmH1 = screen.getByRole('heading', {
-      level: 1,
-      name: 'Pokédex',
+    const textoEmH2 = screen.getByRole('heading', {
+      level: 2,
+      name: 'Encountered pokémons',
     });
-    expect(textoEmH1).toBeInTheDocument();
+    expect(textoEmH2).toBeInTheDocument();
   });
 
   test('Verifica se o primeiro texto possui o texto home', () => {
@@ -86,8 +86,8 @@ describe('Requisito 1', () => {
     userEvent.click(linkHome);
 
     const textoH1Home = screen.getByRole('heading', {
-      level: 1,
-      name: 'Pokédex',
+      level: 2,
+      name: 'Encountered pokémons',
     });
     expect(textoH1Home).toBeInTheDocument();
   });
@@ -104,27 +104,46 @@ describe('Requisito 1', () => {
     userEvent.click(linkAbout);
 
     const textoH1About = screen.getByRole('heading', {
-      level: 1,
-      name: 'Pokédex',
+      level: 2,
+      name: 'About Pokédex',
     });
     expect(textoH1About).toBeInTheDocument();
   });
-  
-  test('Verifica se a aplicação é redirecionada para a página de Pokémons Favoritados', () => {
+
+  test('Verifica se a aplicação é redirecionada para a página de Pokémons Favoritados',
+    () => {
+      render(
+        <MemoryRouter initialEntries={ ['/'] }>
+          <App />
+        </MemoryRouter>,
+      );
+      const linkFavorite = screen.getByRole('link', {
+        name: 'Favorite Pokémons',
+      });
+      userEvent.click(linkFavorite);
+
+      const textoH1Favorite = screen.getByRole('heading', {
+        level: 2,
+        name: 'Favorite pokémons',
+      });
+      expect(textoH1Favorite).toBeInTheDocument();
+    });
+
+  /* test('Verifica se a aplicação é redirecionada para a página de Not Found', () => {
     render(
       <MemoryRouter initialEntries={ ['/'] }>
         <App />
       </MemoryRouter>,
     );
-    const linkFavorite = screen.getByRole('link', {
-      name: 'Favorite Pokémons',
+    const linkNotFound = screen.screen.getByRole('link', {
+      name: '/Aderson',
     });
-    userEvent.click(linkFavorite);
+    userEvent.type(linkNotFound);
 
-    const textoH1About = screen.getByRole('heading', {
-      level: 1,
-      name: 'Pokédex',
+    const textoH1NotFound = screen.getByRole('heading', {
+      level: 2,
+      name: 'Page requested not found',
     });
-    expect(textoH1About).toBeInTheDocument();
-  });
+    expect(textoH1NotFound).toBeInTheDocument();
+  }); */
 });
