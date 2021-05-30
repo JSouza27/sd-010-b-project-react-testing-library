@@ -19,14 +19,14 @@ describe('Test <App.js />', () => {
     expect(getByText('Encountered pokémons')).toBeInTheDocument();
   });
   test(`Teste se o topo da aplicação contém um conjunto fixo de links
-    de navegação.`, () => {
+  de navegação.`, () => {
     renderWithRouter(<App />);
     const links = screen.getAllByText(/Home|About|Favorite Pokémons/);
     const validOrder = links[0].innerHTML === 'Home' && links[1].innerHTML === 'About';
     expect(validOrder).toBe(true);
   });
   test(`Teste se a aplicação é redirecionada para a página inicial, na URL /
-    ao clicar no link Home da barra de navegação.`, () => {
+  ao clicar no link Home da barra de navegação.`, () => {
     const { getByText, history } = renderWithRouter(<App />);
     userEvent.click(getByText('Home'));
     const { pathname } = history.location;
@@ -34,7 +34,7 @@ describe('Test <App.js />', () => {
     expect(getByText('Home')).toBeInTheDocument();
   });
   test(`Teste se a aplicação é redirecionada para a página de About, na URL /about,
-    ao clicar no link About da barra de navegação.`, () => {
+  ao clicar no link About da barra de navegação.`, () => {
     const { getByText, history } = renderWithRouter(<App />);
     userEvent.click(getByText('About'));
     const { pathname } = history.location;
@@ -42,7 +42,7 @@ describe('Test <App.js />', () => {
     expect(getByText('About')).toBeInTheDocument();
   });
   test(`Teste se a aplicação é redirecionada para a página de About, na URL /about,
-    ao clicar no link Favorite Pokémons da barra de navegação.`, () => {
+  ao clicar no link Favorite Pokémons da barra de navegação.`, () => {
     const { getByText, history } = renderWithRouter(<App />);
     userEvent.click(getByText('Favorite Pokémons'));
     const { pathname } = history.location;
@@ -50,7 +50,7 @@ describe('Test <App.js />', () => {
     expect(getByText('Favorite Pokémons')).toBeInTheDocument();
   });
   test(`Teste se a aplicação é redirecionada para a página Not Found ao entrar em uma
-    URL desconhecida.`, () => {
+  URL desconhecida.`, () => {
     const { getByText, history } = renderWithRouter(<App />);
     history.push('/paginanaoexisteeee');
     const notFound = getByText('Page requested not found');
