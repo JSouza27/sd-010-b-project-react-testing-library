@@ -53,9 +53,16 @@ describe('Requisito 2', () => {
     });
     userEvent.click(linkAbout);
 
-    const p1About = screen.getByText('This application simulates a Pokédex, a digital encyclopedia containing all Pokémons');
+    const p1About = screen.getByText(
+      'This application simulates a Pokédex, a digital',
+      ' encyclopedia containing all Pokémons',
+    );
+
     expect(p1About).toBeInTheDocument();
-    const p2About = screen.getByText('One can filter Pokémons by type, and see more details for each one of them');
+
+    const p2About = screen.getByText(
+      'One can filter Pokémons by type, and see more details for each one of them',
+    );
     expect(p2About).toBeInTheDocument();
   });
 
@@ -72,6 +79,5 @@ describe('Requisito 2', () => {
 
     const imagem = screen.getByRole('img');
     expect(imagem.src).toBe('https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
-
   });
 });
