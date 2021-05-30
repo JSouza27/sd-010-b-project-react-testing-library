@@ -1,6 +1,6 @@
 import React from 'react';
 import { screen, fireEvent } from '@testing-library/react';
-import renderWithRoute from '../helper/renderWithRouter';
+import renderWithRoute from '../helper/renderWithRoute';
 import App from '../App';
 import pokemons from '../data';
 

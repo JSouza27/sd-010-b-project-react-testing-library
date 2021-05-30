@@ -1,10 +1,10 @@
 import React from 'react';
-import renderWithRouter from '../helper/renderWithRouter';
+import renderWithRoute from '../helper/renderWithRoute';
 import App from '../App';
 
 describe('Request 3', () => {
   it('shows "no pokemon found" message if dont have favorite pokémons', () => {
-    const { getByText, history } = renderWithRouter(<App />);
+    const { getByText, history } = renderWithRoute(<App />);
     history.push('/favorites');
 
     const anyPokemon = getByText(/no favorite pokemon found/i);
