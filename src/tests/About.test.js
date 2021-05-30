@@ -4,6 +4,7 @@ import { render } from '@testing-library/react';
 
 import About from '../components/About';
 
+// Consulta https://testing-library.com/docs/queries/byrole
 describe('Teste se a página contém as informações sobre a Pokédex.', () => {
   test('Teste se a página contém um heading h2 com o texto About Pokédex.', () => {
     const { getByRole } = render(
