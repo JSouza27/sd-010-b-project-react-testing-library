@@ -18,13 +18,13 @@ test('renders a reading with the text `Pokédex`', () => {
 describe('Verifica links do menu', () => {
   it('Verifica o link Home', () => {
     const { getByText } = renderWithRouter(<App />);
-    const linkHome = getByText('Home');
+    const linkHome = getByText(/Home/i);
     expect(linkHome).toBeInTheDocument();
   });
 
   it('Verifica o link About', () => {
     const { getByText } = renderWithRouter(<App />);
-    const linkAbout = getByText(/About/);
+    const linkAbout = getByText(/About/i);
     expect(linkAbout).toBeInTheDocument();
   });
 
