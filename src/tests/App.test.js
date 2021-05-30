@@ -5,7 +5,7 @@ import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
 // test('renders a reading with the text `Pokédex`', () => {
-  // const { getByText } = render(
+// const { getByText } = render(
 //   const heading = getByText(/Pokédex/i);
 //   expect(heading).toBeInTheDocument();
 // });
@@ -17,7 +17,7 @@ test('shows the Pokédex when the route is `/`', () => {
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
 });
 
-describe ('o topo da aplicação contém um conjunto fixo de links de navegação', () => {
+describe('o topo da aplicação contém um conjunto fixo de links de navegação', () => {
   test('o primeiro link deve possuir o texto Home', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const route = '/';
