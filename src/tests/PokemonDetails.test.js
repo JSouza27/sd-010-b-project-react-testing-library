@@ -41,6 +41,18 @@ describe('Teste o componente <PokemonDetails.js />', () => {
     expect(mapLocationImg).toBeInTheDocument();
     expect(mapLocationImg).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/e/ec/Johto_Goldenrod_City_Map.png');
     expect(mapLocationImg).toHaveAttribute('alt', 'Ekans location');
+  });
 
+  it('Teste se o usuário pode favoritar da página de detalhes', () => {
+    renderWithRouter(<App />);
+
+    const btnPoison = screen.getByRole('button', {  name: /poison/i})
+    userEvent.click(btnPoison);
+
+    const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(linkMoreDetails);
+
+    const favCheckbox = screen.getByText(/pokémon favoritado\?/i);
+    expect(favCheckbox).toBeInTheDocument();
   });
 });
