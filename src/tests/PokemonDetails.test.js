@@ -11,11 +11,11 @@ describe('Teste o componente <PokemonDetails.js />', () => {
     const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
     userEvent.click(linkMoreDetails);
 
-    const titleDetails = screen.getByRole('heading', {  name: /pikachu details/i})
+    const titleDetails = screen.getByRole('heading', { name: /pikachu details/i });
     expect(titleDetails).toBeInTheDocument();
     expect(linkMoreDetails).not.toBeInTheDocument();
 
-    const h2Sumary = screen.getByRole('heading', {  name: /summary/i});
+    const h2Sumary = screen.getByRole('heading', { name: /summary/i });
     expect(h2Sumary).toBeInTheDocument();
 
     const paragraph = screen.getByText(/this intelligent pokémon roasts hard/i);
@@ -25,19 +25,19 @@ describe('Teste o componente <PokemonDetails.js />', () => {
   it('Teste se existe os mapas contendo as localizações do pokémon', () => {
     renderWithRouter(<App />);
 
-    const btnPoison = screen.getByRole('button', {  name: /poison/i})
+    const btnPoison = screen.getByRole('button', { name: /poison/i });
     userEvent.click(btnPoison);
 
     const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
     userEvent.click(linkMoreDetails);
 
-    const Location = screen.getByRole('heading', {  name: /game locations of ekans/i});
+    const Location = screen.getByRole('heading', { name: /game locations of ekans/i });
     expect(Location).toBeInTheDocument();
 
     const nameLocation = screen.getByText(/goldenrod game corner/i);
     expect(nameLocation).toBeInTheDocument();
 
-    const mapLocationImg = screen.getByRole('img', {  name: /ekans location/i});
+    const mapLocationImg = screen.getByRole('img', { name: /ekans location/i });
     expect(mapLocationImg).toBeInTheDocument();
     expect(mapLocationImg).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/e/ec/Johto_Goldenrod_City_Map.png');
     expect(mapLocationImg).toHaveAttribute('alt', 'Ekans location');
@@ -46,7 +46,7 @@ describe('Teste o componente <PokemonDetails.js />', () => {
   it('Teste se o usuário pode favoritar da página de detalhes', () => {
     renderWithRouter(<App />);
 
-    const btnPoison = screen.getByRole('button', {  name: /poison/i})
+    const btnPoison = screen.getByRole('button', { name: /poison/i });
     userEvent.click(btnPoison);
 
     const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
@@ -54,5 +54,21 @@ describe('Teste o componente <PokemonDetails.js />', () => {
 
     const favCheckbox = screen.getByText(/pokémon favoritado\?/i);
     expect(favCheckbox).toBeInTheDocument();
+    expect(favCheckbox.textContent).toBe('Pokémon favoritado?');
+
+    userEvent.click(favCheckbox);
+    const linkFavPokemons = screen.getByRole('link', { name: /favorite pokémons/i });
+    userEvent.click(linkFavPokemons);
+
+    const pokemon = screen.getByText(/ekans/i);
+    expect(pokemon).toBeInTheDocument();
+
+    const linkHome = screen.getByRole('link', { name: /home/i });
+    userEvent.click(linkHome);
+    userEvent.click(btnPoison);
+    userEvent.click(linkMoreDetails);
+    userEvent.click(favCheckbox);
+    userEvent.click(linkFavPokemons);
+    expect(pokemon).not.toBeInTheDocument();
   });
 });
