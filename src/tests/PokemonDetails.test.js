@@ -4,10 +4,12 @@ import renderWithRouter from '../renderWithRouter';
 
 import App from '../App';
 
+const newLocal = '/pokemons/25';
 describe('Requisito 07 = PokemonDetails.js', () => {
   test('Teste se as informações detalhadas do Pokémon são mostradas na tela.', () => {
     const { history } = renderWithRouter(<App />);
-    history.push('/pokemons/25');
+    history.push(newLocal);
+    // history.push('/pokemons/25');
     let textPokemon = 'This intelligent Pokémon roasts hard berries ';
     textPokemon += 'with electricity to make them tender enough to eat.';
 
@@ -21,7 +23,7 @@ describe('Requisito 07 = PokemonDetails.js', () => {
 
   test('Teste seção com os mapas contendo as localizações do pokémons', () => {
     const { history } = renderWithRouter(<App />);
-    history.push('/pokemons/25');
+    history.push(newLocal);
 
     expect(screen.getByText('Game Locations of Pikachu')).toBeInTheDocument();
     const images = screen.getAllByAltText('Pikachu location');
@@ -36,7 +38,7 @@ describe('Requisito 07 = PokemonDetails.js', () => {
 
   test('Teste se o usuário pode favoritar um pokémon pela página de detalhes', () => {
     const { history } = renderWithRouter(<App />);
-    history.push('/pokemons/25');
+    history.push(newLocal);
 
     const label = screen.getByLabelText('Pokémon favoritado?');
 
