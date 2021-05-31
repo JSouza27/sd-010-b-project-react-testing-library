@@ -50,18 +50,18 @@ describe('Teste o componente <Pokemon.js />', () => {
     expect(pathname).toBe('/pokemons/25');
   });
 
-  // it('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
-  //   renderWithRouter(<App />);
+  it('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
+    renderWithRouter(<App />);
 
-  //   const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
-  //   userEvent.click(linkMoreDetails);
+    const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(linkMoreDetails);
 
-  //   const favCheckbox = screen.getByRole('checkbox', { name: /pokémon favoritado\?/i });
-  //   userEvent.click(favCheckbox);
+    const favCheckbox = screen.getByRole('checkbox', { name: /pokémon favoritado\?/i });
+    userEvent.click(favCheckbox);
 
-  //   const starIcon = screen.getByRole('img', { name: /pikachu is marked as favorite/i });
-  //   expect(starIcon).toBeInTheDocument();
-  //   expect(starIcon).toHaveAttribute('src', '/star-icon.svg');
-  //   expect(starIcon).toHaveAttribute('alt', 'Pikachu is marked as favorite');
-  // });
+    const starIcon = screen.getByRole('img', { name: /pikachu is marked as favorite/i });
+    expect(starIcon).toBeInTheDocument();
+    expect(starIcon).toHaveAttribute('src', '/star-icon.svg');
+    expect(starIcon).toHaveAttribute('alt', 'Pikachu is marked as favorite');
+  });
 });
