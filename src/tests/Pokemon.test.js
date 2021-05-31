@@ -32,7 +32,7 @@ describe('Requirement 06', () => {
     expect(pathname).toBe('/pokemons/25');
   });
   test('Testa se existe um ícone de estrela', () => {
-    const { getByText, getByAltText, getByRole } = renderWithRouter(<App />);
+    const { getByText, getByAltText } = renderWithRouter(<App />);
     const link = getByText(/More details/i);
     userEvent.click(link);
     const favorite = getByText(/Pokémon Favoritado?/i);
