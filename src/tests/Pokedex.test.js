@@ -47,13 +47,20 @@ describe('Requisito 05 = Pokedex.js', () => {
     expect(screen.queryByText('Dragonair')).not.toBeInTheDocument();
   });
 
-  test('Teste se a Pokédex tem os botões de filtro', () => {
+  test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
     renderWithRouter(<App />);
-    const btnTypeEletric = screen.getByRole('button', { name: 'Electric' });
-    fireEvent.click(btnTypeEletric);
+    const pokemonsPsychic = data.filter((pokemon) => pokemon.type === 'Psychic');
+    const btnPsychic = screen.getByRole('button', { name: 'Psychic' });
+    fireEvent.click(btnPsychic);
 
-    const btnNextPokemon = screen.getByRole('button', { name: 'Próximo pokémon' });
-    expect(btnNextPokemon).toBeDisabled();
+    pokemonsPsychic.forEach(({ name }) => {
+      expect(screen.queryByText(name)).toBeInTheDocument();
+      const textProximoPokemon = /Próximo pokémon/i;
+      fireEvent.click(screen.queryByText(textProximoPokemon));
+    });
+
+    // Exibi primeiro Pokémon Psychic
+    expect(screen.queryByText(pokemonsPsychic[0].name)).toBeInTheDocument();
   });
 
   test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
@@ -85,5 +92,14 @@ describe('Requisito 05 = Pokedex.js', () => {
       expect(btnType).toBeInTheDocument();
       expect(btnType.getAttribute('data-testid')).toBe('pokemon-type-button');
     });
+  });
+
+  test('Teste se o botão próximo está desabilitado', () => {
+    renderWithRouter(<App />);
+    const btnTypeEletric = screen.getByRole('button', { name: 'Electric' });
+    fireEvent.click(btnTypeEletric);
+
+    const btnNextPokemon = screen.getByRole('button', { name: 'Próximo pokémon' });
+    expect(btnNextPokemon).toBeDisabled();
   });
 });
