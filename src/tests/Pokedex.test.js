@@ -63,10 +63,11 @@ describe('Teste o componente <Pokedex.js />', () => {
       pokemons={ pokemons }
       isPokemonFavoriteById={ favorites }
     />);
-    const tps = [...new Set(pokemons.reduce((types, { type }) => [...types, type], []))];
+    const arr = pokemons.reduce((types, { type }) => [...types, type], []);
+    const pokemonTypes = [...new Set(arr)];
     const types = screen.getAllByTestId('pokemon-type-button');
-    tps.forEach((tp, index) => {
-      const bool = tp === types[index].textContent;
+    pokemonTypes.forEach((type, index) => {
+      const bool = type === types[index].textContent;
       expect(bool).toBe(true);
       expect(types[index]).toBeInTheDocument();
     });
@@ -89,6 +90,23 @@ describe('Teste o componente <Pokedex.js />', () => {
     // testa se o filtro All é setado quando clicado
     userEvent.click(allBtn);
     expect(screen.getByText('Pikachu')).toBeInTheDocument();
+  });
+  test(`Teste se é criado, dinamicamente, um botão de filtro para cada tipo
+  de Pokémon.`, () => {
+    renderWithRouter(<Pokedex
+      pokemons={ pokemons }
+      isPokemonFavoriteById={ favorites }
+    />);
+    const allButton = screen.getByText('All');
+    const allTypes = ['Fire', 'Psychic', 'Electric', 'Bug', 'Poison', 'Dragon', 'Normal'];
+    const typeButtons = screen.getAllByTestId('pokemon-type-button');
+    const types = typeButtons.map((el) => el.textContent);
+    allTypes.forEach((type, index) => {
+      const bool = types.includes(type);
+      expect(bool).toBe(true);
+      expect(typeButtons[index]).toBeInTheDocument();
+    });
+    expect(allButton).toBeInTheDocument();
   });
   test(`O botão de Próximo pokémon deve ser desabilitado quando a lista filtrada de
   Pokémons tiver um só pokémon.`, () => {
