@@ -41,7 +41,7 @@ describe('Test <App.js />', () => {
     expect(pathname).toBe('/about');
     expect(getByText('About')).toBeInTheDocument();
   });
-  test(`Teste se a aplicação é redirecionada para a página de About, na URL /about,
+  test(`Teste se a aplicação é redirecionada para a página de Favorite Pokémons, na URL /about,
   ao clicar no link Favorite Pokémons da barra de navegação.`, () => {
     const { getByText, history } = renderWithRouter(<App />);
     userEvent.click(getByText('Favorite Pokémons'));
@@ -52,7 +52,7 @@ describe('Test <App.js />', () => {
   test(`Teste se a aplicação é redirecionada para a página Not Found ao entrar em uma
   URL desconhecida.`, () => {
     const { getByText, history } = renderWithRouter(<App />);
-    history.push('/paginanaoexisteeee');
+    history.push('/paginanao/existe/eee');
     const notFound = getByText('Page requested not found');
     expect(notFound).toBeDefined();
   });

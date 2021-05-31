@@ -7,6 +7,7 @@ import Pokemon from '../components/Pokemon';
 import renderWithRouter from '../services/renderWithRouter';
 import pokemons from '../data';
 
+const nxtid = 'next-pokemon';
 const favorites = {
   4: false,
   10: false,
@@ -30,8 +31,6 @@ describe('Teste o componente <Pokedex.js />', () => {
       pokemons={ pokemons }
       isPokemonFavoriteById={ favorites }
     />);
-    const allBtn = screen.getByText('All');
-    userEvent.click(allBtn);
     const pikachu = pokemons[0].name;
     const nextBtn = screen.getByText('Próximo pokémon');
     for (let i = 0; i < pokemons.length; i += 1) {
@@ -48,16 +47,16 @@ describe('Teste o componente <Pokedex.js />', () => {
     expect(pokemon.length).toEqual(1);
   });
   test('Teste se a Pokédex tem os botões de filtro - parte 1.', () => {
-    Pokedex.state = {
-      pokemonIndex: 0,
-    };
-    const pokemonsFire = pokemons.filter((pokemon) => pokemon.type === 'Fire');
-    renderWithRouter(<Pokemon
-      isFavorite={ false }
-      pokemon={ pokemonsFire[Pokedex.state.pokemonIndex] }
+    renderWithRouter(<Pokedex
+      pokemons={ pokemons }
+      isPokemonFavoriteById={ favorites }
     />);
-    const name = screen.getByTestId('pokemon-name').textContent;
-    expect(name).toBe('Charmander');
+    const fireBtn = screen.getByText('Fire');
+    const nextBtn = screen.getByTestId(nxtid);
+    userEvent.click(fireBtn);
+    userEvent.click(nextBtn);
+    const rapidash = screen.getByText('Rapidash');
+    expect(rapidash).toBeInTheDocument();
   });
   test('Teste se a Pokédex tem os botões de filtro - parte 2.', () => {
     renderWithRouter(<Pokedex
@@ -69,7 +68,27 @@ describe('Teste o componente <Pokedex.js />', () => {
     tps.forEach((tp, index) => {
       const bool = tp === types[index].textContent;
       expect(bool).toBe(true);
+      expect(types[index]).toBeInTheDocument();
     });
+  });
+  test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+    renderWithRouter(<Pokedex
+      pokemons={ pokemons }
+      isPokemonFavoriteById={ favorites }
+    />);
+    // testa se o botão está na tela
+    const allBtn = screen.getByText('All');
+    expect(allBtn).toBeInTheDocument();
+    // testa se está selecionado All quando carregado
+    const nextBtn = screen.getByTestId(nxtid);
+    for (let i = 0; i < 2; i += 1) {
+      userEvent.click(nextBtn);
+    }
+    const caterpie = screen.getByText('Caterpie').textContent;
+    expect(caterpie).toBe(pokemons[2].name);
+    // testa se o filtro All é setado quando clicado
+    userEvent.click(allBtn);
+    expect(screen.getByText('Pikachu')).toBeInTheDocument();
   });
   test(`O botão de Próximo pokémon deve ser desabilitado quando a lista filtrada de
   Pokémons tiver um só pokémon.`, () => {
@@ -78,7 +97,7 @@ describe('Teste o componente <Pokedex.js />', () => {
       isPokemonFavoriteById={ favorites }
     />);
     const bugBtn = screen.getByText('Bug');
-    const nextBtn = screen.getByTestId('next-pokemon');
+    const nextBtn = screen.getByTestId(nxtid);
     userEvent.click(bugBtn);
     expect(nextBtn.disabled).toBe(true);
   });
