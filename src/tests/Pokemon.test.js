@@ -22,13 +22,13 @@ describe('Teste o componente <Pokemon.js />', () => {
     expect(pokemonImg).toHaveAttribute('alt', 'Pikachu sprite');
   });
 
-  // it('Teste se o card do Pokémon na Pokédex contém um link para detalhes', () => {
-  //   renderWithRouter(<App />);
+  it('Teste se o card do Pokémon na Pokédex contém um link para detalhes', () => {
+    renderWithRouter(<App />);
 
-  //   const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
-  //   expect(linkMoreDetails).toBeInTheDocument();
-  //   expect(linkMoreDetails).toHaveAttribute('href', '/pokemons/25');
-  // });
+    const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
+    expect(linkMoreDetails).toBeInTheDocument();
+    expect(linkMoreDetails).toHaveAttribute('href', '/pokemons/25');
+  });
 
   // it('Teste se ao clicar, é feito o redirecionamento', () => {
   //   renderWithRouter(<App />);
