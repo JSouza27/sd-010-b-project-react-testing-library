@@ -14,5 +14,5 @@ describe('Requirement 06', () => {
     expect(type).toHaveLength(2);
     expect(averageWeight).toBeInTheDocument();
     expect(img).toBeInTheDocument();
-  })
-})
+  });
+});

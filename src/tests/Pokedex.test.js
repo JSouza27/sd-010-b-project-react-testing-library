@@ -62,4 +62,4 @@ describe('Requirement 05', () => {
   });
 });
 
-// https://github.com/tryber/sd-09-project-react-testing-library/blob/ChrisMoura2000-react-testing-library/src/tests/Pokedex.test.js
+// Para testa a função do botão olhei essa pr. https://github.com/tryber/sd-09-project-react-testing-library/blob/ChrisMoura2000-react-testing-library/src/tests/Pokedex.test.js
