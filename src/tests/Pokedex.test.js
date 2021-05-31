@@ -44,5 +44,18 @@ describe('if the page contains info about pokédex', () => {
         }
         expect(firstPokemon.textContent).toBe(allPokemons[0].name);
       });
+      test('Test if only one Pokémon is shown at a time', () => {
+        const { getAllByTestId } = renderWithRouter(<App />);
+        const getNamePokemon = getAllByTestId('pokemon-name');
+        expect(getNamePokemon.length).toBe(1);
+      });
     });
+  describe('Test if the Pokédex has the filter buttons', () => {
+    test('there are filter buttons', () => {
+      const types = ['Electric', 'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon'];
+      const { getAllByTestId } = renderWithRouter(<App />);
+      const buttonsTypes = getAllByTestId('pokemon-type-button');
+      expect(types.length).toBe(buttonsTypes.length);
+    });
+  });
 });
