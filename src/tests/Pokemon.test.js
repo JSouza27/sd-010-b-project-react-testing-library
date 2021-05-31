@@ -1,6 +1,7 @@
 import React from 'react';
+// import userEvent from '@testing-library/user-event';
+// import App from '../App';
 import userEvent from '@testing-library/user-event';
-import App from '../App';
 import renderWithRouter from './renderWithRouter';
 import Pokemon from '../components/Pokemon';
 
@@ -24,7 +25,7 @@ const POKEMON = {
       map: 'https://cdn2.bulbagarden.net/upload/9/95/Johto_Mt_Silver_Map.png',
     },
   ],
-  summary: 'At full gallop, its four hooves barely touch the ground because it moves so incredibly fast.',
+  summary: '...',
 };
 
 describe('Testing Pokemon.js', () => {
@@ -43,5 +44,24 @@ describe('Testing Pokemon.js', () => {
     expect(pokemonType).toBeInTheDocument();
     expect(averageWeight).toBeInTheDocument();
     expect(pokemonImg.src).toBe(pokemonImgSrc);
+  });
+
+  it('Verifies if have a details link and if it directs to the right location', () => {
+    const { getByRole, history } = renderWithRouter(<Pokemon
+      pokemon={ POKEMON }
+      isFavorite={ false }
+    />);
+
+    const detailsLink = getByRole('link', {
+      name: 'More details',
+    });
+
+    expect(detailsLink).toBeInTheDocument();
+
+    userEvent.click(detailsLink);
+
+    const { location: { pathname } } = history;
+
+    expect(pathname).toBe('/pokemons/78');
   });
 });
