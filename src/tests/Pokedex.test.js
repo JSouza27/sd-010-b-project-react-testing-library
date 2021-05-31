@@ -57,5 +57,43 @@ describe('if the page contains info about pokédex', () => {
       const buttonsTypes = getAllByTestId('pokemon-type-button');
       expect(types.length).toBe(buttonsTypes.length);
     });
+    test('when clicking on the type button, it should show only that type', () => {
+      const { getByRole, getByText } = renderWithRouter(<App />);
+      const buttonType = getByRole('button', {
+        name: /^fire$/i,
+      });
+      userEvent.click(buttonType);
+      const textButton = getByText(/charmander/i);
+      expect(textButton).toBeInTheDocument();
+    });
+  });
+  describe('Test if the Pokédex contains a button reset the filter', () => {
+    test('the text must be "All"', () => {
+      const { getByRole } = renderWithRouter(<App />);
+      const buttonReset = getByRole('button', {
+        name: /^all$/i,
+      });
+      expect(buttonReset).toBeInTheDocument();
+    });
+    test('when clicking All button it should show all pokemons', () => {
+      const { getByRole, getByText } = renderWithRouter(<App />);
+      const buttonAll = getByRole('button', {
+        name: /^all$/i,
+      });
+      userEvent.click(buttonAll);
+      const pikachu = getByText(/^pikachu$/i);
+      expect(pikachu).toBeInTheDocument();
+    });
+    test('When there is a pokemon of that type, disable "next pokémon" button', () => {
+      const { getByRole } = renderWithRouter(<App />);
+      const getButtonElectric = getByRole('button', {
+        name: /^electric$/i,
+      });
+      const nextButton = getByRole('button', {
+        name: /^próximo pokémon$/i,
+      });
+      userEvent.click(getButtonElectric);
+      expect(nextButton).toBeDisabled();
+    });
   });
 });
