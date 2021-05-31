@@ -15,6 +15,7 @@ describe('Requirement 06', () => {
     expect(type).toHaveLength(2);
     expect(averageWeight).toBeInTheDocument();
     expect(img).toBeInTheDocument();
+    expect(img).not.toHaveAttribute('src', '');
   });
   test('Testa se passa informações do link corretamente ', () => {
     const { getByText } = renderWithRouter(<App />);
