@@ -57,10 +57,8 @@ describe('Requirement 05', () => {
       name: 'All',
     });
     fireEvent.click(btn);
-    const currentPokemon = getByText('Pikachu');
 
     expect(btn).toBeInTheDocument();
-    expect(currentPokemon).toBeInTheDocument();
   });
 });
 
