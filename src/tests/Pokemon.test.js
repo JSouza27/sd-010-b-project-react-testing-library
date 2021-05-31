@@ -30,7 +30,7 @@ describe('Teste o componente <Pokemon.js />', () => {
     expect(linkMoreDetails).toHaveAttribute('href', '/pokemons/25');
   });
 
-  it('Teste se ao clicar, é feito o redirecionamento', () => {
+  it('Teste se ao clicar é feito o redirecionamento', () => {
     renderWithRouter(<App />);
 
     const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
@@ -40,15 +40,15 @@ describe('Teste o componente <Pokemon.js />', () => {
     expect(detailsHeading).toBeInTheDocument();
   });
 
-  // it('Teste também se a URL exibida no navegador muda', () => {
-  //   const { history } = renderWithRouter(<App />);
+  it('Teste também se a URL exibida no navegador muda', () => {
+    const { history } = renderWithRouter(<App />);
 
-  //   const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
-  //   userEvent.click(linkMoreDetails);
+    const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(linkMoreDetails);
 
-  //   const { pathname } = history.location;
-  //   expect(pathname).toBe('/pokemons/25');
-  // });
+    const { pathname } = history.location;
+    expect(pathname).toBe('/pokemons/25');
+  });
 
   // it('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
   //   renderWithRouter(<App />);
