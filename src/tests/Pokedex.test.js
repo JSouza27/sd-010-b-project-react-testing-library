@@ -2,6 +2,7 @@ import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
 import renderWithRouter from '../renderWithRouter';
 import data from '../data';
+
 import App from '../App';
 
 describe('Requisito 05 = Pokedex.js', () => {
