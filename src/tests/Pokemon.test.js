@@ -30,15 +30,15 @@ describe('Teste o componente <Pokemon.js />', () => {
     expect(linkMoreDetails).toHaveAttribute('href', '/pokemons/25');
   });
 
-  // it('Teste se ao clicar, é feito o redirecionamento', () => {
-  //   renderWithRouter(<App />);
+  it('Teste se ao clicar, é feito o redirecionamento', () => {
+    renderWithRouter(<App />);
 
-  //   const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
-  //   userEvent.click(linkMoreDetails);
+    const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(linkMoreDetails);
 
-  //   const detailsHeading = screen.getByRole('heading', { name: /pikachu details/i });
-  //   expect(detailsHeading).toBeInTheDocument();
-  // });
+    const detailsHeading = screen.getByRole('heading', { name: /pikachu details/i });
+    expect(detailsHeading).toBeInTheDocument();
+  });
 
   // it('Teste também se a URL exibida no navegador muda', () => {
   //   const { history } = renderWithRouter(<App />);
