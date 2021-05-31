@@ -52,7 +52,7 @@ describe('Requirement 05', () => {
     });
   });
   test('Testa se botão all funciona corretamente', () => {
-    const { getByRole, getByText } = renderWithRouter(<App />);
+    const { getByRole } = renderWithRouter(<App />);
     const btn = getByRole('button', {
       name: 'All',
     });
