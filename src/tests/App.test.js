@@ -41,8 +41,8 @@ describe('Test <App.js />', () => {
     expect(pathname).toBe('/about');
     expect(getByText('About')).toBeInTheDocument();
   });
-  test(`Teste se a aplicação é redirecionada para a página de Favorite Pokémons, na URL /about,
-  ao clicar no link Favorite Pokémons da barra de navegação.`, () => {
+  test(`Teste se a aplicação é redirecionada para a página de Favorite Pokémons, na URL
+  /about, ao clicar no link Favorite Pokémons da barra de navegação.`, () => {
     const { getByText, history } = renderWithRouter(<App />);
     userEvent.click(getByText('Favorite Pokémons'));
     const { pathname } = history.location;
