@@ -1,7 +1,6 @@
 import React from 'react';
-// import userEvent from '@testing-library/user-event';
-// import App from '../App';
 import userEvent from '@testing-library/user-event';
+import App from '../App';
 import renderWithRouter from './renderWithRouter';
 import Pokemon from '../components/Pokemon';
 
@@ -63,5 +62,19 @@ describe('Testing Pokemon.js', () => {
     const { location: { pathname } } = history;
 
     expect(pathname).toBe('/pokemons/78');
+  });
+
+  it('Verifies if clicking at details link, redirects to Details page', () => {
+    const { getByRole, getByText } = renderWithRouter(<App />);
+
+    const detailsLink = getByRole('link', {
+      name: 'More details',
+    });
+
+    userEvent.click(detailsLink);
+
+    const pokemonDetails = getByText('Pikachu Details');
+
+    expect(pokemonDetails).toBeInTheDocument();
   });
 });
