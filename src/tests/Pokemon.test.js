@@ -32,14 +32,14 @@ describe('Requirement 06', () => {
     expect(pathname).toBe('/pokemons/25');
   });
   test('Testa se existe um ícone de estrela', () => {
-    const { getByText, getByAltText } = renderWithRouter(<App />);
+    const { getByText, getByAltText, getByRole } = renderWithRouter(<App />);
     const link = getByText(/More details/i);
     userEvent.click(link);
     const favorite = getByText(/Pokémon Favoritado?/i);
     userEvent.click(favorite);
     const favoriteimg = getByAltText(/is marked as favorite/);
 
-    expect(favoriteimg).toBeInTheDocument();
+    expect(favoriteimg).toHaveAttribute('alt', 'Pikachu is marked as favorite');
     expect(favoriteimg).toHaveAttribute('src', '/star-icon.svg');
   });
 });
