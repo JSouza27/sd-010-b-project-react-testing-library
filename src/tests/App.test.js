@@ -1,8 +1,9 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import App from '../App';
 import renderWithRouter from '../renderWithRouter';
+
+import App from '../App';
 
 describe('Requisito 01 = Test App.js', () => {
   test('Renderiza uma leitura com o texto \'Pokédex\'', () => {
