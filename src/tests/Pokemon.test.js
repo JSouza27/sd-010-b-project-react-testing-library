@@ -28,6 +28,8 @@ const POKEMON = {
 };
 
 describe('Testing Pokemon.js', () => {
+  const MORE_DETAILS = 'More details';
+
   it('Verifies if the pokemon have the correct info', () => {
     const { getByText, getByRole } = renderWithRouter(<Pokemon
       pokemon={ POKEMON }
@@ -46,29 +48,24 @@ describe('Testing Pokemon.js', () => {
   });
 
   it('Verifies if have a details link and if it directs to the right location', () => {
-    const { getByRole, history } = renderWithRouter(<Pokemon
+    const { getByRole } = renderWithRouter(<Pokemon
       pokemon={ POKEMON }
       isFavorite={ false }
     />);
 
     const detailsLink = getByRole('link', {
-      name: 'More details',
+      name: MORE_DETAILS,
     });
 
     expect(detailsLink).toBeInTheDocument();
-
-    userEvent.click(detailsLink);
-
-    const { location: { pathname } } = history;
-
-    expect(pathname).toBe('/pokemons/78');
+    expect(detailsLink.href).toMatch(/pokemons\/78/i);
   });
 
   it('Verifies if clicking at details link, redirects to Details page', () => {
     const { getByRole, getByText } = renderWithRouter(<App />);
 
     const detailsLink = getByRole('link', {
-      name: 'More details',
+      name: MORE_DETAILS,
     });
 
     userEvent.click(detailsLink);
@@ -76,5 +73,22 @@ describe('Testing Pokemon.js', () => {
     const pokemonDetails = getByText('Pikachu Details');
 
     expect(pokemonDetails).toBeInTheDocument();
+  });
+
+  it('Verifies if clicking on details link it redirects to the right location', () => {
+    const { getByRole, history } = renderWithRouter(<Pokemon
+      pokemon={ POKEMON }
+      isFavorite={ false }
+    />);
+
+    const detailsLink = getByRole('link', {
+      name: MORE_DETAILS,
+    });
+
+    userEvent.click(detailsLink);
+
+    const { location: { pathname } } = history;
+
+    expect(pathname).toBe('/pokemons/78');
   });
 });
