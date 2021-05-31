@@ -15,11 +15,10 @@ describe('Requisito 02 = Test o About.js', () => {
 
   test('Verifica se os dois parágrafos do About aparece na tela', () => {
     render(<About />);
-
-    const p1 = `This application simulates a Pokédex, 
-    a digital encyclopedia containing all Pokémons`;
-    const p2 = `One can filter Pokémons by type, 
-    and see more details for each one of them`;
+    let p1 = 'This application simulates a Pokédex, ';
+    p1 += 'a digital encyclopedia containing all Pokémons';
+    let p2 = 'One can filter Pokémons by type, ';
+    p2 += 'and see more details for each one of them';
 
     expect(screen.getByText(p1, p2)).toBeInTheDocument();
   });
