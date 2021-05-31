@@ -63,5 +63,6 @@ describe('Test if a card with the information of a certain Pokémon is rendered'
       const imageStar = images[1];
       expect(imageStar).toHaveAttribute('src', '/star-icon.svg');
     });
+    // teste evaluator
   });
 });
