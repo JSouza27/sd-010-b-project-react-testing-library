@@ -40,11 +40,13 @@ describe('Testing Pokemon.js', () => {
     const averageWeight = getByText('Average weight: 95.0 kg');
     const pokemonImg = getByRole('img');
     const pokemonImgSrc = 'https://cdn2.bulbagarden.net/upload/5/58/Spr_5b_078.png';
+    const pokemonImgAlt = 'Rapidash sprite';
 
     expect(pokemonName).toBeInTheDocument();
     expect(pokemonType).toBeInTheDocument();
     expect(averageWeight).toBeInTheDocument();
     expect(pokemonImg.src).toBe(pokemonImgSrc);
+    expect(pokemonImg.alt).toBe(pokemonImgAlt);
   });
 
   it('Verifies if have a details link and if it directs to the right location', () => {
@@ -90,5 +92,18 @@ describe('Testing Pokemon.js', () => {
     const { location: { pathname } } = history;
 
     expect(pathname).toBe('/pokemons/78');
+  });
+
+  it('Verifies if have a star in favorited pokemons', () => {
+    const { getAllByRole } = renderWithRouter(<Pokemon
+      pokemon={ POKEMON }
+      isFavorite
+    />);
+
+    const images = getAllByRole('img');
+    const favoriteStar = images[1];
+
+    expect(favoriteStar.src).toMatch(/star-icon.svg/i);
+    expect(favoriteStar.alt).toBe('Rapidash is marked as favorite');
   });
 });
