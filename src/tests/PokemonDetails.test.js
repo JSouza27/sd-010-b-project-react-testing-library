@@ -24,24 +24,23 @@ describe('Primeiro do 7', () => {
     });
     expect(link).not.toBeInTheDocument();
   });
-  // test('A seção de detalhes deve conter um heading h2 com o texto Summary', () => {
-  //   const { history } = renderWithRouter(<App />);
 
-  //   history.push('/pokemons/10');
-
-  //   const heading = screen.getByRole('heading', {
-  //     name: /Summary/i,
-  //     level: 2,
-
-  //   });
-  //   expect(heading).toBeInTheDocument();
-  // });
+  test('A seção de detalhes deve conter um heading h2 com o texto Summary', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/pokemons/10');
+    const heading = screen.getByRole('heading', {
+      name: /Summary/i,
+      level: 2,
+    });
+    expect(heading).toBeInTheDocument();
+  });
   test('A seção de detalhes deve conter um parágrafo com o resumo do Pokémon', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/pokemons/10');
-    let phrase = 'For protection, it releases a horrible stench  ';
+    let phrase = 'For protection, it releases a horrible stench ';
     phrase += 'from the antennae on its head to drive away enemies.';
-    expect(phrase).toBeDefined();
+    const text = screen.getByText(phrase); // não tava usando o screen antes, e deu problema no stryker. Tem que usar. Aí precisei fazer isso na var phrase pra não dar erro de lint. Depois crio essa var text pra usar o screen com a phrase.
+    expect(text).toBeInTheDocument();
   });
 });
 describe('Segundo do 7', () => {
