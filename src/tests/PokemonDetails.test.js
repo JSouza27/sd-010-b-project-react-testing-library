@@ -22,13 +22,13 @@ describe('Teste o componente <PokemonDetails.js />', () => {
     expect(paragraph).toBeInTheDocument();
   });
 
-  // it('Teste se existe os mapas contendo as localizações do pokémon', () => {
-  //   renderWithRouter(<App />);
+  it('Teste se existe os mapas contendo as localizações do pokémon', () => {
+    renderWithRouter(<App />);
 
-  //   const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
-  //   userEvent.click(linkMoreDetails);
+    const linkMoreDetails = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(linkMoreDetails);
 
-  //   const Location = screen.getByRole('heading', {  name: /game locations of pikachu/i});
-  //   expect(Location).toBeInTheDocument();
-  // });
+    const Location = screen.getByRole('heading', {  name: /game locations of pikachu/i});
+    expect(Location).toBeInTheDocument();
+  });
 });
