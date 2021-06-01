@@ -10,13 +10,14 @@ describe('testing the <Pokemon.js /> component', () => {
   test('testing if a card is rendered with the information of the pokémon',
     () => {
       renderWithRouter(<App />);
-      const { name, image } = pokemon[0];
+      const { name, image, type } = pokemon[0];
 
       const pokemonName = screen.getByText(name);
       expect(pokemonName).toBeInTheDocument();
 
       const pokemonType = screen.getByTestId('pokemon-type');
       expect(pokemonType).toBeInTheDocument();
+      expect(pokemonType).toHaveTextContent(type);
 
       const pokemonAverageWeight = screen.getByText(/average weight: 6\.0 kg/i);
       expect(pokemonAverageWeight).toBeInTheDocument();
