@@ -19,5 +19,5 @@ test('Verifica se é exibido os cards dos pokémons favoritados', () => {
 test('Verifica se nenhum card é exibido, se ele não estiver favoritado', () => {
   const queryAllByTestId = renderWithRouter(<FavoritePokemons pokemons={ [] } />);
 
-  expect(queryAllByTestId('pokemon-name').length).toBe(0);
+  expect(queryAllByTestId('poke-name').length).toBe(0);
 });
