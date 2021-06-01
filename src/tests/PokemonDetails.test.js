@@ -6,6 +6,8 @@ import renderWithRouter from './renderWithRouter';
 describe('testes na PokemonDetails.js', () => {
   const stringMoreDetails = 'More details';
   const stringPikachuDetails = 'Pikachu Details';
+  const phrase1 = 'This intelligent Pokémon roasts hard berries ';
+  const phrase2 = 'with electricity to make them tender enough to eat.';
   test('Testando se as informações detalhadas do Pokémon são mostradas na tela', () => {
     const { getByRole, getByText } = renderWithRouter(<App />);
     const moreDetails = getByText(stringMoreDetails);
@@ -45,9 +47,7 @@ describe('testes na PokemonDetails.js', () => {
     const { getByText } = renderWithRouter(<App />);
     const moreDetails = getByText(stringMoreDetails);
     fireEvent.click(moreDetails);
-    const paragraph = getByText(
-      /This intelligent Pokémon roasts hard berries with electricity/i,
-    );
+    const paragraph = getByText(phrase1 + phrase2);
     expect(paragraph).toBeInTheDocument();
   });
 
