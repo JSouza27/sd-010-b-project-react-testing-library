@@ -75,14 +75,22 @@ describe('Testa o componente <App.js />', () => {
 
     expect(URL).toBe(expected);
     expect(pageText).toBeInTheDocument();
-
   });
 
   test('se ao clicar aplicação é redirecionada para a URL `/favorites`', () => {
     const { history, getByText } = renderWithRouter(<App />);
-    const favoritesPageLink = screen.getByRole('link', { name: /favorites/i });
-    const URL = history.location.pathname;
+    const home = '/';
+    history.push(home);
 
+    const favoritesPageLink = screen.getByRole('link', { name: /favorite pokémons/i });
+    userEvent.click(favoritesPageLink);
+
+    const URL = history.location.pathname;
+    const pageText = getByText('Favorite pokémons');
+    const expected = '/favorites';
+
+    expect(URL).toBe(expected);
+    expect(pageText).toBeInTheDocument();
   });
 
   test('se a aplicação aciona a página Not Found quando a URL é desconhecida', () => {
