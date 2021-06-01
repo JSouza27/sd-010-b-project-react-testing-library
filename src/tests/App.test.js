@@ -95,7 +95,11 @@ describe('Testa o componente <App.js />', () => {
 
   test('se a aplicação aciona a página Not Found quando a URL é desconhecida', () => {
     const { history, getByText } = renderWithRouter(<App />);
-    const notFoundPageLink = screen.getByRole('link', { name: /not found/i });
-    const URL = history.location.pathname;
+    const randomURL = '/random-url';
+    history.push(randomURL);
+
+    const pageText = getByText('Page requested not found');
+
+    expect(pageText).toBeInTheDocument();
   });
 });
