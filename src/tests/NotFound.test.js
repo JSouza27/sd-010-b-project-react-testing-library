@@ -15,9 +15,11 @@ describe('tests the <FavoritePokemons /> component', () => {
     expect(heading).toBeInTheDocument();
   });
   test('whether page shows the specific image', () => {
-    const { history } = renderWithRouter(<App />);
+    const { getAllByRole, history } = renderWithRouter(<App />);
     history.push('pagina-que-nao-existe');
-    const image = document.querySelector('img');
-    expect(image.src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+    const image = getAllByRole('img');
+    expect(image[1]).toHaveAttribute('src', 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+    // const image = document.querySelector('img');
+    // expect(image.src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
   });
 });
