@@ -42,11 +42,52 @@ describe('testes na PokemonDetails.js', () => {
   );
 
   test('Testando se contem um parágrafo com o resumo do Pokémon', () => {
-    const { getByText, container } = renderWithRouter(<App />);
+    const { getByText } = renderWithRouter(<App />);
     const moreDetails = getByText(stringMoreDetails);
     fireEvent.click(moreDetails);
-    const paragraph = container.querySelectorAll('pokemon-details');
-    console.log(paragraph.querySelectorAll('p'));
-    // expect(paragraph.length).toBe(1);
+    const paragraph = getByText(
+      /This intelligent Pokémon roasts hard berries with electricity/i,
+    );
+    expect(paragraph).toBeInTheDocument();
   });
+
+  test(
+    'Teste se existe uma seção com os mapas contendo as localizações do pokémon',
+    () => {
+      const { getByText, getByRole, getAllByAltText } = renderWithRouter(<App />);
+      const moreDetails = getByText(stringMoreDetails);
+      fireEvent.click(moreDetails);
+      const Summary = getByRole('heading', {
+        level: 2,
+        name: 'Game Locations of Pikachu',
+      });
+      expect(Summary).toBeInTheDocument();
+      const habitat = getAllByAltText('Pikachu location');
+      expect(habitat).toHaveLength(2);
+      expect(habitat[0].src).toMatch('https://cdn2.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png');
+      expect(habitat[1].src).toMatch('https://cdn2.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
+    },
+  );
+
+  test(
+    'testando se o usuário pode favoritar um pokémon através da página de detalhes. ',
+    () => {
+      const { getByRole, getByAltText, history } = renderWithRouter(<App />);
+      const moreDetails = getByRole('link', {
+        name: 'More details',
+      });
+      fireEvent.click(moreDetails);
+      const { location: { pathname } } = history;
+      const pikachuRoute = '/pokemons/25';
+      expect(pathname).toBe(pikachuRoute);
+      const favorite = getByRole('checkbox', {
+        name: 'Pokémon favoritado?',
+      });
+      fireEvent.click(favorite);
+      const selection = getByAltText('Pikachu is marked as favorite');
+      expect(selection.src).toMatch('/star-icon.svg');
+      fireEvent.click(favorite);
+      expect(selection.alt).not.toMatch('Pikachu sprite');
+    },
+  );
 });
