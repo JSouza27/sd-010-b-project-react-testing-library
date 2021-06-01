@@ -25,4 +25,28 @@ describe('Teste o componente <Pokedex.js /', () => {
       });
     });
   });
+
+  test('Teste se é mostrado apenas um Pokémon por vez.', () => {
+    const { getAllByTestId } = renderWithRouter(<App />);
+    expect(getAllByTestId('pokemon-name').length).toBe(1);
+  });
+
+  describe('Teste se a Pokédex tem os botões de filtro.', () => {
+    test('A partir de um filtro, a Pokédex só mostra pokémons daquele tipo;', () => {
+      const { getAllByTestId, getByTestId } = renderWithRouter(<App />);
+      const btnFiltroPokemon = getAllByTestId('pokemon-type-button');
+
+      btnFiltroPokemon.forEach((typeButton) => {
+        const pokemonType = typeButton.textContent;
+        const btnProxPokemon = getByTestId('next-pokemon');
+        userEvent.click(typeButton);
+        expect(getByTestId('pokemon-type').textContent).toBe(pokemonType);
+        userEvent.click(btnProxPokemon);
+      });
+    });
+  });
+
+  describe('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+
+  });
 });
