@@ -54,14 +54,28 @@ describe('Test if a card with the information of a certain Pokémon is rendered'
       expect(history.location.pathname).toBe('/pokemons/25');
     });
     test('Test if there is a star icon on favorite Pokemons', () => {
-      const { getAllByRole, getByText, getByRole } = renderWithRouter(<App />);
+      const { getByAltText, getByText, getByRole } = renderWithRouter(<App />);
       const textDetails = getByText(/^more details$/i);
       userEvent.click(textDetails);
       const checkFavorites = getByRole('checkbox');
       userEvent.click(checkFavorites);
-      const images = getAllByRole('img');
-      const imageStar = images[1];
-      expect(imageStar).toHaveAttribute('src', '/star-icon.svg');
+      const images = getByAltText('Pikachu is marked as favorite');
+      expect(images).toHaveAttribute(
+        'src',
+        '/star-icon.svg',
+      );
+    });
+  });
+  describe('complementary test of pokemon image', () => {
+    test('alt pokémon image', () => {
+      const { getByAltText } = renderWithRouter(<App />);
+      const imagemPikachu = getByAltText(/^pikachu sprite$/i);
+      expect(imagemPikachu).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
+    });
+    test('pikachu type test', () => {
+      const { getByTestId } = renderWithRouter(<App />);
+      const typePikachu = getByTestId('pokemon-type');
+      expect(typePikachu).toHaveTextContent(/^electric$/i);
     });
   });
 });
