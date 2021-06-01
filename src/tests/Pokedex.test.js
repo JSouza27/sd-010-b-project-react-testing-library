@@ -84,7 +84,24 @@ describe('testing the `<Pokedex.js />` component', () => {
 
       expect(allButton).toHaveTextContent(/all/i);
 
-      // pokemons.forEach();
+      const nextButton = screen.getByRole('button', {
+        name: /próximo pokémon/i,
+      });
+
+      pokemons.forEach((pokemon) => {
+        expect(screen.getByText(pokemon.name)).toBeInTheDocument();
+        userEvent.click(nextButton);
+      });
+
+      // **a parte abaixo foi feita baseada no arquivo do repositório do João Herculano**
+      userEvent.click(nextButton);
+      const fireButton = screen.getByRole('button', {
+        name: /fire/i,
+      });
+      userEvent.click(fireButton);
+      userEvent.click(allButton);
+
+      expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
     });
 
   test('testing if a filter button is created dynamically for each type of Pokémon',
