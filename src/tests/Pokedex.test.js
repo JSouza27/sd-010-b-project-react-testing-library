@@ -47,6 +47,17 @@ describe('Teste o componente <Pokedex.js /', () => {
   });
 
   describe('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+    test('O texto do botão deve ser `All`', () => {
+      const { getByText } = renderWithRouter(<App />);
+      const btnTodosPokemon = getByText('All');
+      expect(btnTodosPokemon).toBeInTheDocument();
+    });
 
+    test('A Pokedéx mostra os Pokémons sem filtros clicando no botão `All`', () => {
+      const { getByText, getByTestId } = renderWithRouter(<App />);
+      const btnTodosPokemon = getByText('All');
+      userEvent.click(btnTodosPokemon);
+      expect(getByTestId('pokemon-name').textContent).toBe(pokemons[0].name);
+    });
   });
 });
