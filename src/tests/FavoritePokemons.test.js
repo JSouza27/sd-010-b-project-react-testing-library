@@ -32,7 +32,7 @@ describe('Teste o componente <FavoritePokemons.js />', () => {
     expect(screen.getByText(/Pikachu/i)).toBeInTheDocument();
     expect(screen.getByText(/Electric/i)).toBeInTheDocument();
   });
-  test('exibe nenhum favorito', async () => {
+  it('exibe nenhum favorito', async () => {
     const history = createMemoryHistory();
     render(
       <Router history={ history }>
