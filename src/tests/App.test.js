@@ -1,10 +1,11 @@
+// Trabalho feito em parceria com Renato
 import React from 'react';
 
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
 describe('Routes', () => {
-  test('renders a reading with the text `Pokédex` and link Home', () => {
+  it('verifica os links em Home', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     const heading = getByText(/Pokédex/i);
@@ -13,10 +14,14 @@ describe('Routes', () => {
     history.push('/');
 
     const textHome = getByText('Home');
+    const textAbout = getByText('About');
+    const textFavoritePokemons = getByText('Favorite Pokémons');
 
     expect(textHome).toBeInTheDocument();
+    expect(textAbout).toBeInTheDocument();
+    expect(textFavoritePokemons).toBeInTheDocument();
   });
-  it('renders a reading with the link About', () => {
+  it('renderiza a pagina About ao clicar no link About', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     history.push('/About');
@@ -25,7 +30,7 @@ describe('Routes', () => {
 
     expect(textHome).toBeInTheDocument();
   });
-  it('renders a reading with the text `Favorite Pokémons`', () => {
+  it('renderiza a pagina Favorite Pokémons ao clicar no link Favorite Pokémons', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     history.push('/About');
