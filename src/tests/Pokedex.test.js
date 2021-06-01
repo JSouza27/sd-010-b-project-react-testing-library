@@ -104,9 +104,7 @@ describe('Testando o componente Pokedex', () => {
     expect(buttonAll).toBeInTheDocument();
 
     fireEvent.click(buttonAll);
-
     expect(getByText('Pikachu')).toBeInTheDocument();
-
   });
 
   it('Testa se é criado dinamicamente, um botão filtro para cada tipo de Pokémon', () => {
