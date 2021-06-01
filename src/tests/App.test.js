@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
@@ -37,10 +37,10 @@ describe('Testa o componente <App.js />', () => {
   });
 
   test('se o topo da aplicação contém o conjunto fixo de links de navegação', () => {
-    const { history } = renderWithRouter(<App />);
-    const firstLink = screen.getByRole('link', { name: /home/i });
-    const secondLink = screen.getByRole('link', { name: /about/i });
-    const thirdLink = screen.getByRole('link', { name: /favorite pokémons/i });
+    const { history, getByRole } = renderWithRouter(<App />);
+    const firstLink = getByRole('link', { name: /home/i });
+    const secondLink = getByRole('link', { name: /about/i });
+    const thirdLink = getByRole('link', { name: /favorite pokémons/i });
     const URL = '/';
 
     history.push(URL);
@@ -50,8 +50,8 @@ describe('Testa o componente <App.js />', () => {
   });
 
   test('se a aplicação é redirecionada para Home ao clicar na URL `/`', () => {
-    const { history, getByText } = renderWithRouter(<App />);
-    const homepageLink = screen.getByRole('link', { name: /home/i });
+    const { history, getByText, getByRole } = renderWithRouter(<App />);
+    const homepageLink = getByRole('link', { name: /home/i });
     const URL = history.location.pathname;
     const pageText = getByText('Encountered pokémons');
     const expected = '/';
@@ -62,11 +62,11 @@ describe('Testa o componente <App.js />', () => {
   });
 
   test('se a aplicação é redirecionada para About ao clicar na URL `/about`', () => {
-    const { history, getByText } = renderWithRouter(<App />);
+    const { history, getByText, getByRole } = renderWithRouter(<App />);
     const home = '/';
     history.push(home);
 
-    const aboutPageLink = screen.getByRole('link', { name: /about/i });
+    const aboutPageLink = getByRole('link', { name: /about/i });
     userEvent.click(aboutPageLink);
 
     const URL = history.location.pathname;
@@ -78,11 +78,11 @@ describe('Testa o componente <App.js />', () => {
   });
 
   test('se ao clicar aplicação é redirecionada para a URL `/favorites`', () => {
-    const { history, getByText } = renderWithRouter(<App />);
+    const { history, getByText, getByRole } = renderWithRouter(<App />);
     const home = '/';
     history.push(home);
 
-    const favoritesPageLink = screen.getByRole('link', { name: /favorite pokémons/i });
+    const favoritesPageLink = getByRole('link', { name: /favorite pokémons/i });
     userEvent.click(favoritesPageLink);
 
     const URL = history.location.pathname;
