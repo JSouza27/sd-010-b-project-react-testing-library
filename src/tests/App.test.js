@@ -1,6 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
 
@@ -46,5 +47,47 @@ describe('Testa o componente <App.js />', () => {
     expect(firstLink).toBeInTheDocument();
     expect(secondLink).toBeInTheDocument();
     expect(thirdLink).toBeInTheDocument();
+  });
+
+  test('se a aplicação é redirecionada para Home ao clicar na URL `/`', () => {
+    const { history, getByText } = renderWithRouter(<App />);
+    const homepageLink = screen.getByRole('link', { name: /home/i });
+    const URL = history.location.pathname;
+    const pageText = getByText('Encountered pokémons');
+    const expected = '/';
+
+    userEvent.click(homepageLink);
+    expect(URL).toBe(expected);
+    expect(pageText).toBeInTheDocument();
+  });
+
+  test('se a aplicação é redirecionada para About ao clicar na URL `/about`', () => {
+    const { history, getByText } = renderWithRouter(<App />);
+    const home = '/';
+    history.push(home);
+
+    const aboutPageLink = screen.getByRole('link', { name: /about/i });
+    userEvent.click(aboutPageLink);
+
+    const URL = history.location.pathname;
+    const pageText = getByText('About Pokédex');
+    const expected = '/about';
+
+    expect(URL).toBe(expected);
+    expect(pageText).toBeInTheDocument();
+
+  });
+
+  test('se ao clicar aplicação é redirecionada para a URL `/favorites`', () => {
+    const { history, getByText } = renderWithRouter(<App />);
+    const favoritesPageLink = screen.getByRole('link', { name: /favorites/i });
+    const URL = history.location.pathname;
+
+  });
+
+  test('se a aplicação aciona a página Not Found quando a URL é desconhecida', () => {
+    const { history, getByText } = renderWithRouter(<App />);
+    const notFoundPageLink = screen.getByRole('link', { name: /not found/i });
+    const URL = history.location.pathname;
   });
 });
