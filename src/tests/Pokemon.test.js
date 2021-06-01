@@ -29,7 +29,19 @@ describe('Teste o componente <Pokemon.js />', () => {
         pokemon={ mockedPokemon }
       />,
     );
-    const seeDetailsLink = getByRole('link');
-    expect(seeDetailsLink.href).toBe(`http://localhost/pokemons/${id}`);
+    const linkDetalhes = getByRole('link');
+    expect(linkDetalhes.href).toBe(`http://localhost/pokemons/${id}`);
+  });
+
+  test('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
+    const { getByAltText } = renderWithRouter(
+      <Pokemon
+        isFavorite
+        pokemon={ mockedPokemon }
+      />,
+    );
+    const starIcon = getByAltText(`${name} is marked as favorite`);
+    expect(starIcon).toBeInTheDocument();
+    expect(starIcon.src).toBe('http://localhost/star-icon.svg');
   });
 });
