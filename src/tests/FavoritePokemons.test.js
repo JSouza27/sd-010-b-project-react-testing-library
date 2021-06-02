@@ -21,7 +21,7 @@ describe('Requisito 3', () => {
   });
 
   test('Verifica se é exibido todos os cards de pokémons favoritados.', () => {
-    const { getAllByRole } = renderWithRouter(<FavoritePokemons pokemons={pokemons} />);
+    const { getAllByRole } = renderWithRouter(<FavoritePokemons pokemons={ pokemons } />);
 
     const imagem = getAllByRole('img')[0];
     expect(imagem.src).toBe('https://cdn2.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
