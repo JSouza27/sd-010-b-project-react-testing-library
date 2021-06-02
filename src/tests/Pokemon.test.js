@@ -5,11 +5,12 @@ import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
 describe('Teste o componente <Pokemon.js />', () => {
+  const MORE_DETAILS = 'More details';
   it('Teste se é renderizado um card com as informações de determinado pokémon.', () => {
     const { getByRole, getByText, history } = renderWithRouter(<App />);
     history.push('/');
 
-    const moreDetails = getByText('More details');
+    const moreDetails = getByText(MORE_DETAILS);
     userEvent.click(moreDetails);
 
     const name = getByText('Pikachu');
@@ -27,7 +28,7 @@ describe('Teste o componente <Pokemon.js />', () => {
     const { getByText, history } = renderWithRouter(<App />);
     history.push('/');
 
-    const moreDetails = getByText('More details');
+    const moreDetails = getByText(MORE_DETAILS);
     userEvent.click(moreDetails);
 
     expect(history.location.pathname).toBe('/pokemons/25');
@@ -37,7 +38,7 @@ describe('Teste o componente <Pokemon.js />', () => {
     const { getByText, history } = renderWithRouter(<App />);
     history.push('/');
 
-    const moreDetails = getByText('More details');
+    const moreDetails = getByText(MORE_DETAILS);
     userEvent.click(moreDetails);
 
     const details = getByText('Pikachu Details');
@@ -47,7 +48,7 @@ describe('Teste o componente <Pokemon.js />', () => {
     const { getAllByRole, getByText, history } = renderWithRouter(<App />);
     history.push('/');
 
-    const moreDetails = getByText('More details');
+    const moreDetails = getByText(MORE_DETAILS);
     userEvent.click(moreDetails);
     const favorite = getByText('Pokémon favoritado?');
     userEvent.click(favorite);
