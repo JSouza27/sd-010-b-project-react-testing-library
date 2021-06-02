@@ -74,3 +74,4 @@ describe('Teste o componente <Pokedex.js />', () => {
     });
   });
 });
+// Recebi auxilio dos colegas, Carlos Margato, Carlos Vieira, Alan Tanaka, Eder Paiva, Junior Henrique. Obrigado a todos!
