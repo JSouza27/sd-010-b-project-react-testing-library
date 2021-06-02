@@ -1,12 +1,22 @@
-test('', () => {});
+import React from 'react';
+import favoritePokemons from '../data';
+import FavoritePokemons from '../components/FavoritePokemons';
+import renderWithRouter from './renderWithRouter';
 
-// import React from 'react';
-// import { screen } from '@testing-library/react';
+describe('Testando o componente <FavoritePokemons.js />', () => {
+  it('Testanto se a pessoa não tiver pokémons favoritos', () => {
+    const { getByText } = renderWithRouter(<FavoritePokemons />);
 
-// import FavoritePokemons from '../components/FavoritePokemons';
-// import renderWithRouter from './renderWithRouter';
+    expect(getByText('No favorite pokemon found')).toBeDefined();
+  });
 
-// describe('Testando o componente <FavoritePokemons.js />', () => {
-//   it('Testanto se a pessoa não tiver pokémons favoritos', () => {
-//     const { getByText, getByAltText } = renderWithRouter(<FavoritePokemons />);
-// });
+  it('Testanto se a pessoa tiver pokémons favoritos', () => {
+    const { getByText } = renderWithRouter(<FavoritePokemons
+      pokemons={ favoritePokemons }
+    />);
+
+    expect(getByText(/Pikachu/i)).toBeInTheDocument();
+    expect(getByText(/Charmander/i)).toBeInTheDocument();
+    expect(getByText(/Caterpie/i)).toBeInTheDocument();
+  });
+});
